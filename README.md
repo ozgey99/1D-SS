@@ -12,7 +12,7 @@ This project is developed by group 1D, including:
 
 > This project is a clone of the very popular PC game Slay the Spire, made from scratch for CS319 course.
 
-Slay the Spire is a single player roguelike deck building game. The game is based on a character moving upwards on a tower while fighting enemies using the cards in their deck. The tower consists of three different acts, that each end in a boss fight. Each act has a set of bosses that are different for each act. To reach the act boss, player has to climb the tower by clearing rooms. Each act usually consists of 45-55 rooms. Each room is connected to 1-3 different rooms, and a path of 15 rooms clears the floor, with the 16th room being the act boss. The player cannot move downwards or sideways on the level they are in, therefore the game forces the player to choose its path very carefully.
+Slay the Spire is a single player roguelike deck building game. The game is based on a character moving upwards on a tower while fighting enemies using the cards in their deck. The tower consists of three different acts, each end in a boss fight. Each act has a set of bosses that are different for each act. To reach the act boss, player has to climb the tower by clearing rooms. Each act usually consists of 45-55 rooms. Each room is connected to 1-3 different rooms, and a path of 15 rooms clears the floor, with the 16th room being the act boss. The player cannot move downwards or sideways on the level they are in, therefore the game forces the player to choose its path very carefully.
 
 There are four different room types: Monsters, Elites, Rest Sites, Stores and Events.
 
@@ -25,3 +25,6 @@ There are 5 different cards that can be added to the deck: Attack, Skill, Power,
 Relics, however are permanent effects that persist over each fight. A relic can give the player another point of energy, but can take the players ability to earn gold. Potions are rather similar to relics in the sense that they persist as well, but potions are consumables that don't have a cost that the player uses during their fights. For example, a block potion gives the player a certain amount of block for the turn it was used, or another potion can increase the energy player has for that turn.
 
 ### Features to be added/removed
+
+### Documents 
+- Project Description: 
