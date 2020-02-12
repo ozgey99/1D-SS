@@ -5,7 +5,7 @@ This project is developed by group 1D, including:
 - [Özge Yaşayan](https://github.com/ozgey99)
 - [Bora Kurucu](https://github.com/BoraKurucu)
 - [Fatih Karahan](https://github.com/kyroath)
-- [Gülnihal Koruk]
+- [Gülnihal Koruk](https://github.com/gulnihalk)
 - [Batuhan Özçömlekçi](https://github.com/spencereid)
 
 ## Description of the project
