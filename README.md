@@ -26,5 +26,5 @@ Relics, however are permanent effects that persist over each fight. A relic can 
 
 ### Features to be added/removed
 
-### Documents 
-- Project Description: 
+### Deliverables
+- Project Description: https://docs.google.com/document/d/1TpaQdBhhHZmUxeCiF9RuAUme1bVDMzTOLCOH7jja6bo/edit?usp=sharing
