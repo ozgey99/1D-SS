@@ -25,9 +25,12 @@ There are 5 different cards that can be added to the deck: Attack, Skill, Power,
 Relics, however are permanent effects that persist over each fight. A relic can give the player another point of energy, but can take the players ability to earn gold. Potions are rather similar to relics in the sense that they persist as well, but potions are consumables that don't have a cost that the player uses during their fights. For example, a block potion gives the player a certain amount of block for the turn it was used, or another potion can increase the energy player has for that turn.
 
 ### Features to be added
-- New card mechanics
-- New classes
-- Additional music to develop the dungeon atmosphere
+- Playing with two or more characters (heroes) can be added to the game so that two distinct draw-discard piles can be created for each hero.  Moreover, corollary to  this kind of gameplay, relics, potions, cards can be enabled to be distributed between the characters by the player. Some other entities such as money can be shared by these two or more characters in this kind of gameplay. The player can be enabled to choose which character/characters (heroes) are going to  enter the combat. In this kind of gameplay with two or more characters, the game difficulty can be increased.
+- An animal companion (pet) might be added to the game to assist the main hero in combats. This animal companion can be enabled to be  modified utilizing pet-oriented items that can be purchased, looted or gained throughout the game. These pets can be added as  default, that is, they can be given at the beginning of the run or they can be obtained (purchased) from the merchants by the character’s money.
+- Optionally, more than one life (chance of trials in a stage) can be given to the players for a run so that the game can be eased for rookie players.
+- Timer in the upper right corner can be removed from the game since it is an unnecessary detail calculating the total time of the run.
+- There can be full visibility for the cards and relics  in the card library and relic collection sections. 
+
 
 ### Deliverables
 - Project Description: https://docs.google.com/document/d/1TpaQdBhhHZmUxeCiF9RuAUme1bVDMzTOLCOH7jja6bo/edit?usp=sharing
