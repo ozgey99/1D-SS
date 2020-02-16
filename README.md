@@ -24,7 +24,11 @@ There are 5 different cards that can be added to the deck: Attack, Skill, Power,
 
 Relics, however are permanent effects that persist over each fight. A relic can give the player another point of energy, but can take the players ability to earn gold. Potions are rather similar to relics in the sense that they persist as well, but potions are consumables that don't have a cost that the player uses during their fights. For example, a block potion gives the player a certain amount of block for the turn it was used, or another potion can increase the energy player has for that turn.
 
-### Features to be added/removed
+### Features to be added
+-New card mechanics
+-New classes
+-More consistent map generation
+-Additional music to develop the dungeon atmosphere
 
 ### Deliverables
 - Project Description: https://docs.google.com/document/d/1TpaQdBhhHZmUxeCiF9RuAUme1bVDMzTOLCOH7jja6bo/edit?usp=sharing
