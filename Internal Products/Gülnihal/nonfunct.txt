@@ -1,0 +1,23 @@
+Non-Functional Requirements
+•Game Performance
+	In the game, we will use some animations and visual effects for killing the enemy, playing the cards etc. 
+	We will provide background music for the game and different sound effects during the combat.
+	The game will not require high system performance since we will try to keep simplicity and 
+	we will avoid using complex graphics and simulations for better performance.
+
+•Reliability 
+	When the game is closed for any reason, the user will be able to continue to the game from the same stage. 
+	Thus, unexpected termination will be considered, and the game will save the player profile in that case.
+
+•User Interface
+	Animations, design and graphics will be created as user friendly and UI design will be simple so that the game can be easy to play and 
+	the user can figure out the concepts easily. In the main menu, there will be options; play , card library, relic collection, settings and exit. 
+	Card library option will provide information  about cards’ features to the user. Relic collection will has the information about permanent items and in the setting option, 
+	the user will be able to change ---- and turn the music/sounds on and off.
+
+•Extendibility 
+New features will be added.
+	•Playing with several characters in combat so the game difficulty will be increased as well as excitement.
+	•An animal companion is planning to add to help hero in the combats.
+	•Optionally, more than one life might be given for the beginner player.
+	•In main menu, the user will be able to find the information for relics and cards in the card library and relic collection options.
