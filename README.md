@@ -34,3 +34,4 @@ Relics, however are permanent effects that persist over each fight. A relic can 
 
 ### Deliverables
 - Project Description: https://docs.google.com/document/d/1TpaQdBhhHZmUxeCiF9RuAUme1bVDMzTOLCOH7jja6bo/edit?usp=sharing
+- Analysis Report: https://docs.google.com/document/d/1Mnvm1-0mXYxoSYyzedbtk7DHjBDmX6nfN3LyhcjRgqk/edit?usp=sharing
