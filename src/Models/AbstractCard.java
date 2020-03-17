@@ -10,10 +10,10 @@ public abstract class AbstractCard {
     public CardTarget target;
     public CardKeyword keyword;
     public BaseCardAttributes baseAttr;
+    public boolean usable;
+    public boolean upgradable;
 
     public abstract void use(AbstractMonster monster, AbstractCharacter hero);
     public abstract void upgrade();
     public abstract void makeCopy();
-    public abstract void usable();
-    public abstract void upgradable();
 }
