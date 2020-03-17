@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    private String name;
     private ArrayList<AbstractCard> cardList;
     public DeckType type;
 
@@ -24,11 +23,5 @@ public class Deck {
     }
     public void shuffle(){
         Collections.shuffle(cardList);
-    }
-    public void setName(String s){
-        name = s;
-    }
-    public String getName() {
-        return name;
     }
 }
