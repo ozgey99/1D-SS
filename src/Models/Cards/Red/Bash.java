@@ -44,6 +44,8 @@ public class Bash extends AbstractCard {
         else
             v.stackPower(3);
         monster.addPower(v);
+        //subtract 2 from the energy
+        hero.currentEnergy -= cost;
     }
 
     @Override
