@@ -16,7 +16,7 @@ public class Bash extends AbstractCard {
     private boolean usable;
     private boolean upgradable;
 
-    private Bash(){
+    public Bash(){
         name = "Bash";
         description = "Deal 8(10) damage. Apply 2(3) Vulnerable.";
         cost = 2;

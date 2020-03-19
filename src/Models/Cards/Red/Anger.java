@@ -48,7 +48,7 @@ public class Anger extends AbstractCard {
     }
 
     @Override
-    public AbstractCard makeCopy() {
+    public Anger makeCopy() {
         Anger copy = new Anger();
         copy.upgradable = upgradable;
         copy.baseAttr.damage = this.baseAttr.damage;

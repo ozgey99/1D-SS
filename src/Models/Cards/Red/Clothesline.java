@@ -17,7 +17,7 @@ public class Clothesline extends AbstractCard {
     private boolean usable;
     private boolean upgradable;
 
-    private Clothesline(){
+    public Clothesline(){
         name = "Clothesline";
         description = "Deal 12(14) damage. Apply 2(3) Weak.";
         cost = 2;
