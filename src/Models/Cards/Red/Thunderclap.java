@@ -4,7 +4,7 @@ import Models.Cards.*;
 
 import java.util.ArrayList;
 
-public class Clothesline extends AbstractCard {
+public class Thunderclap extends AbstractCard {
     private String name;
     private String description;
     private int cost;
@@ -12,37 +12,32 @@ public class Clothesline extends AbstractCard {
     private CardColor color;
     private CardRarity rarity;
     private CardTarget target;
-    private CardKeyword keyword;
     private BaseCardAttributes baseAttr;
     private boolean usable;
     private boolean upgradable;
 
-    public Clothesline(){
-        name = "Clothesline";
-        description = "Deal 12(14) damage. Apply 2(3) Weak.";
-        cost = 2;
+    public Thunderclap(){
+        name = "Thunderclap";
+        description = "Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.";
+        cost = 1;
         type = CardType.ATTACK;
         color = CardColor.RED;
         rarity = CardRarity.COMMON;
-        target = CardTarget.ENEMY;
+        target = CardTarget.ALL_ENEMY;
         baseAttr = new BaseCardAttributes();
-        baseAttr.damage = 12;
+        baseAttr.damage = 4;
         usable = true;
         upgradable = true;
     }
 
     @Override
     public void use(ArrayList<AbstractMonster> monsters, AbstractCharacter hero) {
-        Weak w = new Weak();
-        if(upgradable)
-            w.stackPower(2);
-        else
-            w.stackPower(3);
+        Vulnerable v = new Vulnerable();
+        v.stackPower(1);
         for (AbstractMonster m : monsters) {
             m.changeHealth(-baseAttr.damage);
-            m.addPower(w);
+            m.addPower(v);
         }
-        //subtract cost from the energy
         hero.currentEnergy -= cost;
     }
 
@@ -50,13 +45,13 @@ public class Clothesline extends AbstractCard {
     public void upgrade() {
         if(upgradable){
             upgradable = false;
-            baseAttr.damage = 14;
+            baseAttr.damage = 7;
         }
     }
 
     @Override
-    public Clothesline makeCopy() {
-        Clothesline newCard = new Clothesline();
+    public AbstractCard makeCopy() {
+        Thunderclap newCard = new Thunderclap();
         newCard.upgradable = this.upgradable;
         newCard.baseAttr.damage = this.baseAttr.damage;
         return newCard;

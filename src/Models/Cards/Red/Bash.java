@@ -32,17 +32,15 @@ public class Bash extends AbstractCard {
 
     @Override
     public void use(ArrayList<AbstractMonster> monsters, AbstractCharacter hero) {
-        //monster's health goes down by "damage" amount
-        for (AbstractMonster m : monsters) {
-            m.changeHealth(-baseAttr.damage);
-        }
-        //apply "vulnerable" amount to monster
         Vulnerable v = new Vulnerable();
         if(upgradable)
             v.stackPower(2);
         else
             v.stackPower(3);
-        monster.addPower(v);
+        for (AbstractMonster m : monsters) {
+            m.changeHealth(-baseAttr.damage);
+            m.addPower(v);
+        }
         //subtract cost from the energy
         hero.currentEnergy -= cost;
     }
