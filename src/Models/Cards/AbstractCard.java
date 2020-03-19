@@ -15,5 +15,5 @@ public abstract class AbstractCard {
 
     public abstract void use(AbstractMonster monster, AbstractCharacter hero);
     public abstract void upgrade();
-    public abstract void makeCopy();
+    public abstract AbstractCard makeCopy();
 }
