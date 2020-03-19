@@ -4,7 +4,7 @@ import Models.Cards.*;
 
 import java.util.ArrayList;
 
-public class Bash extends AbstractCard {
+public class Clothesline extends AbstractCard {
     private String name;
     private String description;
     private int cost;
@@ -12,20 +12,21 @@ public class Bash extends AbstractCard {
     private CardColor color;
     private CardRarity rarity;
     private CardTarget target;
+    private CardKeyword keyword;
     private BaseCardAttributes baseAttr;
     private boolean usable;
     private boolean upgradable;
 
-    private Bash(){
-        name = "Bash";
-        description = "Deal 8(10) damage. Apply 2(3) Vulnerable.";
+    private Clothesline(){
+        name = "Clothesline";
+        description = "Deal 12(14) damage. Apply 2(3) Weak.";
         cost = 2;
         type = CardType.ATTACK;
         color = CardColor.RED;
-        rarity = CardRarity.BASIC;
+        rarity = CardRarity.COMMON;
         target = CardTarget.ENEMY;
         baseAttr = new BaseCardAttributes();
-        baseAttr.damage = 8;
+        baseAttr.damage = 12;
         usable = true;
         upgradable = true;
     }
@@ -36,13 +37,13 @@ public class Bash extends AbstractCard {
         for (AbstractMonster m : monsters) {
             m.changeHealth(-baseAttr.damage);
         }
-        //apply "vulnerable" amount to monster
-        Vulnerable v = new Vulnerable();
+        //apply "weak" amount to monster
+        Weak w = new Weak();
         if(upgradable)
-            v.stackPower(2);
+            w.stackPower(2);
         else
-            v.stackPower(3);
-        monster.addPower(v);
+            w.stackPower(3);
+        monster.addPower(w);
         //subtract cost from the energy
         hero.currentEnergy -= cost;
     }
@@ -51,13 +52,13 @@ public class Bash extends AbstractCard {
     public void upgrade() {
         if(upgradable){
             upgradable = false;
-            baseAttr.damage = 10;
+            baseAttr.damage = 14;
         }
     }
 
     @Override
-    public Bash makeCopy() {
-        Bash newCard = new Bash();
+    public Clothesline makeCopy() {
+        Clothesline newCard = new Clothesline();
         newCard.upgradable = this.upgradable;
         newCard.baseAttr.damage = this.baseAttr.damage;
         return newCard;
