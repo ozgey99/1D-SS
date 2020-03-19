@@ -2,6 +2,8 @@ package Models.Cards.Red;
 
 import Models.Cards.*;
 
+import java.util.ArrayList;
+
 public class Bash extends AbstractCard {
 
     private String name;
@@ -30,9 +32,11 @@ public class Bash extends AbstractCard {
     }
 
     @Override
-    public void use(AbstractMonster monster, AbstractCharacter hero) {
+    public void use(ArrayList<AbstractMonster> monsters, AbstractCharacter hero) {
         //monster's health goes down by "damage" amount
-        monster.currentHP -= baseAttr.damage;
+        for (AbstractMonster m : monsters) {
+            m.changeHealth(-baseAttr.damage)
+        }
         //apply "vulnerable" amount to monster
         Vulnerable v = new Vulnerable();
         if(upgradable)
