@@ -1,6 +1,8 @@
-package Models;
+package Models.Cards.Red;
 
-public class Bash extends AbstractCard{
+import Models.Cards.*;
+
+public class Bash extends AbstractCard {
 
     private String name;
     private String description;

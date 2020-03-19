@@ -1,4 +1,4 @@
-package Models;
+package Models.Cards;
 
 public abstract class AbstractCard {
     public String name;

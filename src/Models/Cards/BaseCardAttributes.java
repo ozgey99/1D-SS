@@ -1,4 +1,4 @@
-package Models;
+package Models.Cards;
 
 public class BaseCardAttributes {
     public int damage;
