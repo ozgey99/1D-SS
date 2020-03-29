@@ -10,12 +10,12 @@ public class Dungeon {
     private AbstractRoom currentRoom;
 
     public Dungeon() {
+        System.out.println("int dungeon.");
         this.act = 1;
         this.name = "The Exordium";
-        generate();
     }
 
-    private void generate() {
+    public void generate() {
         currentRoom = new Fight(null);
     }
 
@@ -23,11 +23,17 @@ public class Dungeon {
         return act;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public AbstractRoom getCurrentRoom() {
         return currentRoom;
     }
 
-    public void ascend() {
+    public boolean ascend() {
+        if (this.currentRoom.getChildren() == null) return false;
         this.currentRoom = this.currentRoom.getChildren();
+        return true;
     }
 }

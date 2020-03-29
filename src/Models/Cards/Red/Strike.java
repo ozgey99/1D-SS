@@ -1,21 +1,15 @@
 package Models.Cards.Red;
 
+import Models.Actions.AttackActions;
 import Models.Cards.*;
+import Models.Creatures.AbstractCharacter;
+import Models.Creatures.Monsters.AbstractMonster;
+import Models.Dungeon.Room.Fight;
+import Models.UI;
 
 import java.util.ArrayList;
 
 public class Strike extends AbstractCard {
-
-    private String name;
-    private String description;
-    private int cost;
-    private CardType type;
-    private CardColor color;
-    private CardRarity rarity;
-    private CardTarget target;
-    private BaseCardAttributes baseAttr;
-    private boolean usable;
-    private boolean upgradable;
 
     public Strike() {
         name = "Strike";
@@ -32,12 +26,14 @@ public class Strike extends AbstractCard {
     }
 
     @Override
-    public void use(ArrayList<AbstractMonster> monsters, AbstractCharacter hero) {
-        // deal damage
-        for (AbstractMonster m : monsters) {
-            m.changeHealth(-baseAttr.damage);
-        }
-        hero.currentEnergy -= cost;
+    public boolean use(Fight f, AbstractCharacter player) {
+        if (!player.changeEnergy(-cost)) return false;
+
+        System.out.print("Choose enemy to attack: ");
+        int monster = UI.getInput(0, f.getMonsters().size());
+        AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+
+        return true;
     }
 
     @Override

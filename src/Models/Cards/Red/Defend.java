@@ -1,20 +1,13 @@
 package Models.Cards.Red;
 
 import Models.Cards.*;
+import Models.Creatures.AbstractCharacter;
+import Models.Creatures.Monsters.AbstractMonster;
+import Models.Dungeon.Room.Fight;
 
 import java.util.ArrayList;
 
 public class Defend extends AbstractCard {
-    private String name;
-    private String description;
-    private int cost;
-    private CardType type;
-    private CardColor color;
-    private CardRarity rarity;
-    private CardTarget target;
-    private BaseCardAttributes baseAttr;
-    private boolean usable;
-    private boolean upgradable;
 
     public Defend() {
         name = "Defend";
@@ -31,9 +24,10 @@ public class Defend extends AbstractCard {
     }
 
     @Override
-    public void use(ArrayList<AbstractMonster> monsters, AbstractCharacter hero) {
-        hero.changeShield(baseAttr.block);
-        hero.currentEnergy -= cost;
+    public boolean use(Fight f, AbstractCharacter player) {
+        if (!player.changeEnergy(-cost)) return false;
+        player.changeBlock(baseAttr.block);
+        return true;
     }
 
     @Override

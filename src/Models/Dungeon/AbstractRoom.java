@@ -3,9 +3,9 @@ package Models.Dungeon;
 import Models.Dungeon.Room.RoomType;
 
 public abstract class AbstractRoom {
-    private RoomType type;
-    private AbstractRoom children;
-    private boolean done;
+    protected RoomType type;
+    protected AbstractRoom children;
+    protected boolean done;
 
     public abstract void start();
 
