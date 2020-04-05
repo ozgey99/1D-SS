@@ -8,7 +8,7 @@ import Models.UI;
 
 public class PommelStrike extends AbstractCard {
 
-    int drawAmt;
+    private int drawAmt;
 
     public PommelStrike(){
         name = "Pommel Strike";

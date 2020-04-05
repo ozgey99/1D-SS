@@ -8,7 +8,7 @@ import Models.UI;
 
 public class ShrugItOff extends AbstractCard {
 
-    int drawAmt;
+    private int drawAmt;
 
     public ShrugItOff(){
         name = "Shrug it Off";
