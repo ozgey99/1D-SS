@@ -6,44 +6,48 @@ import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
 import Models.UI;
 
-import java.util.ArrayList;
+public class ShrugItOff extends AbstractCard {
 
-public class BodySlam extends AbstractCard {
+    int drawAmt;
 
-    public BodySlam() {
-        name = "Body Slam";
-        description = "Deal damage equal to your Block.";
+    public ShrugItOff(){
+        name = "Shrug it Off";
+        description = "Gain 8(11) Block. Draw 1 card.";
         cost = 1;
-        type = CardType.ATTACK;
+        type = CardType.SKILL;
         color = CardColor.RED;
         rarity = CardRarity.COMMON;
-        target = CardTarget.ENEMY;
+        target = CardTarget.SELF;
         baseAttr = new BaseCardAttributes();
+        baseAttr.block = 8;
         usable = true;
         upgradable = true;
+        drawAmt = 1;
     }
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
-        int monster = UI.getInput(0, f.getMonsters().size());
-        AttackActions.Attack(f.getMonsters().get(monster), player.getBlock());
+
+        f.getHand().addDeck(Deck.drawCard(f.getDraw(), f.getDiscard(), drawAmt));
+
+        player.changeBlock(baseAttr.block);
         return true;
     }
 
     @Override
     public void upgrade() {
         if (upgradable) {
-            this.cost = 0;
-            this.upgradable = false;
+            upgradable = false;
+            this.baseAttr.block = 11;
         }
     }
 
     @Override
     public AbstractCard makeCopy() {
-        BodySlam copy = new BodySlam();
+        ShrugItOff copy = new ShrugItOff();
         copy.upgradable = this.upgradable;
-        copy.cost = this.cost;
+        copy.baseAttr.block = this.baseAttr.block;
         return copy;
     }
 }

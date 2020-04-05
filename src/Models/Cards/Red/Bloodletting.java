@@ -7,14 +7,7 @@ import Models.Dungeon.Room.Fight;
 import java.util.ArrayList;
 
 public class Bloodletting extends AbstractCard {
-    private String name;
-    private String description;
-    private CardType type;
-    private CardColor color;
-    private CardRarity rarity;
-    private CardTarget target;
-    private boolean usable;
-    private boolean upgradable;
+
     private int HPdecrease;
     private int energyIncrease;
 

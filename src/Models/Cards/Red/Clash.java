@@ -6,49 +6,47 @@ import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
 import Models.UI;
 
-import java.util.ArrayList;
+public class Clash extends AbstractCard {
 
-public class TwinStrike extends AbstractCard {
-
-    private int repeat;
-
-    public TwinStrike(){
-        name = "Twin Strike";
-        description = "Deal 5(7) damage twice.";
-        cost = 1;
+    public Clash(){
+        name = "Clash";
+        description = "Can only be played if every card in your hand is an Attack. Deal 14(18) damage.";
+        cost = 0;
         type = CardType.ATTACK;
         color = CardColor.RED;
         rarity = CardRarity.COMMON;
         target = CardTarget.ENEMY;
         baseAttr = new BaseCardAttributes();
-        baseAttr.damage = 5;
+        baseAttr.damage = 14;
         usable = true;
         upgradable = true;
-        repeat = 2;
     }
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
+        for(AbstractCard c : f.getHand().getCardList()){
+            if(c.getType() != CardType.ATTACK)
+                return false;
+        }
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
-        for(int i = 0; i < repeat; i++)
-            AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+        AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
         return true;
     }
 
     @Override
     public void upgrade() {
-        if(upgradable){
+        if (upgradable) {
             upgradable = false;
-            baseAttr.damage = 7;
+            this.baseAttr.damage = 18;
         }
     }
 
     @Override
-    public TwinStrike makeCopy() {
-        TwinStrike newCard = new TwinStrike();
-        newCard.upgradable = this.upgradable;
-        newCard.baseAttr.damage = this.baseAttr.damage;
-        return newCard;
+    public AbstractCard makeCopy() {
+        Clash copy = new Clash();
+        copy.upgradable = this.upgradable;
+        copy.baseAttr.damage = this.baseAttr.damage;
+        return copy;
     }
 }

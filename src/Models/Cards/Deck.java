@@ -27,6 +27,8 @@ public class Deck {
         cardList = new ArrayList<AbstractCard>();
     }
 
+    public ArrayList<AbstractCard> getCardList(){ return cardList; }
+
     public boolean addCard(AbstractCard c) {
         return cardList.add(c);
     }

@@ -1,23 +1,19 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
-import Models.UI;
 
-import java.util.ArrayList;
+public class Havoc extends AbstractCard {
 
-public class BodySlam extends AbstractCard {
-
-    public BodySlam() {
-        name = "Body Slam";
-        description = "Deal damage equal to your Block.";
+    public Havoc(){
+        name = "Havoc";
+        description = "Play the top card of your draw pile and Exhaust it.";
         cost = 1;
-        type = CardType.ATTACK;
+        type = CardType.SKILL;
         color = CardColor.RED;
         rarity = CardRarity.COMMON;
-        target = CardTarget.ENEMY;
+        target = CardTarget.NONE;
         baseAttr = new BaseCardAttributes();
         usable = true;
         upgradable = true;
@@ -26,22 +22,24 @@ public class BodySlam extends AbstractCard {
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
-        int monster = UI.getInput(0, f.getMonsters().size());
-        AttackActions.Attack(f.getMonsters().get(monster), player.getBlock());
+        AbstractCard c = f.getDraw().getCard(0);
+        c.use(f, player);
+        f.getDraw().removeCard(c);
+        f.getExhaust().addCard(c);
         return true;
     }
 
     @Override
     public void upgrade() {
         if (upgradable) {
+            upgradable = false;
             this.cost = 0;
-            this.upgradable = false;
         }
     }
 
     @Override
     public AbstractCard makeCopy() {
-        BodySlam copy = new BodySlam();
+        Havoc copy = new Havoc();
         copy.upgradable = this.upgradable;
         copy.cost = this.cost;
         return copy;

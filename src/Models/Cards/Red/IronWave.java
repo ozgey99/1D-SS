@@ -9,16 +9,6 @@ import Models.UI;
 import java.util.ArrayList;
 
 public class IronWave extends AbstractCard {
-    private String name;
-    private String description;
-    private int cost;
-    private CardType type;
-    private CardColor color;
-    private CardRarity rarity;
-    private CardTarget target;
-    private BaseCardAttributes baseAttr;
-    private boolean usable;
-    private boolean upgradable;
 
     public IronWave(){
         name = "Iron Wave";

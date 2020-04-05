@@ -6,49 +6,52 @@ import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
 import Models.UI;
 
-import java.util.ArrayList;
+public class PommelStrike extends AbstractCard {
 
-public class TwinStrike extends AbstractCard {
+    int drawAmt;
 
-    private int repeat;
-
-    public TwinStrike(){
-        name = "Twin Strike";
-        description = "Deal 5(7) damage twice.";
+    public PommelStrike(){
+        name = "Pommel Strike";
+        description = "Deal 9(10) damage. Draw 1(2) card(s).";
         cost = 1;
         type = CardType.ATTACK;
         color = CardColor.RED;
         rarity = CardRarity.COMMON;
         target = CardTarget.ENEMY;
         baseAttr = new BaseCardAttributes();
-        baseAttr.damage = 5;
+        baseAttr.damage = 9;
         usable = true;
         upgradable = true;
-        repeat = 2;
+        drawAmt = 1;
     }
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
+
+        f.getHand().addDeck(Deck.drawCard(f.getDraw(), f.getDiscard(), drawAmt));
+
         int monster = UI.getInput(0, f.getMonsters().size());
-        for(int i = 0; i < repeat; i++)
-            AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+        AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+
         return true;
     }
 
     @Override
     public void upgrade() {
-        if(upgradable){
+        if (upgradable) {
             upgradable = false;
-            baseAttr.damage = 7;
+            this.baseAttr.damage = 10;
+            drawAmt = 2;
         }
     }
 
     @Override
-    public TwinStrike makeCopy() {
-        TwinStrike newCard = new TwinStrike();
-        newCard.upgradable = this.upgradable;
-        newCard.baseAttr.damage = this.baseAttr.damage;
-        return newCard;
+    public AbstractCard makeCopy() {
+        PommelStrike copy = new PommelStrike();
+        copy.upgradable = this.upgradable;
+        copy.baseAttr.damage = this.baseAttr.damage;
+        copy.drawAmt = this.drawAmt;
+        return copy;
     }
 }

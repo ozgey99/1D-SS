@@ -6,49 +6,48 @@ import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
 import Models.UI;
 
-import java.util.ArrayList;
+public class Headbutt extends AbstractCard {
 
-public class TwinStrike extends AbstractCard {
-
-    private int repeat;
-
-    public TwinStrike(){
-        name = "Twin Strike";
-        description = "Deal 5(7) damage twice.";
+    public Headbutt(){
+        name = "Headbutt";
+        description = "Deal 9(12) damage. Place a card from your discard pile on top of your draw pile.";
         cost = 1;
         type = CardType.ATTACK;
         color = CardColor.RED;
         rarity = CardRarity.COMMON;
         target = CardTarget.ENEMY;
         baseAttr = new BaseCardAttributes();
-        baseAttr.damage = 5;
+        baseAttr.damage = 9;
         usable = true;
         upgradable = true;
-        repeat = 2;
     }
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
-        for(int i = 0; i < repeat; i++)
-            AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+        AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+
+        AbstractCard c = f.getDiscard().getCard((int)(Math.random() * f.getDiscard().getSize()));
+        f.getDiscard().removeCard(c);
+        f.getDraw().getCardList().add(0, c);
         return true;
     }
 
     @Override
     public void upgrade() {
-        if(upgradable){
+        if (upgradable) {
             upgradable = false;
-            baseAttr.damage = 7;
+            this.baseAttr.damage = 12;
         }
     }
 
     @Override
-    public TwinStrike makeCopy() {
-        TwinStrike newCard = new TwinStrike();
-        newCard.upgradable = this.upgradable;
-        newCard.baseAttr.damage = this.baseAttr.damage;
-        return newCard;
+    public AbstractCard makeCopy() {
+        Headbutt copy = new Headbutt();
+        copy.upgradable = this.upgradable;
+        copy.baseAttr.damage = this.baseAttr.damage;
+        return copy;
     }
+
 }
