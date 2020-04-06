@@ -1,4 +1,6 @@
 package Models.Object;
 
-public class AbstractObject {
+public abstract class AbstractObject {
+    public abstract int onAttack(int prevDamage);
+    public abstract int onDamage(int prevDamage);
 }

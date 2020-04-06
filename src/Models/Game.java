@@ -16,7 +16,6 @@ public class Game {
     }
 
     public void start() {
-        boolean finished = false;
         UI.displayStartMessage();
         UI.displayAct(dungeon);
 

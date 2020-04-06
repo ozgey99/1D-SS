@@ -1,13 +1,16 @@
 package Models.Dungeon.Room;
 
+import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.Deck;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
 import Models.Creatures.Monsters.Temp;
 import Models.Dungeon.AbstractRoom;
-import Models.Game;
 import Models.Main;
+import Models.Object.AbstractPower;
+import Models.Object.Powers.Strength;
+import Models.Object.Powers.Vulnerable;
 import Models.UI;
 
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ public class Fight extends AbstractRoom {
     private Deck discard;
     private Deck exhaust;
     private Deck hand;
+    private int turn;
 
     private AbstractCharacter player;
 
@@ -47,6 +51,11 @@ public class Fight extends AbstractRoom {
 
         drawAmount = 5;
 
+        turn = 1;
+
+        PowerActions.addPower(player, new Vulnerable());
+        PowerActions.addPower(player, new Strength());
+
         preFight();
 
         while (true) {
@@ -63,6 +72,8 @@ public class Fight extends AbstractRoom {
             if (done) break;
             monsterPostTurn();
 
+            turn++;
+
         }
 
         postFight();
@@ -75,6 +86,10 @@ public class Fight extends AbstractRoom {
     private void preTurn() {
         player.recharge();
         player.changeBlock(-player.getBlock());
+
+        if (turn != 1) {
+            PowerActions.turnEndDecrease(player);
+        }
     }
 
     private void turn() {
@@ -89,8 +104,7 @@ public class Fight extends AbstractRoom {
             UI.displayDeck(hand, "Hand");
             System.out.print("Choose your card: ");
 
-            int card = 0;
-            card = UI.getInput(-1, hand.getSize());
+            int card = UI.getInput(-1, hand.getSize());
 
             if (card == -1) break;
 
@@ -120,7 +134,9 @@ public class Fight extends AbstractRoom {
     private void monsterPreTurn() {
         for (AbstractMonster m : monsters) {
             m.changeBlock(-m.getBlock());
+            PowerActions.turnEndDecrease(m);
         }
+
     }
 
     private void monsterTurn() {

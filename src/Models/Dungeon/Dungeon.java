@@ -10,7 +10,6 @@ public class Dungeon {
     private AbstractRoom currentRoom;
 
     public Dungeon() {
-        System.out.println("int dungeon.");
         this.act = 1;
         this.name = "The Exordium";
     }

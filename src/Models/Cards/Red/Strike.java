@@ -3,11 +3,8 @@ package Models.Cards.Red;
 import Models.Actions.AttackActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
-import Models.Creatures.Monsters.AbstractMonster;
 import Models.Dungeon.Room.Fight;
 import Models.UI;
-
-import java.util.ArrayList;
 
 public class Strike extends AbstractCard {
 
@@ -31,7 +28,7 @@ public class Strike extends AbstractCard {
 
         System.out.print("Choose enemy to attack: ");
         int monster = UI.getInput(0, f.getMonsters().size());
-        AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+        AttackActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
 
         return true;
     }

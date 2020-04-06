@@ -23,7 +23,7 @@ public abstract class AbstractMonster extends AbstractCreature {
 
     public void act(Fight f, AbstractCharacter player) {
         MonsterMove next = getNextMoveAndRotate();
-        AttackActions.Attack(player, next.getDamage());
+        AttackActions.Attack(this, player, next.getDamage());
         changeBlock(next.getBlock());
     }
 
