@@ -186,4 +186,13 @@ public class Fight extends AbstractRoom {
     public ArrayList<AbstractMonster> getMonsters() {
         return monsters;
     }
+
+    public Deck getDraw(){ return draw; }
+
+    public Deck getDiscard(){ return discard; }
+
+    public Deck getExhaust(){ return exhaust; }
+
+    public Deck getHand() { return hand; }
+
 }
