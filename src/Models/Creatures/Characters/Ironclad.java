@@ -3,6 +3,7 @@ package Models.Creatures.Characters;
 import Models.Cards.Red.Defend;
 import Models.Cards.Red.Strike;
 import Models.Creatures.AbstractCharacter;
+import Models.Object.Relics.BurningBlood;
 
 public class Ironclad extends AbstractCharacter {
 
@@ -21,6 +22,7 @@ public class Ironclad extends AbstractCharacter {
             masterDeck.addCard(new Strike());
             masterDeck.addCard(new Defend());
         }
+        relics.add(new BurningBlood());
     }
 
     public int getHealth()

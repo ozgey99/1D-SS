@@ -1,6 +1,9 @@
 package Models.Creatures;
 
 import Models.Cards.Deck;
+import Models.Object.AbstractRelic;
+
+import java.util.ArrayList;
 
 public abstract class AbstractCharacter extends AbstractCreature {
     public int currentEnergy;
@@ -10,6 +13,7 @@ public abstract class AbstractCharacter extends AbstractCreature {
     protected boolean isAlive;
 
     public Deck masterDeck = new Deck();
+    public ArrayList<AbstractRelic> relics = new ArrayList<>();
 //    public Deck hand = new Deck();
 //    public Deck discard = new Deck();
 //    public Deck exhaust = new Deck();
