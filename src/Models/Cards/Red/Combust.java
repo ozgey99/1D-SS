@@ -27,7 +27,7 @@ public class Combust extends AbstractCard {
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         for (AbstractMonster m : f.getMonsters()) {
-            m.changeHealth(-baseAttr.damage);
+            AttackActions.Attack(player, m, baseAttr.damage);
         }
         player.changeHealth(-1);
         return true;

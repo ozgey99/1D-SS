@@ -27,7 +27,7 @@ public class BodySlam extends AbstractCard {
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
-        AttackActions.Attack(f.getMonsters().get(monster), player.getBlock());
+        AttackActions.Attack(player, f.getMonsters().get(monster), player.getBlock());
         return true;
     }
 

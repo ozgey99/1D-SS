@@ -29,7 +29,7 @@ public class IronWave extends AbstractCard {
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
-        AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+        AttackActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
         player.changeBlock(baseAttr.block);
         return true;
     }

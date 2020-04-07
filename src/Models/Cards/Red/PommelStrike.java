@@ -32,7 +32,7 @@ public class PommelStrike extends AbstractCard {
         f.getHand().addDeck(Deck.drawCard(f.getDraw(), f.getDiscard(), drawAmt));
 
         int monster = UI.getInput(0, f.getMonsters().size());
-        AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+        AttackActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
 
         return true;
     }

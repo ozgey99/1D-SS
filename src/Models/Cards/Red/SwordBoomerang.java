@@ -1,5 +1,6 @@
 package Models.Cards.Red;
 
+import Models.Actions.AttackActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
@@ -33,7 +34,7 @@ public class SwordBoomerang extends AbstractCard {
         ArrayList<AbstractMonster> copy = (ArrayList<AbstractMonster>)(f.getMonsters().clone());
         Collections.shuffle(copy);
         for(int i = 0; i < repeat; i++) {
-            copy.get(0).changeHealth(-baseAttr.damage);
+            AttackActions.Attack(player, copy.get(0), baseAttr.damage);
         }
         return true;
     }

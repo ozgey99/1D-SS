@@ -32,7 +32,7 @@ public class TwinStrike extends AbstractCard {
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
         for(int i = 0; i < repeat; i++)
-            AttackActions.Attack(f.getMonsters().get(monster), baseAttr.damage);
+            AttackActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
         return true;
     }
 

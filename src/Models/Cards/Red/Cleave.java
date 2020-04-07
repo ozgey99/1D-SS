@@ -1,5 +1,6 @@
 package Models.Cards.Red;
 
+import Models.Actions.AttackActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
@@ -27,7 +28,7 @@ public class Cleave extends AbstractCard{
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         for (AbstractMonster m : f.getMonsters()) {
-            m.changeHealth(-baseAttr.damage);
+            AttackActions.Attack(player, m, baseAttr.damage);
         }
         return true;
     }
