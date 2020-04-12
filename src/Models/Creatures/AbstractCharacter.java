@@ -28,6 +28,10 @@ public abstract class AbstractCharacter extends AbstractCreature {
         return true;
     }
 
+    public void changeMaxHP(int hp){
+        maxHP += hp;
+    }
+
     void changeGold(int change)
     {
         gold = gold + change;
