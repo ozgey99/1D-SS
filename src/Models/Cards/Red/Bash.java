@@ -1,6 +1,6 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
+import Models.Actions.FightActions;
 import Models.Actions.PowerActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
@@ -28,7 +28,7 @@ public class Bash extends AbstractCard {
         if (!player.changeEnergy(-cost)) return false;
 
         int monster = UI.getInput(0, f.getMonsters().size());
-        AttackActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
 
         Vulnerable v = new Vulnerable();
 

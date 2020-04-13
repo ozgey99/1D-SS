@@ -37,6 +37,10 @@ public abstract class AbstractCreature {
 //        powers.remove(power);
 //    }
 
+    public void resetBlock() {
+        block = 0;
+    }
+
     public int getCurrentHP() {
         return currentHP;
     }

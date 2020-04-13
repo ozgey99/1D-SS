@@ -1,12 +1,10 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
+import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
 import Models.UI;
-
-import java.util.ArrayList;
 
 public class Anger extends AbstractCard {
 
@@ -27,7 +25,7 @@ public class Anger extends AbstractCard {
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
         int monster = UI.getInput(0, f.getMonsters().size());
-        AttackActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
         Deck discardPile = f.getDiscard();
         discardPile.addCard((this.makeCopy()));
         return true;

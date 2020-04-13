@@ -2,24 +2,24 @@ package Models.Object.Powers;
 
 import Models.Object.AbstractPower;
 
-public class Strength extends AbstractPower {
-    public Strength() {
-        name = "Strength";
-        description = "Strength increases damage by one.";
+public class Agility extends AbstractPower {
+    public Agility() {
+        name = "Agility";
+        description = "Increases the block gained by 1.";
         amount = 1;
         doesDecreaseEachTurn = false;
     }
 
     @Override
     public AbstractPower makeCopy() {
-        Strength copy = new Strength();
+        Agility copy = new Agility();
         copy.amount = this.amount;
         return copy;
     }
 
     @Override
     public int onAttack(int prevDamage) {
-        return prevDamage + amount;
+        return prevDamage;
     }
 
     @Override
@@ -29,6 +29,6 @@ public class Strength extends AbstractPower {
 
     @Override
     public int onBlock(int prevBlock) {
-        return prevBlock;
+        return prevBlock + 1;
     }
 }

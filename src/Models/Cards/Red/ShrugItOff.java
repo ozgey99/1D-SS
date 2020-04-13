@@ -1,10 +1,8 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
-import Models.UI;
 
 public class ShrugItOff extends AbstractCard {
 

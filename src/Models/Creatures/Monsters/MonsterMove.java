@@ -1,28 +1,27 @@
 package Models.Creatures.Monsters;
 
 import Models.Creatures.AbstractCreature;
+import Models.Object.AbstractPower;
+
+import java.util.ArrayList;
 
 public class MonsterMove {
     AbstractMonster owner;
     int damage;
     int block;
-//    ArrayList<Power> powerOnMove;
-    AbstractCreature target;
-//    public MonsterMove(){
-//        powerOnMove = new ArrayList<Power>();
-//    }
+    boolean isSelf;
+    ArrayList<AbstractPower> powers;
 
     public MonsterMove(AbstractMonster o) {
         owner = o;
+        powers = new ArrayList<>();
     }
 
     AbstractMonster getOwner()
     {
         return owner;
     }
-    AbstractCreature getTarget(){
-        return target;
-    }
+    boolean getIsSelf() { return isSelf; }
     public int getDamage()
     {
         return damage;
@@ -31,7 +30,12 @@ public class MonsterMove {
     {
         return block;
     }
-    void setDamage( int damage )
+
+    public ArrayList<AbstractPower> getPowers() {
+        return powers;
+    }
+
+    void setDamage(int damage )
     {
         this.damage = damage;
     }
@@ -39,8 +43,8 @@ public class MonsterMove {
     {
         this.block = block;
     }
-//    void addPower( Power power )
-//    {
-//        powerOnMove.add(power);
-//    }
+
+    public void addPower(AbstractPower p) {
+        powers.add(p);
+    }
 }

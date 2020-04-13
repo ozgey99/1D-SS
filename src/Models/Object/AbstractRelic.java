@@ -2,7 +2,6 @@ package Models.Object;
 
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
-import javafx.scene.image.Image;
 
 public abstract class AbstractRelic extends AbstractObject {
     protected String name;

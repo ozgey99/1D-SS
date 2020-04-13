@@ -8,6 +8,9 @@ import Models.Creatures.Monsters.AbstractMonster;
 import Models.Creatures.Monsters.MonsterMove;
 import Models.Dungeon.Dungeon;
 import Models.Dungeon.Room.Fight;
+import Models.Dungeon.Room.Merchant;
+import Models.Dungeon.Room.Treasure;
+import Models.Object.AbstractRelic;
 
 import java.util.Scanner;
 
@@ -82,6 +85,52 @@ public class UI {
         while (i >= max || i < min) {
             System.out.println("Input is out of parameters. Must be between " + min + " and " + max);
             i = in.nextInt();
+        }
+
+        return i;
+    }
+
+    public static void displayRestRoom() {
+        System.out.println("Choose one:");
+        System.out.println("0. Rest to Heal 30% of your Max HP.");
+        System.out.println("1. Smith to upgrade a card in your deck.");
+    }
+
+    public static int displaySmithList(Deck masterDeck) {
+        int amountNotUpgraded = 0;
+        for (int i = 0; i < masterDeck.getSize(); i++) {
+            AbstractCard c= masterDeck.getCard(i);
+            if (c.isUpgradable()) {
+                System.out.println(c.getName());
+                System.out.println("\t" + c.getDescription());
+                amountNotUpgraded++;
+            }
+        }
+
+        return amountNotUpgraded;
+    }
+
+    public static int displayTreasure(Treasure t) {
+        for (AbstractRelic r : t.getRelics()) {
+            System.out.println(r.getName());
+            System.out.println("\t" + r.getDescription());
+        }
+
+        int res = t.getRelics().size() - 1;
+
+        if (t.getGoldAmount() != 0) {
+            System.out.println(t.getGoldAmount() + " Gold.");
+            res++;
+        }
+
+        return res;
+
+    }
+
+    public static int displayMerchant(Merchant m) {
+        int i;
+        for (i = 0; i < m.getCards().size(); i++) {
+            System.out.println(m.getCards().get(i).getName() + "(" + m.getPrices().get(i) + " Gold)");
         }
 
         return i;

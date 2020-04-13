@@ -1,12 +1,10 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
+import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
 import Models.Dungeon.Room.Fight;
-
-import java.util.ArrayList;
 
 public class Cleave extends AbstractCard{
 
@@ -28,7 +26,7 @@ public class Cleave extends AbstractCard{
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         for (AbstractMonster m : f.getMonsters()) {
-            AttackActions.Attack(player, m, baseAttr.damage);
+            FightActions.Attack(player, m, baseAttr.damage);
         }
         return true;
     }

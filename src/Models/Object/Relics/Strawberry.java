@@ -30,6 +30,11 @@ public class Strawberry extends AbstractRelic {
     }
 
     @Override
+    public int onBlock(int prevBlock) {
+        return prevBlock;
+    }
+
+    @Override
     public void affect(Fight f, AbstractCharacter player){
         player.changeMaxHP(amount);
     }

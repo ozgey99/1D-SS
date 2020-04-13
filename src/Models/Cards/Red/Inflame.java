@@ -1,13 +1,10 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
 import Models.Actions.PowerActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
-import Models.Creatures.Monsters.AbstractMonster;
 import Models.Dungeon.Room.Fight;
 import Models.Object.Powers.Strength;
-import Models.Object.Powers.Vulnerable;
 
 public class Inflame extends AbstractCard {
     public Inflame(){

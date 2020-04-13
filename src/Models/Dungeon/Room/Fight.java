@@ -1,5 +1,6 @@
 package Models.Dungeon.Room;
 
+import Models.Actions.FightActions;
 import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.Deck;
@@ -8,7 +9,6 @@ import Models.Creatures.Monsters.AbstractMonster;
 import Models.Creatures.Monsters.Temp;
 import Models.Dungeon.AbstractRoom;
 import Models.Main;
-import Models.Object.AbstractPower;
 import Models.Object.Powers.Strength;
 import Models.Object.Powers.Vulnerable;
 import Models.UI;
@@ -24,10 +24,13 @@ public class Fight extends AbstractRoom {
     private Deck exhaust;
     private Deck hand;
     private int turn;
+    private boolean isElite;
 
     private AbstractCharacter player;
 
     int drawAmount;
+
+    int goldAmount;
 
     public Fight(AbstractRoom c) {
         type = RoomType.FIGHT;
@@ -85,7 +88,7 @@ public class Fight extends AbstractRoom {
 
     private void preTurn() {
         player.recharge();
-        player.changeBlock(-player.getBlock());
+        player.resetBlock();
 
         if (turn != 1) {
             PowerActions.turnEndDecrease(player);
@@ -133,7 +136,7 @@ public class Fight extends AbstractRoom {
 
     private void monsterPreTurn() {
         for (AbstractMonster m : monsters) {
-            m.changeBlock(-m.getBlock());
+            m.resetBlock();
             PowerActions.turnEndDecrease(m);
         }
 
@@ -153,7 +156,7 @@ public class Fight extends AbstractRoom {
 
 
     private void postFight() {
-
+        player.changeGold(goldAmount);
     }
 
     private void generate() {
@@ -163,6 +166,13 @@ public class Fight extends AbstractRoom {
             monsters.add(new Temp());
             monsters.add(new Temp());
         }
+
+        isElite = false;
+        generateRewards();
+    }
+
+    private void generateRewards() {
+        goldAmount = (int) (Math.random() * 100) + 10;
     }
 
     // Getters and setters.
@@ -194,5 +204,7 @@ public class Fight extends AbstractRoom {
     public Deck getExhaust(){ return exhaust; }
 
     public Deck getHand() { return hand; }
+
+    public boolean getIsElite() { return isElite; }
 
 }

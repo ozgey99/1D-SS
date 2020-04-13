@@ -1,13 +1,12 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
+import Models.Actions.FightActions;
 import Models.Actions.PowerActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
 import Models.Dungeon.Room.Fight;
 import Models.Object.Powers.Vulnerable;
-import Models.UI;
 
 public class Thunderclap extends AbstractCard {
     public Thunderclap(){
@@ -31,7 +30,7 @@ public class Thunderclap extends AbstractCard {
         Vulnerable v = new Vulnerable();
 
         for(AbstractMonster m : f.getMonsters()) {
-            AttackActions.Attack(player, m, baseAttr.damage);
+            FightActions.Attack(player, m, baseAttr.damage);
             PowerActions.addPower(m, v);
         }
 

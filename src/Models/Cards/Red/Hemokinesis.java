@@ -1,6 +1,6 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
+import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
@@ -31,7 +31,7 @@ public class Hemokinesis extends AbstractCard {
 
             player.changeHealth(-HPdecrease);
             int monster = UI.getInput(0, f.getMonsters().size());
-            AttackActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+            FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
 
             return true;
         }
