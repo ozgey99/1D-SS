@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
+    public static int random(int range, int min) {
+        return (int) (Math.random() * range + min);
+    }
+
     // This is terrible.
     public static ArrayList<AbstractCard> getAllCardsOfColor(CardColor color) {
         ArrayList<AbstractCard> c = new ArrayList<>();

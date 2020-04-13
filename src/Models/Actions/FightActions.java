@@ -18,6 +18,10 @@ public class FightActions {
             to.changeHealth(to.getBlock());
             to.changeBlock(-to.getBlock());
         }
+
+        for (AbstractPower p : to.powers) {
+            p.onDamage(to);
+        }
     }
 
     public static void block(AbstractCreature to, int amount) {

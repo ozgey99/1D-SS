@@ -1,20 +1,21 @@
 package Models.Object.Powers;
 
+import Models.Actions.PowerActions;
 import Models.Creatures.AbstractCreature;
 import Models.Dungeon.Room.Fight;
 import Models.Object.AbstractPower;
 
-public class Agility extends AbstractPower {
-    public Agility() {
-        name = "Agility";
-        description = "Increases the block gained by 1.";
-        amount = 1;
+public class CurlUp extends AbstractPower {
+    public CurlUp() {
+        name = "Curl Up";
+        amount = (int) (Math.random() * 4 + 3);
+        description = "Gain " + amount + " block on damage received.";
         doesDecreaseEachTurn = false;
     }
 
     @Override
     public AbstractPower makeCopy() {
-        Agility copy = new Agility();
+        CurlUp copy = new CurlUp();
         copy.amount = this.amount;
         return copy;
     }
@@ -31,12 +32,13 @@ public class Agility extends AbstractPower {
 
     @Override
     public void onDamage(AbstractCreature c) {
-
+        c.changeBlock(amount);
+        amount = 0;
     }
 
     @Override
     public int onBlock(int prevBlock) {
-        return prevBlock + 1;
+        return prevBlock;
     }
 
     @Override
