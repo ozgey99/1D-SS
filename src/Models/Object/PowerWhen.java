@@ -1,5 +1,5 @@
 package Models.Object;
 
-public enum powerWhen {
+public enum PowerWhen {
     ATTACK, DEFEND
 }
