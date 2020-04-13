@@ -1,6 +1,6 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
+import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
@@ -28,7 +28,7 @@ public class Strike extends AbstractCard {
 
         System.out.print("Choose enemy to attack: ");
         int monster = UI.getInput(0, f.getMonsters().size());
-        AttackActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
 
         return true;
     }

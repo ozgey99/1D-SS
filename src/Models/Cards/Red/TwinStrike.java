@@ -1,12 +1,10 @@
 package Models.Cards.Red;
 
-import Models.Actions.AttackActions;
+import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.Room.Fight;
 import Models.UI;
-
-import java.util.ArrayList;
 
 public class TwinStrike extends AbstractCard {
 
@@ -32,7 +30,7 @@ public class TwinStrike extends AbstractCard {
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
         for(int i = 0; i < repeat; i++)
-            AttackActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+            FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
         return true;
     }
 

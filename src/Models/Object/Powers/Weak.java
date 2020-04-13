@@ -2,24 +2,24 @@ package Models.Object.Powers;
 
 import Models.Object.AbstractPower;
 
-public class Strength extends AbstractPower {
-    public Strength() {
-        name = "Strength";
-        description = "Strength increases damage by one.";
+public class Weak extends AbstractPower {
+    public Weak() {
+        name = "Weak";
+        description = "Target deals 25% less attack damage.";
         amount = 1;
-        doesDecreaseEachTurn = false;
+        doesDecreaseEachTurn = true;
     }
 
     @Override
     public AbstractPower makeCopy() {
-        Strength copy = new Strength();
+        Weak copy = new Weak();
         copy.amount = this.amount;
         return copy;
     }
 
     @Override
     public int onAttack(int prevDamage) {
-        return prevDamage + amount;
+        return prevDamage * 3 / 4;
     }
 
     @Override

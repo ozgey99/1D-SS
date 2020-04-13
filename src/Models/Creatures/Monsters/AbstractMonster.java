@@ -1,7 +1,7 @@
 package Models.Creatures.Monsters;
 //import java.util.ArrayList;
 
-import Models.Actions.AttackActions;
+import Models.Actions.FightActions;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.AbstractCreature;
 import Models.Dungeon.Room.Fight;
@@ -23,7 +23,7 @@ public abstract class AbstractMonster extends AbstractCreature {
 
     public void act(Fight f, AbstractCharacter player) {
         MonsterMove next = getNextMoveAndRotate();
-        AttackActions.Attack(this, player, next.getDamage());
+        FightActions.Attack(this, player, next.getDamage());
         changeBlock(next.getBlock());
     }
 

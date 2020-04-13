@@ -13,6 +13,7 @@ public class Vulnerable extends AbstractPower {
     @Override
     public AbstractPower makeCopy() {
         Vulnerable copy = new Vulnerable();
+        copy.amount = this.amount;
         return copy;
     }
 
@@ -24,5 +25,10 @@ public class Vulnerable extends AbstractPower {
     @Override
     public int onDamage(int prevDamage) {
         return prevDamage + (prevDamage / 4);
+    }
+
+    @Override
+    public int onBlock(int prevBlock) {
+        return prevBlock;
     }
 }
