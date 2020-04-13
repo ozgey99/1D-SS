@@ -6,8 +6,6 @@ import Models.Dungeon.Room.Fight;
 
 public class ShrugItOff extends AbstractCard {
 
-    private int drawAmt;
-
     public ShrugItOff(){
         name = "Shrug it Off";
         description = "Gain 8(11) Block. Draw 1 card.";
@@ -18,16 +16,16 @@ public class ShrugItOff extends AbstractCard {
         target = CardTarget.SELF;
         baseAttr = new BaseCardAttributes();
         baseAttr.block = 8;
+        baseAttr.draw = 1;
         usable = true;
         upgradable = true;
-        drawAmt = 1;
     }
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
 
-        f.getHand().addDeck(Deck.drawCard(f.getDraw(), f.getDiscard(), drawAmt));
+        f.getHand().addDeck(Deck.drawCard(f.getDraw(), f.getDiscard(), baseAttr.draw));
 
         player.changeBlock(baseAttr.block);
         return true;

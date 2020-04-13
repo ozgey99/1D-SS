@@ -8,8 +8,6 @@ import Models.UI;
 
 public class PommelStrike extends AbstractCard {
 
-    private int drawAmt;
-
     public PommelStrike(){
         name = "Pommel Strike";
         description = "Deal 9(10) damage. Draw 1(2) card(s).";
@@ -20,16 +18,16 @@ public class PommelStrike extends AbstractCard {
         target = CardTarget.ENEMY;
         baseAttr = new BaseCardAttributes();
         baseAttr.damage = 9;
+        baseAttr.draw = 1;
         usable = true;
         upgradable = true;
-        drawAmt = 1;
     }
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
 
-        f.getHand().addDeck(Deck.drawCard(f.getDraw(), f.getDiscard(), drawAmt));
+        f.getHand().addDeck(Deck.drawCard(f.getDraw(), f.getDiscard(), baseAttr.draw));
 
         int monster = UI.getInput(0, f.getMonsters().size());
         FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
@@ -42,7 +40,7 @@ public class PommelStrike extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.baseAttr.damage = 10;
-            drawAmt = 2;
+            this.baseAttr.draw = 2;
         }
     }
 
@@ -51,7 +49,7 @@ public class PommelStrike extends AbstractCard {
         PommelStrike copy = new PommelStrike();
         copy.upgradable = this.upgradable;
         copy.baseAttr.damage = this.baseAttr.damage;
-        copy.drawAmt = this.drawAmt;
+        copy.baseAttr.draw = this.baseAttr.draw;
         return copy;
     }
 }
