@@ -26,7 +26,7 @@ public class Cleave extends AbstractCard{
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         for (AbstractMonster m : f.getMonsters()) {
-            FightActions.Attack(player, m, baseAttr.damage);
+            FightActions.attack(player, m, baseAttr.damage);
         }
         return true;
     }

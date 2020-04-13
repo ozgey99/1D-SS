@@ -26,7 +26,7 @@ public class Headbutt extends AbstractCard {
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
-        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.attack(player, f.getMonsters().get(monster), baseAttr.damage);
 
         AbstractCard c = f.getDiscard().getCard((int)(Math.random() * f.getDiscard().getSize()));
         f.getDiscard().removeCard(c);

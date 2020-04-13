@@ -35,7 +35,7 @@ public class UI {
     public static void displayFightInfo(Fight f) {
         AbstractCharacter player = Main.game.getPlayer();
         System.out.println("Player Health: " + player.getCurrentHP() + "/" + player.getMaxHP());
-        System.out.println("Player Block: " + player.getBlock());
+        System.out.println("Player block: " + player.getBlock());
         System.out.println("Player Energy: " + player.currentEnergy);
         for (int i = 0; i < f.getMonsters().size(); i++) {
             System.out.print("" + i + " - ");
@@ -46,7 +46,7 @@ public class UI {
 
     public static void displayMonster(AbstractMonster m) {
         System.out.println(m.getName() + "(" + m.getCurrentHP() + "/" + m.getMaxHP() + ")");
-        System.out.println("\tCurrent Block: " + m.getBlock());
+        System.out.println("\tCurrent block: " + m.getBlock());
         System.out.print("\t Next move: ");
 
         MonsterMove move = m.getNextMove();

@@ -10,7 +10,7 @@ public class Clash extends AbstractCard {
 
     public Clash(){
         name = "Clash";
-        description = "Can only be played if every card in your hand is an Attack. Deal 14(18) damage.";
+        description = "Can only be played if every card in your hand is an attack. Deal 14(18) damage.";
         cost = 0;
         type = CardType.ATTACK;
         color = CardColor.RED;
@@ -30,7 +30,7 @@ public class Clash extends AbstractCard {
         }
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
-        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.attack(player, f.getMonsters().get(monster), baseAttr.damage);
         return true;
     }
 

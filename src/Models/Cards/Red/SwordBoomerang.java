@@ -34,7 +34,7 @@ public class SwordBoomerang extends AbstractCard {
         ArrayList<AbstractMonster> copy = (ArrayList<AbstractMonster>)(f.getMonsters().clone());
         Collections.shuffle(copy);
         for(int i = 0; i < repeat; i++) {
-            FightActions.Attack(player, copy.get(0), baseAttr.damage);
+            FightActions.attack(player, copy.get(0), baseAttr.damage);
         }
         return true;
     }

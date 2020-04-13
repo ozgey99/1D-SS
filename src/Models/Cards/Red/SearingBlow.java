@@ -29,7 +29,7 @@ public class SearingBlow extends AbstractCard {
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
-        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.attack(player, f.getMonsters().get(monster), baseAttr.damage);
         return true;
     }
 

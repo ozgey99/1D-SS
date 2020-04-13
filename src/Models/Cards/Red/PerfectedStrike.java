@@ -29,21 +29,21 @@ public class PerfectedStrike extends AbstractCard {
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
-        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.attack(player, f.getMonsters().get(monster), baseAttr.damage);
 
         for(AbstractCard c : f.getDraw().getCardList()){
             if(c.getName().contains("Strike"))
-                FightActions.Attack(player, f.getMonsters().get(monster), additionalDamage);
+                FightActions.attack(player, f.getMonsters().get(monster), additionalDamage);
         }
 
         for(AbstractCard c : f.getHand().getCardList()){
             if(c.getName().contains("Strike"))
-                FightActions.Attack(player, f.getMonsters().get(monster), additionalDamage);
+                FightActions.attack(player, f.getMonsters().get(monster), additionalDamage);
         }
 
         for(AbstractCard c : f.getDiscard().getCardList()){
             if(c.getName().contains("Strike"))
-                FightActions.Attack(player, f.getMonsters().get(monster), additionalDamage);
+                FightActions.attack(player, f.getMonsters().get(monster), additionalDamage);
         }
         return true;
     }

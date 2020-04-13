@@ -4,7 +4,7 @@ import Models.Creatures.AbstractCreature;
 import Models.Object.AbstractPower;
 
 public class FightActions {
-    public static void Attack(AbstractCreature from, AbstractCreature to, int amount) {
+    public static void attack(AbstractCreature from, AbstractCreature to, int amount) {
         for (AbstractPower p : from.powers) {
             amount = p.onAttack(amount);
         }
@@ -20,7 +20,7 @@ public class FightActions {
         }
     }
 
-    public static void Block(AbstractCreature to, int amount) {
+    public static void block(AbstractCreature to, int amount) {
         for (AbstractPower p : to.powers) {
             amount = p.onBlock(amount);
         }

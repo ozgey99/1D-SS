@@ -28,7 +28,7 @@ public class Strike extends AbstractCard {
 
         System.out.print("Choose enemy to attack: ");
         int monster = UI.getInput(0, f.getMonsters().size());
-        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.attack(player, f.getMonsters().get(monster), baseAttr.damage);
 
         return true;
     }

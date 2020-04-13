@@ -8,7 +8,7 @@ public class Entrench extends AbstractCard {
 
     public Entrench(){
         name = "Entrench";
-        description = "Double your current Block.";
+        description = "Double your current block.";
         cost = 2;
         type = CardType.SKILL;
         color = CardColor.RED;

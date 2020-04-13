@@ -30,7 +30,7 @@ public class Thunderclap extends AbstractCard {
         Vulnerable v = new Vulnerable();
 
         for(AbstractMonster m : f.getMonsters()) {
-            FightActions.Attack(player, m, baseAttr.damage);
+            FightActions.attack(player, m, baseAttr.damage);
             PowerActions.addPower(m, v);
         }
 

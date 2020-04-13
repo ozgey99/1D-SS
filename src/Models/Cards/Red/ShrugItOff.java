@@ -8,7 +8,7 @@ public class ShrugItOff extends AbstractCard {
 
     public ShrugItOff(){
         name = "Shrug it Off";
-        description = "Gain 8(11) Block. Draw 1 card.";
+        description = "Gain 8(11) block. Draw 1 card.";
         cost = 1;
         type = CardType.SKILL;
         color = CardColor.RED;

@@ -25,7 +25,7 @@ public class Anger extends AbstractCard {
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
         int monster = UI.getInput(0, f.getMonsters().size());
-        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.attack(player, f.getMonsters().get(monster), baseAttr.damage);
         Deck discardPile = f.getDiscard();
         discardPile.addCard((this.makeCopy()));
         return true;

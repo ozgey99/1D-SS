@@ -31,7 +31,7 @@ public class Hemokinesis extends AbstractCard {
 
             player.changeHealth(-HPdecrease);
             int monster = UI.getInput(0, f.getMonsters().size());
-            FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+            FightActions.attack(player, f.getMonsters().get(monster), baseAttr.damage);
 
             return true;
         }

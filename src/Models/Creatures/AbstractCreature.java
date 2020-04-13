@@ -28,14 +28,6 @@ public abstract class AbstractCreature {
         maxHP = 100;
         currentHP = 100;
     }
-//    void addPower(AbstractPower power)
-//    {
-//        powers.add(power);
-//    }
-//    void removePower(AbstractPower power)
-//    {
-//        powers.remove(power);
-//    }
 
     public void resetBlock() {
         block = 0;

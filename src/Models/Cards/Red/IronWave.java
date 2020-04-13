@@ -10,7 +10,7 @@ public class IronWave extends AbstractCard {
 
     public IronWave(){
         name = "Iron Wave";
-        description = "Gain 5(7) Block. Deal 5(7) damage.";
+        description = "Gain 5(7) block. Deal 5(7) damage.";
         cost = 1;
         type = CardType.ATTACK;
         color = CardColor.RED;
@@ -27,7 +27,7 @@ public class IronWave extends AbstractCard {
     public boolean use(Fight f, AbstractCharacter player) {
         if (!player.changeEnergy(-cost)) return false;
         int monster = UI.getInput(0, f.getMonsters().size());
-        FightActions.Attack(player, f.getMonsters().get(monster), baseAttr.damage);
+        FightActions.attack(player, f.getMonsters().get(monster), baseAttr.damage);
         player.changeBlock(baseAttr.block);
         return true;
     }

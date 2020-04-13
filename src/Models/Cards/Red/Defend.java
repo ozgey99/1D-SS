@@ -11,7 +11,7 @@ public class Defend extends AbstractCard {
 
     public Defend() {
         name = "Defend";
-        description = "Gain 5 Block.";
+        description = "Gain 5 block.";
         cost = 1;
         type = CardType.SKILL;
         color = CardColor.RED;
