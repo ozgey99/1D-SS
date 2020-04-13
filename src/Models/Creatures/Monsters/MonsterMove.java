@@ -15,6 +15,7 @@ public class MonsterMove {
     public MonsterMove(AbstractMonster o) {
         owner = o;
         powers = new ArrayList<>();
+        isSelf = false;
     }
 
     AbstractMonster getOwner()
@@ -42,6 +43,10 @@ public class MonsterMove {
     void setBlock( int block )
     {
         this.block = block;
+    }
+
+    public void setSelf(boolean self) {
+        isSelf = self;
     }
 
     public void addPower(AbstractPower p) {
