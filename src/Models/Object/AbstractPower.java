@@ -5,7 +5,6 @@ public abstract class AbstractPower extends AbstractObject {
     protected String description;
     protected int amount;
     public boolean doesDecreaseEachTurn;
-    public PowerWhen when;
 
     public void stack(int a) {
         amount += a;
