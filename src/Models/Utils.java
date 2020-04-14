@@ -3,6 +3,7 @@ package Models;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Models.Cards.Red.*;
+import Models.Object.Relics.Anchor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class Utils {
 
         return res;
     }
+
 
     public static <E> boolean containsInstance(List<E> l, Class<? extends E> c) {
         for (E e : l) {

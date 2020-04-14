@@ -1,8 +1,6 @@
 package Models.Object.Powers;
 
-import Models.Actions.PowerActions;
 import Models.Creatures.AbstractCreature;
-import Models.Dungeon.Room.Fight;
 import Models.Object.AbstractPower;
 
 public class CurlUp extends AbstractPower {
@@ -21,33 +19,8 @@ public class CurlUp extends AbstractPower {
     }
 
     @Override
-    public int onAttack(int prevDamage) {
-        return prevDamage;
-    }
-
-    @Override
-    public int onDamage(int prevDamage) {
-        return prevDamage;
-    }
-
-    @Override
     public void onDamage(AbstractCreature c) {
         c.changeBlock(amount);
         amount = 0;
-    }
-
-    @Override
-    public int onBlock(int prevBlock) {
-        return prevBlock;
-    }
-
-    @Override
-    public void onTurnStart(Fight f) {
-
-    }
-
-    @Override
-    public void onTurnStart(AbstractCreature c) {
-
     }
 }

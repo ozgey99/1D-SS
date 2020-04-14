@@ -1,6 +1,5 @@
 package Models.Dungeon.Room;
 
-import Models.Actions.FightActions;
 import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.Deck;
@@ -9,6 +8,7 @@ import Models.Creatures.Monsters.AbstractMonster;
 import Models.Creatures.Monsters.Temp;
 import Models.Dungeon.AbstractRoom;
 import Models.Main;
+import Models.Object.AbstractRelic;
 import Models.Object.Powers.Strength;
 import Models.Object.Powers.Vulnerable;
 import Models.UI;
@@ -83,10 +83,17 @@ public class Fight extends AbstractRoom {
     }
 
     private void preFight() {
-
+        for (AbstractRelic r : player.relics) {
+            r.onFightStart(this, player);
+        }
     }
 
     private void preTurn() {
+        for (AbstractRelic r : player.relics) {
+            r.onTurnStart(this);
+            r.onTurnStart(player);
+        }
+
         player.recharge();
         player.resetBlock();
 
@@ -157,6 +164,9 @@ public class Fight extends AbstractRoom {
 
     private void postFight() {
         player.changeGold(goldAmount);
+        for (AbstractRelic r : player.relics) {
+            r.onFightEnd(player);
+        }
     }
 
     private void generate() {

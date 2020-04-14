@@ -1,7 +1,5 @@
 package Models.Object.Powers;
 
-import Models.Creatures.AbstractCreature;
-import Models.Dungeon.Room.Fight;
 import Models.Object.AbstractPower;
 
 public class Strength extends AbstractPower {
@@ -22,30 +20,5 @@ public class Strength extends AbstractPower {
     @Override
     public int onAttack(int prevDamage) {
         return prevDamage + amount;
-    }
-
-    @Override
-    public int onDamage(int prevDamage) {
-        return prevDamage;
-    }
-
-    @Override
-    public void onDamage(AbstractCreature c) {
-
-    }
-
-    @Override
-    public int onBlock(int prevBlock) {
-        return prevBlock;
-    }
-
-    @Override
-    public void onTurnStart(Fight f) {
-
-    }
-
-    @Override
-    public void onTurnStart(AbstractCreature c) {
-
     }
 }
