@@ -1,25 +1,27 @@
 package Models.Object.Relics;
 
-import Models.Creatures.AbstractCharacter;
+import Models.Actions.PowerActions;
 import Models.Creatures.AbstractCreature;
 import Models.Dungeon.Room.Fight;
 import Models.Object.AbstractRelic;
+import Models.Object.Powers.Strength;
 import Models.Object.RelicClass;
 import Models.Object.RelicRarity;
 
-public class BurningBlood extends AbstractRelic {
+public class Vajra extends AbstractRelic {
 
-    public BurningBlood(){
-        name = "Burning Blood";
-        description = "At the end of combat, heal 6 HP.";
-        rarity = RelicRarity.STARTER;
-        rClass = RelicClass.IRONCLAD;
-        amount = 6;
+    private int turn;
+    public Vajra(){
+        name = "Vajra";
+        description = "At the start of each combat, gain 1 Strength.";
+        rarity = RelicRarity.COMMON;
+        rClass = RelicClass.ANY;
+        turn = 0;
     }
 
     @Override
     public AbstractRelic makeCopy(){
-        return new BurningBlood();
+        return new Vajra();
     }
 
     @Override
@@ -39,10 +41,15 @@ public class BurningBlood extends AbstractRelic {
     public void onDamage(AbstractCreature c) {}
 
     @Override
-    public void onTurnStart(Fight f) {}
+    public void onTurnStart(Fight f) {
+        turn++;
+    }
 
     @Override
     public void onTurnStart(AbstractCreature c) {
-        c.changeHealth(amount);
+        if(turn == 1){
+            PowerActions.addPower(c, new Strength());
+        }
     }
+
 }

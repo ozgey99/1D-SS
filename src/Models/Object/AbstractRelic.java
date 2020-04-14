@@ -20,5 +20,4 @@ public abstract class AbstractRelic extends AbstractObject {
         return description;
     }
 
-    public abstract void affect(Fight f, AbstractCharacter player);
 }

@@ -1,6 +1,7 @@
 package Models.Object.Relics;
 
 import Models.Creatures.AbstractCharacter;
+import Models.Creatures.AbstractCreature;
 import Models.Dungeon.Room.Fight;
 import Models.Object.AbstractRelic;
 import Models.Object.RelicClass;
@@ -35,8 +36,15 @@ public class Mango extends AbstractRelic {
     }
 
     @Override
-    public void affect(Fight f, AbstractCharacter player){
-        player.changeMaxHP(amount);
+    public void onDamage(AbstractCreature c) {}
+
+    @Override
+    public void onTurnStart(Fight f) {}
+
+    @Override
+    public void onTurnStart(AbstractCreature c) {
+        if(c instanceof AbstractCharacter)
+            ((AbstractCharacter) c).changeMaxHP(amount);
     }
 
 }

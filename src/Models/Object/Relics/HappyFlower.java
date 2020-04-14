@@ -7,19 +7,21 @@ import Models.Object.AbstractRelic;
 import Models.Object.RelicClass;
 import Models.Object.RelicRarity;
 
-public class BurningBlood extends AbstractRelic {
+public class HappyFlower extends AbstractRelic {
 
-    public BurningBlood(){
-        name = "Burning Blood";
-        description = "At the end of combat, heal 6 HP.";
-        rarity = RelicRarity.STARTER;
-        rClass = RelicClass.IRONCLAD;
-        amount = 6;
+    private int turn;
+    public HappyFlower(){
+        name = "Happy Flower";
+        description = "Every 3 turns, gain 1 Energy.";
+        rarity = RelicRarity.COMMON;
+        rClass = RelicClass.ANY;
+        amount = 1;
+        turn = 0;
     }
 
     @Override
     public AbstractRelic makeCopy(){
-        return new BurningBlood();
+        return new HappyFlower();
     }
 
     @Override
@@ -39,10 +41,14 @@ public class BurningBlood extends AbstractRelic {
     public void onDamage(AbstractCreature c) {}
 
     @Override
-    public void onTurnStart(Fight f) {}
+    public void onTurnStart(Fight f) {
+        turn++;
+    }
 
     @Override
     public void onTurnStart(AbstractCreature c) {
-        c.changeHealth(amount);
+        if(turn % 3 == 0 && c instanceof AbstractCharacter){
+            ((AbstractCharacter) c).changeEnergy(amount);
+        }
     }
 }

@@ -14,9 +14,9 @@ public abstract class AbstractCharacter extends AbstractCreature {
 
     public Deck masterDeck = new Deck();
     public ArrayList<AbstractRelic> relics = new ArrayList<>();
-    public boolean changeEnergy(int usage) {
-        if (currentEnergy + usage < 0) return false;
-        currentEnergy += usage;
+    public boolean changeEnergy(int amount) {
+        if (currentEnergy + amount < 0) return false;
+        currentEnergy += amount;
         return true;
     }
 

@@ -1,25 +1,28 @@
 package Models.Object.Relics;
 
-import Models.Creatures.AbstractCharacter;
+import Models.Actions.PowerActions;
 import Models.Creatures.AbstractCreature;
+import Models.Creatures.Monsters.AbstractMonster;
 import Models.Dungeon.Room.Fight;
 import Models.Object.AbstractRelic;
+import Models.Object.Powers.Vulnerable;
 import Models.Object.RelicClass;
 import Models.Object.RelicRarity;
 
-public class Strawberry extends AbstractRelic {
+public class BagOfMarbles extends AbstractRelic {
 
-    public Strawberry(){
-        name = "Strawberry";
-        description = "Upon pickup, raise your Max HP by 7.";
+    private int turn;
+    public BagOfMarbles(){
+        name = "Bag of Marbles";
+        description = "At the start of each combat, apply 1 Vulnerable to ALL enemies.";
         rarity = RelicRarity.COMMON;
         rClass = RelicClass.ANY;
-        amount = 7;
+        turn = 0;
     }
 
     @Override
     public AbstractRelic makeCopy(){
-        return new Strawberry();
+        return new BagOfMarbles();
     }
 
     @Override
@@ -39,11 +42,16 @@ public class Strawberry extends AbstractRelic {
     public void onDamage(AbstractCreature c) {}
 
     @Override
-    public void onTurnStart(Fight f) {}
+    public void onTurnStart(Fight f) {
+        turn++;
+        if(turn == 1){
+            for(AbstractMonster m : f.getMonsters()){
+                PowerActions.addPower(m, new Vulnerable());
+            }
+        }
+    }
 
     @Override
-    public void onTurnStart(AbstractCreature c) {
-        if(c instanceof AbstractCharacter)
-            ((AbstractCharacter) c).changeMaxHP(amount);
-    }
+    public void onTurnStart(AbstractCreature c) {}
+
 }
