@@ -22,27 +22,7 @@ public class BurningBlood extends AbstractRelic {
         return new BurningBlood();
     }
 
-    @Override
-    public int onAttack(int prevDamage) { return prevDamage; }
-
-    @Override
-    public int onDamage(int prevDamage) {
-        return prevDamage;
-    }
-
-    @Override
-    public int onBlock(int prevBlock) {
-        return prevBlock;
-    }
-
-    @Override
-    public void onDamage(AbstractCreature c) {}
-
-    @Override
-    public void onTurnStart(Fight f) {}
-
-    @Override
-    public void onTurnStart(AbstractCreature c) {
+    public void onFightEnd(AbstractCharacter c) {
         c.changeHealth(amount);
     }
 }

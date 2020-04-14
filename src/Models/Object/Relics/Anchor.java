@@ -9,13 +9,11 @@ import Models.Object.RelicRarity;
 
 public class Anchor extends AbstractRelic {
 
-    private int turn;
     public Anchor(){
         name = "Anchor";
         description = "Start each combat with 10 Block.";
         rarity = RelicRarity.COMMON;
         rClass = RelicClass.ANY;
-        turn = 0;
         amount = 10;
     }
 
@@ -25,30 +23,7 @@ public class Anchor extends AbstractRelic {
     }
 
     @Override
-    public int onAttack(int prevDamage) { return prevDamage; }
-
-    @Override
-    public int onDamage(int prevDamage) {
-        return prevDamage;
-    }
-
-    @Override
-    public int onBlock(int prevBlock) {
-        return prevBlock;
-    }
-
-    @Override
-    public void onDamage(AbstractCreature c) {}
-
-    @Override
-    public void onTurnStart(Fight f) {
-        turn++;
-    }
-
-    @Override
-    public void onTurnStart(AbstractCreature c) {
-        if(turn == 1 && c instanceof AbstractCharacter){
-            c.changeBlock(amount);
-        }
+    public void onFightStart(Fight f, AbstractCharacter c) {
+        c.changeBlock(amount);
     }
 }

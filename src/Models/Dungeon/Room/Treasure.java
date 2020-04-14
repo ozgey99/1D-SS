@@ -5,7 +5,7 @@ import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.AbstractRoom;
 import Models.Main;
 import Models.Object.AbstractRelic;
-import Models.Object.Relics.Mango;
+import Models.Object.Relics.BloodVial;
 import Models.UI;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Treasure extends AbstractRoom {
     }
 
     private void generate() {
-        relics.add(new Mango());
+        relics.add(new BloodVial());
         goldAmount = (int) (Math.random() * 100) + 10;
     }
 
