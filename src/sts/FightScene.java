@@ -1,71 +1,50 @@
 package sts;
 
+import Models.Game;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class FightScene extends Scene {
-    private int width = 1600;
-    private int height = 900;
+    private int width = 1300; //1920;
+    private int height = 700; //1080;
+    public static Game game;
 
     private StackPane root;
-    //private Pane fightPane = new Pane();
+    private StackPane fightPane = new StackPane();
     private GridPane gridFight = new GridPane();
+    CharPane left; //character pane
+    MonsterPane right; //monster pane
     private Pane upper = new  Pane(); // Adjust this upper pane part
-    private GridPane lower = new GridPane(); // Adjust this lower pane part
+    private CardPane lower; // Adjust this lower pane part
     private GridPane division = new GridPane();
+
 
     public FightScene(StackPane pane)
     {
         super( pane );
         root = pane;
-        root.setMinSize( 1600, 900);
+        root.setMinSize( width, height);
         addBackground();
 
-        division.setPadding(new Insets(5,5,5,5));
-        division.setGridLinesVisible(true);
-        root.getChildren().add(division);
-        division.setGridLinesVisible(true);
-        division.setHgap(900);
-        division.setVgap(1600);
+        game = new Game();
 
+        lower  = new CardPane(width , height/9*6,game.getPlayer().masterDeck);
+        left = new CharPane( width/2 , height/9*6, game.getPlayer());
+        right = new MonsterPane( width/2 , height/9*6);
+        initialize();
 
-
-        GridPane.setConstraints(upper, 0,0,1,1);
-        division.getChildren().add(upper);
-        division.setGridLinesVisible(true);
-        upper.getChildren().addAll( new ImageView(new Image("Ironclad.png")) );
-
-        gridFight.setPadding(new Insets(5,5,5,5));
-        gridFight.setGridLinesVisible(true);
-
-       GridPane.setConstraints(gridFight, 0,1,1,1);
-       division.getChildren().add(gridFight);
-
-       // GridPane.setConstraints(lower, 0,2,1,1);
-      //  division.getChildren().add(gridFight);
-
-        //addClickables();
-
-        //Rectangle frame = new Rectangle(5, 5);
-        //frame.setStroke( Color.GREEN );
-
-        //root.getChildren().add(fightPane);
-
-       // fightPane.setEffect( new DropShadow(30, Color.YELLOW) );
-
-        addCharacters();
-        addMonsters();
+        //game.start();
     }
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("background1.jpg"));
@@ -75,23 +54,77 @@ public class FightScene extends Scene {
         root.getChildren().add(imageView);
     }
     private void addCharacters(){
-        ImageView imageView = new ImageView(new Image("Ironclad.png"));
-        imageView.setFitWidth(width/8);
-        imageView.setFitHeight(height/8);
-        //imageView.setTranslateX(width / 4 - (width/8) / 2);
-        //imageView.setTranslateY(height / 2);
-        GridPane.setConstraints( imageView, 0,0,1,1);
-        gridFight.getChildren().add(imageView);
+        left.initialize();
+        GridPane.setConstraints( left, 0,0,1,1);
+        gridFight.getChildren().add(left);
     }
+
     private void addMonsters(){
         ImageView imageView = new ImageView(new Image("Cultist-pretty.png"));
-        imageView.setFitWidth(width/8);
-        imageView.setFitHeight(height/8);
-        //imageView.setTranslateX(width / 4 - (width/8) / 2);
-        //imageView.setTranslateY(height / 2);
-        GridPane.setConstraints( imageView, 1,0,1,1);
-        gridFight.getChildren().add(imageView);
+        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(width/8);
+
+        right.getChildren().add( imageView );
+        right.setAlignment( Pos.BOTTOM_CENTER );
+        GridPane.setConstraints( right, 1,0,1,1);
+        gridFight.getChildren().add(right);
     }
+    private void initialize()
+    {
+        division.setPadding(new Insets(5,5,5,5));
+        root.getChildren().add(division);
+
+        division.setMinWidth(width);
+        division.setMinHeight(height);
+        division.setGridLinesVisible(true);
+
+
+        GridPane.setConstraints(upper, 0,0,1,1);
+        division.getChildren().add(upper);
+        upper.setMinWidth(width);
+        upper.setMinHeight(height/9);
+        upper.setBackground( new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)) );
+
+
+        GridPane.setConstraints(fightPane, 0,1,1,1);
+        division.getChildren().add(fightPane);
+        fightPane.setMinWidth(width);
+        fightPane.setMinHeight(height/9*6);
+        fightPane.getChildren().add(gridFight);
+
+
+
+        GridPane.setConstraints(lower, 0,2,1,1);
+        division.getChildren().add(lower);
+        lower.setMinWidth(width);
+        lower.setMinHeight(height/9*2);
+        lower.setBackground( new Background(new BackgroundFill(Color.DARKMAGENTA, CornerRadii.EMPTY, Insets.EMPTY)) );
+
+
+        //addClickables();
+
+        //
+        // Rectangle frame = new Rectangle();
+        //frame.setStroke( Color.GREEN );
+        //lower.getChildren().add( frame );
+
+        lower.initialize();
+        addCharacters();
+        addMonsters();
+        gridFight.setGridLinesVisible(true);
+
+
+        game.getDungeon().generate();
+    }
+    private void update()
+    {
+
+    }
+    private void draw()
+    {
+
+    }
+
     private void addClickables(){
 
         Button button1 = new Button("Button 1");

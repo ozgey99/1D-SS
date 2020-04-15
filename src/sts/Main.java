@@ -1,6 +1,7 @@
 package sts;
 
 
+import Models.Game;
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -29,8 +30,8 @@ import java.util.List;
 
 public class Main extends Application {
 
-    private static int width = 1600;
-    private static int height = 900;
+    private static int width = 1300; //1920;
+    private static int height = 700; //1080;
 
     private Stage window;
 
@@ -52,7 +53,7 @@ public class Main extends Application {
         double lineX = width / 2 - 100;
         double lineY = height / 3 + 50;
 
-      //  addLine(lineX, lineY);
+        //  addLine(lineX, lineY);
         addMenu(lineX + 5, lineY + 5);
 
         startAnimation();
@@ -131,15 +132,16 @@ public class Main extends Application {
 
     public void changeWindowSize( int width, int height ){
 
-            this.width = width;
-            this.height = height;
+        this.width = width;
+        this.height = height;
     }
     public void switch2Fight( Stage stage ){
         Pane fight = new Pane();
-       // stage.setScene( new Scene() );
+        // stage.setScene( new Scene() );
     }
 
     public static void main(String[] args) {
+
         launch(args);
     }
 }
