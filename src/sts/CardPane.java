@@ -73,7 +73,7 @@ public class CardPane  extends GridPane
 
         Rectangle rect5 = new Rectangle();
         rect5.setFill(new ImagePattern(new Image("Strike.png")));
-        rect5.setX(640);
+        rect5.setX(width/6+440);
         rect5.setY(5);
         rect5.setWidth(100);
         rect5.setHeight(140);
@@ -81,7 +81,7 @@ public class CardPane  extends GridPane
 
         Rectangle rect4 = new Rectangle();
         rect4.setFill(new ImagePattern(new Image("Defend.png")));
-        rect4.setX(530);
+        rect4.setX(width/6+330);
         rect4.setY(5);
         rect4.setWidth(100);
         rect4.setHeight(140);
@@ -89,7 +89,7 @@ public class CardPane  extends GridPane
 
         Rectangle rect3 = new Rectangle();
         rect3.setFill(new ImagePattern(new Image("clash.png")));
-        rect3.setX(420);
+        rect3.setX(width/6+220);
         rect3.setY(5);
         rect3.setWidth(100);
         rect3.setHeight(140);
@@ -97,7 +97,7 @@ public class CardPane  extends GridPane
 
         Rectangle rect2 = new Rectangle();
         rect2.setFill(new ImagePattern(new Image("Bash.png")));
-        rect2.setX(310);
+        rect2.setX(width/6+110);
         rect2.setY(5);
         rect2.setWidth(100);
         rect2.setHeight(140);
@@ -105,7 +105,7 @@ public class CardPane  extends GridPane
 
         Rectangle rect1 = new Rectangle();
         rect1.setFill(new ImagePattern(new Image("Anger.png")));
-        rect1.setX(200);
+        rect1.setX(width/6);
         rect1.setY(5);
         rect1.setWidth(100);
         rect1.setHeight(140);
@@ -176,10 +176,10 @@ public class CardPane  extends GridPane
                 new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent t) {
-                        if (t.getX() < 300 && t.getX() > 200 && t.getY() < 145 && t.getY() > 5) {
+                        if (t.getX() < width/6+100 && t.getX() > width/6 && t.getY() < 145 && t.getY() > 5) {
                             TranslateTransition trans = new TranslateTransition();
                             trans.setDuration(Duration.millis(1000));
-                            trans.setToX(1000);
+                            trans.setToX( ((width/4)*3+(width/9)) );
                             trans.setNode(rect1);
                             trans.play();
                             ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect1);
@@ -192,10 +192,10 @@ public class CardPane  extends GridPane
                             rotate.setAutoReverse(true);
                             rotate.play();
 
-                        } else if (t.getX() < 410 && t.getX() > 310 && t.getY() < 145 && t.getY() > 5) {
+                        } else if (t.getX() < width/6+210 && t.getX() > width/6+110 && t.getY() < 145 && t.getY() > 5) {
                             TranslateTransition trans = new TranslateTransition();
                             trans.setDuration(Duration.millis(1000));
-                            trans.setToX(890);
+                            trans.setToX(((width/4)*3+(width/9))-110);
                             trans.setNode(rect2);
                             trans.play();
                             ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect2);
@@ -207,10 +207,10 @@ public class CardPane  extends GridPane
                             rotate.setCycleCount(1);
                             rotate.setAutoReverse(true);
                             rotate.play();
-                        } else if (t.getX() < 520 && t.getX() > 420 && t.getY() < 145 && t.getY() > 5) {
+                        } else if (t.getX() < width/6+320 && t.getX() > width/6+220 && t.getY() < 145 && t.getY() > 5) {
                             TranslateTransition trans = new TranslateTransition();
                             trans.setDuration(Duration.millis(1000));
-                            trans.setToX(780);
+                            trans.setToX(((width/4)*3+(width/9))-220);
                             trans.setNode(rect3);
                             trans.play();
                             ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect3);
@@ -222,10 +222,10 @@ public class CardPane  extends GridPane
                             rotate.setCycleCount(1);
                             rotate.setAutoReverse(true);
                             rotate.play();
-                        } else if (t.getX() < 630 && t.getX() > 530 && t.getY() < 145 && t.getY() > 5) {
+                        } else if (t.getX() < width/6+430 && t.getX() > width/6+330 && t.getY() < 145 && t.getY() > 5) {
                             TranslateTransition trans = new TranslateTransition();
                             trans.setDuration(Duration.millis(1000));
-                            trans.setToX(670);
+                            trans.setToX(((width/4)*3+(width/9))-330);
                             trans.setNode(rect4);
                             trans.play();
                             ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect4);
@@ -237,10 +237,10 @@ public class CardPane  extends GridPane
                             rotate.setCycleCount(1);
                             rotate.setAutoReverse(true);
                             rotate.play();
-                        } else if (t.getX() < 740 && t.getX() > 640 && t.getY() < 145 && t.getY() > 5) {
+                        } else if (t.getX() < width/6+540 && t.getX() > width/6+440 && t.getY() < 145 && t.getY() > 5) {
                             TranslateTransition trans = new TranslateTransition();
                             trans.setDuration(Duration.millis(1000));
-                            trans.setToX(560);
+                            trans.setToX(((width/4)*3+(width/9))-440);
                             trans.setNode(rect5);
                             trans.play();
                             ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect5);
