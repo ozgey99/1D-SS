@@ -14,9 +14,6 @@ public abstract class AbstractMonster extends AbstractCreature {
     String name;
     ArrayList<MonsterMove> moveList;
 
-    public AbstractMonster(){
-        moveList = new ArrayList<MonsterMove>();
-    }
 //    void addMove(AbstractPower monsterPower)
 //    {
 //        moveList.add(monsterPower);

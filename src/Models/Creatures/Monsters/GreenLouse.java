@@ -13,10 +13,10 @@ public class GreenLouse extends AbstractMonster {
 
     @Override
     public void initialize() {
-        MonsterMove bite = new MonsterMove();
+        MonsterMove bite = new MonsterMove(this);
         bite.setDamage(Utils.random(2, 5));
 
-        MonsterMove spitWeb = new MonsterMove();
+        MonsterMove spitWeb = new MonsterMove(this);
         Weak weak = new Weak();
         weak.stack(1);
         spitWeb.addPower(weak);
