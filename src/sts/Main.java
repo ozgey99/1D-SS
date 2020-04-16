@@ -30,8 +30,8 @@ import java.util.List;
 
 public class Main extends Application {
 
-    private static int width = 1300; //1920;
-    private static int height = 700; //1080;
+    private static int width = 1920;
+    private static int height = 1080;
 
     private Stage window;
 

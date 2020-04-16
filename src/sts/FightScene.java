@@ -16,8 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class FightScene extends Scene {
-    private int width = 1300; //1920;
-    private int height = 700; //1080;
+    private int width = 1920;
+    private int height = 1080;
     public static Game game;
 
     private StackPane root;

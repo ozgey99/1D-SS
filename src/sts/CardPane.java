@@ -122,6 +122,26 @@ public class CardPane  extends GridPane
                 scaleTransition.play();
             }
         });
+        rect1.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent t) {
+                TranslateTransition trans = new TranslateTransition();
+                trans.setDuration(Duration.millis(1000));
+                trans.setToX( ((width/4)*3+(width/9)) );
+                trans.setNode(rect1);
+                trans.play();
+                ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect1);
+                scale.setToX(0);
+                scale.setToY(0);
+                scale.play();
+                RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect1);
+                rotate.setByAngle(360);
+                rotate.setCycleCount(1);
+                rotate.setAutoReverse(true);
+                rotate.play();
+            }
+        });
 
         ScaleTransition scaleTransition2 = new ScaleTransition(Duration.millis(300), rect2);
         rect2.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
@@ -132,6 +152,26 @@ public class CardPane  extends GridPane
                 scaleTransition2.setCycleCount(2);
                 scaleTransition2.setAutoReverse(true);
                 scaleTransition2.play();
+            }
+        });
+        rect2.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent t) {
+                TranslateTransition trans = new TranslateTransition();
+                trans.setDuration(Duration.millis(1000));
+                trans.setToX(((width/4)*3+(width/9))-110);
+                trans.setNode(rect2);
+                trans.play();
+                ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect2);
+                scale.setToX(0);
+                scale.setToY(0);
+                scale.play();
+                RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect2);
+                rotate.setByAngle(360);
+                rotate.setCycleCount(1);
+                rotate.setAutoReverse(true);
+                rotate.play();
             }
         });
 
@@ -146,6 +186,26 @@ public class CardPane  extends GridPane
                 scaleTransition3.play();
             }
         });
+        rect3.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent t) {
+                TranslateTransition trans = new TranslateTransition();
+                trans.setDuration(Duration.millis(1000));
+                trans.setToX(((width/4)*3+(width/9))-220);
+                trans.setNode(rect3);
+                trans.play();
+                ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect3);
+                scale.setToX(0);
+                scale.setToY(0);
+                scale.play();
+                RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect3);
+                rotate.setByAngle(360);
+                rotate.setCycleCount(1);
+                rotate.setAutoReverse(true);
+                rotate.play();
+            }
+        });
 
         ScaleTransition scaleTransition4 = new ScaleTransition(Duration.millis(300), rect4);
         rect4.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
@@ -156,6 +216,26 @@ public class CardPane  extends GridPane
                 scaleTransition4.setCycleCount(2);
                 scaleTransition4.setAutoReverse(true);
                 scaleTransition4.play();
+            }
+        });
+        rect4.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent t) {
+                TranslateTransition trans = new TranslateTransition();
+                trans.setDuration(Duration.millis(1000));
+                trans.setToX(((width/4)*3+(width/9))-330);
+                trans.setNode(rect4);
+                trans.play();
+                ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect4);
+                scale.setToX(0);
+                scale.setToY(0);
+                scale.play();
+                RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect4);
+                rotate.setByAngle(360);
+                rotate.setCycleCount(1);
+                rotate.setAutoReverse(true);
+                rotate.play();
             }
         });
 
@@ -170,93 +250,28 @@ public class CardPane  extends GridPane
                 scaleTransition5.play();
             }
         });
+        rect5.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent t) {
+                TranslateTransition trans = new TranslateTransition();
+                trans.setDuration(Duration.millis(1000));
+                trans.setToX(((width/4)*3+(width/9))-440);
+                trans.setNode(rect5);
+                trans.play();
+                ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect5);
+                scale.setToX(0);
+                scale.setToY(0);
+                scale.play();
+                RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect5);
+                rotate.setByAngle(360);
+                rotate.setCycleCount(1);
+                rotate.setAutoReverse(true);
+                rotate.play();
+            }
+        });
 
-
-        pane.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent t) {
-                        if (t.getX() < width/6+100 && t.getX() > width/6 && t.getY() < 145 && t.getY() > 5) {
-                            TranslateTransition trans = new TranslateTransition();
-                            trans.setDuration(Duration.millis(1000));
-                            trans.setToX( ((width/4)*3+(width/9)) );
-                            trans.setNode(rect1);
-                            trans.play();
-                            ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect1);
-                            scale.setToX(0);
-                            scale.setToY(0);
-                            scale.play();
-                            RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect1);
-                            rotate.setByAngle(360);
-                            rotate.setCycleCount(1);
-                            rotate.setAutoReverse(true);
-                            rotate.play();
-
-                        } else if (t.getX() < width/6+210 && t.getX() > width/6+110 && t.getY() < 145 && t.getY() > 5) {
-                            TranslateTransition trans = new TranslateTransition();
-                            trans.setDuration(Duration.millis(1000));
-                            trans.setToX(((width/4)*3+(width/9))-110);
-                            trans.setNode(rect2);
-                            trans.play();
-                            ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect2);
-                            scale.setToX(0);
-                            scale.setToY(0);
-                            scale.play();
-                            RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect2);
-                            rotate.setByAngle(360);
-                            rotate.setCycleCount(1);
-                            rotate.setAutoReverse(true);
-                            rotate.play();
-                        } else if (t.getX() < width/6+320 && t.getX() > width/6+220 && t.getY() < 145 && t.getY() > 5) {
-                            TranslateTransition trans = new TranslateTransition();
-                            trans.setDuration(Duration.millis(1000));
-                            trans.setToX(((width/4)*3+(width/9))-220);
-                            trans.setNode(rect3);
-                            trans.play();
-                            ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect3);
-                            scale.setToX(0);
-                            scale.setToY(0);
-                            scale.play();
-                            RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect3);
-                            rotate.setByAngle(360);
-                            rotate.setCycleCount(1);
-                            rotate.setAutoReverse(true);
-                            rotate.play();
-                        } else if (t.getX() < width/6+430 && t.getX() > width/6+330 && t.getY() < 145 && t.getY() > 5) {
-                            TranslateTransition trans = new TranslateTransition();
-                            trans.setDuration(Duration.millis(1000));
-                            trans.setToX(((width/4)*3+(width/9))-330);
-                            trans.setNode(rect4);
-                            trans.play();
-                            ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect4);
-                            scale.setToX(0);
-                            scale.setToY(0);
-                            scale.play();
-                            RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect4);
-                            rotate.setByAngle(360);
-                            rotate.setCycleCount(1);
-                            rotate.setAutoReverse(true);
-                            rotate.play();
-                        } else if (t.getX() < width/6+540 && t.getX() > width/6+440 && t.getY() < 145 && t.getY() > 5) {
-                            TranslateTransition trans = new TranslateTransition();
-                            trans.setDuration(Duration.millis(1000));
-                            trans.setToX(((width/4)*3+(width/9))-440);
-                            trans.setNode(rect5);
-                            trans.play();
-                            ScaleTransition scale = new ScaleTransition(Duration.millis(1000), rect5);
-                            scale.setToX(0);
-                            scale.setToY(0);
-                            scale.play();
-                            RotateTransition rotate = new RotateTransition(Duration.millis(1000), rect5);
-                            rotate.setByAngle(360);
-                            rotate.setCycleCount(1);
-                            rotate.setAutoReverse(true);
-                            rotate.play();
-                        }
-                    }
-                });
         this.getChildren().addAll(pane);
-        //========================================  NEW  ========================================
 
     }
 
