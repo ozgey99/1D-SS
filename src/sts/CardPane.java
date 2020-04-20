@@ -37,6 +37,9 @@ import javafx.event.EventHandler;
 
 public class CardPane  extends GridPane
 {
+    private int id;
+    private int maxHand = 5;
+    private int space;
     private StackPane root;
     private Text text;
     private Deck deck;
@@ -49,10 +52,9 @@ public class CardPane  extends GridPane
     Rectangle rect3;
     Rectangle rect4;
     Rectangle rect5;
-
+    Pane pane = new Pane();
     private GridPane general = new GridPane();
-    private int maxHand = 5;
-    private int space;
+
 
     private Effect shadow = new DropShadow(5, Color.BLACK);
     private Effect blur = new BoxBlur(1, 1, 3);
@@ -68,47 +70,48 @@ public class CardPane  extends GridPane
     public void initialize()
     {
 
-        AbstractCard firstHandCard = deck.getCard(0);
-        Pane pane = new Pane();
+        space = width/10;
 
-        Rectangle rect5 = new Rectangle();
+        AbstractCard firstHandCard = deck.getCard(0);
+
+         rect5 = new Rectangle();
         rect5.setFill(new ImagePattern(new Image("Strike.png")));
-        rect5.setX(width/6+440);
-        rect5.setY(5);
-        rect5.setWidth(100);
-        rect5.setHeight(140);
+        rect5.setX(4*space);
+        rect5.setY(0);
+        rect5.setWidth(space);
+        rect5.setHeight(space);
         pane.getChildren().add(rect5);
 
-        Rectangle rect4 = new Rectangle();
+         rect4 = new Rectangle();
         rect4.setFill(new ImagePattern(new Image("Defend.png")));
-        rect4.setX(width/6+330);
-        rect4.setY(5);
-        rect4.setWidth(100);
-        rect4.setHeight(140);
+        rect4.setX(3*space);
+        rect4.setY(0);
+        rect4.setWidth(space);
+        rect4.setHeight(space);
         pane.getChildren().add(rect4);
 
-        Rectangle rect3 = new Rectangle();
+         rect3 = new Rectangle();
         rect3.setFill(new ImagePattern(new Image("clash.png")));
-        rect3.setX(width/6+220);
-        rect3.setY(5);
-        rect3.setWidth(100);
-        rect3.setHeight(140);
+        rect3.setX(2*space);
+        rect3.setY(0);
+        rect3.setWidth(space);
+        rect3.setHeight(space);
         pane.getChildren().add(rect3);
 
-        Rectangle rect2 = new Rectangle();
+         rect2 = new Rectangle();
         rect2.setFill(new ImagePattern(new Image("Bash.png")));
-        rect2.setX(width/6+110);
-        rect2.setY(5);
-        rect2.setWidth(100);
-        rect2.setHeight(140);
+        rect2.setX(space+1);
+        rect2.setY(0);
+        rect2.setWidth(space);
+        rect2.setHeight(space);
         pane.getChildren().add(rect2);
 
-        Rectangle rect1 = new Rectangle();
+         rect1 = new Rectangle();
         rect1.setFill(new ImagePattern(new Image("Anger.png")));
-        rect1.setX(width/6);
-        rect1.setY(5);
-        rect1.setWidth(100);
-        rect1.setHeight(140);
+        rect1.setX(0);
+        rect1.setY(0);
+        rect1.setWidth(space);
+        rect1.setHeight(space);
         pane.getChildren().add(rect1);
 
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(300), rect1);
@@ -271,6 +274,51 @@ public class CardPane  extends GridPane
             }
         });
 
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+
+                        if (t.getX() < space) {
+                            System.out.println("Selected card id "+ 0);
+                            id = 0;
+                            draw();
+
+                        }
+                        if (t.getX() >  space && t.getX() < 2*space) {
+                            System.out.println("Selected card id "+ 1);
+                            id = 1;
+                            draw();
+
+                        }
+                        if (t.getX() >  2*space && t.getX() < 3*space) {
+                            System.out.println("Selected card id "+ 2);
+                            id = 2;
+                            draw();
+
+                        }
+                        if (t.getX() >  3*space && t.getX() < 4*space) {
+                            System.out.println("Selected card id "+ 3);
+                            id = 3;
+                            draw();
+
+                        }
+                        if (t.getX() >  4*space && t.getX() < 5*space) {
+                            System.out.println("Selected card id "+ 4);
+                            id = 4;
+                            draw();
+
+                        }
+                        if (t.getX() >  5*space && t.getX() < 6*space) {
+                            System.out.println("Selected card id "+ 5);
+                            id = 5;
+                            draw();
+
+
+                        }
+                    }
+                });
+
         this.getChildren().addAll(pane);
 
     }
@@ -281,17 +329,14 @@ public class CardPane  extends GridPane
     }
     public void draw()
     {
-        /*
-        card1.getChildren().remove(rect1);
-        card1.getChildren().addAll( new ImageView(new Image("Ironclad.png")) );
-        card2.getChildren().addAll( new ImageView(new Image("Ironclad.png")) );
-        card3.getChildren().addAll( new ImageView(new Image("Ironclad.png")) );
-        card4.getChildren().addAll( new ImageView(new Image("Ironclad.png")) );
-        card5.getChildren().addAll( new ImageView(new Image("Ironclad.png")) );
-        box = new HBox(card1,card2,card3,card4,card5);
-        box.setSpacing(0);
-        this.getChildren().addAll(box);
-         */
+        rect1 = new Rectangle();
+        initialize();
+
+
+    }
+    public void putListener(Rectangle rect)
+    {
+
     }
 
     public void setOnAction(Runnable action) {
