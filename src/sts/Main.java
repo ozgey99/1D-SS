@@ -41,8 +41,9 @@ public class Main extends Application {
     private FightScene fight = new FightScene(new StackPane(), (Fight) game.getDungeon().getCurrentRoom());
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("START RUN", () -> window.setScene(
-                        fight)),
+            new Pair<String, Runnable>("START RUN", () -> {window.setScene(
+                        fight); game.start();
+            while(true) fight.update();}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene(new StackPane()) )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("OPTIONS", () -> {}),
@@ -150,7 +151,6 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         game.getDungeon().generate();
-        game.start();
         launch(args);
 
     }
