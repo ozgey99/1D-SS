@@ -70,6 +70,8 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+.idea/misc.xml
+
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
