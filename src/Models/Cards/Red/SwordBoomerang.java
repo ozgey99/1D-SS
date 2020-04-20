@@ -30,6 +30,7 @@ public class SwordBoomerang extends AbstractCard {
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
+        selected = false;
         if (!player.changeEnergy(-cost)) return false;
         ArrayList<AbstractMonster> copy = (ArrayList<AbstractMonster>)(f.getMonsters().clone());
         Collections.shuffle(copy);

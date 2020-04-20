@@ -23,6 +23,7 @@ public class ShrugItOff extends AbstractCard {
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
+        selected = false;
         if (!player.changeEnergy(-cost)) return false;
 
         f.getHand().addDeck(Deck.drawCard(f.getDraw(), f.getDiscard(), baseAttr.draw));

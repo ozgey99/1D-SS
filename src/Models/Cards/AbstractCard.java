@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public abstract class AbstractCard {
     protected String name;
+    protected boolean selected;
     protected String description;
     protected int cost;
     protected CardType type;
@@ -65,5 +66,13 @@ public abstract class AbstractCard {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean getSelected(){
+        return selected;
+    }
+
+    public void setSelected(){
+        selected = !selected;
     }
 }

@@ -3,8 +3,10 @@ package Models.Cards.Red;
 import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
+import Models.Creatures.Monsters.AbstractMonster;
 import Models.Dungeon.Room.Fight;
-import Models.UI;
+import Models.TextBasedUI;
+import sts.Controller;
 
 public class Clash extends AbstractCard {
 
@@ -24,13 +26,17 @@ public class Clash extends AbstractCard {
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
+        selected = false;
+
         for(AbstractCard c : f.getHand().getCardList()){
             if(c.getType() != CardType.ATTACK)
                 return false;
         }
         if (!player.changeEnergy(-cost)) return false;
-        int monster = UI.getInput(0, f.getMonsters().size());
-        FightActions.attack(player, f.getMonsters().get(monster), baseAttr.damage);
+
+        AbstractMonster monster = Controller.getMonsterInput();
+        FightActions.attack(player, monster, baseAttr.damage);
+
         return true;
     }
 

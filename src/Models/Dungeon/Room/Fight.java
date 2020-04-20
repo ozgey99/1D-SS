@@ -5,13 +5,15 @@ import Models.Cards.AbstractCard;
 import Models.Cards.Deck;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
+import Models.Creatures.Monsters.JawWorm;
 import Models.Creatures.Monsters.Temp;
 import Models.Dungeon.AbstractRoom;
 import Models.Main;
 import Models.Object.AbstractRelic;
 import Models.Object.Powers.Strength;
 import Models.Object.Powers.Vulnerable;
-import Models.UI;
+import javafx.scene.control.Control;
+import sts.Controller;
 
 import java.util.ArrayList;
 
@@ -42,7 +44,7 @@ public class Fight extends AbstractRoom {
 
     @Override
     public void start() {
-        UI.displayFightStart(this);
+        Controller.displayFightStart(this);
         player = Main.game.getPlayer();
 
         draw = new Deck();
@@ -106,32 +108,35 @@ public class Fight extends AbstractRoom {
         hand = Deck.drawCard(draw, discard, drawAmount);
 
         while (true) {
-            UI.displayFightInfo(this);
+            Controller.displayFightInfo(this);
 
             System.out.println();
             System.out.println();
 
-            UI.displayDeck(hand, "Hand");
+            Controller.displayDeck(hand, "Hand");
             System.out.print("Choose your card: ");
 
-            int card = UI.getInput(-1, hand.getSize());
+            AbstractCard card = Controller.getCardInput();
+            boolean nextTurn = Controller.getNextTurn();
 
-            if (card == -1) break;
+            if(nextTurn) break;
 
-            AbstractCard c = hand.getCard(card);
-            if (!c.use(this, player)) {
-                System.out.println("You do not have enough energy to use this card.");
-            } else {
-                hand.removeCard(c);
-                discard.addCard(c);
+            if(card != null) {
+
+                if (!card.use(this, player)) {
+                    System.out.println("You do not have enough energy to use this card.");
+                } else {
+                    hand.removeCard(card);
+                    discard.addCard(card);
+                }
+
+                monsters.removeIf(m -> m.getCurrentHP() <= 0);
+                if (monsters.isEmpty()) {
+                    done = true;
+                    return;
+                }
+                System.out.println("---------------------------");
             }
-
-            monsters.removeIf(m -> m.getCurrentHP() <= 0);
-            if (monsters.isEmpty()) {
-                done = true;
-                return;
-            }
-            System.out.println("---------------------------");
         }
 
         discard.addDeck(hand);
@@ -170,12 +175,13 @@ public class Fight extends AbstractRoom {
     }
 
     private void generate() {
+        /**
         int act = Main.game.getDungeon().getAct();
         if (act == 1) {
-            // change this to random
-            monsters.add(new Temp());
-            monsters.add(new Temp());
-        }
+            // change this
+         */
+        monsters.add(new JawWorm());
+        //}
 
         isElite = false;
         generateRewards();

@@ -14,7 +14,7 @@ import Models.Object.AbstractRelic;
 
 import java.util.Scanner;
 
-public class UI {
+public class TextBasedUI {
 
     public static void displayStartMessage() {
         System.out.println("The game has started.");

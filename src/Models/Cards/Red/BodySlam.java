@@ -3,8 +3,10 @@ package Models.Cards.Red;
 import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
+import Models.Creatures.Monsters.AbstractMonster;
 import Models.Dungeon.Room.Fight;
-import Models.UI;
+import Models.TextBasedUI;
+import sts.Controller;
 
 public class BodySlam extends AbstractCard {
 
@@ -23,9 +25,12 @@ public class BodySlam extends AbstractCard {
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
+        selected = false;
         if (!player.changeEnergy(-cost)) return false;
-        int monster = UI.getInput(0, f.getMonsters().size());
-        FightActions.attack(player, f.getMonsters().get(monster), player.getBlock());
+
+        AbstractMonster monster = Controller.getMonsterInput();
+        FightActions.attack(player, monster, player.getBlock());
+
         return true;
     }
 

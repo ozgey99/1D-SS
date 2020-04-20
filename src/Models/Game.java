@@ -3,6 +3,7 @@ package Models;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Characters.Ironclad;
 import Models.Dungeon.Dungeon;
+import sts.Controller;
 
 public class Game {
     private Dungeon dungeon;
@@ -16,12 +17,13 @@ public class Game {
     }
 
     public void start() {
-        UI.displayStartMessage();
-        UI.displayAct(dungeon);
+        Controller.displayStartMessage();
+        Controller.displayAct(dungeon);
 
         dungeon.getCurrentRoom().start();
 
-        UI.displayFinishMessage(player);
+        if(dungeon.getCurrentRoom().getDone())
+            Controller.displayFinishMessage(player);
     }
 
     public Dungeon getDungeon() {

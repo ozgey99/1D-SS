@@ -5,11 +5,10 @@ import Models.Cards.CardColor;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.AbstractRoom;
 import Models.Main;
-import Models.UI;
+import Models.TextBasedUI;
 import Models.Utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Merchant extends AbstractRoom {
     ArrayList<AbstractCard> cards;
@@ -44,8 +43,8 @@ public class Merchant extends AbstractRoom {
         AbstractCharacter player = Main.game.getPlayer();
 
         while (!done) {
-            int max = UI.displayMerchant(this);
-            int choose = UI.getInput(-1, max);
+            int max = TextBasedUI.displayMerchant(this);
+            int choose = TextBasedUI.getInput(-1, max);
             if (choose == -1) done = true;
             else if (player.getGold() >= prices.get(choose)) {
                     player.masterDeck.addCard(cards.get(choose));

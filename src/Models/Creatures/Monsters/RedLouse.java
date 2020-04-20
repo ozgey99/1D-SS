@@ -2,6 +2,8 @@ package Models.Creatures.Monsters;
 
 import Models.Object.Powers.Strength;
 
+import java.util.ArrayList;
+
 public class RedLouse extends AbstractMonster {
     public RedLouse() {
         name = "Red Louse";
@@ -12,6 +14,7 @@ public class RedLouse extends AbstractMonster {
 
     @Override
     public void initialize() {
+        moveList = new ArrayList<MonsterMove>();
         MonsterMove bite = new MonsterMove(this);
         bite.setDamage((int) (Math.random() * 2 + 5));
 

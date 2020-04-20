@@ -6,7 +6,7 @@ import Models.Dungeon.AbstractRoom;
 import Models.Main;
 import Models.Object.AbstractRelic;
 import Models.Object.Relics.BloodVial;
-import Models.UI;
+import Models.TextBasedUI;
 
 import java.util.ArrayList;
 
@@ -31,8 +31,8 @@ public class Treasure extends AbstractRoom {
         AbstractCharacter player = Main.game.getPlayer();
 
         while (!done) {
-            int max = UI.displayTreasure(this);
-            int in = UI.getInput(-1, max);
+            int max = TextBasedUI.displayTreasure(this);
+            int in = TextBasedUI.getInput(-1, max);
             if (in == -1) done = true;
             else if (in == relics.size()) {
                     player.changeGold(goldAmount);

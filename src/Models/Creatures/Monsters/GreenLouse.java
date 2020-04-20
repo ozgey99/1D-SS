@@ -3,6 +3,8 @@ package Models.Creatures.Monsters;
 import Models.Object.Powers.Weak;
 import Models.Utils;
 
+import java.util.ArrayList;
+
 public class GreenLouse extends AbstractMonster {
     public GreenLouse() {
         name = "Green Louse";
@@ -13,6 +15,7 @@ public class GreenLouse extends AbstractMonster {
 
     @Override
     public void initialize() {
+        moveList = new ArrayList<MonsterMove>();
         MonsterMove bite = new MonsterMove(this);
         bite.setDamage(Utils.random(2, 5));
 

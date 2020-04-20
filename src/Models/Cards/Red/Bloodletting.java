@@ -26,9 +26,11 @@ public class Bloodletting extends AbstractCard {
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
+        selected = false;
         if(player.getCurrentHP() > HPdecrease) {
             player.changeEnergy(energyIncrease);
             player.changeHealth(-HPdecrease);
+            selected = false;
             return true;
         }
         return false;

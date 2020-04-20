@@ -25,6 +25,7 @@ public class Defend extends AbstractCard {
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
+        selected = false;
         if (!player.changeEnergy(-cost)) return false;
         player.changeBlock(baseAttr.block);
         return true;

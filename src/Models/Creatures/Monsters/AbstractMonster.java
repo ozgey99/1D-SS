@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public abstract class AbstractMonster extends AbstractCreature {
     String name;
+    boolean selected = false;
     ArrayList<MonsterMove> moveList;
 
 //    void addMove(AbstractPower monsterPower)
@@ -44,5 +45,13 @@ public abstract class AbstractMonster extends AbstractCreature {
 
     public String getName() {
         return name;
+    }
+
+    public boolean getSelected(){
+        return selected;
+    }
+
+    public void setSelected(){
+        selected = !selected;
     }
 }

@@ -1,6 +1,7 @@
 package sts;
 
 
+import Models.Dungeon.Room.Fight;
 import Models.Game;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -30,18 +31,24 @@ import java.util.List;
 
 public class Main extends Application {
 
+    public static Game game = new Game();
+
     private static int width = 1920;
     private static int height = 1080;
 
     private Stage window;
 
+    private FightScene fight = new FightScene(new StackPane(), (Fight) game.getDungeon().getCurrentRoom());
+
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("START RUN", () -> window.setScene( new FightScene(new StackPane()) )),
+            new Pair<String, Runnable>("START RUN", () -> window.setScene(
+                        fight)),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene(new StackPane()) )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("OPTIONS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
+
 
     private Pane root = new Pane();
     private VBox menuBox = new VBox(-5);
@@ -142,6 +149,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
+        game.getDungeon().generate();
+        game.start();
         launch(args);
+
     }
 }

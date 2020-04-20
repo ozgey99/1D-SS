@@ -21,6 +21,7 @@ public class Havoc extends AbstractCard {
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
+        selected = false;
         if (!player.changeEnergy(-cost)) return false;
         AbstractCard c = f.getDraw().getCard(0);
         c.use(f, player);

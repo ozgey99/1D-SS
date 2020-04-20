@@ -22,6 +22,8 @@ public class Inflame extends AbstractCard {
 
     @Override
     public boolean use(Fight f, AbstractCharacter player) {
+
+        selected = false;
         if (!player.changeEnergy(-cost)) return false;
 
         Strength s = new Strength();

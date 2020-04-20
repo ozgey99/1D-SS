@@ -1,5 +1,7 @@
 package Models.Creatures.Monsters;
 
+import java.util.ArrayList;
+
 public class Temp extends AbstractMonster {
     public Temp() {
         name = "Temporary Monster";
@@ -10,6 +12,7 @@ public class Temp extends AbstractMonster {
 
     @Override
     public void initialize() {
+        moveList = new ArrayList<MonsterMove>();
         MonsterMove attk = new MonsterMove(this);
         attk.setDamage(5);
 

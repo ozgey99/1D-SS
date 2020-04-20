@@ -2,6 +2,8 @@ package Models.Creatures.Monsters;
 
 import Models.Object.Powers.Ritual;
 
+import java.util.ArrayList;
+
 public class Cultist extends AbstractMonster {
     public Cultist() {
         name = "Cultist";
@@ -12,6 +14,7 @@ public class Cultist extends AbstractMonster {
 
     @Override
     public void initialize() {
+        moveList = new ArrayList<MonsterMove>();
         MonsterMove ritual = new MonsterMove(this);
         ritual.setSelf(true);
         Ritual r = new Ritual();

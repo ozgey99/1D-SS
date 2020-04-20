@@ -35,9 +35,10 @@ public class CharPane extends StackPane {
         this.getChildren().add( imageView );
         this.setAlignment( Pos.BOTTOM_CENTER );
     }
-    public void update()
+    public void update(AbstractCharacter hero)
     {
-
+        this.hero = hero;
+        draw();
     }
     public void draw()
     {
