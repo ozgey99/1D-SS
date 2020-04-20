@@ -13,13 +13,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class FightScene extends Scene {
     private int width = 1920;
     private int height = 1080;
     public static Game game;
-
+    Text healthText = new Text();
     private StackPane root;
     private StackPane fightPane = new StackPane();
     private GridPane gridFight = new GridPane();
@@ -28,6 +33,7 @@ public class FightScene extends Scene {
     private Pane upper = new  Pane(); // Adjust this upper pane part
     private CardPane lower; // Adjust this lower pane part
     private GridPane division = new GridPane();
+    private int currentHealth = 50;
 
 
     public FightScene(StackPane pane)
@@ -60,12 +66,7 @@ public class FightScene extends Scene {
     }
 
     private void addMonsters(){
-        ImageView imageView = new ImageView(new Image("Cultist-pretty.png"));
-        imageView.setPreserveRatio(true);
-        imageView.setFitHeight(width/8);
-
-        right.getChildren().add( imageView );
-        right.setAlignment( Pos.BOTTOM_CENTER );
+        right.initalize();
         GridPane.setConstraints( right, 1,0,1,1);
         gridFight.getChildren().add(right);
     }
@@ -78,6 +79,13 @@ public class FightScene extends Scene {
         division.setMinHeight(height);
         division.setGridLinesVisible(true);
 
+
+        healthText.setX(0);
+        healthText.setY(100);
+        healthText.setText("Your health is " + currentHealth);
+        healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+
+        upper.getChildren().addAll(healthText);
 
         GridPane.setConstraints(upper, 0,0,1,1);
         division.getChildren().add(upper);
@@ -101,24 +109,18 @@ public class FightScene extends Scene {
         lower.setBackground( new Background(new BackgroundFill(Color.DARKMAGENTA, CornerRadii.EMPTY, Insets.EMPTY)) );
 
 
-        //addClickables();
-
-        //
-        // Rectangle frame = new Rectangle();
-        //frame.setStroke( Color.GREEN );
-        //lower.getChildren().add( frame );
-
         lower.initialize();
         addCharacters();
         addMonsters();
         gridFight.setGridLinesVisible(true);
 
 
-        game.getDungeon().generate();
     }
     private void update()
     {
-
+        left.update();
+        right.update();
+       //currentHealth = ?
     }
     private void draw()
     {

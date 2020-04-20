@@ -37,7 +37,7 @@ public class Main extends Application {
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("START RUN", () -> window.setScene( new FightScene(new StackPane()) )),
-            new Pair<String, Runnable>("VIEW COMPENDIUM", () -> {}),
+            new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene(new StackPane()) )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("OPTIONS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
