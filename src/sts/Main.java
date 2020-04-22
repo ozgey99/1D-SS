@@ -38,12 +38,9 @@ public class Main extends Application {
 
     private Stage window;
 
-    public static FightScene fight = new FightScene(new StackPane(), (Fight) game.getDungeon().getCurrentRoom());
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("START RUN", () -> {window.setScene(
-                    fight); game.start();
-            while(true) fight.update();}),
+            new Pair<String, Runnable>("START RUN", () -> {startFight();}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene(new StackPane()) )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("OPTIONS", () -> {}),
@@ -67,6 +64,12 @@ public class Main extends Application {
         startAnimation();
 
         return root;
+    }
+    private void startFight()
+    {
+        game.fightScene = new FightScene(new StackPane());
+        window.setScene(
+                game.fightScene); game.start();
     }
 
     private void addBackground() {

@@ -4,10 +4,12 @@ import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Characters.Ironclad;
 import Models.Dungeon.Dungeon;
 import sts.Controller;
+import sts.FightScene;
 
 public class Game {
     private Dungeon dungeon;
     private AbstractCharacter player;
+    public FightScene fightScene;
 
     public Game() {
         dungeon = new Dungeon();

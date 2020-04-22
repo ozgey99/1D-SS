@@ -140,6 +140,7 @@ public class CardPane  extends GridPane {
                             ( (Fight) game.getDungeon().getCurrentRoom()).nextState();
                             deck = ( (Fight) game.getDungeon().getCurrentRoom()).getHand();
                             id = 4;
+                            scene.draw();
                             draw();
 
 
@@ -153,7 +154,6 @@ public class CardPane  extends GridPane {
     public void update() {
 
     }
-
     public void draw() {
         space = width / 10;
 

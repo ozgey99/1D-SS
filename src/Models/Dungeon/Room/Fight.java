@@ -18,7 +18,6 @@ import sts.Controller;
 
 import java.util.ArrayList;
 
-import static sts.Main.fight;
 import static sts.Main.game;
 
 public class Fight extends AbstractRoom {
@@ -76,7 +75,7 @@ public class Fight extends AbstractRoom {
         drawAmount = 5;
 
         turn = 1;
-        fight.initialize(draw,player,monsters.get(0));
+        game.fightScene.initialize(draw,player,monsters.get(0));
 
 
         PowerActions.addPower(player, new Vulnerable());
@@ -118,8 +117,8 @@ public class Fight extends AbstractRoom {
         System.out.println("I AM IN TURN");
         state = FightState.TURN;
         hand = Deck.drawCard(draw, discard, drawAmount);
-        fight.setHandDeck(hand);
-        fight.draw();
+        game.fightScene.setHandDeck(hand);
+        game.fightScene.draw();
         System.out.println("MONSTER HP IN FIGHT IS " + monsters.get(0).getCurrentHP());
 
 

@@ -42,20 +42,17 @@ public class FightScene extends Scene {
     private GridPane division = new GridPane();
     private Text monsterText = new Text();
     private Text energyText = new Text();
-    private Fight fight;
     private Deck handDeck;
     private AbstractCharacter player;
     private AbstractMonster monster;
 
 
-    public FightScene(StackPane pane, Fight fight)
+    public FightScene(StackPane pane)
     {
         super( pane );
         root = pane;
         root.setMinSize( width, height);
         addBackground();
-
-        this.fight = fight;
 
 
     }
@@ -101,25 +98,6 @@ public class FightScene extends Scene {
         division.setGridLinesVisible(true);
 
 
-        draw();
-
-    }
-
-    public void update()
-    {
-        //setMonsterName();
-        //setMonsterHealth();
-        //setenergy();
-        //setGold();
-        //setEnergy();
-        //setDrawDeck();
-        //setEverything();
-        left.update(game.getPlayer());
-        right.update(fight.getMonsters().get(0)); //call this for every monster
-        draw();
-    }
-    public void draw()
-    {
         System.out.println("NEW MONSTER HP IS "+monster.getCurrentHP());
         energyText.setX(0);
         energyText.setY(25);
@@ -129,7 +107,6 @@ public class FightScene extends Scene {
 
         monsterText.setX(1000);
         monsterText.setY(50);
-        //show for every monster !!
         monsterText.setText("Monster health:   " + monster.getCurrentHP());
         monsterText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
@@ -147,6 +124,7 @@ public class FightScene extends Scene {
         upper.getChildren().addAll(goldText);
         upper.getChildren().addAll(monsterText);
         upper.getChildren().addAll(energyText);
+
 
         GridPane.setConstraints(upper, 0,0,1,1);
         division.getChildren().add(upper);
@@ -169,11 +147,42 @@ public class FightScene extends Scene {
         lower.setMinHeight(height/9*2);
         lower.setBackground( new Background(new BackgroundFill(Color.DARKMAGENTA, CornerRadii.EMPTY, Insets.EMPTY)) );
 
-
         lower.initialize();
         addCharacters();
         addMonsters();
         gridFight.setGridLinesVisible(true);
+
+
+    }
+
+    public void update()
+    {
+        //setMonsterName();
+        //setMonsterHealth();
+        //setenergy();
+        //setGold();
+        //setEnergy();
+        //setDrawDeck();
+        //setEverything();
+        left.update(player);
+        right.update(monster); //call this for every monster
+
+    }
+    public void draw()
+    {
+
+
+        energyText.setText("Your energy:   " + player.currentEnergy);
+        healthText.setText("Your health: " + player.getCurrentHP());
+        monsterText.setText("Monster health:   " + monster.getCurrentHP());
+        goldText.setText("Your gold is: " + player.getGold());
+
+
+
+
+
+
+
     }
 
     private void addClickables(){
