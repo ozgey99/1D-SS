@@ -38,11 +38,11 @@ public class Main extends Application {
 
     private Stage window;
 
-    private FightScene fight = new FightScene(new StackPane(), (Fight) game.getDungeon().getCurrentRoom());
+    public static FightScene fight = new FightScene(new StackPane(), (Fight) game.getDungeon().getCurrentRoom());
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("START RUN", () -> {window.setScene(
-                        fight); game.start();
+                    fight); game.start();
             while(true) fight.update();}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene(new StackPane()) )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),

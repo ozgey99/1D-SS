@@ -83,7 +83,9 @@ public class Controller {
     }
 
     public static AbstractMonster getMonsterInput() {
-        if(game.getDungeon().getCurrentRoom() instanceof Fight){
+        return  ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().get(0);
+
+        /*if(game.getDungeon().getCurrentRoom() instanceof Fight){
             for(AbstractMonster m :((Fight) game.getDungeon().getCurrentRoom()).getMonsters()){
                 if(m.getSelected())
                     return m;
@@ -91,6 +93,8 @@ public class Controller {
             return null;
         }
         return null;
+
+         */
     }
 
     public static AbstractCard getCardInput(){
@@ -108,6 +112,7 @@ public class Controller {
 
     //get the input from a button
     public static boolean getNextTurn(){
+
         return false;
     }
 
