@@ -43,7 +43,10 @@ public class MonsterPane extends StackPane {
     void draw()
     {
         if(monster.getCurrentHP() > 0) {
-            ImageView imageView = new ImageView(new Image("Cultist-pretty.png"));
+            String monstername = monster.getName();
+            monstername = monstername + ".png";
+            System.out.println("NAME IS " + monstername);
+            ImageView imageView = new ImageView(new Image(monstername));
             imageView.setPreserveRatio(true);
             imageView.setFitHeight(width / 8);
 

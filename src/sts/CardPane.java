@@ -124,13 +124,15 @@ public class CardPane  extends GridPane {
             rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
-                    Rectangles.get(finalI).setVisible(false);
-                    Rectangles.get(finalI).setFill(new ImagePattern(new Image("used.png")));
-                    firstHandCard.setSelected();
-                    System.out.println("PRESSED ID " + firstHandCard.getName());
-                    boolean used = ( (Fight) game.getDungeon().getCurrentRoom()).useCard(firstHandCard);
-                    deck = ( (Fight) game.getDungeon().getCurrentRoom()).getHand();
-                    game.fightScene.draw();
+                    //if(game.getPlayer().currentEnergy > deck.getCard(finalI).getCost() ) {
+                        Rectangles.get(finalI).setVisible(false);
+                        Rectangles.get(finalI).setFill(new ImagePattern(new Image("used.png")));
+                        firstHandCard.setSelected();
+                        System.out.println("PRESSED ID " + firstHandCard.getName());
+                        boolean used = ((Fight) game.getDungeon().getCurrentRoom()).useCard(firstHandCard);
+                        deck = ((Fight) game.getDungeon().getCurrentRoom()).getHand();
+                        game.fightScene.draw();
+                  //  }
 
                 }
             });
