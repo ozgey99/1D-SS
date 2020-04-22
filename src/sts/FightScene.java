@@ -5,6 +5,10 @@ import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
 import Models.Dungeon.Room.Fight;
 import Models.Game;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,6 +19,7 @@ import javafx.scene.effect.Glow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -23,6 +28,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 import static sts.Main.game;
 
@@ -42,9 +48,11 @@ public class FightScene extends Scene {
     private GridPane division = new GridPane();
     private Text monsterText = new Text();
     private Text energyText = new Text();
+    private Text blockText = new Text();
     private Deck handDeck;
     private AbstractCharacter player;
     private AbstractMonster monster;
+    Rectangle endTurn = new Rectangle();
 
 
     public FightScene(StackPane pane)
@@ -53,6 +61,9 @@ public class FightScene extends Scene {
         root = pane;
         root.setMinSize( width, height);
         addBackground();
+
+
+
 
 
     }
@@ -98,9 +109,24 @@ public class FightScene extends Scene {
         division.setGridLinesVisible(true);
 
 
-        System.out.println("NEW MONSTER HP IS "+monster.getCurrentHP());
+        endTurn.setFill(new ImagePattern(new Image("endturn.png")));
+        endTurn.setX(200);
+        endTurn.setY(0);
+        endTurn.setWidth(100);
+        endTurn.setHeight(100);
+        endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                lower.draw();
+                draw();
+                ( (Fight) game.getDungeon().getCurrentRoom()).nextState();
+            }
+        });
+
+
+
         energyText.setX(0);
-        energyText.setY(25);
+        energyText.setY(30);
         energyText.setText("Your energy:   " + player.currentEnergy);
         energyText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
@@ -115,6 +141,11 @@ public class FightScene extends Scene {
         healthText.setText("Your health: " + player.getCurrentHP());
         healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
+        blockText.setX(0);
+        blockText.setY(16);
+        blockText.setText("Your block: " + player.getBlock());
+        blockText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
         goldText.setX(0);
         goldText.setY(50);
         goldText.setText("Your gold is: " + player.getGold());
@@ -124,6 +155,8 @@ public class FightScene extends Scene {
         upper.getChildren().addAll(goldText);
         upper.getChildren().addAll(monsterText);
         upper.getChildren().addAll(energyText);
+        upper.getChildren().addAll(endTurn);
+        upper.getChildren().addAll(blockText);
 
 
         GridPane.setConstraints(upper, 0,0,1,1);
@@ -176,6 +209,8 @@ public class FightScene extends Scene {
         healthText.setText("Your health: " + player.getCurrentHP());
         monsterText.setText("Monster health:   " + monster.getCurrentHP());
         goldText.setText("Your gold is: " + player.getGold());
+        blockText.setText("Your block: " + player.getBlock());
+        //lower.draw();
 
 
 
