@@ -77,7 +77,6 @@ public class TreasureScene extends Scene {
     }
 
     private void addClickables(){
-
         Button button1 = new Button("Button 1");
         root.getChildren().add(button1);
     }

@@ -5,6 +5,7 @@ import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
 import Models.Dungeon.Room.Fight;
 import Models.Game;
+import Models.TextBasedUI;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -44,7 +45,7 @@ public class FightScene extends Scene {
     private StackPane fightPane = new StackPane();
     private GridPane gridFight = new GridPane();
     CharPane left; //character pane
-    MonsterPane right; //monster pane
+    public static MonsterPane right; //monster pane
     private Pane upper = new  Pane(); // Adjust this upper pane part
     public static CardPane lower; // Adjust this lower pane part
     private GridPane division = new GridPane();
@@ -53,11 +54,13 @@ public class FightScene extends Scene {
     private Text energyText = new Text();
     private Text blockText = new Text();
     private Deck handDeck;
+    private ArrayList<Text> textList = new ArrayList<Text>();
     private AbstractCharacter player;
     ArrayList<AbstractMonster> monsters = new ArrayList<>();
     Rectangle endTurn = new Rectangle();
     int clickTime = 0;
     int ClickedMonster = 0;
+    int prevMonsters = 0;
 
 
     public FightScene(StackPane pane)
@@ -140,17 +143,19 @@ public class FightScene extends Scene {
         energyText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
 
-        monsterText.setX(1000);
-        monsterText.setY(25);
-        monsterText.setText("Monster health:   " + monsters.get(0).getCurrentHP());
-        monsterText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        for(int i = 0; i < ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size();i++)
+        {
+            Text text = new Text();
+            int j = i + 1;
+            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() );
+            text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+            text.setX(1000);
+            text.setY(25 * i + 25);
+            textList.add(text);
+            upper.getChildren().addAll(textList.get(i));
 
-
-        monsterText2.setX(1000);
-        monsterText2.setY(50);
-        monsterText2.setText("Monster health2:   " + monsters.get(1).getCurrentHP());
-        monsterText2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-
+        }
+        prevMonsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size();
 
         healthText.setX(0);
         healthText.setY(100);
@@ -169,11 +174,9 @@ public class FightScene extends Scene {
 
         upper.getChildren().addAll(healthText);
         upper.getChildren().addAll(goldText);
-        upper.getChildren().addAll(monsterText);
         upper.getChildren().addAll(energyText);
         upper.getChildren().addAll(endTurn);
         upper.getChildren().addAll(blockText);
-        upper.getChildren().addAll(monsterText2);
 
 
         GridPane.setConstraints(upper, 0,0,1,1);
@@ -207,6 +210,7 @@ public class FightScene extends Scene {
 
     public void update()
     {
+
         //setMonsterName();
         //setMonsterHealth();
         //setenergy();
@@ -222,11 +226,30 @@ public class FightScene extends Scene {
 
         energyText.setText("Your energy:   " + player.currentEnergy);
         healthText.setText("Your health: " + player.getCurrentHP());
-        monsterText.setText("Monster health:   " + monsters.get(0).getCurrentHP());
-        monsterText2.setText("Monster health2:   " + monsters.get(1).getCurrentHP());
+
+
         goldText.setText("Your gold is: " + player.getGold());
         blockText.setText("Your block: " + player.getBlock());
-        //lower.draw();
+
+
+        for(int i = 0; i < ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size();i++)
+        {
+
+            int health = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().get(i).getCurrentHP();
+            if(health > 0) {
+                int j= i + 1;
+                textList.get(i).setText("Monster " + j + " health is " + ((Fight) game.getDungeon().getCurrentRoom()).getMonsters().get(i).getCurrentHP() + " block is " + ((Fight) game.getDungeon().
+                        getCurrentRoom()).getMonsters().get(i).getBlock());
+                TextBasedUI.displayMonster(((Fight) game.getDungeon().
+                        getCurrentRoom()).getMonsters().get(i));
+            }
+            else
+            {
+                textList.get(i).setVisible(false);
+            }
+
+
+        }
 
 
 

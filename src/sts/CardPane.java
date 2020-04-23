@@ -162,6 +162,7 @@ public class CardPane  extends GridPane {
 
             AbstractCard firstHandCard = deck.getCard(i);
             String firstName = firstHandCard.getName();
+            System.out.println("NAME IS " + firstHandCard.getName());
             firstName = firstName + ".png";
             CardNames.add(firstName);
             Rectangles.get(i).setFill(new ImagePattern(new Image(firstName)));
@@ -170,14 +171,7 @@ public class CardPane  extends GridPane {
             Rectangles.get(i).setVisible(true);
 
         }
-        for(int i = len; i < privLen;i++) {
-            Rectangles.get(i).setFill(new ImagePattern(new Image("used.png")));
-            Rectangles.get(i).setX(i * space);
-            Rectangles.get(i).setY(0);
-            Rectangles.get(i).setVisible(false);
 
-        }
-        privLen = len;
     }
 
 

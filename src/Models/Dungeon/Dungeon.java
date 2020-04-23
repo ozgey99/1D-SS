@@ -1,6 +1,7 @@
 package Models.Dungeon;
 
 import Models.Dungeon.Room.Fight;
+import Models.Dungeon.Room.Treasure;
 
 public class Dungeon {
     private int act;
@@ -15,7 +16,8 @@ public class Dungeon {
     }
 
     public void generate() {
-        currentRoom = new Fight(null);
+        Treasure t = new Treasure(null);
+        currentRoom = new Fight(t);
     }
 
     public int getAct() {

@@ -132,48 +132,7 @@ public class Fight extends AbstractRoom {
         game.fightScene.setHandDeck(hand);
         game.fightScene.draw();
         game.fightScene.lower.draw();
-
-
-
-
-
-
-        /*
-
-        while (true) {
-            Controller.displayFightInfo(this);
-
-            System.out.println();
-            System.out.println();
-
-            Controller.displayDeck(hand, "Hand");
-            System.out.print("Choose your card: ");
-
-            AbstractCard card = Controller.getCardInput();
-            boolean nextTurn = Controller.getNextTurn();
-
-            if(nextTurn) break;
-
-            if(card != null) {
-
-                if (!card.use(this, player)) {
-                    System.out.println("You do not have enough energy to use this card.");
-                } else {
-                    hand.removeCard(card);
-                    discard.addCard(card);
-                }
-
-                monsters.removeIf(m -> m.getCurrentHP() <= 0);
-                if (monsters.isEmpty()) {
-                    done = true;
-                    return;
-                }
-                System.out.println("---------------------------");
-            }
-        }
-
-        discard.addDeck(hand);*/
-
+        game.fightScene.right.draw();
     }
     public boolean useCard(AbstractCard card)
     {

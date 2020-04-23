@@ -47,7 +47,7 @@ public class TextBasedUI {
     public static void displayMonster(AbstractMonster m) {
         System.out.println(m.getName() + "(" + m.getCurrentHP() + "/" + m.getMaxHP() + ")");
         System.out.println("\tCurrent block: " + m.getBlock());
-        System.out.print("\t Next move: ");
+        System.out.print("\t Next move: " );
 
         MonsterMove move = m.getNextMove();
         if (move.getDamage() != 0) {

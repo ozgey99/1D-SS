@@ -121,6 +121,18 @@ public class MonsterPane extends StackPane {
     }
     public void draw()
     {
+        monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
+
+        int len = monsters.size();
+
+        System.out.println("LEN IS IN DRAW "+ len);
+
+        for(int i = 0; i < len;i++) {
+            if(monsters.get(i).getCurrentHP() <= 0)
+            {
+                Rectangles.get(i).setVisible(false);
+            }
+        }
 
 
     }

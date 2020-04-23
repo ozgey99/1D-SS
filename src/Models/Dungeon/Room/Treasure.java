@@ -18,6 +18,7 @@ public class Treasure extends AbstractRoom {
         type = RoomType.CHEST;
         children = c;
         done = false;
+        relics = new ArrayList<>();
         generate();
     }
 
