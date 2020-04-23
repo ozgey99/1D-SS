@@ -83,7 +83,7 @@ public class Controller {
     }
 
     public static AbstractMonster getMonsterInput() {
-        return  ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().get(0);
+        return  ( (Fight) game.getDungeon().getCurrentRoom()).getSelectedMonster();
 
         /*if(game.getDungeon().getCurrentRoom() instanceof Fight){
             for(AbstractMonster m :((Fight) game.getDungeon().getCurrentRoom()).getMonsters()){

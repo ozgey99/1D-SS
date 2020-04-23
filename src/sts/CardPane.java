@@ -66,6 +66,7 @@ public class CardPane  extends GridPane {
     ArrayList<Rectangle> Rectangles = new ArrayList<>();
 
 
+
     private Effect shadow = new DropShadow(5, Color.BLACK);
     private Effect blur = new BoxBlur(1, 1, 3);
 

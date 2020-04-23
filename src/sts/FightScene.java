@@ -30,6 +30,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 import static sts.Main.game;
 
 
@@ -47,13 +49,15 @@ public class FightScene extends Scene {
     public static CardPane lower; // Adjust this lower pane part
     private GridPane division = new GridPane();
     private Text monsterText = new Text();
+    private Text monsterText2 = new Text();
     private Text energyText = new Text();
     private Text blockText = new Text();
     private Deck handDeck;
     private AbstractCharacter player;
-    private AbstractMonster monster;
+    ArrayList<AbstractMonster> monsters = new ArrayList<>();
     Rectangle endTurn = new Rectangle();
     int clickTime = 0;
+    int ClickedMonster = 0;
 
 
     public FightScene(StackPane pane)
@@ -93,15 +97,15 @@ public class FightScene extends Scene {
         GridPane.setConstraints( right, 1,0,1,1);
         gridFight.getChildren().add(right);
     }
-    public void initialize(Deck deck,AbstractCharacter player, AbstractMonster monster)
+    public void initialize(Deck deck,AbstractCharacter player)
     {
-        this.monster = monster;
+        monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
         this.player = player;
         this.handDeck = deck;
 
         lower  = new CardPane(width , height/9*6,handDeck,this);
         left = new CharPane( width/2 , height/9*6,player);
-        right = new MonsterPane(width / 2, height / 9 * 6,monster);
+        right = new MonsterPane(width / 2, height / 9 * 6);
 
         division.setPadding(new Insets(5,5,5,5));
         root.getChildren().add(division);
@@ -137,9 +141,16 @@ public class FightScene extends Scene {
 
 
         monsterText.setX(1000);
-        monsterText.setY(50);
-        monsterText.setText("Monster health:   " + monster.getCurrentHP());
+        monsterText.setY(25);
+        monsterText.setText("Monster health:   " + monsters.get(0).getCurrentHP());
         monsterText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
+
+        monsterText2.setX(1000);
+        monsterText2.setY(50);
+        monsterText2.setText("Monster health2:   " + monsters.get(1).getCurrentHP());
+        monsterText2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
 
         healthText.setX(0);
         healthText.setY(100);
@@ -162,6 +173,7 @@ public class FightScene extends Scene {
         upper.getChildren().addAll(energyText);
         upper.getChildren().addAll(endTurn);
         upper.getChildren().addAll(blockText);
+        upper.getChildren().addAll(monsterText2);
 
 
         GridPane.setConstraints(upper, 0,0,1,1);
@@ -202,8 +214,6 @@ public class FightScene extends Scene {
         //setEnergy();
         //setDrawDeck();
         //setEverything();
-        left.update(player);
-        right.update(monster); //call this for every monster
 
     }
     public void draw()
@@ -212,7 +222,8 @@ public class FightScene extends Scene {
 
         energyText.setText("Your energy:   " + player.currentEnergy);
         healthText.setText("Your health: " + player.getCurrentHP());
-        monsterText.setText("Monster health:   " + monster.getCurrentHP());
+        monsterText.setText("Monster health:   " + monsters.get(0).getCurrentHP());
+        monsterText2.setText("Monster health2:   " + monsters.get(1).getCurrentHP());
         goldText.setText("Your gold is: " + player.getGold());
         blockText.setText("Your block: " + player.getBlock());
         //lower.draw();

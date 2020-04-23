@@ -2,6 +2,7 @@ package Models.Dungeon.Room;
 
 import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
+import Models.Cards.CardTarget;
 import Models.Cards.Deck;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
@@ -32,6 +33,7 @@ public class Fight extends AbstractRoom {
     private Deck hand;
     private int turn;
     private boolean isElite;
+    private AbstractMonster selectedMonster;
 
     private AbstractCharacter player;
 
@@ -45,6 +47,14 @@ public class Fight extends AbstractRoom {
         done = false;
         monsters = new ArrayList<>();
         generate();
+    }
+    public void setSelectedMonster(AbstractMonster monster)
+    {
+        selectedMonster = monster;
+    }
+    public AbstractMonster getSelectedMonster()
+    {
+        return selectedMonster;
     }
     public void nextState()
     {
@@ -76,7 +86,7 @@ public class Fight extends AbstractRoom {
         drawAmount = 5;
 
         turn = 1;
-        game.fightScene.initialize(draw,player,monsters.get(0));
+        game.fightScene.initialize(draw,player);
 
 
         PowerActions.addPower(player, new Vulnerable());
@@ -167,6 +177,10 @@ public class Fight extends AbstractRoom {
     }
     public boolean useCard(AbstractCard card)
     {
+        if(getSelectedMonster() == null && card.getTarget() == CardTarget.ENEMY)
+        {
+            return false;
+        }
         if (!card.use(this, player)) {
             System.out.println("You do not have enough energy to use this card.");
             return false;
@@ -181,6 +195,7 @@ public class Fight extends AbstractRoom {
         if (monsters.isEmpty()) {
             done = true;
         }
+        setSelectedMonster(null);
         return true;
     }
 
@@ -237,6 +252,7 @@ public class Fight extends AbstractRoom {
         if (act == 1) {
             // change this
          */
+        monsters.add(new Cultist());
         monsters.add(new Cultist());
         //}
 
