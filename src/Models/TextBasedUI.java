@@ -70,8 +70,8 @@ public class TextBasedUI {
     }
 
     public static void displayCard(AbstractCard c) {
+        System.out.println(c == null);
         System.out.println("---- " + c.getName() + "(" + c.getCost() + ")" + " ----");
-        System.out.println("\t" + c.getDescription());
     }
 
     public static void displayAct(Dungeon d) {

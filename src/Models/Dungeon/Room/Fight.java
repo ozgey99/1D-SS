@@ -13,6 +13,7 @@ import Models.Main;
 import Models.Object.AbstractRelic;
 import Models.Object.Powers.Strength;
 import Models.Object.Powers.Vulnerable;
+import Models.TextBasedUI;
 import javafx.scene.control.Control;
 import sts.Controller;
 
@@ -115,11 +116,13 @@ public class Fight extends AbstractRoom {
 
     private void turn() {
         System.out.println("I AM IN TURN");
+
         state = FightState.TURN;
         hand = Deck.drawCard(draw, discard, drawAmount);
         game.fightScene.setHandDeck(hand);
         game.fightScene.draw();
-        System.out.println("MONSTER HP IN FIGHT IS " + monsters.get(0).getCurrentHP());
+        game.fightScene.lower.draw();
+
 
 
 
@@ -168,8 +171,10 @@ public class Fight extends AbstractRoom {
             System.out.println("You do not have enough energy to use this card.");
             return false;
         } else {
+            TextBasedUI.displayCard(card);
             hand.removeCard(card);
             discard.addCard(card);
+           // TextBasedUI.displayDeck(discard, "dıscard");
         }
 
         monsters.removeIf(m -> m.getCurrentHP() <= 0);

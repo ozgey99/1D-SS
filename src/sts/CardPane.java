@@ -3,6 +3,7 @@ package sts;
 import Models.Cards.AbstractCard;
 import Models.Cards.Deck;
 import Models.Dungeon.Room.Fight;
+import Models.TextBasedUI;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
@@ -60,7 +61,7 @@ public class CardPane  extends GridPane {
     private GridPane general = new GridPane();
     AbstractCard returnedCard;
     private FightScene scene;
-    int id = 4;
+    int id = 0;
     ArrayList<String> CardNames = new ArrayList<>();
     ArrayList<Rectangle> Rectangles = new ArrayList<>();
 
@@ -97,6 +98,7 @@ public class CardPane  extends GridPane {
         int i;
         for( i = 0; i < len;i++)
         {
+
             AbstractCard firstHandCard = deck.getCard(i);
             String firstName = firstHandCard.getName();
             firstName = firstName + ".png";
@@ -109,6 +111,7 @@ public class CardPane  extends GridPane {
             rect1.setHeight(space);
             Rectangles.add(rect1);
             pane.getChildren().add(Rectangles.get(i));
+            Rectangles.get(i).setVisible(false);
             ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(300), rect1);
             rect1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
                 @Override
@@ -124,15 +127,15 @@ public class CardPane  extends GridPane {
             rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
-                    //if(game.getPlayer().currentEnergy > deck.getCard(finalI).getCost() ) {
+                    if(((Fight) game.getDungeon().getCurrentRoom()).useCard(firstHandCard) ) {
                         Rectangles.get(finalI).setVisible(false);
                         Rectangles.get(finalI).setFill(new ImagePattern(new Image("used.png")));
-                        firstHandCard.setSelected();
+                         firstHandCard.setSelected();
                         System.out.println("PRESSED ID " + firstHandCard.getName());
-                        boolean used = ((Fight) game.getDungeon().getCurrentRoom()).useCard(firstHandCard);
+                        id = finalI;
                         deck = ((Fight) game.getDungeon().getCurrentRoom()).getHand();
                         game.fightScene.draw();
-                  //  }
+                   }
 
                 }
             });
@@ -144,6 +147,7 @@ public class CardPane  extends GridPane {
         this.getChildren().addAll(pane);
     }
 
+
     public void draw() {
 
         deck = ( (Fight) game.getDungeon().getCurrentRoom()).getHand();
@@ -151,7 +155,10 @@ public class CardPane  extends GridPane {
         int len = deck.getSize();
 
         System.out.println("LEN IS IN DRAW "+ len);
+
+       // TextBasedUI.displayDeck(deck,"hand  deck ");
         for(int i = 0; i < len;i++) {
+
             AbstractCard firstHandCard = deck.getCard(i);
             String firstName = firstHandCard.getName();
             firstName = firstName + ".png";

@@ -53,6 +53,7 @@ public class FightScene extends Scene {
     private AbstractCharacter player;
     private AbstractMonster monster;
     Rectangle endTurn = new Rectangle();
+    int clickTime = 0;
 
 
     public FightScene(StackPane pane)
@@ -117,10 +118,14 @@ public class FightScene extends Scene {
         endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
-                lower.draw();
-                draw();
-                ( (Fight) game.getDungeon().getCurrentRoom()).nextState();
-            }
+
+                    ((Fight) game.getDungeon().getCurrentRoom()).getDiscard().addDeck(((Fight) game.getDungeon().getCurrentRoom()).getHand());
+                    lower.draw();
+                    draw();
+                    ((Fight) game.getDungeon().getCurrentRoom()).nextState();
+
+
+             }
         });
 
 
