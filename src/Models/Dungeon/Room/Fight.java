@@ -10,13 +10,14 @@ import Models.Creatures.Monsters.Cultist;
 import Models.Creatures.Monsters.JawWorm;
 import Models.Creatures.Monsters.Temp;
 import Models.Dungeon.AbstractRoom;
-import Models.Main;
+import sts.Main;
 import Models.Object.AbstractRelic;
 import Models.Object.Powers.Strength;
 import Models.Object.Powers.Vulnerable;
 import Models.TextBasedUI;
 import javafx.scene.control.Control;
 import sts.Controller;
+import sts.FightScene;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,7 @@ public class Fight extends AbstractRoom {
     private int turn;
     private boolean isElite;
     private AbstractMonster selectedMonster;
+    boolean firstTime = true;
 
     private AbstractCharacter player;
 
@@ -73,6 +75,7 @@ public class Fight extends AbstractRoom {
 
     @Override
     public void start() {
+
         System.out.println("I AM IN START");
         player = Main.game.getPlayer();
 
@@ -86,13 +89,13 @@ public class Fight extends AbstractRoom {
         drawAmount = 5;
 
         turn = 1;
-        game.fightScene.initialize(draw,player);
+        game.currentScene.initialize();
 
 
         PowerActions.addPower(player, new Vulnerable());
         PowerActions.addPower(player, new Strength());
 
-        preFight();
+       preFight();
 
 
        // postFight();
@@ -129,13 +132,17 @@ public class Fight extends AbstractRoom {
 
         state = FightState.TURN;
         hand = Deck.drawCard(draw, discard, drawAmount);
-        game.fightScene.setHandDeck(hand);
+        if(hand == null)
+            System.out.println("HAND IS NULL");
+        game.currentScene.draw();
+        /*
         game.fightScene.draw();
         game.fightScene.lower.draw();
-        game.fightScene.right.draw();
+        game.fightScene.right.draw();*/
     }
     public boolean useCard(AbstractCard card)
     {
+        System.out.println("I AM USING CARD");
         if(getSelectedMonster() == null && card.getTarget() == CardTarget.ENEMY)
         {
             return false;

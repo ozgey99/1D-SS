@@ -19,7 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class TreasureScene extends Scene {
+public class TreasureScene extends RoomScene {
     private int width = 1920;
     private int gold = 0;
     private String relic = "DefaultRelicName";
@@ -32,15 +32,11 @@ public class TreasureScene extends Scene {
 
 
 
-    private StackPane root;
 
 
-
-    public TreasureScene(StackPane pane)
+    public TreasureScene()
     {
 
-        super( pane );
-        root = pane;
 
         box.getChildren().addAll(goldText);
         box.getChildren().addAll(relicText);
@@ -63,15 +59,12 @@ public class TreasureScene extends Scene {
 
         root.getChildren().add(imageView);
     }
-    private void initialize()
+    public void initialize()
     {
 
     }
-    private void update()
-    {
 
-    }
-    private void draw()
+    public void draw()
     {
 
     }

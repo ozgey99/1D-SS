@@ -11,8 +11,10 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -34,6 +36,12 @@ public class MonsterPane extends StackPane {
     ArrayList<String> MonsterNames = new ArrayList<>();
     ArrayList<Rectangle> Rectangles = new ArrayList<>();
     ArrayList<AbstractMonster> monsters = new ArrayList<>();
+    private ArrayList<Text> textList = new ArrayList<Text>();
+
+    private HBox rectangleBox;
+    private VBox box;
+
+
     Pane pane = new Pane();
     int privLen;
     int space = 100;
@@ -44,30 +52,36 @@ public class MonsterPane extends StackPane {
         this.setMinSize( width, height);
         this.width = width;
         this.height = height;
-        this.setMinSize( width, height);
+        // this.setMinSize( width, height);
+        box = new VBox();
+        rectangleBox = new HBox();
+
+
 
     }
 
-    void update(AbstractMonster m)
-    {
 
-        draw();
-    }
 
     public void initialize()
     {
         monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
+        initializeTexts();
         initializeRectangles();
 
 
     }
+    public void draw()
+    {
+        drawRectangles();
+        drawTexts();
+    }
+
     private void initializeRectangles()
     {
         monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
 
         int len = monsters.size();
         System.out.println("SIZE IS "+ len);
-        privLen = len;
         int i;
         for( i = 0; i < len;i++)
         {
@@ -76,19 +90,11 @@ public class MonsterPane extends StackPane {
 
             String firstName = monster.getName();
             firstName = firstName + ".png";
-            MonsterNames.add(firstName);
-            System.out.println("FIRSTNAME NAME IS "+ firstName);
             Rectangle rect1 = new Rectangle();
             rect1.setFill(new ImagePattern(new Image(firstName)));
-            rect1.setX(i * space);
-            rect1.setY(600);
             rect1.setWidth(100);
             rect1.setHeight(100);
-            System.out.println(rect1 == null);
-            Rectangles.add(rect1);
-            System.out.println("Rectangles size is "+ Rectangles.size());
-            pane.getChildren().add(Rectangles.get(i));
-            Rectangles.get(i).setVisible(true);
+            rectangleBox.getChildren().add(rect1);
             ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(300), rect1);
             rect1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
                 @Override
@@ -102,41 +108,102 @@ public class MonsterPane extends StackPane {
             });
             int finalI = i;
             rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent t) {
+                                        @Override
+                                        public void handle(MouseEvent t) {
 
-                    ( (Fight) game.getDungeon().getCurrentRoom()).setSelectedMonster(monsters.get(finalI));
-                        System.out.println(id);
-                        game.fightScene.draw();
-                    }
+                                            ( (Fight) game.getDungeon().getCurrentRoom()).setSelectedMonster(monsters.get(finalI));
+                                            System.out.println("ID IS HELOOOOOOOOOO");
+                                        }
 
-                }
+                                    }
             );
 
         }
 
 
 
-        this.getChildren().addAll(pane);
+        rectangleBox.setAlignment(Pos.BOTTOM_LEFT);
+        this.getChildren().addAll(rectangleBox);
     }
-    public void draw()
+    private void drawRectangles()
     {
+        rectangleBox.getChildren().removeAll();
+        rectangleBox.getChildren().clear();
         monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
 
         int len = monsters.size();
+        System.out.println("SIZE IS "+ len);
+        int i;
+        for( i = 0; i < len;i++)
+        {
 
-        System.out.println("LEN IS IN DRAW "+ len);
+            AbstractMonster monster = monsters.get(i);
 
-        for(int i = 0; i < len;i++) {
-            if(monsters.get(i).getCurrentHP() <= 0)
-            {
-                Rectangles.get(i).setVisible(false);
-            }
+            String firstName = monster.getName();
+            firstName = firstName + ".png";
+            Rectangle rect1 = new Rectangle();
+            rect1.setFill(new ImagePattern(new Image(firstName)));
+            rect1.setWidth(100);
+            rect1.setHeight(100);
+            rectangleBox.getChildren().add(rect1);
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(300), rect1);
+            rect1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    scaleTransition.setToX(1.5f);
+                    scaleTransition.setToY(1.5f);
+                    scaleTransition.setCycleCount(2);
+                    scaleTransition.setAutoReverse(true);
+                    scaleTransition.play();
+                }
+            });
+            int finalI = i;
+            rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                        @Override
+                                        public void handle(MouseEvent t) {
+
+                                            ( (Fight) game.getDungeon().getCurrentRoom()).setSelectedMonster(monsters.get(finalI));
+                                            System.out.println("ID IS HELOOOOOOOOOO");
+                                        }
+
+                                    }
+            );
+
         }
+    }
+    public void initializeTexts()
+    {
+        monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
+        for(int i = 0; i < ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size();i++)
+        {
+            Text text = new Text();
+            int j = i + 1;
+            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() );
+            text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+            box.getChildren().add(text);
+
+        }
+        box.setAlignment(Pos.TOP_LEFT);
+        this.getChildren().add(box);
 
 
     }
-    public AbstractMonster getMonster(){
-        return monster;
+    public void drawTexts()
+    {
+        box.getChildren().removeAll();
+        box.getChildren().clear();
+        monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
+        for(int i = 0; i < ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size();i++)
+        {
+            Text text = new Text();
+            int j = i + 1;
+            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() );
+            box.getChildren().add(i,text);
+            text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
+
+        }
     }
+
+
 }

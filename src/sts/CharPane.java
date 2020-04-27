@@ -55,20 +55,18 @@ import static sts.Main.game;
 import java.awt.*;
 
 
-public class CharPane extends StackPane {
+public class CharPane extends GridPane {
     private int width;
     private int height;
     boolean selected = false;
-    AbstractCharacter hero;
 
 
 
-    public CharPane(int width, int height, AbstractCharacter hero ){
+    public CharPane(int width, int height){
         this.width = width;
         this.height = height;
         this.setMinSize( width, height);
         listenSelected();
-        this.hero = hero;
     }
     public void initialize()
     {
@@ -80,12 +78,10 @@ public class CharPane extends StackPane {
 
         this.getChildren().add( imageView );
         this.setAlignment( Pos.BOTTOM_CENTER );
+
+
     }
-    public void update(AbstractCharacter hero)
-    {
-        this.hero = hero;
-        draw();
-    }
+
     public void draw()
     {
 
@@ -97,13 +93,13 @@ public class CharPane extends StackPane {
         if( selected == false ) {
             this.setEffect( new Shadow(30, Color.YELLOW));
             selected = true;
-            System.out.println("The HP of the selected character is " + hero.getCurrentHP());
+            System.out.println("The HP of the selected character is " + game.getPlayer().getCurrentHP());
         }
         else
         {
             this.setEffect(null);
             selected = false;
-            System.out.println("The HP of the deselected character is " + hero.getCurrentHP());
+            System.out.println("The HP of the deselected character is " + game.getPlayer().getCurrentHP());
         }
     }
 }

@@ -5,11 +5,12 @@ import Models.Creatures.Characters.Ironclad;
 import Models.Dungeon.Dungeon;
 import sts.Controller;
 import sts.FightScene;
+import sts.RoomScene;
 
 public class Game {
     private Dungeon dungeon;
     private AbstractCharacter player;
-    public FightScene fightScene;
+    public RoomScene currentScene;
 
     public Game() {
         dungeon = new Dungeon();

@@ -2,6 +2,10 @@ package Models.Dungeon;
 
 import Models.Dungeon.Room.Fight;
 import Models.Dungeon.Room.Treasure;
+import sts.FightScene;
+import sts.RoomScene;
+
+import static sts.Main.game;
 
 public class Dungeon {
     private int act;
@@ -9,6 +13,7 @@ public class Dungeon {
 
     private AbstractRoom root;
     private AbstractRoom currentRoom;
+
 
     public Dungeon() {
         this.act = 1;
@@ -18,6 +23,8 @@ public class Dungeon {
     public void generate() {
         Treasure t = new Treasure(null);
         currentRoom = new Fight(t);
+        game.currentScene = new FightScene();
+
     }
 
     public int getAct() {
