@@ -81,7 +81,6 @@ public class MonsterPane extends StackPane {
         monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
 
         int len = monsters.size();
-        System.out.println("SIZE IS "+ len);
         int i;
         for( i = 0; i < len;i++)
         {
@@ -112,7 +111,6 @@ public class MonsterPane extends StackPane {
                                         public void handle(MouseEvent t) {
 
                                             ( (Fight) game.getDungeon().getCurrentRoom()).setSelectedMonster(monsters.get(finalI));
-                                            System.out.println("ID IS HELOOOOOOOOOO");
                                         }
 
                                     }
@@ -132,7 +130,6 @@ public class MonsterPane extends StackPane {
         monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
 
         int len = monsters.size();
-        System.out.println("SIZE IS "+ len);
         int i;
         for( i = 0; i < len;i++)
         {
@@ -163,13 +160,13 @@ public class MonsterPane extends StackPane {
                                         public void handle(MouseEvent t) {
 
                                             ( (Fight) game.getDungeon().getCurrentRoom()).setSelectedMonster(monsters.get(finalI));
-                                            System.out.println("ID IS HELOOOOOOOOOO");
                                         }
 
                                     }
             );
 
         }
+
     }
     public void initializeTexts()
     {

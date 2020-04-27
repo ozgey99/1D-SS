@@ -136,10 +136,24 @@ public class FightScene extends RoomScene {
     public void draw()
     {
 
-      gridUpper.draw();
-      gridLeft.draw();
-      gridRight.draw();
-      gridLower.draw();
+        if(( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size() == 0 &&  game.getPlayer().getCurrentHP() > 0)
+        {
+            endTurn.setFill(new ImagePattern(new Image("win.jpg")));
+            endTurn.setHeight(height);
+            endTurn.setWidth(width);
+        }
+        else if( game.getPlayer().getCurrentHP() <= 0)
+        {
+            endTurn.setFill(new ImagePattern(new Image("lose.png")));
+            endTurn.setHeight(height);
+            endTurn.setWidth(width);
+        }
+        else {
+            gridUpper.draw();
+            gridLeft.draw();
+            gridRight.draw();
+            gridLower.draw();
+        }
 
     }
 

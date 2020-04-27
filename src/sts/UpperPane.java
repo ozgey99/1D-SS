@@ -76,8 +76,6 @@ public class UpperPane extends GridPane {
         box.getChildren().removeAll();
 
 
-        System.out.println("energy ısss " + game.getPlayer().currentEnergy);
-
         healthText.setText("Your health: " + game.getPlayer().getCurrentHP());
         healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
