@@ -4,6 +4,18 @@ import Models.Creatures.AbstractCreature;
 import Models.Object.AbstractPower;
 
 public class FightActions {
+    public static int getAttackAmount(AbstractCreature from, AbstractCreature to, int amount) {
+        for (AbstractPower p : from.powers) {
+            amount = p.onAttack(amount);
+        }
+
+        for (AbstractPower p : to.powers) {
+            amount = p.onDamage(amount);
+        }
+
+        return amount;
+    }
+
     public static void attack(AbstractCreature from, AbstractCreature to, int amount) {
         for (AbstractPower p : from.powers) {
             amount = p.onAttack(amount);

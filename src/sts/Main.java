@@ -36,11 +36,11 @@ public class Main extends Application {
     private static int width = 1920;
     private static int height = 1080;
 
-    private Stage window;
+    public static Stage window;
 
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("START RUN", () -> {startFight();}),
+            new Pair<String, Runnable>("START RUN", () -> {game.start();}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene() )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("OPTIONS", () -> {}),
@@ -64,12 +64,6 @@ public class Main extends Application {
         startAnimation();
 
         return root;
-    }
-    private void startFight()
-    {
-        game.currentScene = new FightScene();
-        window.setScene(
-                game.currentScene); game.start();
     }
 
     private void addBackground() {

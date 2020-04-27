@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Cultist extends AbstractMonster {
     public Cultist() {
         name = "Cultist";
-        maxHP = (int) (Math.random() * 6 + 48);
+        maxHP =10;// (int) (Math.random() * 6 + 48);
         currentHP = maxHP;
         initialize();
     }

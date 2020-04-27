@@ -1,5 +1,6 @@
 package sts;
 
+import Models.Actions.FightActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.Deck;
 import Models.Creatures.Monsters.AbstractMonster;
@@ -175,7 +176,7 @@ public class MonsterPane extends StackPane {
         {
             Text text = new Text();
             int j = i + 1;
-            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() );
+            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() + "next move is " + FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage()));
             text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
             box.getChildren().add(text);
 
@@ -194,7 +195,7 @@ public class MonsterPane extends StackPane {
         {
             Text text = new Text();
             int j = i + 1;
-            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() );
+            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() + "next move is " + FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage()));
             box.getChildren().add(i,text);
             text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 

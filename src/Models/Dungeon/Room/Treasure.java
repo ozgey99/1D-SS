@@ -6,10 +6,14 @@ import Models.Dungeon.AbstractRoom;
 import Models.Object.AbstractRelic;
 import Models.Object.Relics.BloodVial;
 import Models.TextBasedUI;
+import sts.FightScene;
 import sts.Main;
+import sts.TreasureScene;
 
 
 import java.util.ArrayList;
+
+import static sts.Main.game;
 
 public class Treasure extends AbstractRoom {
     ArrayList<AbstractRelic> relics;
@@ -30,19 +34,18 @@ public class Treasure extends AbstractRoom {
 
     @Override
     public void start() {
-        AbstractCharacter player = Main.game.getPlayer();
 
-        while (!done) {
-            int max = TextBasedUI.displayTreasure(this);
-            int in = TextBasedUI.getInput(-1, max);
-            if (in == -1) done = true;
-            else if (in == relics.size()) {
-                    player.changeGold(goldAmount);
-                    goldAmount = 0;
-            } else {
-                    AbstractRelic r = relics.remove(in);
-                    RelicActions.addRelic(player, r);
-            }
+        game.currentScene = new TreasureScene();
+        Main.window.setScene(
+                game.currentScene);
+        game.currentScene.initialize();
+    }
+
+    public void addRewards() {
+        AbstractCharacter player = game.getPlayer();
+        player.changeGold(goldAmount);
+        for (AbstractRelic r : relics) {
+            RelicActions.addRelic(player, r);
         }
     }
 

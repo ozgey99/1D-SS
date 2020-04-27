@@ -40,8 +40,11 @@ public class Dungeon {
     }
 
     public boolean ascend() {
+
         if (this.currentRoom.getChildren() == null) return false;
+        System.out.println("ASCEND IN");
         this.currentRoom = this.currentRoom.getChildren();
+        this.currentRoom.start();
         return true;
     }
 }
