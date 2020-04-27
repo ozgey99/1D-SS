@@ -7,12 +7,6 @@ import Models.Creatures.Monsters.AbstractMonster;
 import Models.Creatures.Monsters.MonsterMove;
 import Models.Dungeon.Dungeon;
 import Models.Dungeon.Room.Fight;
-import Models.Dungeon.Room.Merchant;
-import Models.Dungeon.Room.Treasure;
-import Models.Main;
-import Models.Object.AbstractRelic;
-
-import java.util.Scanner;
 
 import static sts.Main.game;
 

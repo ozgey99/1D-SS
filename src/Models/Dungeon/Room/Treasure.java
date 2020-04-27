@@ -3,10 +3,11 @@ package Models.Dungeon.Room;
 import Models.Actions.RelicActions;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.AbstractRoom;
-import Models.Main;
 import Models.Object.AbstractRelic;
 import Models.Object.Relics.BloodVial;
 import Models.TextBasedUI;
+import sts.Main;
+
 
 import java.util.ArrayList;
 

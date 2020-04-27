@@ -4,9 +4,10 @@ import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.AbstractRoom;
-import Models.Main;
 import Models.TextBasedUI;
 import Models.Utils;
+import sts.Main;
+
 
 import java.util.ArrayList;
 

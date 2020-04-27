@@ -2,8 +2,9 @@ package Models.Dungeon.Room;
 
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.AbstractRoom;
-import Models.Main;
 import Models.TextBasedUI;
+import sts.Main;
+
 
 public class Rest extends AbstractRoom {
     public Rest(AbstractRoom c) {

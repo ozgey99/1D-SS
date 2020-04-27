@@ -11,6 +11,7 @@ import Models.Dungeon.Room.Fight;
 import Models.Dungeon.Room.Merchant;
 import Models.Dungeon.Room.Treasure;
 import Models.Object.AbstractRelic;
+import sts.Main;
 
 import java.util.Scanner;
 
