@@ -4,6 +4,7 @@ import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.AbstractRoom;
+import Models.Object.AbstractRelic;
 import Models.TextBasedUI;
 import Models.Utils;
 import sts.Main;
@@ -37,7 +38,7 @@ public class Merchant extends AbstractRoom {
         while (cards.size() != 5 ) {
             index = (int) (Math.random() * (allCards.size() - 1));
             cards.add(allCards.get(index));
-            prices.add((int) (Math.random() * 50));
+            prices.add((int) (Math.random() * 150));
         }
     }
 

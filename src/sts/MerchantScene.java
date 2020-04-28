@@ -1,17 +1,8 @@
 package sts;
-import Models.Cards.Deck;
-import Models.Creatures.AbstractCharacter;
-import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
-import Models.TextBasedUI;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 
+import javafx.event.EventHandler;
 import Models.Cards.AbstractCard;
 import Models.Dungeon.Room.Merchant;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -21,16 +12,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import Models.Cards.Deck;
 import Models.Creatures.AbstractCharacter;
-import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
 import Models.Game;
-import Models.TextBasedUI;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -49,6 +34,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
+import Models.Object.AbstractRelic;
 
 import java.util.ArrayList;
 
@@ -72,10 +58,29 @@ public class MerchantScene extends RoomScene  {
 
     }
 
-    public void initializeShop(){
-        int space = width/4;
+    @Override
+    public void initialize(){
         cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
         prices = ((Merchant) game.getDungeon().getCurrentRoom()).getPrices();
+        addBackground();
+        shop();
+    }
+
+    public void warning(int x, int y, boolean destroy){
+        ImageView imageView = new ImageView(new Image("warning.png"));
+        imageView.setPreserveRatio(true);
+        imageView.setX(x);
+        imageView.setY(y);
+        imageView.setFitWidth(100);
+        if(!destroy){
+            pane.getChildren().add( imageView );
+        }
+        else
+            pane.getChildren().removeAll(imageView);
+    }
+
+    public void shop(){
+        int space = width/4;
 
         boolean saleAdded = true;
         int rand = (int) (Math.random() * 5);
@@ -97,7 +102,6 @@ public class MerchantScene extends RoomScene  {
             rect.setWidth(100);
             rect.setHeight(150);
             rect.setVisible(true);
-
             if(saleAdded && rand == i ){
                 saleAdded = false;
                 price = price/2;
@@ -117,8 +121,9 @@ public class MerchantScene extends RoomScene  {
             text.setFont(Font.font ("Verdana", 15));
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
-
+            int warningLoc = space;
             int j = i;
+
             rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
@@ -136,26 +141,45 @@ public class MerchantScene extends RoomScene  {
                         }
 
                     } else {
-                        rect.setEffect(new Shadow(30, Color.RED));
+                        warning(warningLoc,height/5,false);
                         System.out.println("You don't have enough gold to purchase this item.");
                     }
 
                 }
             });
+
+            rect.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(300), rect);
+                    scaleTransition.setToX(1.5f);
+                    scaleTransition.setToY(1.5f);
+                    scaleTransition.setCycleCount(1);
+                    scaleTransition.setAutoReverse(true);
+                    scaleTransition.play();
+                }
+            });
+
+            rect.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(400), rect);
+                    scaleTransition.setToX(1);
+                    scaleTransition.setToY(1);
+                    scaleTransition.setAutoReverse(true);
+                    scaleTransition.play();
+                    warning(warningLoc,height/5,true);
+                }
+            });
+
             space = space + 120;
         }
         root.getChildren().add(pane);
 
     }
 
-    @Override
-    public void initialize(){
-        addBackground();
-        initializeShop();
-    }
 
     /*public void initialize() {
-
 
         ImageView back = new ImageView(new Image("back_merchant.jpg"));
         back.setFitWidth(width);
