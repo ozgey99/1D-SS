@@ -11,6 +11,8 @@ import sts.Main;
 
 import java.util.ArrayList;
 
+import static sts.Main.game;
+
 public class Merchant extends AbstractRoom {
     ArrayList<AbstractCard> cards;
     ArrayList<Integer> prices;
@@ -29,21 +31,24 @@ public class Merchant extends AbstractRoom {
 
         int index = (int) (Math.random() * (allCards.size() - 1));
         cards.add(allCards.get(index));
-        prices.add((int) (Math.random() * 250));
+        prices.add((int) (Math.random() * 50)); //kartların rarity type'ına göre fiyatlandırılması lazım belki her kart içine random eklenebilir?
         allCards.remove(index);
 
-        while (cards.size() != 4) {
+        while (cards.size() != 5 ) {
             index = (int) (Math.random() * (allCards.size() - 1));
             cards.add(allCards.get(index));
-            prices.add((int) (Math.random() * 250));
+            prices.add((int) (Math.random() * 50));
         }
     }
+
+
 
     @Override
     public void start() {
         AbstractCharacter player = Main.game.getPlayer();
-
-        while (!done) {
+        game.currentScene.initialize();
+        System.out.println(" I AM IN MERCHANT ROOM");
+        /*while (!done) {
             int max = TextBasedUI.displayMerchant(this);
             int choose = TextBasedUI.getInput(-1, max);
             if (choose == -1) done = true;
@@ -54,7 +59,7 @@ public class Merchant extends AbstractRoom {
             } else {
                 System.out.println("You don't have enough gold to purchase this item.");
             }
-        }
+        }*/
     }
 
     @Override

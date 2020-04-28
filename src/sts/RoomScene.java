@@ -10,25 +10,28 @@ import java.awt.*;
 
 public abstract class RoomScene extends Scene {
 
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    /*Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     protected int width = screenSize.width;
-    protected int height = screenSize.height;
+    protected int height = screenSize.height;*/
+
+    protected int width = 1300;
+    protected int height = 700;
     StackPane root;
 
     public RoomScene(){
         super(new StackPane());
         this.root = (StackPane) this.getRoot();
-        addBackground();
+        //addBackground(); //bunu kullanma sen ya
     }
     public abstract void draw();
     public abstract void initialize();
 
 
-    private void addBackground() {
+    /*private void addBackground() {
         ImageView imageView = new ImageView(new Image("background1.jpg"));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
 
         root.getChildren().add(imageView);
-    }
+    }*/
 }

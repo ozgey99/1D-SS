@@ -1,9 +1,11 @@
 package Models.Dungeon;
 
 import Models.Dungeon.Room.Fight;
+import Models.Dungeon.Room.Merchant;
 import Models.Dungeon.Room.Treasure;
 import sts.FightScene;
 import sts.RoomScene;
+import  sts.MerchantScene;
 
 import static sts.Main.game;
 
@@ -21,9 +23,12 @@ public class Dungeon {
     }
 
     public void generate() {
-        Treasure t = new Treasure(null);
-        currentRoom = new Fight(t);
-        game.currentScene = new FightScene();
+        //Treasure t = new Treasure(null);
+        //currentRoom = new Fight(t);
+        //game.currentScene = new FightScene();
+        Merchant m = new Merchant(null); // ??
+        currentRoom = new Merchant(m);
+        game.currentScene = new MerchantScene();
 
     }
 

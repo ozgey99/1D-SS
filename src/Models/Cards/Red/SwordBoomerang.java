@@ -14,7 +14,7 @@ public class SwordBoomerang extends AbstractCard {
     private int repeat;
 
     public SwordBoomerang(){
-        name = "Sword Boomerang";
+        name = "SwordBoomerang";
         description = "Deal 3 damage to a random enemy 3(4) times.";
         cost = 1;
         type = CardType.ATTACK;

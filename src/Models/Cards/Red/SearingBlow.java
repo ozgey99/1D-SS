@@ -14,7 +14,7 @@ public class SearingBlow extends AbstractCard {
 
     public SearingBlow(){
         n = 0;
-        name = "Searing Blow";
+        name = "SearingBlow";
         description = "Deal 12(+) damage. Can be upgraded any number of times.";
         cost = 2;
         type = CardType.ATTACK;

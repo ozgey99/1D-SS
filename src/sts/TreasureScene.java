@@ -20,11 +20,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class TreasureScene extends RoomScene {
-    private int width = 1920;
+    private int width = 1300; //1920;
     private int gold = 0;
     private String relic = "DefaultRelicName";
     private String potion = "DefaultPotionName";
-    private int height = 1080;
+    private int height = 700; //1080;
     Text goldText = new Text("You gold reward is "+ gold);
     Text relicText = new Text("You relic reward is "+ relic);
     Text potionText = new Text("You potion reward is "+ gold);

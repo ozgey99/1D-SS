@@ -33,8 +33,8 @@ public class Main extends Application {
 
     public static Game game = new Game();
 
-    private static int width = 1920;
-    private static int height = 1080;
+    private static int width = 1300; //1920;
+    private static int height = 700; //1080;
 
     private Stage window;
 
@@ -42,7 +42,7 @@ public class Main extends Application {
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("START RUN", () -> {startFight();}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene() )),
-            new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
+            new Pair<String, Runnable>("VIEW STATISTICS", () -> {startMerchant();}),
             new Pair<String, Runnable>("OPTIONS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
@@ -68,6 +68,12 @@ public class Main extends Application {
     private void startFight()
     {
         game.currentScene = new FightScene();
+        window.setScene(
+                game.currentScene); game.start();
+    }
+
+    private void startMerchant(){
+        game.currentScene = new MerchantScene();
         window.setScene(
                 game.currentScene); game.start();
     }

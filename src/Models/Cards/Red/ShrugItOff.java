@@ -7,7 +7,7 @@ import Models.Dungeon.Room.Fight;
 public class ShrugItOff extends AbstractCard {
 
     public ShrugItOff(){
-        name = "Shrug it Off";
+        name = "ShrugItOff";
         description = "Gain 8(11) block. Draw 1 card.";
         cost = 1;
         type = CardType.SKILL;
