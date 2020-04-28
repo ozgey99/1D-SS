@@ -3,8 +3,11 @@ package Models;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Models.Cards.Red.*;
-import Models.Object.Relics.Anchor;
+import Models.Creatures.AbstractCharacter;
+import Models.Object.AbstractRelic;
+import Models.Object.Relics.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +45,19 @@ public class Utils {
         }
 
         return res;
+    }
+
+    public static ArrayList<AbstractRelic> getIroncladRelics(){
+        ArrayList<AbstractRelic> r = new ArrayList<>();
+        r.add(new Anchor());
+        r.add(new BagOfMarbles());
+        r.add(new BloodVial());
+        r.add(new BurningBlood());
+        r.add(new HappyFlower());
+        r.add(new Lantern());
+        r.add(new Vajra());
+
+        return r;
     }
 
 

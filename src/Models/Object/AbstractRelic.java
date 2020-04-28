@@ -16,6 +16,14 @@ public abstract class AbstractRelic extends AbstractObject {
         return name;
     }
 
+    public RelicRarity getRarity(){
+        return rarity;
+    }
+
+    public RelicClass getrClass(){
+        return rClass;
+    }
+
     public String getDescription() {
         return description;
     }
