@@ -1,6 +1,10 @@
 package sts;
 
+import Models.Cards.AbstractCard;
+import Models.Dungeon.Room.Fight;
+import Models.Dungeon.Room.Treasure;
 import Models.Game;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,13 +15,15 @@ import javafx.scene.effect.Glow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.*;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+
+import static sts.Main.game;
 
 public class TreasureScene extends RoomScene {
     private int width = 1300; //1920;
@@ -36,20 +42,10 @@ public class TreasureScene extends RoomScene {
 
     public TreasureScene()
     {
-
-
-        box.getChildren().addAll(goldText);
-        box.getChildren().addAll(relicText);
-        root.getChildren().addAll(box);
-
+        Text goldText = new Text();
+        Text relicText = new Text();
+        Text potionText = new Text();
         root.setMinSize( width, height);
-
-
-        root.getChildren().add(goldText);
-        //addBackground();
-        initialize();
-
-
 
     }
     private void addBackground() {
@@ -61,11 +57,46 @@ public class TreasureScene extends RoomScene {
     }
     public void initialize()
     {
+        Rectangle rect1 = new Rectangle();
+        rect1.setFill(new ImagePattern(new Image("Cultist.png")));
+
+        rect1.setWidth(width/10);
+        rect1.setHeight(height/4);
+
+
+
+        rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+               {
+                   ((Treasure)game.getDungeon().getCurrentRoom()).addRewards();
+
+                   if (game.getDungeon().getCurrentRoom().getChildren() == null) {
+                       rect1.setFill(new ImagePattern(new Image("win.jpg")));
+                       rect1.setHeight(height);
+                       rect1.setWidth(width);
+                   }
+                   game.getDungeon().ascend();
+
+                }
+
+            }
+        });
+
+        System.out.println("I AM CALLED");
+        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+
+        goldText.setText("You gold reward is "+ ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount());
+        box.getChildren().add(goldText);
+        root.getChildren().add(box);
+        root.getChildren().add(rect1);
 
     }
 
     public void draw()
     {
+        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        goldText.setText("You gold reward is "+ ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount());
 
     }
 

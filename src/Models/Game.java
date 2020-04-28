@@ -20,13 +20,9 @@ public class Game {
     }
 
     public void start() {
-        Controller.displayStartMessage();
-        Controller.displayAct(dungeon);
 
         dungeon.getCurrentRoom().start();
 
-        if(dungeon.getCurrentRoom().getDone())
-            Controller.displayFinishMessage(player);
     }
 
     public Dungeon getDungeon() {

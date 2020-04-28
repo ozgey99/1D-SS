@@ -138,15 +138,23 @@ public class FightScene extends RoomScene {
 
         if(( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size() == 0 &&  game.getPlayer().getCurrentHP() > 0)
         {
-            endTurn.setFill(new ImagePattern(new Image("win.jpg")));
-            endTurn.setHeight(height);
-            endTurn.setWidth(width);
+            if (game.getDungeon().getCurrentRoom().getChildren() == null) {
+                endTurn.setFill(new ImagePattern(new Image("win.jpg")));
+                endTurn.setHeight(height);
+                endTurn.setWidth(width);
+            }
+            game.getDungeon().ascend();
+
+
+
         }
         else if( game.getPlayer().getCurrentHP() <= 0)
         {
             endTurn.setFill(new ImagePattern(new Image("lose.png")));
             endTurn.setHeight(height);
             endTurn.setWidth(width);
+            game.getDungeon().ascend();
+
         }
         else {
             gridUpper.draw();

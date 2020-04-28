@@ -178,57 +178,6 @@ public class MerchantScene extends RoomScene  {
 
     }
 
-
-    /*public void initialize() {
-
-        ImageView back = new ImageView(new Image("back_merchant.jpg"));
-        back.setFitWidth(width);
-        back.setFitHeight(height);
-
-        ImageView image = new ImageView(new Image("papirus.png"));
-        image.setFitWidth(width-300);
-        image.setFitHeight(height);
-        root.getChildren().add(back);
-        root.getChildren().add(image);
-
-        int space = width/4;
-        cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
-        prices = ((Merchant) game.getDungeon().getCurrentRoom()).getPrices();
-
-        for (int i = 0; i < cards.size(); i++){
-            int price = prices.get(i);
-            String name = cards.get(i).getName();
-            System.out.println("NAME IS " + name);
-            name = name + ".png";
-            Rectangle rect = new Rectangle();
-            rect.setFill(new ImagePattern(new Image(name)));
-            rect.setX(space);
-            rect.setY(height/5);
-            rect.setWidth(100);
-            rect.setHeight(150);
-            rect.setVisible(true);
-            pane.getChildren().add(rect);
-            String post = "cost " + price;
-            Text text = new Text(post);
-            text.setX(space);
-            text.setY(height/2+155);
-            pane.getChildren().add(text);
-
-            rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent t) {
-                    // karakterin deck'ine eklemen lazım
-                    // altın değişecek
-                    // lorem ipsum
-
-                }
-            });
-            space = space + 120;
-        }
-        //root.getChildren().add(box);
-        root.getChildren().add(pane);
-    }*/
-
     private void addBackground() {
         ImageView back = new ImageView(new Image("back_merchant.jpg"));
         back.setFitWidth(width);
@@ -242,47 +191,6 @@ public class MerchantScene extends RoomScene  {
 
 
     }
-
-    /*public void initialize(ArrayList<AbstractCard> cards, ArrayList<Integer> prices)
-    {
-        this.cards = cards;
-        this.prices = prices;
-        int space = width/4;
-        //System.out.println("heeeey");
-        for (int i = 0; i < cards.size(); i++) {
-            String name = cards.get(i).getName();
-            int price = prices.get(i);
-            System.out.println(name);
-            name = name + ".png";
-            Rectangle rect = new Rectangle();
-            rect.setFill(new ImagePattern(new Image(name)));
-            space = space + 160;
-            rect.setX(space);
-            rect.setY(height/2);
-            rect.setWidth(100);
-            rect.setHeight(150);
-            rectangles.add(rect);
-            rectangles.get(i).setVisible(true);
-            papirus.getChildren().add(rectangles.get(i));
-            String post = "cost " + price;
-            Text text = new Text(post);
-            text.setX(space);
-            text.setY(height/2+155);
-            papirus.getChildren().add(text);
-            int finalI = i;
-
-            rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent t) {
-                    // karakterin deck'ine eklemen lazım
-                    // altın değişecek
-                    // lorem ipsum
-
-                }
-            });
-        }
-        root.getChildren().add(papirus);
-    }*/
 
 
 }

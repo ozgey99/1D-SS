@@ -2,14 +2,20 @@ package Models.Dungeon.Room;
 
 import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
+import Models.Cards.CardColor;
 import Models.Cards.CardTarget;
 import Models.Cards.Deck;
+import Models.Cards.Red.Anger;
+import Models.Cards.Red.Bash;
+import Models.Cards.Red.Clash;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
 import Models.Creatures.Monsters.Cultist;
 import Models.Creatures.Monsters.JawWorm;
 import Models.Creatures.Monsters.Temp;
 import Models.Dungeon.AbstractRoom;
+import Models.Object.AbstractPower;
+import Models.Utils;
 import sts.Main;
 import Models.Object.AbstractRelic;
 import Models.Object.Powers.Strength;
@@ -20,6 +26,7 @@ import sts.Controller;
 import sts.FightScene;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static sts.Main.game;
 
@@ -42,6 +49,7 @@ public class Fight extends AbstractRoom {
     int drawAmount;
 
     int goldAmount;
+    ArrayList<AbstractCard> cardRewards;
 
     public Fight(AbstractRoom c) {
         type = RoomType.FIGHT;
@@ -76,6 +84,10 @@ public class Fight extends AbstractRoom {
     @Override
     public void start() {
 
+        game.currentScene = new FightScene();
+        Main.window.setScene(
+                game.currentScene);
+
         System.out.println("I AM IN START");
         player = Main.game.getPlayer();
 
@@ -91,13 +103,10 @@ public class Fight extends AbstractRoom {
         turn = 1;
         game.currentScene.initialize();
 
-
-        PowerActions.addPower(player, new Vulnerable());
-        PowerActions.addPower(player, new Strength());
-
-       preFight();
+        preFight();
 
 
+        TextBasedUI.displayFightStart(this);
        // postFight();
     }
 
@@ -183,7 +192,13 @@ public class Fight extends AbstractRoom {
 
     }
 
-    private void monsterTurn() {
+    private void monsterTurn() {/*
+        for (AbstractMonster m : monsters) {
+            for (AbstractPower p : m.powers) {
+                p.onTurnStart(m);
+            }
+        }
+*/
         System.out.println("I AM IN MOSNTERTURN");
         state = FightState.MONSTERTURN;
         for (AbstractMonster m : monsters) {
@@ -203,6 +218,7 @@ public class Fight extends AbstractRoom {
 
 
     private void postFight() {
+
         System.out.println("I AM IN POSTFIGHT");
         state = FightState.POSTFIGHT;
         player.changeGold(goldAmount);
@@ -219,7 +235,7 @@ public class Fight extends AbstractRoom {
             // change this
          */
         monsters.add(new Cultist());
-        monsters.add(new Cultist());
+        //monsters.add(new Cultist());
         //}
 
         isElite = false;
@@ -227,6 +243,13 @@ public class Fight extends AbstractRoom {
     }
 
     private void generateRewards() {
+        cardRewards = new ArrayList<>();
+        /*ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
+        Collections.shuffle(allCards);
+        cardRewards.add(allCards.get(0));
+        cardRewards.add(allCards.get(1));
+        cardRewards.add(allCards.get(2));*/
+
         goldAmount = (int) (Math.random() * 100) + 10;
     }
 
