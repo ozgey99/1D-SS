@@ -21,17 +21,17 @@ public abstract class RoomScene extends Scene {
     public RoomScene(){
         super(new StackPane());
         this.root = (StackPane) this.getRoot();
-        //addBackground(); //bunu kullanma sen ya
+        addBackground();
     }
     public abstract void draw();
     public abstract void initialize();
 
 
-    /*private void addBackground() {
+    private void addBackground() {
         ImageView imageView = new ImageView(new Image("background1.jpg"));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
 
         root.getChildren().add(imageView);
-    }*/
+    }
 }

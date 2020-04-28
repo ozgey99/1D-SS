@@ -56,7 +56,7 @@ public class Treasure extends AbstractRoom {
 
     @Override
     public AbstractRoom getChildren() {
-        return null;
+        return children;
     }
 
     @Override

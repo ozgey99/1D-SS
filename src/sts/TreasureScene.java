@@ -37,9 +37,6 @@ public class TreasureScene extends RoomScene {
     HBox box = new HBox();
 
 
-
-
-
     public TreasureScene()
     {
         Text goldText = new Text();
@@ -55,6 +52,7 @@ public class TreasureScene extends RoomScene {
 
         root.getChildren().add(imageView);
     }
+
     public void initialize()
     {
         Rectangle rect1 = new Rectangle();
@@ -62,8 +60,6 @@ public class TreasureScene extends RoomScene {
 
         rect1.setWidth(width/10);
         rect1.setHeight(height/4);
-
-
 
         rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -97,7 +93,6 @@ public class TreasureScene extends RoomScene {
     {
         goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
         goldText.setText("You gold reward is "+ ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount());
-
     }
 
     private void addClickables(){

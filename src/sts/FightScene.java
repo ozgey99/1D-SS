@@ -145,8 +145,6 @@ public class FightScene extends RoomScene {
             }
             game.getDungeon().ascend();
 
-
-
         }
         else if( game.getPlayer().getCurrentHP() <= 0)
         {

@@ -6,9 +6,10 @@ import Models.Cards.CardColor;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.AbstractRoom;
 import Models.Object.AbstractRelic;
-import Models.TextBasedUI;
 import Models.Utils;
 import sts.Main;
+import sts.MerchantScene;
+
 
 
 import java.util.ArrayList;
@@ -97,13 +98,18 @@ public class Merchant extends AbstractRoom {
     }
 
 
-
     @Override
     public void start() {
-        AbstractCharacter player = Main.game.getPlayer();
+        game.currentScene = new MerchantScene();
+        Main.window.setScene(
+                game.currentScene);
+
         game.currentScene.initialize();
         System.out.println(" I AM IN MERCHANT ROOM");
-        /*while (!done) {
+        /*AbstractCharacter player = Main.game.getPlayer();
+        game.currentScene.initialize();
+        System.out.println(" I AM IN MERCHANT ROOM");
+        while (!done) {
             int max = TextBasedUI.displayMerchant(this);
             int choose = TextBasedUI.getInput(-1, max);
             if (choose == -1) done = true;

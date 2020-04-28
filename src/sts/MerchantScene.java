@@ -45,7 +45,9 @@ public class MerchantScene extends RoomScene  {
     HBox box;
     ArrayList<AbstractCard> cards;
     ArrayList<Integer> prices;
-
+    ArrayList<AbstractRelic> relics;
+    ArrayList<Integer> cardPrices;
+    ArrayList<Integer> relicPrices;
 
     public MerchantScene() {
         pane = new Pane();
@@ -61,9 +63,12 @@ public class MerchantScene extends RoomScene  {
     @Override
     public void initialize(){
         cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
-        prices = ((Merchant) game.getDungeon().getCurrentRoom()).getPrices();
+        cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
+        relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
+        relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
         addBackground();
-        shop();
+        shopCards();
+        shopRelics();
     }
 
     public void warning(int x, int y, boolean destroy){
@@ -79,7 +84,7 @@ public class MerchantScene extends RoomScene  {
             pane.getChildren().removeAll(imageView);
     }
 
-    public void shop(){
+    public void shopCards(){
         int space = width/4;
 
         boolean saleAdded = true;
@@ -92,7 +97,7 @@ public class MerchantScene extends RoomScene  {
         System.out.println("========INITIAL MASTER DECK=========");
 
         for (int i = 0; i < cards.size(); i++){
-            int price = prices.get(i);
+            int price = cardPrices.get(i);
             String name = cards.get(i).getName();
             name = name + ".png";
             Rectangle rect = new Rectangle();
@@ -128,8 +133,8 @@ public class MerchantScene extends RoomScene  {
                 @Override
                 public void handle(MouseEvent t) {
 
-                    if (game.getPlayer().getGold() >= prices.get(j)) {
-                        game.getPlayer().changeGold(-prices.get(j));
+                    if (game.getPlayer().getGold() >= cardPrices.get(j)) {
+                        game.getPlayer().changeGold(-cardPrices.get(j));
                         System.out.println(game.getPlayer().getGold());
                         game.getPlayer().masterDeck.addCard(cards.get(j));
                         pane.getChildren().remove(rect);
@@ -142,7 +147,7 @@ public class MerchantScene extends RoomScene  {
 
                     } else {
                         warning(warningLoc,height/5,false);
-                        System.out.println("You don't have enough gold to purchase this item.");
+                        System.out.println("You don't have enough gold");
                     }
 
                 }
@@ -178,6 +183,10 @@ public class MerchantScene extends RoomScene  {
 
     }
 
+    public void shopRelics(){
+
+    }
+
     private void addBackground() {
         ImageView back = new ImageView(new Image("back_merchant.jpg"));
         back.setFitWidth(width);
@@ -188,7 +197,6 @@ public class MerchantScene extends RoomScene  {
         image.setFitHeight(height);
         root.getChildren().add(back);
         root.getChildren().add(image);
-
 
     }
 

@@ -42,7 +42,7 @@ public class Main extends Application {
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("START RUN", () -> {game.start();}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene() )),
-            new Pair<String, Runnable>("VIEW STATISTICS", () -> {startMerchant();}),
+            new Pair<String, Runnable>("VIEW STATISTICS", () -> window.setScene( new MerchantScene() )),
             new Pair<String, Runnable>("OPTIONS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
@@ -66,11 +66,7 @@ public class Main extends Application {
         return root;
     }
 
-    private void startMerchant(){
-        game.currentScene = new MerchantScene();
-        window.setScene(
-                game.currentScene); game.start();
-    }
+
 
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("hall.jpg"));
