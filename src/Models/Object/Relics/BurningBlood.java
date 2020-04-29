@@ -10,7 +10,7 @@ import Models.Object.RelicRarity;
 public class BurningBlood extends AbstractRelic {
 
     public BurningBlood(){
-        name = "Burning Blood";
+        name = "BurningBlood";
         description = "At the end of combat, heal 6 HP.";
         rarity = RelicRarity.STARTER;
         rClass = RelicClass.IRONCLAD;

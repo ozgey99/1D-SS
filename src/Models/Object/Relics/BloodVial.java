@@ -9,7 +9,7 @@ import Models.Object.RelicRarity;
 public class BloodVial extends AbstractRelic {
 
     public BloodVial(){
-        name = "Blood Vial";
+        name = "BloodVial";
         description = "At the start of each combat, heal 2 HP.";
         rarity = RelicRarity.COMMON;
         rClass = RelicClass.ANY;

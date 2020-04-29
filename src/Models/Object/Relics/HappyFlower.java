@@ -11,7 +11,7 @@ public class HappyFlower extends AbstractRelic {
 
     private int turn;
     public HappyFlower(){
-        name = "Happy Flower";
+        name = "HappyFlower";
         description = "Every 3 turns, gain 1 Energy.";
         rarity = RelicRarity.COMMON;
         rClass = RelicClass.ANY;

@@ -10,12 +10,12 @@ import java.awt.*;
 
 public abstract class RoomScene extends Scene {
 
-    /*Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     protected int width = screenSize.width;
-    protected int height = screenSize.height;*/
+    protected int height = screenSize.height;
 
-    protected int width = 1300;
-    protected int height = 700;
+    /*protected int width = 1300;
+    protected int height = 700;*/
     StackPane root;
 
     public RoomScene(){

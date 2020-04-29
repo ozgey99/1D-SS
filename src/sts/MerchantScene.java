@@ -15,15 +15,7 @@ import Models.Creatures.AbstractCharacter;
 import Models.Game;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
-import javafx.scene.effect.Shadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -31,27 +23,23 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 import Models.Object.AbstractRelic;
 
 import java.util.ArrayList;
 
 import static sts.Main.game;
+import Models.Actions.RelicActions;
 
 public class MerchantScene extends RoomScene  {
     Pane pane;
-    HBox box;
     ArrayList<AbstractCard> cards;
-    ArrayList<Integer> prices;
     ArrayList<AbstractRelic> relics;
     ArrayList<Integer> cardPrices;
     ArrayList<Integer> relicPrices;
 
     public MerchantScene() {
         pane = new Pane();
-        box = new HBox();
         root.setMinSize( width, height);
     }
 
@@ -184,8 +172,94 @@ public class MerchantScene extends RoomScene  {
     }
 
     public void shopRelics(){
+        int space = width/4;
+
+        for (int i = 0; i < relics.size(); i++){
+            int price = relicPrices.get(i);
+            String name = relics.get(i).getName();
+            name = name + ".png";
+            System.out.println(name);
+            ImageView imageView = new ImageView(new Image(name));
+            imageView.setPreserveRatio(true);
+            imageView.setFitHeight(50);
+            imageView.setX(space);
+            imageView.setY(height/5*2+100);
+            pane.getChildren().add( imageView );
+
+            String cost = "cost " + price;
+            Text text = new Text(cost);
+            text.setX(space);
+            text.setY(height/5*2+165);
+            text.setFont(Font.font ("Verdana", 15));
+            text.setFill(Color.WHITE);
+            pane.getChildren().add(text);
+            int warningLoc = space;
+
+            int j = i;
+            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent t) {
+                    System.out.println("initial gold: "+ game.getPlayer().getGold());
+                    if (game.getPlayer().getGold() >= relicPrices.get(j)) {
+                        game.getPlayer().changeGold(-relicPrices.get(j));
+                        System.out.println("after purchase: "+ game.getPlayer().getGold());
+
+                        System.out.println("========BEFORE ADDING NEW RELIC=========");
+                        for(int k=0; k<game.getPlayer().relics.size(); k++){
+                            System.out.println(game.getPlayer().relics.get(k).getName() );
+                        }
+                        System.out.println("========BEFORE NEW RELIC=========");
+
+                        RelicActions.addRelic(game.getPlayer(),relics.get(j));
+
+                        System.out.println("========AFTER ADDING NEW RELIC=========");
+                        for(int k=0; k<game.getPlayer().relics.size(); k++){
+                            System.out.println(game.getPlayer().relics.get(k).getName() );
+                        }
+                        System.out.println("========ADDED NEW RELIC=========");
+
+                        pane.getChildren().remove(imageView);
+                        pane.getChildren().remove(text);
+
+
+                    } else {
+                        warning(warningLoc,height/5,false);
+                        System.out.println("You don't have enough gold");
+                    }
+
+                }
+            });
+
+            imageView.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(300), imageView);
+                    scaleTransition.setToX(1.5f);
+                    scaleTransition.setToY(1.5f);
+                    scaleTransition.setCycleCount(1);
+                    scaleTransition.setAutoReverse(true);
+                    scaleTransition.play();
+                }
+            });
+
+            imageView.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(400), imageView);
+                    scaleTransition.setToX(1);
+                    scaleTransition.setToY(1);
+                    scaleTransition.setAutoReverse(true);
+                    scaleTransition.play();
+                    warning(warningLoc,height/5,true);
+                }
+            });
+
+            space = space + 120;
+        }
+        root.getChildren().add(pane);
 
     }
+
 
     private void addBackground() {
         ImageView back = new ImageView(new Image("back_merchant.jpg"));
