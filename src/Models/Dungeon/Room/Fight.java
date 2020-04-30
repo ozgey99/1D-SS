@@ -44,7 +44,7 @@ public class Fight extends AbstractRoom {
     private boolean isElite;
     private boolean isBoss;
     private AbstractMonster selectedMonster;
-    boolean firstTime = true;
+
 
     private AbstractCharacter player;
 
@@ -111,7 +111,6 @@ public class Fight extends AbstractRoom {
 
 
         TextBasedUI.displayFightStart(this);
-       // postFight();
     }
 
     private void preFight() {

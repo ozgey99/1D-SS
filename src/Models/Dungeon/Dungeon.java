@@ -54,14 +54,19 @@ public class Dungeon {
                 switch(rand){
                     case 1:
                         room = new Fight(children, true, false);
+                        break;
                     case 2:
                         room = new Merchant(children);
+                        break;
                     case 3:
                         room = new Rest(children);
+                        break;
                     case 4:
                         room = new Treasure(children);
+                        break;
                     default:
                         room = new Fight(children, false, false);
+                        break;
                 }
 
                 if(j == length - 1){
