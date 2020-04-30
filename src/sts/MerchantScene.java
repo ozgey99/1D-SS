@@ -3,6 +3,7 @@ package sts;
 import javafx.event.EventHandler;
 import Models.Cards.AbstractCard;
 import Models.Dungeon.Room.Merchant;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.effect.Bloom;
@@ -37,6 +38,8 @@ import Models.Actions.RelicActions;
 
 public class MerchantScene extends RoomScene  {
     Pane pane;
+    private Upper gridUpper;
+
     ArrayList<AbstractCard> cards;
     ArrayList<AbstractRelic> relics;
     ArrayList<Integer> cardPrices;
@@ -46,7 +49,21 @@ public class MerchantScene extends RoomScene  {
 
     public MerchantScene() {
         pane = new Pane();
+        gridUpper = new Upper(width,height/15);
         root.setMinSize( width, height);
+    }
+
+    private void initializeUpper()
+    {
+        gridUpper.initialize();
+        gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
+        gridUpper.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        GridPane.setConstraints(gridUpper, 0,0,1,1);
+        pane.getChildren().add(gridUpper);
+        gridUpper.setMinWidth(width);
+        //gridUpper.setMinHeight(height/9);
+
     }
 
     @Override
@@ -61,6 +78,7 @@ public class MerchantScene extends RoomScene  {
         relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
         relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
         warning = new ImageView(new Image("warning.png"));
+        initializeUpper();
         addBackground();
         shopCards();
         shopRelics();
@@ -82,7 +100,7 @@ public class MerchantScene extends RoomScene  {
     public void shopCards(){
         int space = width/4;
 
-        boolean saleAdded = true;
+        boolean saleAdded = false;
         int rand = (int) (Math.random() * 5);
 
         System.out.println("========INITIAL MASTER DECK=========");
@@ -102,15 +120,15 @@ public class MerchantScene extends RoomScene  {
             rect.setWidth(100);
             rect.setHeight(150);
             rect.setVisible(true);
-            if(saleAdded && rand == i ){
-                saleAdded = false;
+            Text saleText = new Text("SALE");
+            if(!saleAdded && rand == i ){
+                saleAdded = true;
                 price = price/2;
-                Text text1 = new Text("SALE");
-                text1.setX(space+15);
-                text1.setY(height/5-5);
-                text1.setFont(Font.font ("family", 30));
-                text1.setFill(Color.RED);
-                pane.getChildren().add(text1);
+                saleText.setX(space+15);
+                saleText.setY(height/5-5);
+                saleText.setFont(Font.font ("family", 30));
+                saleText.setFill(Color.RED);
+                pane.getChildren().add(saleText);
             }
             pane.getChildren().add(rect);
 
@@ -129,19 +147,26 @@ public class MerchantScene extends RoomScene  {
 
             int warningLocX = space;
             int warningLocY = height/5;
-
+            boolean sale_added = saleAdded;
+            int cardPrice = price;
             int j = i;
             rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
 
-                    if (game.getPlayer().getGold() >= cardPrices.get(j)) {
-                        game.getPlayer().changeGold(-cardPrices.get(j));
-                        System.out.println(game.getPlayer().getGold());
+                    if (game.getPlayer().getGold() >= cardPrice) {
+                        System.out.println("gold before: "+ game.getPlayer().getGold());
+                        game.getPlayer().changeGold(-cardPrice);
+                        System.out.println("gold after :" + game.getPlayer().getGold());
                         game.getPlayer().masterDeck.addCard(cards.get(j));
                         pane.getChildren().remove(rect);
                         pane.getChildren().remove(text);
                         pane.getChildren().remove(cost);
+                        if(sale_added == true){
+                            pane.getChildren().remove(saleText);
+                            System.out.println();
+                        }
+
 
                         System.out.println("========AFTER CLICK MASTER DECK=========");
                         for(int k=0; k<game.getPlayer().masterDeck.getSize(); k++){
@@ -237,8 +262,8 @@ public class MerchantScene extends RoomScene  {
 
             int price = relicPrices.get(i);
             String name = relics.get(i).getName();
-            name = name + ".png";
             System.out.println(name);
+            name = name + ".png";
             ImageView relicImage = new ImageView(new Image(name));
             relicImage.setPreserveRatio(true);
             relicImage.setFitHeight(50);

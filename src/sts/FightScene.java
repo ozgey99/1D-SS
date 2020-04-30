@@ -132,7 +132,6 @@ public class FightScene extends RoomScene {
 
     }
 
-
     public void draw()
     {
 

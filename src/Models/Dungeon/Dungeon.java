@@ -23,14 +23,10 @@ public class Dungeon {
     }
 
     public void generate() {
-        /*Merchant m = new Merchant(null);
+        Merchant m = new Merchant(null);
         Treasure t = new Treasure(m);
         currentRoom = new Fight(t);
-        game.currentScene = new FightScene();*/
-
-        Merchant m = new Merchant(null);
-        currentRoom = new Merchant(m);
-        game.currentScene = new MerchantScene();
+        game.currentScene = new FightScene();
 
     }
 
