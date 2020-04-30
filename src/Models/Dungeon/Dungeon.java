@@ -1,9 +1,12 @@
 package Models.Dungeon;
 
 import Models.Dungeon.Room.Fight;
+import Models.Dungeon.Room.Rest;
 import Models.Dungeon.Room.Treasure;
 import sts.FightScene;
+import sts.RestScene;
 import sts.RoomScene;
+import sts.TreasureScene;
 
 import static sts.Main.game;
 
@@ -21,9 +24,13 @@ public class Dungeon {
     }
 
     public void generate() {
-        Treasure t = new Treasure(null);
-        currentRoom = new Fight(t);
-        game.currentScene = new FightScene();
+       /* Fight z = new Fight(null);
+        Fight f = new Fight(z);
+        currentRoom = new Treasure(f);
+        game.currentScene = new TreasureScene();*/
+        currentRoom = new Rest(null);
+        game.currentScene = new RestScene();
+
 
     }
 
@@ -41,7 +48,10 @@ public class Dungeon {
 
     public boolean ascend() {
 
-        if (this.currentRoom.getChildren() == null) return false;
+        if (this.currentRoom.getChildren() == null) {
+            System.out.println("ASCEND RETURN FALSE");
+            return false;
+        }
         System.out.println("ASCEND IN");
         this.currentRoom = this.currentRoom.getChildren();
         this.currentRoom.start();

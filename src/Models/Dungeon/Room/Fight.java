@@ -99,7 +99,6 @@ public class Fight extends AbstractRoom {
         exhaust = new Deck();
 
         drawAmount = 5;
-
         turn = 1;
         game.currentScene.initialize();
 

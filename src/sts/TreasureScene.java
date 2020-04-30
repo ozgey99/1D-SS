@@ -4,8 +4,10 @@ import Models.Cards.AbstractCard;
 import Models.Dungeon.Room.Fight;
 import Models.Dungeon.Room.Treasure;
 import Models.Game;
+import Models.Object.AbstractRelic;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,18 +25,15 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+
 import static sts.Main.game;
 
 public class TreasureScene extends RoomScene {
-    private int width = 1920;
-    private int gold = 0;
-    private String relic = "DefaultRelicName";
-    private String potion = "DefaultPotionName";
-    private int height = 1080;
-    Text goldText = new Text("You gold reward is "+ gold);
-    Text relicText = new Text("You relic reward is "+ relic);
-    Text potionText = new Text("You potion reward is "+ gold);
-    HBox box = new HBox();
+
+    VBox box;
+    ArrayList<Rectangle> rectangles;
+    ArrayList<AbstractRelic> relics;
 
 
 
@@ -42,10 +41,11 @@ public class TreasureScene extends RoomScene {
 
     public TreasureScene()
     {
-        Text goldText = new Text();
-        Text relicText = new Text();
-        Text potionText = new Text();
+        relics = new ArrayList<>();
+        rectangles = new ArrayList<>();
+        box = new VBox();
         root.setMinSize( width, height);
+
 
     }
     private void addBackground() {
@@ -57,51 +57,88 @@ public class TreasureScene extends RoomScene {
     }
     public void initialize()
     {
+       initializeRectangles();
+    }
+    public void initializeRectangles()
+    {
+        Text goldText = new Text(((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount() + "");
+        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
         Rectangle rect1 = new Rectangle();
-        rect1.setFill(new ImagePattern(new Image("Cultist.png")));
-
+        rect1.setFill(new ImagePattern(new Image("Gold.png")));
         rect1.setWidth(width/10);
         rect1.setHeight(height/4);
-
-
+        TextFlow goldflow = new TextFlow(rect1,goldText);
 
         rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
-               {
-                   ((Treasure)game.getDungeon().getCurrentRoom()).addRewards();
+                {
 
-                   if (game.getDungeon().getCurrentRoom().getChildren() == null) {
-                       rect1.setFill(new ImagePattern(new Image("win.jpg")));
-                       rect1.setHeight(height);
-                       rect1.setWidth(width);
-                   }
-                   game.getDungeon().ascend();
+                   /* if (game.getDungeon().getCurrentRoom().getChildren() == null) {
+                        System.out.println("you win the game");
+                        rect1.setFill(new ImagePattern(new Image("win.jpg")));
+                        rect1.setHeight(height);
+                        rect1.setWidth(width);
+                    }*/
+                   // else {
+                        System.out.println("ASCENDING CALLED IN TREASSURESCENE");
+                        game.getPlayer().changeGold(((Treasure) game.getDungeon().getCurrentRoom()).getGoldAmount());
+                        game.getDungeon().ascend();
+                   // }
 
                 }
 
             }
         });
+        relics = ((Treasure)game.getDungeon().getCurrentRoom()).getRelics();
 
-        System.out.println("I AM CALLED");
-        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        for (int i = 0; i < relics.size(); i++) {
 
-        goldText.setText("You gold reward is "+ ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount());
-        box.getChildren().add(goldText);
+            AbstractRelic relic = relics.get(i);
+            String firstName = relic.getName();
+            firstName = firstName + ".png";
+
+            Rectangle rect2 = new Rectangle();
+            System.out.println("NAME IS " + firstName);
+            rect2.setFill(new ImagePattern(new Image(firstName)));
+
+            rect2.setWidth(width/10);
+            rect2.setHeight(height/4);
+
+
+            int finalI = i;
+            rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent t) {
+
+                    System.out.println("ASCENDING CALLED IN TREASSURE");
+                    game.getPlayer().relics.add(relic);
+                    game.getDungeon().ascend();
+
+                }
+            });
+
+            String relicDecriptionText = relic.getDescription();
+            Text relicDescription = new Text(relicDecriptionText);
+            relicDescription.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
+            TextFlow text = new TextFlow(rect2,relicDescription);
+
+            box.getChildren().add(text);
+
+
+        }
+
+
+        box.getChildren().add(goldflow);
         root.getChildren().add(box);
-        root.getChildren().add(rect1);
 
     }
 
     public void draw()
     {
-        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
-        goldText.setText("You gold reward is "+ ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount());
+
 
     }
 
-    private void addClickables(){
-        Button button1 = new Button("Button 1");
-        root.getChildren().add(button1);
-    }
 }
