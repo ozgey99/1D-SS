@@ -61,7 +61,7 @@ public class Dungeon {
                     case 4:
                         room = new Treasure(children);
                     default:
-                        room = new Fight(children, true, false);
+                        room = new Fight(children, false, false);
                 }
 
                 if(j == length - 1){
