@@ -19,7 +19,7 @@ public class Merchant extends AbstractRoom {
     ArrayList<AbstractRelic> relics;
     ArrayList<Integer> relicPrices;
 
-    public Merchant(AbstractRoom c) {
+    public Merchant(ArrayList<AbstractRoom> c) {
         type = RoomType.SHOP;
         children = c;
         done = false;
@@ -124,7 +124,7 @@ public class Merchant extends AbstractRoom {
     }
 
     @Override
-    public AbstractRoom getChildren() {
+    public ArrayList<AbstractRoom> getChildren() {
         return children;
     }
 

@@ -5,9 +5,11 @@ import Models.Dungeon.AbstractRoom;
 import Models.TextBasedUI;
 import sts.Main;
 
+import java.util.ArrayList;
+
 
 public class Rest extends AbstractRoom {
-    public Rest(AbstractRoom c) {
+    public Rest(ArrayList<AbstractRoom> c) {
         type = RoomType.REST;
         children = c;
         done = false;
@@ -40,7 +42,7 @@ public class Rest extends AbstractRoom {
     }
 
     @Override
-    public AbstractRoom getChildren() {
+    public ArrayList<AbstractRoom> getChildren() {
         return children;
     }
 

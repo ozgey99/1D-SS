@@ -25,6 +25,7 @@ import javafx.scene.control.Control;
 import sts.Controller;
 import sts.FightScene;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -41,6 +42,7 @@ public class Fight extends AbstractRoom {
     private Deck hand;
     private int turn;
     private boolean isElite;
+    private boolean isBoss;
     private AbstractMonster selectedMonster;
     boolean firstTime = true;
 
@@ -51,8 +53,10 @@ public class Fight extends AbstractRoom {
     int goldAmount;
     ArrayList<AbstractCard> cardRewards;
 
-    public Fight(AbstractRoom c) {
+    public Fight(ArrayList<AbstractRoom> c, boolean isElite, boolean isBoss) {
         type = RoomType.FIGHT;
+        this.isBoss = isBoss;
+        this.isElite = isElite;
         children = c;
         done = false;
         monsters = new ArrayList<>();
@@ -234,11 +238,21 @@ public class Fight extends AbstractRoom {
         if (act == 1) {
             // change this
          */
-        monsters.add(new Cultist());
-        //monsters.add(new Cultist());
-        //}
 
-        isElite = false;
+        //change these monsters!!
+        if(isElite){
+            monsters.add(new Cultist());
+            monsters.add(new Cultist());
+        }
+        else if(isBoss){
+            monsters.add(new Cultist());
+            monsters.add(new Cultist());
+            monsters.add(new Cultist());
+        }
+        else
+            monsters.add(new Cultist());
+
+
         generateRewards();
     }
 
@@ -262,7 +276,7 @@ public class Fight extends AbstractRoom {
     }
 
     @Override
-    public AbstractRoom getChildren() {
+    public ArrayList<AbstractRoom> getChildren() {
         return children;
     }
 
@@ -284,5 +298,9 @@ public class Fight extends AbstractRoom {
     public Deck getHand() { return hand; }
 
     public boolean getIsElite() { return isElite; }
+
+    public boolean getIsBoss() {
+        return isBoss;
+    }
 
 }
