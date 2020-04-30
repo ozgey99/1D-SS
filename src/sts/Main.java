@@ -33,8 +33,8 @@ public class Main extends Application {
 
     public static Game game = new Game();
 
-    private static int width = 1920;
-    private static int height = 1080;
+    private static int width = 1300; //1920;
+    private static int height = 700; //1080;
 
     public static Stage window;
 
@@ -42,7 +42,7 @@ public class Main extends Application {
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("START RUN", () -> {game.start();}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene() )),
-            new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
+            new Pair<String, Runnable>("VIEW STATISTICS", () -> window.setScene( new MerchantScene() )),
             new Pair<String, Runnable>("OPTIONS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
@@ -65,6 +65,7 @@ public class Main extends Application {
 
         return root;
     }
+
 
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("hall.jpg"));

@@ -65,8 +65,6 @@ public class CardPane  extends GridPane {
     AbstractCard returnedCard;
     private FightScene scene;
     int id = 0;
-    ArrayList<String> CardNames = new ArrayList<>();
-    ArrayList<Rectangle> Rectangles = new ArrayList<>();
     HBox box;
 
 
@@ -93,15 +91,13 @@ public class CardPane  extends GridPane {
     {
         initializeRectangles();
     }
-    public void draw()
-    {
-       drawRectangles();
 
-
+    public void draw() {
+        drawRectangles();
     }
+
     private void initializeRectangles()
     {
-
         this.getChildren().addAll(box);
     }
 

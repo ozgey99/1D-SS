@@ -35,10 +35,6 @@ public class TreasureScene extends RoomScene {
     ArrayList<Rectangle> rectangles;
     ArrayList<AbstractRelic> relics;
 
-
-
-
-
     public TreasureScene()
     {
         relics = new ArrayList<>();
@@ -55,6 +51,7 @@ public class TreasureScene extends RoomScene {
 
         root.getChildren().add(imageView);
     }
+
     public void initialize()
     {
        initializeRectangles();
@@ -68,6 +65,7 @@ public class TreasureScene extends RoomScene {
         rect1.setWidth(width/10);
         rect1.setHeight(height/4);
         TextFlow goldflow = new TextFlow(rect1,goldText);
+
 
         rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -107,7 +105,7 @@ public class TreasureScene extends RoomScene {
 
 
             int finalI = i;
-            rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            rect2.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
 
@@ -137,7 +135,6 @@ public class TreasureScene extends RoomScene {
 
     public void draw()
     {
-
 
     }
 

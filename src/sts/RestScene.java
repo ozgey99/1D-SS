@@ -36,7 +36,7 @@ public class RestScene extends RoomScene {
 
     public RestScene()
     {
-        box = new VBox();
+        box = new HBox();
         root.setMinSize( width, height);
 
     }
@@ -71,7 +71,7 @@ public class RestScene extends RoomScene {
         });
         box.getChildren().add(rect1);
         Deck deck = game.getPlayer().masterDeck;
-        for (int i = 0; i < deck.getSize(); i++) {
+        for (int i = 0; i < 7; i++) {
 
             AbstractCard firstHandCard = deck.getCard(i);
             String firstName = firstHandCard.getName();
@@ -85,10 +85,11 @@ public class RestScene extends RoomScene {
 
 
             int finalI = i;
-            rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            rect2.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
                    deck.getCard(finalI).upgrade();
+                    game.getDungeon().ascend();
 
                 }
             });

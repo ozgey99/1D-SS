@@ -13,7 +13,7 @@ public class PerfectedStrike extends AbstractCard {
     private int additionalDamage;
 
     public PerfectedStrike(){
-        name = "Perfected Strike";
+        name = "PerfectedStrike";
         description = "Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing \"Strike\".";
         cost = 2;
         type = CardType.ATTACK;

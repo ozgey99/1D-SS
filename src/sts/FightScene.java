@@ -132,7 +132,6 @@ public class FightScene extends RoomScene {
 
     }
 
-
     public void draw()
     {
 
@@ -144,8 +143,6 @@ public class FightScene extends RoomScene {
                 endTurn.setWidth(width);
             }
             game.getDungeon().ascend();
-
-
 
         }
         else if( game.getPlayer().getCurrentHP() <= 0)

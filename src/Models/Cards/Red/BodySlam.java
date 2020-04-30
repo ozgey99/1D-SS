@@ -11,7 +11,7 @@ import sts.Controller;
 public class BodySlam extends AbstractCard {
 
     public BodySlam() {
-        name = "Body Slam";
+        name = "BodySlam";
         description = "Deal damage equal to your block.";
         cost = 1;
         type = CardType.ATTACK;

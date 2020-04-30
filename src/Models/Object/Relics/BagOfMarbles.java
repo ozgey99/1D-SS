@@ -12,7 +12,7 @@ import Models.Object.RelicRarity;
 public class BagOfMarbles extends AbstractRelic {
 
     public BagOfMarbles(){
-        name = "Bag of Marbles";
+        name = "BagOfMarbles";
         description = "At the start of each combat, apply 1 Vulnerable to ALL enemies.";
         rarity = RelicRarity.COMMON;
         rClass = RelicClass.ANY;

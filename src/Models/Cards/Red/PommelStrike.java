@@ -11,7 +11,7 @@ import sts.Controller;
 public class PommelStrike extends AbstractCard {
 
     public PommelStrike(){
-        name = "Pommel Strike";
+        name = "PommelStrike";
         description = "Deal 9(10) damage. Draw 1(2) card(s).";
         cost = 1;
         type = CardType.ATTACK;

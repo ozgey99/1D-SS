@@ -2,11 +2,13 @@ package Models.Dungeon;
 
 import Models.Dungeon.Room.Fight;
 import Models.Dungeon.Room.Rest;
+import Models.Dungeon.Room.Merchant;
 import Models.Dungeon.Room.Treasure;
 import sts.FightScene;
 import sts.RestScene;
 import sts.RoomScene;
 import sts.TreasureScene;
+import  sts.MerchantScene;
 
 import static sts.Main.game;
 
@@ -24,13 +26,12 @@ public class Dungeon {
     }
 
     public void generate() {
-       /* Fight z = new Fight(null);
-        Fight f = new Fight(z);
-        currentRoom = new Treasure(f);
-        game.currentScene = new TreasureScene();*/
-        currentRoom = new Rest(null);
-        game.currentScene = new RestScene();
 
+        Merchant m = new Merchant(null);
+        Rest r = new Rest(m);
+        Treasure t = new Treasure(r);
+        currentRoom = new Fight(t);
+        game.currentScene = new FightScene();
 
     }
 
