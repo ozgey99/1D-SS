@@ -109,6 +109,8 @@ public class MerchantScene extends RoomScene  {
         }
         System.out.println("========INITIAL MASTER DECK=========");
 
+        cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
+
         for (int i = 0; i < cards.size(); i++){
             int price = cardPrices.get(i);
             String name = cards.get(i).getName();
@@ -258,6 +260,7 @@ public class MerchantScene extends RoomScene  {
 
     public void shopRelics(){
         int space = width/4;
+        relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
 
         for (int i = 0; i < relics.size(); i++){
 
@@ -296,7 +299,7 @@ public class MerchantScene extends RoomScene  {
                     if (game.getPlayer().getGold() >= relicPrices.get(j)) {
 
                         game.getPlayer().changeGold(-relicPrices.get(j));
-                        gridUpper.draw();
+
                         System.out.println("gold after purchase: "+ game.getPlayer().getGold());
 
                         System.out.println("========BEFORE ADDING NEW RELIC=========");
@@ -306,6 +309,7 @@ public class MerchantScene extends RoomScene  {
                         System.out.println("========BEFORE NEW RELIC=========");
 
                         RelicActions.addRelic(game.getPlayer(),relics.get(j));
+                        gridUpper.draw();
 
                         System.out.println("========AFTER ADDING NEW RELIC=========");
                         for(int k=0; k<game.getPlayer().relics.size(); k++){

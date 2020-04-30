@@ -22,7 +22,8 @@ public class Hemokinesis extends AbstractCard {
         usable = true;
         upgradable = true;
         HPdecrease = 3;
-        //baseAttr.damage = 14;
+        baseAttr = new BaseCardAttributes();
+        baseAttr.damage = 14;
         cost = 1;
     }
 
@@ -34,8 +35,8 @@ public class Hemokinesis extends AbstractCard {
 
             player.changeHealth(-HPdecrease);
             AbstractMonster monster = Controller.getMonsterInput();
-            //FightActions.attack(player, monster, baseAttr.damage);
-            FightActions.attack(player, monster, 14);
+            FightActions.attack(player, monster, baseAttr.damage);
+           // FightActions.attack(player, monster, 14);
 
             return true;
         }

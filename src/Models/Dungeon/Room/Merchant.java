@@ -47,51 +47,36 @@ public class Merchant extends AbstractRoom {
             cardPrices.add((int) (Math.random() * 250));
         }
 
-        ArrayList<AbstractRelic> allRelics = Utils.getIroncladRelics();
-        int ind = (int) (Math.random() * (allRelics.size() - 1));
-        relics.add(allRelics.get(ind));
+        ArrayList<AbstractRelic> allRelics = Utils.getAllRelics();
 
-        switch (allRelics.get(ind).getRarity()){
-            case BOSS:
-                relicPrices.add((int) (Math.random() * 450));
-            case RARE:
-                relicPrices.add((int) (Math.random() * 400));
-            case SHOP:
-                relicPrices.add((int) (Math.random() * 350));
-            case EVENT:
-                relicPrices.add((int) (Math.random() * 350));
-            case COMMON:
-                relicPrices.add((int) (Math.random() * 200));
-            case SPECIAL:
-                relicPrices.add((int) (Math.random() * 550));
-            case STARTER:
-                relicPrices.add((int) (Math.random() * 150));
-            case UNCOMMON:
-                relicPrices.add((int) (Math.random() * 300));
-        }
-
-        allRelics.remove(ind);
 
         while (relics.size() != 4) {
-            ind = (int) (Math.random() * (allRelics.size() - 1));
+            int ind = (int) (Math.random() * (allRelics.size() - 1));
             relics.add(allRelics.get(ind));
+            allRelics.remove(ind);
             switch (allRelics.get(ind).getRarity()){
                 case BOSS:
                     relicPrices.add((int) (Math.random() * 450));
+                    break;
                 case RARE:
                     relicPrices.add((int) (Math.random() * 400));
+                    break;
                 case SHOP:
-                    relicPrices.add((int) (Math.random() * 350));
                 case EVENT:
                     relicPrices.add((int) (Math.random() * 350));
+                    break;
                 case COMMON:
                     relicPrices.add((int) (Math.random() * 200));
+                    break;
                 case SPECIAL:
                     relicPrices.add((int) (Math.random() * 550));
+                    break;
                 case STARTER:
                     relicPrices.add((int) (Math.random() * 150));
+                    break;
                 case UNCOMMON:
                     relicPrices.add((int) (Math.random() * 300));
+                    break;
             }
         }
 

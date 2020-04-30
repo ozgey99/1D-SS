@@ -161,6 +161,11 @@ public class FightScene extends RoomScene {
         }
 
     }
+    public void drawMonsters()
+    {
+        gridRight.draw();
+
+    }
 
 
 }
