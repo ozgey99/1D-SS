@@ -28,6 +28,8 @@ public class Dungeon {
         currentRoom = new Fight(t);
         game.currentScene = new FightScene();
 
+
+
     }
 
     public int getAct() {

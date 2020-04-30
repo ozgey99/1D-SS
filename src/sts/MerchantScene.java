@@ -44,6 +44,7 @@ public class MerchantScene extends RoomScene  {
     ArrayList<AbstractRelic> relics;
     ArrayList<Integer> cardPrices;
     ArrayList<Integer> relicPrices;
+    //ImageView nextButton;
     ImageView warning;
     boolean destroy;
 
@@ -82,7 +83,25 @@ public class MerchantScene extends RoomScene  {
         addBackground();
         shopCards();
         shopRelics();
+        nextButton();
         root.getChildren().add(pane);
+
+    }
+
+    public void nextButton(){
+        ImageView nextButton = new ImageView(new Image("nextButton.png"));
+        nextButton.setPreserveRatio(true);
+        nextButton.setFitHeight(50);
+        nextButton.setX(width-400);
+        nextButton.setY(height/7*5);
+        pane.getChildren().add( nextButton );
+
+        nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                game.getDungeon().ascend();
+            }
+        });
     }
 
     public void warning(int x, int y, boolean destroy,ImageView warning){

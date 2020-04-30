@@ -67,6 +67,7 @@ public class Main extends Application {
     }
 
 
+
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("hall.jpg"));
         imageView.setFitWidth(width);
