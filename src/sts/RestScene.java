@@ -43,6 +43,7 @@ public class RestScene extends RoomScene {
 
 
     public void initialize() {
+        addBackground();
         System.out.println("INITIALIZE IN RESTSCENE");
         Rectangle rect1 = new Rectangle();
         rect1.setFill(new ImagePattern(new Image("Rest.png")));
@@ -71,7 +72,8 @@ public class RestScene extends RoomScene {
         });
         box.getChildren().add(rect1);
         Deck deck = game.getPlayer().masterDeck;
-        for (int i = 0; i < 7; i++) {
+        System.out.println("DECK SIZE IS "+ deck.getSize());
+        for (int i = 0; i < deck.getSize(); i++) {
 
             AbstractCard firstHandCard = deck.getCard(i);
             String firstName = firstHandCard.getName();
@@ -80,7 +82,7 @@ public class RestScene extends RoomScene {
             Rectangle rect2 = new Rectangle();
             rect2.setFill(new ImagePattern(new Image(firstName)));
 
-            rect2.setWidth(width / 10);
+            rect2.setWidth(width / 12);
             rect2.setHeight(height / 4);
 
 
@@ -88,6 +90,7 @@ public class RestScene extends RoomScene {
             rect2.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
+                    if(deck.getCard(finalI).isUpgradable())
                    deck.getCard(finalI).upgrade();
                     game.getDungeon().ascend();
 
@@ -100,6 +103,12 @@ public class RestScene extends RoomScene {
 
         }
         root.getChildren().add(box);
+    }
+    private void addBackground() {
+        ImageView imageView = new ImageView(new Image("CampFire.png"));
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        root.getChildren().add(imageView);
     }
     public void draw()
     {

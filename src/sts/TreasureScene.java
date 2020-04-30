@@ -44,16 +44,10 @@ public class TreasureScene extends RoomScene {
 
 
     }
-    private void addBackground() {
-        ImageView imageView = new ImageView(new Image("background1.jpg"));
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-
-        root.getChildren().add(imageView);
-    }
 
     public void initialize()
     {
+        addBackground();
        initializeRectangles();
     }
     public void initializeRectangles()
@@ -131,6 +125,12 @@ public class TreasureScene extends RoomScene {
         box.getChildren().add(goldflow);
         root.getChildren().add(box);
 
+    }
+    private void addBackground() {
+        ImageView imageView = new ImageView(new Image("Treasure.png"));
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        root.getChildren().add(imageView);
     }
 
     public void draw()
