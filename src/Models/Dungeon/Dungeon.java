@@ -42,7 +42,7 @@ public class Dungeon {
         //randomize the length
         int length = (int) (Math.random() * n) + 1;
 
-        //populate from bottom to top
+        //populate from top to bottom
         for(int i = 0; i < noOfPaths; i++){
             children.clear();
             children.add(boss);
