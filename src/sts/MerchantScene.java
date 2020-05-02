@@ -6,6 +6,7 @@ import Models.Dungeon.Room.Merchant;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,54 +39,94 @@ import Models.Actions.RelicActions;
 
 public class MerchantScene extends RoomScene  {
     Pane pane;
-    private Upper gridUpper;
-
+    public Upper upper;
+    public RemoveCard removeCardPane;
     ArrayList<AbstractCard> cards;
     ArrayList<AbstractRelic> relics;
     ArrayList<Integer> cardPrices;
     ArrayList<Integer> relicPrices;
-    //ImageView nextButton;
-    ImageView warning;
-    boolean destroy;
+    ImageView turnBack;
+    ImageView removeButton;
+    static boolean added;
 
     public MerchantScene() {
         pane = new Pane();
-        gridUpper = new Upper(width,height/15);
+        upper = new Upper(width,height/15);
         root.setMinSize( width, height);
-    }
-
-    private void initializeUpper()
-    {
-        gridUpper.initialize();
-        gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
-        gridUpper.setBorder(new Border(new BorderStroke(Color.BLACK,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        GridPane.setConstraints(gridUpper, 0,0,1,1);
-        pane.getChildren().add(gridUpper);
-        gridUpper.setMinWidth(width);
-        //gridUpper.setMinHeight(height/9);
-
-    }
-
-    @Override
-    public void draw() {
-
-    }
-
-    @Override
-    public void initialize(){
+        removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
+        removeButton = new ImageView(new Image("removeButton.png"));
         cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
         cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
         relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
         relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
-        warning = new ImageView(new Image("warning.png"));
+        added = false;
+    }
+
+    @Override
+    public void initialize(){
+
         initializeUpper();
         addBackground();
         shopCards();
         shopRelics();
         nextButton();
+        cardRemovalService();
         root.getChildren().add(pane);
 
+    }
+
+    private void initializeUpper()
+    {
+        upper.initialize();
+        upper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
+        upper.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        GridPane.setConstraints(upper, 0,0,1,1);
+        pane.getChildren().add(upper);
+        upper.setMinWidth(width);
+        //gridUpper.setMinHeight(height/9);
+
+    }
+
+    public void turnBack(){
+        turnBack = new ImageView(new Image("turnBack.png"));
+        turnBack.setPreserveRatio(true);
+        turnBack.setFitHeight(100);
+        turnBack.setX(width/5);
+        turnBack.setY(height/4*3);
+
+        removeCardPane.pane.getChildren().add( turnBack );
+        turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                removeCardPane.visible(false);
+            }
+        });
+    }
+
+    @Override
+    public void draw() {}
+
+    public void cardRemovalService(){
+        //removeCardPane.setVisible(true);
+        removeButton.setPreserveRatio(true);
+        removeButton.setFitHeight(150);
+        removeButton.setX(width/9*6);
+        removeButton.setY(height/5+160);
+        pane.getChildren().add( removeButton );
+        removeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                removeCardPane.visible(true);
+                removeCardPane.addBackground();
+                removeCardPane.initialize();
+                if(!added){
+                    root.getChildren().add(removeCardPane);
+                    added = true;
+                }
+                turnBack();
+            }
+        });
     }
 
     public void nextButton(){
@@ -95,7 +136,6 @@ public class MerchantScene extends RoomScene  {
         nextButton.setX(width-400);
         nextButton.setY(height/7*5);
         pane.getChildren().add( nextButton );
-
         nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -104,16 +144,16 @@ public class MerchantScene extends RoomScene  {
         });
     }
 
-    public void warning(int x, int y, boolean destroy,ImageView warning){
-        if(!destroy){
-            warning.setPreserveRatio(true);
-            warning.setX(x);
-            warning.setY(y);
-            warning.setFitWidth(100);
-            pane.getChildren().add( warning );
-        }
-        else
-            pane.getChildren().remove(warning);
+    static Node warning(int x, int y){
+        Group g = new Group();
+        ImageView warning = new ImageView(new Image("warning.png"));
+        warning.setVisible(true);
+        warning.setPreserveRatio(true);
+        warning.setX(x);
+        warning.setY(y);
+        warning.setFitWidth(100);
+        g.getChildren().add(warning);
+        return g;
     }
 
     public void shopCards(){
@@ -127,6 +167,7 @@ public class MerchantScene extends RoomScene  {
             System.out.println(game.getPlayer().masterDeck.getCard(k).getName());
         }
         System.out.println("========INITIAL MASTER DECK=========");
+
 
         for (int i = 0; i < cards.size(); i++){
             int price = cardPrices.get(i);
@@ -164,8 +205,13 @@ public class MerchantScene extends RoomScene  {
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
-            int warningLocX = space;
-            int warningLocY = height/5;
+            int warningLocX = space-5;
+            int warningLocY = height/5-100;
+
+            Node warn = warning(warningLocX, warningLocY);
+            pane.getChildren().add(warn);
+            warn.setVisible(false);
+
             boolean sale_added = saleAdded;
             int cardPrice = price;
             int j = i;
@@ -193,8 +239,7 @@ public class MerchantScene extends RoomScene  {
                         }
 
                     } else {
-                        destroy = false;
-                        warning(warningLocX,warningLocY,false, warning);
+                        warn.setVisible(true);
                         System.out.println("You don't have enough gold for card");
                     }
 
@@ -232,9 +277,7 @@ public class MerchantScene extends RoomScene  {
                     scaleTransition1.setToY(1);
                     scaleTransition1.setAutoReverse(true);
                     scaleTransition1.play();
-                    if(destroy == false){
-                        warning(warningLocX,warningLocY,true, warning);
-                    }
+                    warn.setVisible(false);
 
                 }
             });
@@ -255,7 +298,6 @@ public class MerchantScene extends RoomScene  {
         rect.setY(y);
         rect.setFill(Color.GREY);
         rect.setStroke(Color.BLACK);
-        //rectDesc.setEffect();
         rect.setWidth(len*6);
         rect.setHeight(20);
         rect.setVisible(true);
@@ -263,7 +305,6 @@ public class MerchantScene extends RoomScene  {
         Text relicText = new Text(desc);
         relicText.setX(x+5);
         relicText.setY(y+13);
-        //relicText.setStroke(Color.BLACK);
         relicText.setFont(Font.font ("Verdana", 10));
         relicText.setFill(Color.WHITE);
 
@@ -272,7 +313,6 @@ public class MerchantScene extends RoomScene  {
 
         return g;
     }
-
 
     public void shopRelics(){
         int space = width/4;
@@ -303,9 +343,13 @@ public class MerchantScene extends RoomScene  {
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
+            int warningLocX = space-50;
+            int warningLocY = height/5*2+5;
 
-            int warningLocX = space;
-            int warningLocY = height/5*2+100;
+            Node warn = warning(warningLocX, warningLocY);
+            pane.getChildren().add(warn);
+            warn.setVisible(false);
+
             int j = i;
             relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -332,16 +376,15 @@ public class MerchantScene extends RoomScene  {
                         pane.getChildren().remove(relicImage);
                         pane.getChildren().remove(text);
                         pane.getChildren().remove(cost);
-
-
-                    } else {
-                        destroy = false;
-                        warning(warningLocX,warningLocY,false, warning);
+                    }
+                    else {
+                        warn.setVisible(true);
                         System.out.println("You don't have enough gold for relic");
                     }
 
                 }
             });
+
             Node desc = relicDescription(relics,i, space+50, height/5*2+130);
             pane.getChildren().add(desc);
             desc.setVisible(false);
@@ -379,10 +422,7 @@ public class MerchantScene extends RoomScene  {
                     scaleTransition1.setToY(1);
                     scaleTransition1.setAutoReverse(true);
                     scaleTransition1.play();
-                    if(destroy == false){ // destroy, if it is created
-                        warning(warningLocX,warningLocY,true, warning);
-                    }
-                    //pane.getChildren().remove(desc);
+                    warn.setVisible(false);
                     desc.setVisible(false);
                 }
             });
@@ -390,7 +430,6 @@ public class MerchantScene extends RoomScene  {
             space = space + 120;
         }
     }
-
 
     private void addBackground() {
         ImageView back = new ImageView(new Image("back_merchant.jpg"));
@@ -404,7 +443,6 @@ public class MerchantScene extends RoomScene  {
         root.getChildren().add(image);
 
     }
-
 
 }
 
