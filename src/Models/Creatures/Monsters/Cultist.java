@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Cultist extends AbstractMonster {
     public Cultist() {
         name = "Cultist";
-        maxHP =10;// (int) (Math.random() * 6 + 48);
+        maxHP = (int) (Math.random() * 6 + 48);
         currentHP = maxHP;
         initialize();
     }
@@ -24,7 +24,7 @@ public class Cultist extends AbstractMonster {
 
         for (int i = 0; i < 50; i++) {
             MonsterMove darkStrike = new MonsterMove(this);
-            darkStrike.setDamage(6);
+            darkStrike.setDamage(3);
             moveList.add(darkStrike);
         }
     }

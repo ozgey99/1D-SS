@@ -1,7 +1,9 @@
 package sts;
 
 import Models.Cards.AbstractCard;
+import Models.Cards.Deck;
 import Models.Dungeon.Room.Fight;
+import Models.Dungeon.Room.Rest;
 import Models.Dungeon.Room.Treasure;
 import Models.Game;
 import Models.Object.AbstractRelic;
@@ -28,39 +30,25 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 
 import static sts.Main.game;
+public class RestScene extends RoomScene {
 
-public class TreasureScene extends RoomScene {
+    HBox box;
 
-    VBox box;
-    ArrayList<Rectangle> rectangles;
-    ArrayList<AbstractRelic> relics;
-
-    public TreasureScene()
+    public RestScene()
     {
-        relics = new ArrayList<>();
-        rectangles = new ArrayList<>();
-        box = new VBox();
+        box = new HBox();
         root.setMinSize( width, height);
 
-
     }
 
-    public void initialize()
-    {
+
+    public void initialize() {
         addBackground();
-       initializeRectangles();
-    }
-    public void initializeRectangles()
-    {
-        Text goldText = new Text(((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount() + "");
-        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        System.out.println("INITIALIZE IN RESTSCENE");
         Rectangle rect1 = new Rectangle();
-        rect1.setFill(new ImagePattern(new Image("Gold_rest.png")));
-        rect1.setWidth(width/10);
-        rect1.setHeight(height/4);
-        TextFlow goldflow = new TextFlow(rect1,goldText);
-
-
+        rect1.setFill(new ImagePattern(new Image("Rest.png")));
+        rect1.setWidth(width / 10);
+        rect1.setHeight(height / 4);
         rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
@@ -72,70 +60,58 @@ public class TreasureScene extends RoomScene {
                         rect1.setHeight(height);
                         rect1.setWidth(width);
                     }*/
-                   // else {
-                        System.out.println("ASCENDING CALLED IN TREASSURESCENE");
-                        game.getPlayer().changeGold(((Treasure) game.getDungeon().getCurrentRoom()).getGoldAmount());
-                        game.getDungeon().ascend();
-                   // }
+                    // else {
+                    System.out.println("ASCENDING CALLED IN RESTSCENE");
+                    game.getPlayer().recharge();
+                    game.getDungeon().ascend();
+                    // }
 
                 }
 
             }
         });
-        relics = ((Treasure)game.getDungeon().getCurrentRoom()).getRelics();
+        box.getChildren().add(rect1);
+        Deck deck = game.getPlayer().masterDeck;
+        System.out.println("DECK SIZE IS "+ deck.getSize());
+        for (int i = 0; i < deck.getSize(); i++) {
 
-        for (int i = 0; i < relics.size(); i++) {
-
-            AbstractRelic relic = relics.get(i);
-            String firstName = relic.getName();
+            AbstractCard firstHandCard = deck.getCard(i);
+            String firstName = firstHandCard.getName();
             firstName = firstName + ".png";
 
             Rectangle rect2 = new Rectangle();
-            System.out.println("NAME IS " + firstName);
             rect2.setFill(new ImagePattern(new Image(firstName)));
 
-            rect2.setWidth(width/10);
-            rect2.setHeight(height/4);
+            rect2.setWidth(width / 12);
+            rect2.setHeight(height / 4);
 
 
             int finalI = i;
             rect2.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
-
-                    System.out.println("ASCENDING CALLED IN TREASSURE");
-                    game.getPlayer().relics.add(relic);
+                    if(deck.getCard(finalI).isUpgradable())
+                   deck.getCard(finalI).upgrade();
                     game.getDungeon().ascend();
 
                 }
             });
 
-            String relicDecriptionText = relic.getDescription();
-            Text relicDescription = new Text(relicDecriptionText);
-            relicDescription.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
-            TextFlow text = new TextFlow(rect2,relicDescription);
-
-            box.getChildren().add(text);
+            box.getChildren().add(rect2);
 
 
         }
-
-
-        box.getChildren().add(goldflow);
         root.getChildren().add(box);
-
     }
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image("Treasure.png"));
+        ImageView imageView = new ImageView(new Image("CampFire.png"));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         root.getChildren().add(imageView);
     }
-
     public void draw()
     {
 
     }
-
 }

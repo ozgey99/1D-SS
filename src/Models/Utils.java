@@ -47,12 +47,12 @@ public class Utils {
         return res;
     }
 
-    public static ArrayList<AbstractRelic> getIroncladRelics(){
+
+    public static ArrayList<AbstractRelic> getAllRelics() {
         ArrayList<AbstractRelic> r = new ArrayList<>();
         r.add(new Anchor());
         r.add(new BagOfMarbles());
         r.add(new BloodVial());
-        r.add(new BurningBlood());
         r.add(new HappyFlower());
         r.add(new Lantern());
         r.add(new Vajra());

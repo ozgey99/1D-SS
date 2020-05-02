@@ -65,6 +65,28 @@ public class UpperPane extends GridPane {
         energyText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
         box.getChildren().addAll(healthText,blockText,goldText,energyText);
+
+        String relicsT = new String();
+        relicsT = "Your relics are ";
+        for(int i = 0; i <  game.getPlayer().relics.size();i++) {
+            relicsT = relicsT + game.getPlayer().relics.get(i).getName() + " ";
+
+        }
+        Text text = new Text(relicsT);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        box.getChildren().add(text);
+
+
+        String powersT = new String();
+        powersT = "Your powers are ";
+        for(int i = 0; i <  game.getPlayer().powers.size();i++) {
+            powersT = powersT + game.getPlayer().powers.get(i).getName() + " ";
+
+        }
+        Text text2 = new Text(powersT);
+        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        box.getChildren().add(text2);
+
         this.getChildren().add(box);
 
 
@@ -96,6 +118,26 @@ public class UpperPane extends GridPane {
         box.getChildren().add(1,blockText);
         box.getChildren().add(2,goldText);
         box.getChildren().add(3,energyText);
+        String relicsT = new String();
+        relicsT = "Your relics are ";
+        for(int i = 0; i <  game.getPlayer().relics.size();i++) {
+            relicsT = relicsT + game.getPlayer().relics.get(i).getName() + " ";
+
+        }
+        Text text = new Text(relicsT);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        box.getChildren().add(text);
+
+
+        String powersT = new String();
+        powersT = "Your powers are ";
+        for(int i = 0; i <  game.getPlayer().powers.size();i++) {
+            powersT = powersT + game.getPlayer().powers.get(i).getName() + " ";
+
+        }
+        Text text2 = new Text(powersT);
+        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        box.getChildren().add(text2);
 
     }
 

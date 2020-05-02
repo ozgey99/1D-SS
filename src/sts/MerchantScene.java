@@ -39,8 +39,8 @@ import Models.Actions.RelicActions;
 
 public class MerchantScene extends RoomScene  {
     Pane pane;
-    public Upper upper;
-    public RemoveCard removeCardPane;
+    private UpperPane gridUpper;
+    RemoveCard removeCardPane;
     ArrayList<AbstractCard> cards;
     ArrayList<AbstractRelic> relics;
     ArrayList<Integer> cardPrices;
@@ -51,7 +51,7 @@ public class MerchantScene extends RoomScene  {
 
     public MerchantScene() {
         pane = new Pane();
-        upper = new Upper(width,height/15);
+        gridUpper = new UpperPane(width,height/15);
         root.setMinSize( width, height);
         removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
         removeButton = new ImageView(new Image("removeButton.png"));
@@ -77,13 +77,13 @@ public class MerchantScene extends RoomScene  {
 
     private void initializeUpper()
     {
-        upper.initialize();
-        upper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
-        upper.setBorder(new Border(new BorderStroke(Color.BLACK,
+        gridUpper.initialize();
+        gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
+        gridUpper.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        GridPane.setConstraints(upper, 0,0,1,1);
-        pane.getChildren().add(upper);
-        upper.setMinWidth(width);
+        GridPane.setConstraints(gridUpper, 0,0,1,1);
+        pane.getChildren().add(gridUpper);
+        gridUpper.setMinWidth(width);
         //gridUpper.setMinHeight(height/9);
 
     }
@@ -168,6 +168,7 @@ public class MerchantScene extends RoomScene  {
         }
         System.out.println("========INITIAL MASTER DECK=========");
 
+        cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
 
         for (int i = 0; i < cards.size(); i++){
             int price = cardPrices.get(i);
@@ -222,6 +223,7 @@ public class MerchantScene extends RoomScene  {
                     if (game.getPlayer().getGold() >= cardPrice) {
                         System.out.println("gold before: "+ game.getPlayer().getGold());
                         game.getPlayer().changeGold(-cardPrice);
+                        gridUpper.draw();
                         System.out.println("gold after :" + game.getPlayer().getGold());
                         game.getPlayer().masterDeck.addCard(cards.get(j));
                         pane.getChildren().remove(rect);
@@ -316,6 +318,7 @@ public class MerchantScene extends RoomScene  {
 
     public void shopRelics(){
         int space = width/4;
+        relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
 
         for (int i = 0; i < relics.size(); i++){
 
@@ -356,7 +359,9 @@ public class MerchantScene extends RoomScene  {
                 public void handle(MouseEvent t) {
                     System.out.println("current gold: "+ game.getPlayer().getGold());
                     if (game.getPlayer().getGold() >= relicPrices.get(j)) {
+
                         game.getPlayer().changeGold(-relicPrices.get(j));
+
                         System.out.println("gold after purchase: "+ game.getPlayer().getGold());
 
                         System.out.println("========BEFORE ADDING NEW RELIC=========");
@@ -366,6 +371,7 @@ public class MerchantScene extends RoomScene  {
                         System.out.println("========BEFORE NEW RELIC=========");
 
                         RelicActions.addRelic(game.getPlayer(),relics.get(j));
+                        gridUpper.draw();
 
                         System.out.println("========AFTER ADDING NEW RELIC=========");
                         for(int k=0; k<game.getPlayer().relics.size(); k++){

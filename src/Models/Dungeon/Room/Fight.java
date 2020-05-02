@@ -1,5 +1,6 @@
 package Models.Dungeon.Room;
 
+import Models.Actions.FightActions;
 import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
@@ -16,6 +17,10 @@ import Models.Creatures.Monsters.Temp;
 import Models.Dungeon.AbstractRoom;
 import Models.Object.AbstractPower;
 import Models.Utils;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import sts.Main;
 import Models.Object.AbstractRelic;
 import Models.Object.Powers.Strength;
@@ -44,7 +49,11 @@ public class Fight extends AbstractRoom {
     private AbstractMonster selectedMonster;
     boolean firstTime = true;
 
+
+
     private AbstractCharacter player;
+    int cardRewardAmount;
+
 
     int drawAmount;
 
@@ -99,7 +108,6 @@ public class Fight extends AbstractRoom {
         exhaust = new Deck();
 
         drawAmount = 5;
-
         turn = 1;
         game.currentScene.initialize();
 
@@ -182,12 +190,34 @@ public class Fight extends AbstractRoom {
     }
 
     private void monsterPreTurn() {
-        System.out.println("I AM IN MOSNTERPRETURN ");
+      //  ( (FightScene)(game.currentScene)).drawMonsters();
+
+        System.out.println("I AM IN MONSTERPRETURN");
+
         state = FightState.MONSTERPRETURN;
         for (AbstractMonster m : monsters) {
             m.resetBlock();
             PowerActions.turnEndDecrease(m);
         }
+
+        for (AbstractMonster m : monsters) {
+            ArrayList<AbstractPower> temp = new ArrayList<>(m.powers);
+
+
+
+            for (AbstractPower p : temp) {
+                p.onTurnStart(this);
+                p.onTurnStart(m);
+            }
+        }
+        //for(AbstractMonster m : monsters)
+        //{
+         //   for(int r = 0; r < m.powers.size();r++)
+           // {
+             //   System.out.println("MONSTER POWR IS " + m.powers.get(r).getName() + " " + m.powers.get(r).getAmount());
+          //  }
+         //}
+
         nextState();
 
     }
@@ -199,6 +229,8 @@ public class Fight extends AbstractRoom {
             }
         }
 */
+        //( (FightScene)(game.currentScene)).drawMonsters();
+
         System.out.println("I AM IN MOSNTERTURN");
         state = FightState.MONSTERTURN;
         for (AbstractMonster m : monsters) {
@@ -206,25 +238,42 @@ public class Fight extends AbstractRoom {
         }
 
         if (player.getCurrentHP() <= 0) done = true;
+        //( (FightScene)(game.currentScene)).drawMonsters();
+
         nextState();
     }
 
     private void monsterPostTurn() {
         System.out.println("I AM IN MONSTERPOSTTURN");
         state = FightState.MONSTERPOSTTURN;
+        for (AbstractMonster m : monsters) {
+            ArrayList<AbstractPower> temp = new ArrayList<>(m.powers);
+
+            for (AbstractPower p : temp) {
+                p.onTurnEnd(m);
+            }
+        }
         nextState();
 
     }
 
 
     private void postFight() {
-
         System.out.println("I AM IN POSTFIGHT");
+
         state = FightState.POSTFIGHT;
         player.changeGold(goldAmount);
         for (AbstractRelic r : player.relics) {
             r.onFightEnd(player);
         }
+
+
+        ArrayList<AbstractPower> temp = new ArrayList<>(player.powers);
+
+        for (AbstractPower p : temp) {
+            p.onFightEnd(player);
+        }
+
         nextState();
     }
 
@@ -243,12 +292,11 @@ public class Fight extends AbstractRoom {
     }
 
     private void generateRewards() {
-        cardRewards = new ArrayList<>();
-        /*ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
+        ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
+
         Collections.shuffle(allCards);
-        cardRewards.add(allCards.get(0));
-        cardRewards.add(allCards.get(1));
-        cardRewards.add(allCards.get(2));*/
+        for (int i = 0; i < cardRewardAmount; i++)
+            cardRewards.add(allCards.get(i));
 
         goldAmount = (int) (Math.random() * 100) + 10;
     }

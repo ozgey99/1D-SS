@@ -21,7 +21,7 @@ public abstract class RoomScene extends Scene {
     public RoomScene(){
         super(new StackPane());
         this.root = (StackPane) this.getRoot();
-        addBackground();
+        //addBackground();
     }
     public abstract void draw();
     public abstract void initialize();

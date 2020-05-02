@@ -5,6 +5,7 @@ import Models.Creatures.AbstractCreature;
 import Models.Object.AbstractPower;
 
 public class Ritual extends AbstractPower {
+
     public Ritual() {
         name = "Ritual";
         description = "At the end of its turn gain 1 strength.";
@@ -25,11 +26,14 @@ public class Ritual extends AbstractPower {
         copy.amount = this.amount;
         return copy;
     }
+
     @Override
-    public void onTurnStart(AbstractCreature c) {
+    public void onTurnEnd(AbstractCreature c) {
+
         Strength s = new Strength();
         s.stack(amount - 1);
 
         PowerActions.addPower(c, s);
+
     }
 }
