@@ -26,7 +26,6 @@ public abstract class RoomScene extends Scene {
     public abstract void draw();
     public abstract void initialize();
 
-
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("background1.jpg"));
         imageView.setFitWidth(width);

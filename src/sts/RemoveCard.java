@@ -34,10 +34,13 @@ public class RemoveCard extends StackPane {
     public RemoveCard(int width, int height){
         this.width = width;
         this.height = height;
+        int padX = width*3/2;
+        int padY = height*9/6;
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
         vbox = new VBox(10);
-        vbox.setPadding(new Insets(150,400,100,250));
+        vbox.setPadding(new Insets(padX/9,padY/3,height/7,padX/5));
+        //vbox.setPadding(new Insets(150,400,100,250));
         this.setMinSize( width, height);
         this.getChildren().add(back);
         this.getChildren().add(pane);
@@ -58,9 +61,9 @@ public class RemoveCard extends StackPane {
         int size = game.getPlayer().masterDeck.getSize();
 
         for (int i = 0; i < size; i++){
-            HBox hbox = new HBox(); // ilk row last column'a üst üste iki tane ekliyor
+            HBox hbox = new HBox();
             hbox.getChildren().clear();
-            for(int count = 0; count < 4; count++ ){
+            for(int count = 0; count < 7; count++ ){
                 String name = game.getPlayer().masterDeck.getCard(i).getName();
                 System.out.println(name);
                 name = name + ".png";
@@ -118,6 +121,7 @@ public class RemoveCard extends StackPane {
                 });
 
                 hbox.getChildren().add(rect);
+                if(count != 6)
                 i++;
                 if(i == size)
                     break;

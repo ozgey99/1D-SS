@@ -3,7 +3,10 @@ package sts;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -22,9 +25,13 @@ public class UpperPane extends GridPane {
     Text blockText;
     Text energyText;
     int space;
-    VBox box;
-
-
+    HBox box;
+    HBox box1;
+    HBox block;
+    HBox box2;
+    HBox box3;
+    HBox box4;
+    HBox energy;
 
     public UpperPane(int width,int height)
     {
@@ -35,7 +42,13 @@ public class UpperPane extends GridPane {
         blockText = new Text();
         energyText = new Text();
         space = 800;
-        box = new VBox();
+        box = new HBox(70);
+        box1 = new HBox();
+        block = new HBox();
+        box2 = new HBox();
+        box3 = new HBox(5);
+        box4 = new HBox(5);
+        energy = new HBox();
         //addBackground();
     }
     private void addBackground() {
@@ -47,46 +60,60 @@ public class UpperPane extends GridPane {
     }
     public void initialize()
     {
-
-
-        healthText.setText("Your health: " + game.getPlayer().getCurrentHP());
+        // box 1
+        healthText.setText(game.getPlayer().getCurrentHP()+ " / "+ game.getPlayer().getMaxHP());
         healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        healthText.setFill(Color.RED);
+        ImageView heart = new ImageView(new Image("heart.png"));
+        heart.setFitWidth(40);
+        heart.setFitHeight(40);
+        heart.setVisible(true);
+        heart.setPreserveRatio(true);
+        box1.getChildren().addAll(heart, healthText);
 
-
+        // block box
         blockText.setText("Your block: " + game.getPlayer().getBlock());
         blockText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        block.getChildren().add(blockText);
 
-
-        goldText.setText("Your gold is: " + game.getPlayer().getGold());
+        // box 2
+        goldText.setText("" + game.getPlayer().getGold());
         goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        ImageView gold = new ImageView(new Image("gold.png"));
+        gold.setFitWidth(40);
+        gold.setFitHeight(40);
+        gold.setVisible(true);
+        gold.setPreserveRatio(true);
+        box2.getChildren().addAll(gold, goldText);
 
-
+        // energy box
         energyText.setText("Your enery is: " + game.getPlayer().currentEnergy);
         energyText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        energy.getChildren().add(energyText);
 
-        box.getChildren().addAll(healthText,blockText,goldText,energyText);
-
-        String relicsT = new String();
-        relicsT = "Your relics are ";
-        for(int i = 0; i <  game.getPlayer().relics.size();i++) {
-            relicsT = relicsT + game.getPlayer().relics.get(i).getName() + " ";
-
+        // box 3
+        for(int i=0; i< game.getPlayer().relics.size(); i++){
+            String name = game.getPlayer().relics.get(i).getName();
+            System.out.println(name);
+            name = name + ".png";
+            ImageView relicImage = new ImageView(new Image(name));
+            relicImage.setPreserveRatio(true);
+            relicImage.setFitHeight(30);
+            box3.getChildren().add(relicImage);
         }
-        Text text = new Text(relicsT);
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        box.getChildren().add(text);
 
-
-        String powersT = new String();
-        powersT = "Your powers are ";
-        for(int i = 0; i <  game.getPlayer().powers.size();i++) {
-            powersT = powersT + game.getPlayer().powers.get(i).getName() + " ";
-
+        // box 4
+        for(int i=0; i< game.getPlayer().powers.size(); i++){
+            String name = game.getPlayer().powers.get(i).getName();
+            System.out.println(name);
+            name = name + ".png";
+            ImageView powerImage = new ImageView(new Image(name));
+            powerImage.setPreserveRatio(true);
+            powerImage.setFitHeight(30);
+            box4.getChildren().add(powerImage);
         }
-        Text text2 = new Text(powersT);
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        box.getChildren().add(text2);
 
+        box.getChildren().addAll(box1,block,energy,box2,box3,box4);
         this.getChildren().add(box);
 
 
@@ -96,49 +123,71 @@ public class UpperPane extends GridPane {
 
         box.getChildren().clear();
         box.getChildren().removeAll();
+        box1.getChildren().clear();
+        box1.getChildren().removeAll();
+        block.getChildren().removeAll();
+        block.getChildren().clear();
+        box2.getChildren().removeAll();
+        box2.getChildren().clear();
+        box3.getChildren().removeAll();
+        box3.getChildren().clear();
+        box4.getChildren().removeAll();
+        energy.getChildren().clear();
+        energy.getChildren().removeAll();
 
-
-        healthText.setText("Your health: " + game.getPlayer().getCurrentHP());
+        // box 1
+        healthText.setText(game.getPlayer().getCurrentHP()+ " / "+ game.getPlayer().getMaxHP());
         healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        healthText.setFill(Color.RED);
+        ImageView heart = new ImageView(new Image("heart.png"));
+        heart.setFitWidth(40);
+        heart.setFitHeight(40);
+        heart.setVisible(true);
+        heart.setPreserveRatio(true);
+        box1.getChildren().addAll(heart, healthText);
 
-
+        // block box
         blockText.setText("Your block: " + game.getPlayer().getBlock());
         blockText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        block.getChildren().add(blockText);
 
-
-        goldText.setText("Your gold is: " + game.getPlayer().getGold());
+        // box 2
+        goldText.setText("" + game.getPlayer().getGold());
         goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        ImageView gold = new ImageView(new Image("gold.png"));
+        gold.setFitWidth(40);
+        gold.setFitHeight(40);
+        gold.setVisible(true);
+        gold.setPreserveRatio(true);
+        box2.getChildren().addAll(gold, goldText);
 
-
+        // energy box
         energyText.setText("Your enery is: " + game.getPlayer().currentEnergy);
         energyText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        energy.getChildren().add(energyText);
 
-
-        box.getChildren().add(0,healthText);
-        box.getChildren().add(1,blockText);
-        box.getChildren().add(2,goldText);
-        box.getChildren().add(3,energyText);
-        String relicsT = new String();
-        relicsT = "Your relics are ";
-        for(int i = 0; i <  game.getPlayer().relics.size();i++) {
-            relicsT = relicsT + game.getPlayer().relics.get(i).getName() + " ";
-
+        // box 3
+        for(int i=0; i< game.getPlayer().relics.size(); i++){
+            String name = game.getPlayer().relics.get(i).getName();
+            System.out.println(name);
+            name = name + ".png";
+            ImageView relicImage = new ImageView(new Image(name));
+            relicImage.setPreserveRatio(true);
+            relicImage.setFitHeight(30);
+            box3.getChildren().add(relicImage);
         }
-        Text text = new Text(relicsT);
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        box.getChildren().add(text);
 
-
-        String powersT = new String();
-        powersT = "Your powers are ";
-        for(int i = 0; i <  game.getPlayer().powers.size();i++) {
-            powersT = powersT + game.getPlayer().powers.get(i).getName() + " ";
-
+        // box 4
+        for(int i=0; i< game.getPlayer().powers.size(); i++){
+            String name = game.getPlayer().powers.get(i).getName();
+            System.out.println(name);
+            name = name + ".png";
+            ImageView powerImage = new ImageView(new Image(name));
+            powerImage.setPreserveRatio(true);
+            powerImage.setFitHeight(30);
+            box4.getChildren().add(powerImage);
         }
-        Text text2 = new Text(powersT);
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        box.getChildren().add(text2);
-
+        box.getChildren().addAll(box1,block,energy,box2,box3,box4);
     }
 
 

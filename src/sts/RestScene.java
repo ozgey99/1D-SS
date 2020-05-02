@@ -31,87 +31,130 @@ import java.util.ArrayList;
 
 import static sts.Main.game;
 public class RestScene extends RoomScene {
-
+    Pane pane;
     HBox box;
-
+    HBox options;
+    SmithPane smithPane;
+    private UpperPane gridUpper;
+    ImageView turnBack;
     public RestScene()
     {
+        pane = new Pane();
         box = new HBox();
+        options = new HBox();
+        turnBack = new ImageView(new Image("goAhead.png"));
+        turnBack.setPreserveRatio(true);
+        turnBack.setFitHeight(100);
+        int size = game.getPlayer().masterDeck.getSize();
+        int num = size/7;
+        turnBack.setX(width/5+ width/3*2); // smith pane' in sonuna ekledik ---------BUNLARI DÜZENLE
+        turnBack.setY(height/4*3);
+        gridUpper = new UpperPane(width,height/15);
+        smithPane  = new SmithPane(width/3*2 , height/9*6);
         root.setMinSize( width, height);
 
     }
 
+    private void initializeUpper()
+    {
+        gridUpper.initialize();
+        gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
+        gridUpper.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        GridPane.setConstraints(gridUpper, 0,0,1,1);
+        pane.getChildren().add(gridUpper);
+        gridUpper.setMinWidth(width);
+        //gridUpper.setMinHeight(height/9);
+
+    }
 
     public void initialize() {
+        initializeUpper();
         addBackground();
+        showOptions();
+    }
+
+    public void proceed(){
+
+        pane.getChildren().add( turnBack );
+        turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println(" you are in next scene");
+                game.getDungeon().ascend();
+            }
+        });
+    }
+
+    /*public void proceedForSmith(){
+        smithPane.pane.getChildren().add( turnBack );
+        turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                smithPane.visible(false);
+                game.getDungeon().ascend();
+            }
+        });
+    }*/
+
+    public void showOptions(){
         System.out.println("INITIALIZE IN RESTSCENE");
-        Rectangle rect1 = new Rectangle();
-        rect1.setFill(new ImagePattern(new Image("Rest.png")));
-        rect1.setWidth(width / 10);
-        rect1.setHeight(height / 4);
-        rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        int imageWidth = width / 10;
+        int imageHeight = height / 4;
+
+        ImageView rest = new ImageView(new Image("Rest.png"));
+        rest.setFitWidth(imageWidth);
+        rest.setFitHeight(imageHeight);
+        rest.setX(width/6*2);
+        rest.setY(height/3);
+        rest.setVisible(true);
+        rest.setPreserveRatio(true);
+        rest.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 {
-
-                   /* if (game.getDungeon().getCurrentRoom().getChildren() == null) {
-                        System.out.println("you win the game");
-                        rect1.setFill(new ImagePattern(new Image("win.jpg")));
-                        rect1.setHeight(height);
-                        rect1.setWidth(width);
-                    }*/
-                    // else {
-                    System.out.println("ASCENDING CALLED IN RESTSCENE");
+                    System.out.println("ASCENDING CALLED IN REST SCENE");
                     game.getPlayer().recharge();
-                    game.getDungeon().ascend();
-                    // }
+                    proceed();
+                }
+            }
+        });
+        pane.getChildren().add(rest);
 
+        ImageView smith = new ImageView(new Image("Smith.png"));
+        smith.setVisible(true);
+        smith.setPreserveRatio(true);
+        smith.setFitWidth(imageWidth);
+        smith.setFitHeight(imageHeight);
+        smith.setX(width/6*2+ imageWidth);
+        smith.setY(height/3);
+        smith.setVisible(true);
+        smith.setPreserveRatio(true);
+        smith.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                {
+                    smithPane.visible(true);
+                    smithPane.addBackground();
+                    smithPane.initialize();
+                    root.getChildren().add(smithPane);
+                    proceed();
                 }
 
             }
         });
-        box.getChildren().add(rect1);
-        Deck deck = game.getPlayer().masterDeck;
-        System.out.println("DECK SIZE IS "+ deck.getSize());
-        for (int i = 0; i < deck.getSize(); i++) {
-
-            AbstractCard firstHandCard = deck.getCard(i);
-            String firstName = firstHandCard.getName();
-            firstName = firstName + ".png";
-
-            Rectangle rect2 = new Rectangle();
-            rect2.setFill(new ImagePattern(new Image(firstName)));
-
-            rect2.setWidth(width / 12);
-            rect2.setHeight(height / 4);
-
-
-            int finalI = i;
-            rect2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent t) {
-                    if(deck.getCard(finalI).isUpgradable())
-                   deck.getCard(finalI).upgrade();
-                    game.getDungeon().ascend();
-
-                }
-            });
-
-
-            box.getChildren().add(rect2);
-
-
-        }
-        root.getChildren().add(box);
+        pane.getChildren().add(smith);
+        root.getChildren().add(pane);
     }
+
+
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image("CampFire.png"));
+        ImageView imageView = new ImageView(new Image("campFire.gif"));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         root.getChildren().add(imageView);
     }
-    public void draw()
-    {
+    public void draw() {}
 
-    }
+
 }

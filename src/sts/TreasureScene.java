@@ -24,13 +24,12 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
 import javafx.scene.text.Text;
-
+import Models.Actions.RelicActions;
 import java.util.ArrayList;
 
 import static sts.Main.game;
 
 public class TreasureScene extends RoomScene {
-
     VBox box;
     ArrayList<Rectangle> rectangles;
     ArrayList<AbstractRelic> relics;
@@ -41,27 +40,28 @@ public class TreasureScene extends RoomScene {
         rectangles = new ArrayList<>();
         box = new VBox();
         root.setMinSize( width, height);
-
-
+        //root.setAlignment(Pos.CENTER);
     }
 
     public void initialize()
     {
         addBackground();
-       initializeRectangles();
+        initializeRectangles();
     }
+
     public void initializeRectangles()
     {
         Text goldText = new Text(((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount() + "");
         goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        Rectangle rect1 = new Rectangle();
-        rect1.setFill(new ImagePattern(new Image("Gold_rest.png")));
-        rect1.setWidth(width/10);
-        rect1.setHeight(height/4);
-        TextFlow goldflow = new TextFlow(rect1,goldText);
+
+        ImageView chest = new ImageView(new Image("SmallChest.png"));
+        chest.setFitWidth(width/15);
+        chest.setVisible(true);
+        chest.setPreserveRatio(true);
+        TextFlow goldflow = new TextFlow(chest,goldText);
 
 
-        rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        chest.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 {
@@ -86,48 +86,44 @@ public class TreasureScene extends RoomScene {
 
         for (int i = 0; i < relics.size(); i++) {
 
-            AbstractRelic relic = relics.get(i);
-            String firstName = relic.getName();
-            firstName = firstName + ".png";
+            String name = relics.get(i).getName();
+            name = name + ".png";
+            ImageView relicImage = new ImageView(new Image(name));
+            relicImage.setPreserveRatio(true);
+            relicImage.setFitHeight(100);
 
-            Rectangle rect2 = new Rectangle();
-            System.out.println("NAME IS " + firstName);
-            rect2.setFill(new ImagePattern(new Image(firstName)));
-
-            rect2.setWidth(width/10);
-            rect2.setHeight(height/4);
-
+            System.out.println("NAME IS " + name);
 
             int finalI = i;
-            rect2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
 
                     System.out.println("ASCENDING CALLED IN TREASSURE");
-                    game.getPlayer().relics.add(relic);
+                    RelicActions.addRelic(game.getPlayer(),relics.get(finalI)); //game.getPlayer().relics.add(relics.get(finalI));
                     game.getDungeon().ascend();
 
                 }
             });
 
-            String relicDecriptionText = relic.getDescription();
+            String relicDecriptionText = relics.get(i).getDescription();
             Text relicDescription = new Text(relicDecriptionText);
             relicDescription.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
-            TextFlow text = new TextFlow(rect2,relicDescription);
+            TextFlow text = new TextFlow(relicImage,relicDescription);
 
             box.getChildren().add(text);
 
 
         }
 
-
         box.getChildren().add(goldflow);
         root.getChildren().add(box);
+        root.setAlignment(box, Pos.CENTER);
 
     }
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image("Treasure.png"));
+        ImageView imageView = new ImageView(new Image("treasure_back.jpg"));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         root.getChildren().add(imageView);
