@@ -173,10 +173,8 @@ public class TreasureScene extends RoomScene {
 
         g.getChildren().add(rect);
         g.getChildren().add(vbox);
-
         return g;
     }
-
 
     public void nextButton(){
         ImageView nextButton = new ImageView(new Image("nextButton.png"));
@@ -209,7 +207,6 @@ public class TreasureScene extends RoomScene {
             }
         });
     }
-
 
     public void smallChest()
     {

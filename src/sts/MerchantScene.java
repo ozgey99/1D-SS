@@ -230,7 +230,6 @@ public class MerchantScene extends RoomScene  {
                         pane.getChildren().remove(cost);
                         if(sale_added == true){
                             pane.getChildren().remove(saleText);
-                            System.out.println();
                         }
 
 
