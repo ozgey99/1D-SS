@@ -64,7 +64,6 @@ public class MerchantScene extends RoomScene  {
 
     @Override
     public void initialize(){
-
         initializeUpper();
         addBackground();
         shopCards();

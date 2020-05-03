@@ -37,13 +37,13 @@ public class Dungeon {
         currentRoom = new Merchant(m);
         game.currentScene = new MerchantScene();*/
 
-        Rest r = new Rest(null);
+        /*Rest r = new Rest(null);
         currentRoom = new Rest(r);
-        game.currentScene = new RestScene();
+        game.currentScene = new RestScene();*/
 
-        /*Treasure t = new Treasure(null);
+        Treasure t = new Treasure(null);
         currentRoom = new Treasure(t);
-        game.currentScene = new TreasureScene();*/
+        game.currentScene = new TreasureScene();
 
     }
 
