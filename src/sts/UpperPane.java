@@ -141,9 +141,14 @@ public class UpperPane extends GridPane {
         box1.getChildren().addAll(heart, healthText);
 
         // block box
-        blockText.setText("Your block: " + game.getPlayer().getBlock());
+        blockText.setText("" + game.getPlayer().getBlock());
         blockText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        block.getChildren().add(blockText);
+        ImageView blockPic = new ImageView(new Image("blockPic.png"));
+        blockPic.setFitWidth(40);
+        blockPic.setFitHeight(40);
+        blockPic.setVisible(true);
+        blockPic.setPreserveRatio(true);
+        block.getChildren().addAll(blockPic, blockText);
 
         // box 2 -- gold
         goldText.setText("" + game.getPlayer().getGold());
@@ -262,9 +267,14 @@ public class UpperPane extends GridPane {
         box1.getChildren().addAll(heart, healthText);
 
         // block box
-        blockText.setText("Your block: " + game.getPlayer().getBlock());
+        blockText.setText("" + game.getPlayer().getBlock());
         blockText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        block.getChildren().add(blockText);
+        ImageView blockPic = new ImageView(new Image("blockPic.png"));
+        blockPic.setFitWidth(40);
+        blockPic.setFitHeight(40);
+        blockPic.setVisible(true);
+        blockPic.setPreserveRatio(true);
+        block.getChildren().addAll(blockPic, blockText);
 
         // box 2 -- gold
         goldText.setText("" + game.getPlayer().getGold());

@@ -43,7 +43,7 @@ public class Main extends Application {
             new Pair<String, Runnable>("START RUN", () -> {game.start();}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene() )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> window.setScene( new MerchantScene() )),
-            new Pair<String, Runnable>("OPTIONS", () -> {startTreasure();}),
+            new Pair<String, Runnable>("OPTIONS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
 
@@ -79,11 +79,11 @@ public class Main extends Application {
         game.start();
     }*/
 
-    private void startTreasure(){
+    /*private void startTreasure(){
         game.currentScene = new TreasureScene();
         window.setScene(
                 game.currentScene); game.start();
-    }
+    }*/
 
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("hall.jpg"));

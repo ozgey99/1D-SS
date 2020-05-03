@@ -8,6 +8,8 @@ import Models.Dungeon.Room.Fight;
 import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -55,13 +57,37 @@ public class MonsterPane extends StackPane {
         this.height = height;
         // this.setMinSize( width, height);
         box = new VBox();
-        rectangleBox = new HBox();
+        rectangleBox = new HBox(20);
 
 
 
     }
 
+    static Node initializeMonsterMove(String text, int x, int y) {
+        Group g = new Group();
 
+        int len = text.length();
+
+        Rectangle rect = new Rectangle();
+        rect.setX(x);
+        rect.setY(y);
+        rect.setFill(Color.GREY);
+        rect.setStroke(Color.BLACK);
+        rect.setWidth(len*5);
+        rect.setHeight(len);
+        rect.setVisible(true);
+
+        Text relicText = new Text(text);
+        relicText.setX(x+5);
+        relicText.setY(y+13);
+        relicText.setFont(Font.font ("Verdana", 15));
+        relicText.setFill(Color.WHITE);
+
+        g.getChildren().add(rect);
+        g.getChildren().add(relicText);
+
+        return g;
+    }
 
     public void initialize()
     {
@@ -95,26 +121,46 @@ public class MonsterPane extends StackPane {
             rect1.setWidth(100);
             rect1.setHeight(100);
             rectangleBox.getChildren().add(rect1);
-            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(300), rect1);
+            int j = i + 1;
+            String s = "  Monster (" + j + ") health is " + monsters.get(i).getCurrentHP() + "\n"+
+                    "  block is " +monsters.get(i).getBlock() + "\n"+
+                    "  next move damage is " + FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage());
+            Node movement = initializeMonsterMove(s, width/4*3, height/2);
+            this.getChildren().add(movement);
+            movement.setVisible(false);
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), rect1);
             rect1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     scaleTransition.setToX(1.5f);
                     scaleTransition.setToY(1.5f);
-                    scaleTransition.setCycleCount(2);
+                    scaleTransition.setCycleCount(1);
+                    scaleTransition.setAutoReverse(true);
+                    scaleTransition.play();
+                    movement.setVisible(true);
+                }
+            });
+
+            rect1.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    movement.setVisible(false);
+                    ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), rect1);
+                    scaleTransition.setToX(1);
+                    scaleTransition.setToY(1);
                     scaleTransition.setAutoReverse(true);
                     scaleTransition.play();
                 }
             });
             int finalI = i;
             rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                                        @Override
-                                        public void handle(MouseEvent t) {
+                    @Override
+                    public void handle(MouseEvent t) {
 
-                                            ( (Fight) game.getDungeon().getCurrentRoom()).setSelectedMonster(monsters.get(finalI));
-                                        }
+                        ( (Fight) game.getDungeon().getCurrentRoom()).setSelectedMonster(monsters.get(finalI));
+                    }
 
-                                    }
+                }
             );
 
         }
@@ -144,26 +190,45 @@ public class MonsterPane extends StackPane {
             rect1.setWidth(100);
             rect1.setHeight(100);
             rectangleBox.getChildren().add(rect1);
-            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(300), rect1);
+            int j = i + 1;
+            String s = "  Monster (" + j + ") health is " + monsters.get(i).getCurrentHP() + "\n"+
+                    "  block is " +monsters.get(i).getBlock() + "\n"+
+                    "  next move damage is " + FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage());
+            Node movement = initializeMonsterMove(s, width/4*3, height/2);
+            this.getChildren().add(movement);
+            movement.setVisible(false);
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), rect1);
             rect1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     scaleTransition.setToX(1.5f);
                     scaleTransition.setToY(1.5f);
-                    scaleTransition.setCycleCount(2);
+                    scaleTransition.setCycleCount(1);
+                    scaleTransition.setAutoReverse(true);
+                    scaleTransition.play();
+                    movement.setVisible(true);
+                }
+            });
+            rect1.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    movement.setVisible(false);
+                    ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), rect1);
+                    scaleTransition.setToX(1);
+                    scaleTransition.setToY(1);
                     scaleTransition.setAutoReverse(true);
                     scaleTransition.play();
                 }
             });
             int finalI = i;
             rect1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                                        @Override
-                                        public void handle(MouseEvent t) {
+                    @Override
+                    public void handle(MouseEvent t) {
 
-                                            ( (Fight) game.getDungeon().getCurrentRoom()).setSelectedMonster(monsters.get(finalI));
-                                        }
+                        ( (Fight) game.getDungeon().getCurrentRoom()).setSelectedMonster(monsters.get(finalI));
+                    }
 
-                                    }
+                }
             );
 
         }
@@ -202,7 +267,6 @@ public class MonsterPane extends StackPane {
             for(int r = 0; r < monsters.get(i).powers.size();r++)
             {
                 System.out.println("MONSTER POWR IS " + monsters.get(i).powers.get(r).getName() + " " + monsters.get(i).powers.get(r).getAmount());
-
             }*/
             box.getChildren().add(i,text);
             text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
