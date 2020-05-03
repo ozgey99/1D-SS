@@ -20,9 +20,7 @@ public class Game {
     }
 
     public void start() {
-
         dungeon.getCurrentRoom().start();
-
     }
 
     public Dungeon getDungeon() {

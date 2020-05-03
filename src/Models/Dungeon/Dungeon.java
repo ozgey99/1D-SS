@@ -86,6 +86,8 @@ public class Dungeon {
 
         Fight beginningFight = new Fight(c, false, false);
 
+        currentRoom = beginningFight;
+
         game.currentScene = new FightScene();
     }
 

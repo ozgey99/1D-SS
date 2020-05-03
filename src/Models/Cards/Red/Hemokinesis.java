@@ -22,6 +22,7 @@ public class Hemokinesis extends AbstractCard {
         usable = true;
         upgradable = true;
         HPdecrease = 3;
+        baseAttr = new BaseCardAttributes();
         baseAttr.damage = 14;
         cost = 1;
     }
