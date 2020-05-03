@@ -127,7 +127,7 @@ public class TreasureScene extends RoomScene {
 
     }
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image("Treasure.png"));
+        ImageView imageView = new ImageView(new Image("Anchor.png")); //fix this
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         root.getChildren().add(imageView);
