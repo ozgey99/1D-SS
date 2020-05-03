@@ -1,23 +1,12 @@
 package sts;
 
 import Models.Cards.AbstractCard;
-import Models.Dungeon.Room.Fight;
 import Models.Dungeon.Room.Treasure;
-import Models.Game;
 import Models.Object.AbstractRelic;
-import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.NodeOrientation;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,8 +17,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
 import javafx.scene.text.Text;
 import Models.Actions.RelicActions;
-import javafx.util.Duration;
-import Models.Dungeon.Room.Treasure;
 
 import java.util.ArrayList;
 
@@ -37,33 +24,22 @@ import static sts.Main.game;
 
 public class TreasureScene extends RoomScene {
 
-    Pane pane;
-    ImageView chest;
     private UpperPane gridUpper;
     ArrayList<Rectangle> rectangles;
     ArrayList<AbstractRelic> relics;
-    static boolean chosen;
+    ImageView chest;
+    ImageView tick;
+    Pane pane;
     Node rect;
-    ImageView turnBack;
 
     public TreasureScene()
     {
-        turnBack = new ImageView(new Image("goAhead.png"));
-        turnBack.setPreserveRatio(true);
-        turnBack.setFitHeight(100);
-        turnBack.setX(width/5+ width/3*2);
-        turnBack.setY(height/4*3);
+        tick = new ImageView(new Image("tick.png"));
+        chest = new ImageView(new Image("SmallChest.png"));
         pane = new Pane();
         relics = new ArrayList<>();
         rectangles = new ArrayList<>();
         gridUpper = new UpperPane(width,height/15);
-        chest = new ImageView(new Image("SmallChest.png"));
-        chest.setFitWidth(width/8);
-        chest.setX(width/2-width/8);
-        chest.setY(height/3*2);
-        chest.setVisible(true);
-        chest.setPreserveRatio(true);
-        chosen = false;
         rect = rewards(width, height);
         root.setMinSize( width, height);
     }
@@ -92,12 +68,13 @@ public class TreasureScene extends RoomScene {
         Group g = new Group();
         VBox vbox = new VBox(10);
 
+        // gold reward
         HBox box1 = new HBox();
         Text goldText = new Text();
         int gold = ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount();
-        goldText.setText("   "+gold + " gold");
+        goldText.setText(gold + " gold");
         goldText.setFill(Color.WHITE);
-        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 10));
+        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         ImageView goldImage = new ImageView(new Image("gold.png"));
         goldImage.setFitWidth(40);
         goldImage.setFitHeight(40);
@@ -107,51 +84,81 @@ public class TreasureScene extends RoomScene {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 game.getPlayer().changeGold(((Treasure) game.getDungeon().getCurrentRoom()).getGoldAmount());
-                chosen = true;
+                goldImage.setVisible(false);
+                goldText.setVisible(false);
             }
         });
         box1.getChildren().addAll(goldImage, goldText);
         vbox.getChildren().add(box1);
 
 
-        // 3 tane aynı şey ekleniyor ????????
+        // relic reward
+        HBox box2 = new HBox();
         ArrayList<AbstractRelic> relics = ((Treasure)game.getDungeon().getCurrentRoom()).getRelics();
-        int relicsSize = relics.size();
-        System.out.println("relix size: "+ relicsSize);
-        for(int i=0; i< relicsSize; i++){
-            String name = relics.get(i).getName();
-            System.out.println(name);
-            name = name + ".png";
-            ImageView relicImage = new ImageView(new Image(name));
-            relicImage.setPreserveRatio(true);
-            relicImage.setFitHeight(50);
-            vbox.getChildren().add(relicImage);
-            int j = i;
-            relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    RelicActions.addRelic(game.getPlayer(),relics.get(j));
-                }
-            });
-        }
+        String desc = relics.get(0).getDescription();
+        String s = "get a relic";
+        Text relicText = new Text(s);
 
-        // 3 tane aynı şey ekleniyor listeye ???????
-        ArrayList<AbstractCard> cards = ((Treasure)game.getDungeon().getCurrentRoom()).getCards();
-        System.out.println("card size: "+ cards.size());
-        Group textGroup = new Group();
-        String label = "add a card to your deck";
-        Text text = new Text(label);
-        Rectangle textRect = new Rectangle();
-        textRect.setWidth(label.length());
-        textRect.setHeight(5);
-        textGroup.getChildren().addAll(textRect, text);
-        vbox.getChildren().add(textGroup);
-        /*textGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        String name = relics.get(0).getName();
+        Text relicDesc = new Text();
+        relicDesc.setText(name+" : "+ desc);
+        relicDesc.setFill(Color.WHITE);
+        relicDesc.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 10));
+        vbox.getChildren().add(relicText);
+        relicText.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                String name = relics.get(0).getName();
+                name = name + ".png";
+                ImageView relicImage = new ImageView(new Image(name));
+                relicImage.setPreserveRatio(true);
+                relicImage.setFitHeight(100);
+                //relicImage.setX(x/2-90);
+                //relicImage.setY(y/2-140);
+                box2.setPadding(new Insets(y/2,100, 100, x/2-90 ));
+                box2.getChildren().addAll(relicImage, relicDesc);
+                g.getChildren().add(box2);
+                relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        RelicActions.addRelic(game.getPlayer(),relics.get(0));
+                        relicImage.setVisible(false);
+                        relicText.setDisable(true);
+                        relicDesc.setVisible(false);
+                    }
+                });
 
             }
-        });*/
+        });
+
+        // card reward
+        Rectangle cardRect = new Rectangle();
+        ArrayList<AbstractCard> cards = ((Treasure)game.getDungeon().getCurrentRoom()).getCards();
+        String label = "add a card to your deck";
+        Text text = new Text(label);
+        vbox.getChildren().add(text);
+        text.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                String name = cards.get(0).getName();
+                name = name + ".png";
+                cardRect.setX(x/2-90);
+                cardRect.setY(y/2-140);
+                cardRect.setFill(new ImagePattern(new Image(name)));
+                cardRect.setWidth(200); // proportional yap
+                cardRect.setHeight(250); //
+                cardRect.setVisible(true);
+                g.getChildren().add(cardRect);
+                cardRect.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        game.getPlayer().masterDeck.addCard(cards.get(0));
+                        cardRect.setVisible(false);
+                        text.setDisable(true);
+                    }
+                });
+            }
+        });
 
         Rectangle rect = new Rectangle();
         rect.setX(x/2-100);
@@ -161,19 +168,8 @@ public class TreasureScene extends RoomScene {
         rect.setWidth(200); // proportional yap
         rect.setHeight(300); //
         rect.setVisible(true);
-        vbox.setPadding(new Insets(y/2-155,100, 100, x/2-105));
-        /*ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(300), rect);
-        scaleTransition.setToX(1.5f);
-        scaleTransition.setToY(1.5f);
-        scaleTransition.setCycleCount(1);
-        scaleTransition.setAutoReverse(true);
-        scaleTransition.play();
 
-        Text relicText = new Text(desc);
-        relicText.setX(x+5);
-        relicText.setY(y+13);
-        relicText.setFont(Font.font ("Verdana", 10));
-        relicText.setFill(Color.WHITE);*/
+        vbox.setPadding(new Insets(y/2-130,100, 100, x/2-90));
 
         g.getChildren().add(rect);
         g.getChildren().add(vbox);
@@ -181,14 +177,35 @@ public class TreasureScene extends RoomScene {
         return g;
     }
 
-    public void delete(){
 
-        pane.getChildren().add( turnBack );
-        turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    public void nextButton(){
+        ImageView nextButton = new ImageView(new Image("nextButton.png"));
+        nextButton.setPreserveRatio(true);
+        nextButton.setFitHeight(50);
+        nextButton.setX(width-400);
+        nextButton.setY(height/7*5);
+        pane.getChildren().add( nextButton );
+        nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                game.getDungeon().ascend();
+            }
+        });
+    }
+
+    public void chosen(){
+        tick.setPreserveRatio(true);
+        tick.setFitHeight(75);
+        tick.setX(width/2); //tick.setX(width/2-100+100); // x of node
+        tick.setY(height/2+60); //tick.setY(height/2-140+200);
+        pane.getChildren().add( tick );
+        tick.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 rect.setVisible(false);
+                tick.setVisible(false);
                 draw();
+                nextButton();
             }
         });
     }
@@ -196,53 +213,24 @@ public class TreasureScene extends RoomScene {
 
     public void smallChest()
     {
+        chest.setFitWidth(width/8);
+        chest.setX(width/2-width/8);
+        chest.setY(height/3*2);
+        chest.setVisible(true);
+        chest.setPreserveRatio(true);
         chest.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 {
                     System.out.println("ASCENDING CALLED IN TREASURE SCENE");
                     pane.getChildren().add(rect);
-                    delete();
+                    chosen();
                     chest.setDisable(true);
                 }
 
             }
         });
-
         pane.getChildren().add(chest);
-
-        /*relics = ((Treasure)game.getDungeon().getCurrentRoom()).getRelics();
-
-        for (int i = 0; i < relics.size(); i++) {
-
-            String name = relics.get(i).getName();
-            name = name + ".png";
-            ImageView relicImage = new ImageView(new Image(name));
-            relicImage.setPreserveRatio(true);
-            relicImage.setFitHeight(100);
-
-            int finalI = i;
-            relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent t) {
-
-                    System.out.println("ASCENDING CALLED IN TREASSURE");
-                    RelicActions.addRelic(game.getPlayer(),relics.get(finalI)); //game.getPlayer().relics.add(relics.get(finalI));
-                    game.getDungeon().ascend();
-
-                }
-            });
-
-            String relicDecriptionText = relics.get(i).getDescription();
-            Text relicDescription = new Text(relicDecriptionText);
-            relicDescription.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-
-            TextFlow text = new TextFlow(relicImage,relicDescription);
-
-            box.getChildren().add(text);
-
-
-        }*/
 
     }
 
