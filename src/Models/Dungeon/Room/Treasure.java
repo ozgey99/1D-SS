@@ -6,12 +6,14 @@ import Models.Dungeon.AbstractRoom;
 import Models.Object.AbstractRelic;
 import Models.Object.Relics.BloodVial;
 import Models.TextBasedUI;
+import Models.Utils;
 import sts.FightScene;
 import sts.Main;
 import sts.TreasureScene;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static sts.Main.game;
 
@@ -28,7 +30,15 @@ public class Treasure extends AbstractRoom {
     }
 
     private void generate() {
-        relics.add(new BloodVial());
+        ArrayList<AbstractRelic> allRelics = Utils.getAllRelics();
+        Collections.shuffle(allRelics);
+        for (AbstractRelic r : allRelics) {
+            if (!Utils.containsInstance(Main.game.getPlayer().relics, r.getClass())) {
+                relics.add(r);
+                break;
+            }
+        }
+
         goldAmount = (int) (Math.random() * 100) + 10;
     }
 
@@ -55,8 +65,9 @@ public class Treasure extends AbstractRoom {
     }
 
     @Override
+
     public ArrayList<AbstractRoom> getChildren() {
-        return null;
+        return children;
     }
 
     @Override

@@ -12,7 +12,7 @@ public class PowerActions {
         if (p == null) {
             to.powers.add(power);
         } else {
-            p.stack(power.getAmount() - 1);
+            p.stack(power.getAmount());
         }
     }
 

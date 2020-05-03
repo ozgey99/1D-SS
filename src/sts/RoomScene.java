@@ -13,12 +13,15 @@ public abstract class RoomScene extends Scene {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     protected int width = screenSize.width;
     protected int height = screenSize.height;
+
+    /*protected int width = 1300;
+    protected int height = 700;*/
     StackPane root;
 
     public RoomScene(){
         super(new StackPane());
         this.root = (StackPane) this.getRoot();
-        addBackground();
+        //addBackground();
     }
     public abstract void draw();
     public abstract void initialize();

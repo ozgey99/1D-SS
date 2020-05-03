@@ -5,9 +5,6 @@ import Models.Dungeon.Room.Merchant;
 import Models.Dungeon.Room.Rest;
 import Models.Dungeon.Room.Treasure;
 import sts.FightScene;
-import sts.RoomScene;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static sts.Main.game;
@@ -105,7 +102,10 @@ public class Dungeon {
 
     public boolean ascend() {
 
-        if (this.currentRoom.getChildren() == null) return false;
+        if (this.currentRoom.getChildren() == null) {
+            System.out.println("ASCEND RETURN FALSE");
+            return false;
+        }
         System.out.println("ASCEND IN");
         this.currentRoom = this.currentRoom.getChildren().get(0); //change this to input from user
         this.currentRoom.start();

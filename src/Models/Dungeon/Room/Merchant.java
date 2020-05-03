@@ -6,12 +6,15 @@ import Models.Cards.CardColor;
 import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.AbstractRoom;
 import Models.Object.AbstractRelic;
-import Models.TextBasedUI;
 import Models.Utils;
 import sts.Main;
+import sts.MerchantScene;
+
 
 
 import java.util.ArrayList;
+
+import static sts.Main.game;
 
 public class Merchant extends AbstractRoom {
     ArrayList<AbstractCard> cards;
@@ -38,66 +41,59 @@ public class Merchant extends AbstractRoom {
         cardPrices.add((int) (Math.random() * 250));
         allCards.remove(index);
 
-        while (cards.size() != 4) {
+        while (cards.size() != 5 ) {
             index = (int) (Math.random() * (allCards.size() - 1));
             cards.add(allCards.get(index));
             cardPrices.add((int) (Math.random() * 250));
         }
 
-        ArrayList<AbstractRelic> allRelics = Utils.getIroncladRelics();
-        int ind = (int) (Math.random() * (allRelics.size() - 1));
-        relics.add(allRelics.get(ind));
+        ArrayList<AbstractRelic> allRelics = Utils.getAllRelics();
 
-        switch (allRelics.get(ind).getRarity()){
-            case BOSS:
-                relicPrices.add((int) (Math.random() * 450));
-            case RARE:
-                relicPrices.add((int) (Math.random() * 400));
-            case SHOP:
-                relicPrices.add((int) (Math.random() * 350));
-            case EVENT:
-                relicPrices.add((int) (Math.random() * 350));
-            case COMMON:
-                relicPrices.add((int) (Math.random() * 200));
-            case SPECIAL:
-                relicPrices.add((int) (Math.random() * 550));
-            case STARTER:
-                relicPrices.add((int) (Math.random() * 150));
-            case UNCOMMON:
-                relicPrices.add((int) (Math.random() * 300));
-        }
-
-        allRelics.remove(ind);
 
         while (relics.size() != 4) {
-            ind = (int) (Math.random() * (allRelics.size() - 1));
+            int ind = (int) (Math.random() * (allRelics.size() - 1));
             relics.add(allRelics.get(ind));
+            allRelics.remove(ind);
             switch (allRelics.get(ind).getRarity()){
                 case BOSS:
                     relicPrices.add((int) (Math.random() * 450));
+                    break;
                 case RARE:
                     relicPrices.add((int) (Math.random() * 400));
+                    break;
                 case SHOP:
-                    relicPrices.add((int) (Math.random() * 350));
                 case EVENT:
                     relicPrices.add((int) (Math.random() * 350));
+                    break;
                 case COMMON:
                     relicPrices.add((int) (Math.random() * 200));
+                    break;
                 case SPECIAL:
                     relicPrices.add((int) (Math.random() * 550));
+                    break;
                 case STARTER:
                     relicPrices.add((int) (Math.random() * 150));
+                    break;
                 case UNCOMMON:
                     relicPrices.add((int) (Math.random() * 300));
+                    break;
             }
         }
 
     }
 
+
     @Override
     public void start() {
-        AbstractCharacter player = Main.game.getPlayer();
+        game.currentScene = new MerchantScene();
+        Main.window.setScene(
+                game.currentScene);
 
+        game.currentScene.initialize();
+        System.out.println(" I AM IN MERCHANT ROOM");
+        /*AbstractCharacter player = Main.game.getPlayer();
+        game.currentScene.initialize();
+        System.out.println(" I AM IN MERCHANT ROOM");
         while (!done) {
             int max = TextBasedUI.displayMerchant(this);
             int choose = TextBasedUI.getInput(-1, max);
@@ -115,7 +111,7 @@ public class Merchant extends AbstractRoom {
             else {
                 System.out.println("You don't have enough gold to purchase this item.");
             }
-        }
+        }*/
     }
 
     @Override

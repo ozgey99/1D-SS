@@ -176,7 +176,7 @@ public class MonsterPane extends StackPane {
         {
             Text text = new Text();
             int j = i + 1;
-            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() + "next move is " + FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage()));
+            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() + "next move damage is " + FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage()));
             text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
             box.getChildren().add(text);
 
@@ -195,12 +195,21 @@ public class MonsterPane extends StackPane {
         {
             Text text = new Text();
             int j = i + 1;
-            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() + " block is " +monsters.get(i).getBlock() + "next move is " + FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage()));
+            text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() +
+                    " block is " +monsters.get(i).getBlock() + "next move damage is " +
+                    FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage()));
+/*
+            for(int r = 0; r < monsters.get(i).powers.size();r++)
+            {
+                System.out.println("MONSTER POWR IS " + monsters.get(i).powers.get(r).getName() + " " + monsters.get(i).powers.get(r).getAmount());
+
+            }*/
             box.getChildren().add(i,text);
             text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
 
 
         }
+
     }
 
 

@@ -11,7 +11,7 @@ import sts.Controller;
 public class IronWave extends AbstractCard {
 
     public IronWave(){
-        name = "Iron Wave";
+        name = "IronWave";
         description = "Gain 5(7) block. Deal 5(7) damage.";
         cost = 1;
         type = CardType.ATTACK;

@@ -4,6 +4,10 @@ import Models.Creatures.AbstractCharacter;
 import Models.Dungeon.AbstractRoom;
 import Models.TextBasedUI;
 import sts.Main;
+import sts.RestScene;
+import sts.TreasureScene;
+
+import static sts.Main.game;
 
 import java.util.ArrayList;
 
@@ -17,23 +21,12 @@ public class Rest extends AbstractRoom {
 
     @Override
     public void start() {
-        AbstractCharacter player = Main.game.getPlayer();
 
-        while (!done) {
-            TextBasedUI.displayRestRoom();
-            int in = TextBasedUI.getInput(-1, 1);
-            if (in == 0) {
-                player.changeHealth(player.getMaxHP() * 3 / 10);
-                done = true;
-            } else if (in == 1) {
-                int amount = TextBasedUI.displaySmithList(player.masterDeck);
-                int choose = TextBasedUI.getInput(-1, amount);
-                if (choose != -1) {
-                    player.masterDeck.getCard(choose).upgrade();
-                }
-                done = true;
-            }
-        }
+        game.currentScene = new RestScene();
+        Main.window.setScene(
+                game.currentScene);
+        game.currentScene.initialize();
+
     }
 
     @Override

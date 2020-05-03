@@ -18,5 +18,6 @@ public abstract class AbstractObject {
     public void onTurnStart(Fight f) {}
     public void onTurnStart(AbstractCreature c) {}
     public void onFightStart(Fight f, AbstractCharacter c) {}
+    public void onTurnEnd(AbstractCreature c) {}
     public void onFightEnd(AbstractCharacter c) {}
 }
