@@ -76,10 +76,10 @@ public class Utils {
 
     public static ArrayList<AbstractMonster> getAllNonElites(){
         ArrayList<AbstractMonster> m = new ArrayList<>();
-        //m.add(new Cultist());
-       // m.add(new GreenLouse());
+        m.add(new Cultist());
+        m.add(new GreenLouse());
         m.add(new JawWorm());
-        //m.add(new RedLouse());
+        m.add(new RedLouse());
         return m;
     }
 
