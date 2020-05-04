@@ -6,6 +6,7 @@ import Models.Dungeon.Room.Merchant;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,18 +40,42 @@ import Models.Actions.RelicActions;
 public class MerchantScene extends RoomScene  {
     Pane pane;
     private UpperPane gridUpper;
-
+    RemoveCard removeCardPane;
     ArrayList<AbstractCard> cards;
     ArrayList<AbstractRelic> relics;
     ArrayList<Integer> cardPrices;
     ArrayList<Integer> relicPrices;
-    ImageView warning;
-    boolean destroy;
+    ImageView turnBack;
+    ImageView removeButton;
+    static boolean added;
+    static int origWidth;
+    static  int origHeight;
 
     public MerchantScene() {
         pane = new Pane();
         gridUpper = new UpperPane(width,height/15);
         root.setMinSize( width, height);
+        removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
+        removeButton = new ImageView(new Image("removeButton.png"));
+        cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
+        cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
+        relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
+        relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
+        added = false;
+        origWidth = width;
+        origHeight = height;
+    }
+
+    @Override
+    public void initialize(){
+        initializeUpper();
+        addBackground();
+        shopCards();
+        shopRelics();
+        nextButton();
+        cardRemovalService();
+        root.getChildren().add(pane);
+
     }
 
     private void initializeUpper()
@@ -66,35 +91,71 @@ public class MerchantScene extends RoomScene  {
 
     }
 
-    @Override
-    public void draw() {
+    public void turnBack(){
+        turnBack = new ImageView(new Image("turnBack.png"));
+        turnBack.setPreserveRatio(true);
+        turnBack.setFitHeight(height/7); //turnBack.setFitHeight(100);
+        turnBack.setX(width/5);
+        turnBack.setY(height/4*3);
 
+        removeCardPane.pane.getChildren().add( turnBack );
+        turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                removeCardPane.visible(false);
+            }
+        });
     }
 
     @Override
-    public void initialize(){
-        cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
-        cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
-        relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
-        relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
-        warning = new ImageView(new Image("warning.png"));
-        initializeUpper();
-        addBackground();
-        shopCards();
-        shopRelics();
-        root.getChildren().add(pane);
+    public void draw() {}
+
+    public void cardRemovalService(){
+        removeButton.setPreserveRatio(true);
+        removeButton.setFitHeight(height/5); //removeButton.setFitHeight(150);
+        removeButton.setX(width/9*6);
+        removeButton.setY(height/5+height/(43/10)); //removeButton.setY(height/5+160);
+        pane.getChildren().add( removeButton );
+        removeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                removeCardPane.visible(true);
+                removeCardPane.addBackground();
+                removeCardPane.initialize();
+                if(!added){
+                    root.getChildren().add(removeCardPane);
+                    added = true;
+                }
+                turnBack();
+            }
+        });
     }
 
-    public void warning(int x, int y, boolean destroy,ImageView warning){
-        if(!destroy){
-            warning.setPreserveRatio(true);
-            warning.setX(x);
-            warning.setY(y);
-            warning.setFitWidth(100);
-            pane.getChildren().add( warning );
-        }
-        else
-            pane.getChildren().remove(warning);
+    public void nextButton(){
+        ImageView nextButton = new ImageView(new Image("nextButton.png"));
+        nextButton.setPreserveRatio(true);
+        nextButton.setFitHeight(height/14);
+        nextButton.setX(width-width/3); //nextButton.setX(width-400);
+        nextButton.setY(height/7*5);
+        pane.getChildren().add( nextButton );
+        nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                game.getDungeon().ascend();
+            }
+        });
+    }
+
+    static Node warning(int x, int y){
+        Group g = new Group();
+        ImageView warning = new ImageView(new Image("warning.png"));
+        warning.setVisible(true);
+        warning.setPreserveRatio(true);
+        warning.setX(x);
+        warning.setY(y);
+        warning.setFitWidth(origWidth/13);
+        g.getChildren().add(warning);
+        return g;
     }
 
     public void shopCards(){
@@ -119,8 +180,8 @@ public class MerchantScene extends RoomScene  {
             rect.setFill(new ImagePattern(new Image(name)));
             rect.setX(space);
             rect.setY(height/5);
-            rect.setWidth(100);
-            rect.setHeight(150);
+            rect.setWidth(width/13); // rect.setWidth(100);
+            rect.setHeight(height/(466/100)); //rect.setHeight(150);
             rect.setVisible(true);
             Text saleText = new Text("SALE");
             if(!saleAdded && rand == i ){
@@ -136,19 +197,24 @@ public class MerchantScene extends RoomScene  {
 
             ImageView cost = new ImageView(new Image("cost.png"));
             cost.setPreserveRatio(true);
-            cost.setFitHeight(40);
-            cost.setX(space+10);
-            cost.setY(height/5+140);
+            cost.setFitHeight(height/(175/10));//cost.setFitHeight(40);
+            cost.setX(space+(width/130)); //cost.setX(space+10);
+            cost.setY(height/5+height/(46/10)); //cost.setY(height/5+140);
             pane.getChildren().add(cost);
             Text text = new Text(" " +price);
-            text.setX(space+40);
-            text.setY(height/5+170);
+            text.setX(space+width/(325/10)); //text.setX(space+40);
+            text.setY(height/5+height/4); //text.setY(height/5+170);
             text.setFont(Font.font ("Verdana", 15));
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
-            int warningLocX = space;
-            int warningLocY = height/5;
+            int warningLocX = space-5;
+            int warningLocY = height/5-height/7; //int warningLocY = height/5-100;
+
+            Node warn = warning(warningLocX, warningLocY);
+            pane.getChildren().add(warn);
+            warn.setVisible(false);
+
             boolean sale_added = saleAdded;
             int cardPrice = price;
             int j = i;
@@ -167,7 +233,6 @@ public class MerchantScene extends RoomScene  {
                         pane.getChildren().remove(cost);
                         if(sale_added == true){
                             pane.getChildren().remove(saleText);
-                            System.out.println();
                         }
 
 
@@ -177,8 +242,7 @@ public class MerchantScene extends RoomScene  {
                         }
 
                     } else {
-                        destroy = false;
-                        warning(warningLocX,warningLocY,false, warning);
+                        warn.setVisible(true);
                         System.out.println("You don't have enough gold for card");
                     }
 
@@ -216,14 +280,12 @@ public class MerchantScene extends RoomScene  {
                     scaleTransition1.setToY(1);
                     scaleTransition1.setAutoReverse(true);
                     scaleTransition1.play();
-                    if(destroy == false){
-                        warning(warningLocX,warningLocY,true, warning);
-                    }
+                    warn.setVisible(false);
 
                 }
             });
 
-            space = space + 120;
+            space = space +  width/(108/10); //space = space + 120;
         }
 
     }
@@ -239,15 +301,13 @@ public class MerchantScene extends RoomScene  {
         rect.setY(y);
         rect.setFill(Color.GREY);
         rect.setStroke(Color.BLACK);
-        //rectDesc.setEffect();
         rect.setWidth(len*6);
-        rect.setHeight(20);
+        rect.setHeight(origHeight/35); //rect.setHeight(20);
         rect.setVisible(true);
 
         Text relicText = new Text(desc);
         relicText.setX(x+5);
         relicText.setY(y+13);
-        //relicText.setStroke(Color.BLACK);
         relicText.setFont(Font.font ("Verdana", 10));
         relicText.setFill(Color.WHITE);
 
@@ -256,7 +316,6 @@ public class MerchantScene extends RoomScene  {
 
         return g;
     }
-
 
     public void shopRelics(){
         int space = width/4;
@@ -270,27 +329,31 @@ public class MerchantScene extends RoomScene  {
             name = name + ".png";
             ImageView relicImage = new ImageView(new Image(name));
             relicImage.setPreserveRatio(true);
-            relicImage.setFitHeight(50);
+            relicImage.setFitHeight(height/14); //relicImage.setFitHeight(50);
             relicImage.setX(space);
-            relicImage.setY(height/5*2+100);
+            relicImage.setY(height/5*2+height/7); //relicImage.setY(height/5*2+100);
             pane.getChildren().add( relicImage );
 
             ImageView cost = new ImageView(new Image("cost.png"));
             cost.setPreserveRatio(true);
-            cost.setFitHeight(40);
+            cost.setFitHeight(height/17); //cost.setFitHeight(40);
             cost.setX(space);
-            cost.setY(height/5*2+150);
+            cost.setY(height/5*2+height/(46/10)); //cost.setY(height/5*2+150);
             pane.getChildren().add(cost);
             Text text = new Text(" " +price);
-            text.setX(space+30);
-            text.setY(height/5*2+170);
+            text.setX(space+width/43); //text.setX(space+30);
+            text.setY(height/5*2+height/4); //text.setY(height/5*2+170);
             text.setFont(Font.font ("Verdana", 15));
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
+            int warningLocX = space-width/26; //int warningLocX = space-50;
+            int warningLocY = height/5*2+5;
 
-            int warningLocX = space;
-            int warningLocY = height/5*2+100;
+            Node warn = warning(warningLocX, warningLocY);
+            pane.getChildren().add(warn);
+            warn.setVisible(false);
+
             int j = i;
             relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -320,17 +383,17 @@ public class MerchantScene extends RoomScene  {
                         pane.getChildren().remove(relicImage);
                         pane.getChildren().remove(text);
                         pane.getChildren().remove(cost);
-
-
-                    } else {
-                        destroy = false;
-                        warning(warningLocX,warningLocY,false, warning);
+                    }
+                    else {
+                        warn.setVisible(true);
                         System.out.println("You don't have enough gold for relic");
                     }
 
                 }
             });
-            Node desc = relicDescription(relics,i, space+50, height/5*2+130);
+
+            //Node desc = relicDescription(relics,i, space+50, height/5*2+130);
+            Node desc = relicDescription(relics,i, space+width/26, height/5*2+height/(53/10));
             pane.getChildren().add(desc);
             desc.setVisible(false);
             relicImage.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
@@ -367,18 +430,14 @@ public class MerchantScene extends RoomScene  {
                     scaleTransition1.setToY(1);
                     scaleTransition1.setAutoReverse(true);
                     scaleTransition1.play();
-                    if(destroy == false){ // destroy, if it is created
-                        warning(warningLocX,warningLocY,true, warning);
-                    }
-                    //pane.getChildren().remove(desc);
+                    warn.setVisible(false);
                     desc.setVisible(false);
                 }
             });
 
-            space = space + 120;
+            space = space + width/(108/10); //space = space + 120;
         }
     }
-
 
     private void addBackground() {
         ImageView back = new ImageView(new Image("back_merchant.jpg"));
@@ -386,13 +445,12 @@ public class MerchantScene extends RoomScene  {
         back.setFitHeight(height);
 
         ImageView image = new ImageView(new Image("papirus.png"));
-        image.setFitWidth(width-300);
+        image.setFitWidth(width-width/(43/10)); //image.setFitWidth(width-300);
         image.setFitHeight(height);
         root.getChildren().add(back);
         root.getChildren().add(image);
 
     }
-
 
 }
 

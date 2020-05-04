@@ -154,6 +154,7 @@ public class FightScene extends RoomScene {
 
         }
         else {
+            // get current energy
             gridUpper.draw();
             gridLeft.draw();
             gridRight.draw();

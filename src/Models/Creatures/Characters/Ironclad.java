@@ -19,7 +19,7 @@ public class Ironclad extends AbstractCharacter {
 
     @Override
     public void initialize() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             masterDeck.addCard(new Strike());
             masterDeck.addCard(new Defend());
         }

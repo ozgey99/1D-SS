@@ -79,7 +79,7 @@ public class CardPane  extends GridPane {
         space = width / 10;
         this.setMinSize(width, height);
         this.scene = scene;
-        box = new HBox();
+        box = new HBox(10);
 
     }
 
@@ -144,6 +144,7 @@ public class CardPane  extends GridPane {
 
 
                 box.getChildren().add(rect1);
+                box.setPadding(new Insets(0,0,0,50));
 
 
             }
