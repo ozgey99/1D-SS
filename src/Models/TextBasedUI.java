@@ -131,7 +131,7 @@ public class TextBasedUI {
     /*public static int displayMerchant(Merchant m) {
         int i;
         for (i = 0; i < m.getCards().size(); i++) {
-            System.out.println(m.getCards().get(i).getName() + "(" + m.getCardPrices() + " Gold)");
+            System.out.println(m.getCards().get(i).getName() + "(" + m.getCardPrices().get(i) + " Gold)");
         }
 
         return i;

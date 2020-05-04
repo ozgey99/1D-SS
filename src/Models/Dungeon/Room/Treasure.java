@@ -24,7 +24,7 @@ public class Treasure extends AbstractRoom {
     ArrayList<AbstractCard> cards;
     int goldAmount;
 
-    public Treasure(AbstractRoom c) {
+    public Treasure(ArrayList<AbstractRoom> c) {
         type = RoomType.CHEST;
         children = c;
         done = false;
@@ -81,7 +81,8 @@ public class Treasure extends AbstractRoom {
     }
 
     @Override
-    public AbstractRoom getChildren() {
+
+    public ArrayList<AbstractRoom> getChildren() {
         return children;
     }
 
