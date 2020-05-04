@@ -42,7 +42,7 @@ public class TreasureScene extends RoomScene {
         relics = new ArrayList<>();
         rectangles = new ArrayList<>();
         gridUpper = new UpperPane(width,height/15);
-        rect = rewards();
+
         root.setMinSize( width, height);
         origWidth = width;
         origHeight = height;
@@ -119,8 +119,6 @@ public class TreasureScene extends RoomScene {
                 goldImage.setDisable(true);
             }
         });
-
-
 
 
         // relic reward event listener
@@ -236,6 +234,7 @@ public class TreasureScene extends RoomScene {
         chest.setY(height/3*2);
         chest.setVisible(true);
         chest.setPreserveRatio(true);
+        rect = rewards();
         chest.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
