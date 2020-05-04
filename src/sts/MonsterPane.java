@@ -89,6 +89,7 @@ public class MonsterPane extends StackPane {
             AbstractMonster monster = monsters.get(i);
 
             String firstName = monster.getName();
+            System.out.println("Monster " + firstName);
             firstName = firstName + ".png";
             Rectangle rect1 = new Rectangle();
             rect1.setFill(new ImagePattern(new Image(firstName)));

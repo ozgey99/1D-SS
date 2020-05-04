@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GreenLouse extends AbstractMonster {
     public GreenLouse() {
-        name = "Green Louse";
+        name = "GreenLouse";
         maxHP = Utils.random(6, 11);
         currentHP = maxHP;
         initialize();

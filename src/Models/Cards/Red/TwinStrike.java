@@ -13,7 +13,7 @@ public class TwinStrike extends AbstractCard {
     private int repeat;
 
     public TwinStrike(){
-        name = "Twin Strike";
+        name = "TwinStrike";
         description = "Deal 5(7) damage twice.";
         cost = 1;
         type = CardType.ATTACK;

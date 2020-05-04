@@ -4,6 +4,7 @@ import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Models.Cards.Red.*;
 import Models.Creatures.AbstractCharacter;
+import Models.Creatures.Monsters.*;
 import Models.Object.AbstractRelic;
 import Models.Object.Relics.*;
 
@@ -58,6 +59,28 @@ public class Utils {
         r.add(new Vajra());
 
         return r;
+    }
+
+    public static ArrayList<AbstractMonster> getAllBosses(){
+        ArrayList<AbstractMonster> bosses = new ArrayList<>();
+        bosses.add(new TheGuardian());
+        return bosses;
+    }
+
+    public static ArrayList<AbstractMonster> getAllElites(){
+        ArrayList<AbstractMonster> elites = new ArrayList<>();
+        elites.add(new Sentry());
+        elites.add(new GremlinNob());
+        return elites;
+    }
+
+    public static ArrayList<AbstractMonster> getAllNonElites(){
+        ArrayList<AbstractMonster> m = new ArrayList<>();
+        //m.add(new Cultist());
+       // m.add(new GreenLouse());
+        m.add(new JawWorm());
+        //m.add(new RedLouse());
+        return m;
     }
 
 
