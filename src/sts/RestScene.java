@@ -37,18 +37,16 @@ public class RestScene extends RoomScene {
     SmithPane smithPane;
     private UpperPane gridUpper;
     ImageView turnBack;
+    ImageView rest;
+    ImageView smith;
     public RestScene()
     {
         pane = new Pane();
         box = new HBox();
         options = new HBox();
         turnBack = new ImageView(new Image("goAhead.png"));
-        turnBack.setPreserveRatio(true);
-        turnBack.setFitHeight(100);
-        int size = game.getPlayer().masterDeck.getSize();
-        int num = size/7;
-        turnBack.setX(width/5+ width/3*2); // smith pane' in sonuna ekledik ---------BUNLARI DÜZENLE
-        turnBack.setY(height/4*3);
+        rest = new ImageView(new Image("Rest.png"));
+        smith = new ImageView(new Image("Smith.png"));
         gridUpper = new UpperPane(width,height/15);
         smithPane  = new SmithPane(width/3*2 , height/9*6);
         root.setMinSize( width, height);
@@ -72,10 +70,16 @@ public class RestScene extends RoomScene {
         initializeUpper();
         addBackground();
         showOptions();
+        pane.getChildren().add(rest);
+        pane.getChildren().add(smith);
+        root.getChildren().add(pane);
     }
 
     public void proceed(){
-
+        turnBack.setPreserveRatio(true);
+        turnBack.setFitHeight(height/7);
+        turnBack.setX(width/5+ width/3*2);
+        turnBack.setY(height/4*3);
         pane.getChildren().add( turnBack );
         turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -98,11 +102,10 @@ public class RestScene extends RoomScene {
     }*/
 
     public void showOptions(){
-        System.out.println("INITIALIZE IN RESTSCENE");
+        System.out.println("INITIALIZE IN REST SCENE");
         int imageWidth = width / 10;
         int imageHeight = height / 4;
 
-        ImageView rest = new ImageView(new Image("Rest.png"));
         rest.setFitWidth(imageWidth);
         rest.setFitHeight(imageHeight);
         rest.setX(width/6*2);
@@ -114,14 +117,17 @@ public class RestScene extends RoomScene {
             public void handle(MouseEvent t) {
                 {
                     System.out.println("ASCENDING CALLED IN REST SCENE");
-                    game.getPlayer().recharge();
+                    int hp = (game.getPlayer().getMaxHP() * 3) / 10;
+                    game.getPlayer().changeHealth(hp);
                     proceed();
+                    draw();
+                    rest.setDisable(true);
+                    smith.setDisable(true);
                 }
             }
         });
-        pane.getChildren().add(rest);
 
-        ImageView smith = new ImageView(new Image("Smith.png"));
+
         smith.setVisible(true);
         smith.setPreserveRatio(true);
         smith.setFitWidth(imageWidth);
@@ -139,14 +145,15 @@ public class RestScene extends RoomScene {
                     smithPane.initialize();
                     root.getChildren().add(smithPane);
                     proceed();
+                    draw();
+                    rest.setDisable(true);
+                    smith.setDisable(true);
                 }
 
             }
         });
-        pane.getChildren().add(smith);
-        root.getChildren().add(pane);
-    }
 
+    }
 
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("campFire.gif"));
@@ -154,7 +161,11 @@ public class RestScene extends RoomScene {
         imageView.setFitHeight(height);
         root.getChildren().add(imageView);
     }
-    public void draw() {}
+
+    public void draw()
+    {
+        gridUpper.draw();
+    }
 
 
 }

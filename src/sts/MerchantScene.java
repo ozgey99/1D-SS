@@ -48,6 +48,8 @@ public class MerchantScene extends RoomScene  {
     ImageView turnBack;
     ImageView removeButton;
     static boolean added;
+    static int origWidth;
+    static  int origHeight;
 
     public MerchantScene() {
         pane = new Pane();
@@ -60,6 +62,8 @@ public class MerchantScene extends RoomScene  {
         relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
         relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
         added = false;
+        origWidth = width;
+        origHeight = height;
     }
 
     @Override
@@ -90,7 +94,7 @@ public class MerchantScene extends RoomScene  {
     public void turnBack(){
         turnBack = new ImageView(new Image("turnBack.png"));
         turnBack.setPreserveRatio(true);
-        turnBack.setFitHeight(100);
+        turnBack.setFitHeight(height/7); //turnBack.setFitHeight(100);
         turnBack.setX(width/5);
         turnBack.setY(height/4*3);
 
@@ -107,11 +111,10 @@ public class MerchantScene extends RoomScene  {
     public void draw() {}
 
     public void cardRemovalService(){
-        //removeCardPane.setVisible(true);
         removeButton.setPreserveRatio(true);
-        removeButton.setFitHeight(150);
+        removeButton.setFitHeight(height/5); //removeButton.setFitHeight(150);
         removeButton.setX(width/9*6);
-        removeButton.setY(height/5+160);
+        removeButton.setY(height/5+height/(43/10)); //removeButton.setY(height/5+160);
         pane.getChildren().add( removeButton );
         removeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -131,8 +134,8 @@ public class MerchantScene extends RoomScene  {
     public void nextButton(){
         ImageView nextButton = new ImageView(new Image("nextButton.png"));
         nextButton.setPreserveRatio(true);
-        nextButton.setFitHeight(50);
-        nextButton.setX(width-400);
+        nextButton.setFitHeight(height/14);
+        nextButton.setX(width-width/3); //nextButton.setX(width-400);
         nextButton.setY(height/7*5);
         pane.getChildren().add( nextButton );
         nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -150,7 +153,7 @@ public class MerchantScene extends RoomScene  {
         warning.setPreserveRatio(true);
         warning.setX(x);
         warning.setY(y);
-        warning.setFitWidth(100);
+        warning.setFitWidth(origWidth/13);
         g.getChildren().add(warning);
         return g;
     }
@@ -177,8 +180,8 @@ public class MerchantScene extends RoomScene  {
             rect.setFill(new ImagePattern(new Image(name)));
             rect.setX(space);
             rect.setY(height/5);
-            rect.setWidth(100);
-            rect.setHeight(150);
+            rect.setWidth(width/13); // rect.setWidth(100);
+            rect.setHeight(height/(466/100)); //rect.setHeight(150);
             rect.setVisible(true);
             Text saleText = new Text("SALE");
             if(!saleAdded && rand == i ){
@@ -194,19 +197,19 @@ public class MerchantScene extends RoomScene  {
 
             ImageView cost = new ImageView(new Image("cost.png"));
             cost.setPreserveRatio(true);
-            cost.setFitHeight(40);
-            cost.setX(space+10);
-            cost.setY(height/5+140);
+            cost.setFitHeight(height/(175/10));//cost.setFitHeight(40);
+            cost.setX(space+(width/130)); //cost.setX(space+10);
+            cost.setY(height/5+height/(46/10)); //cost.setY(height/5+140);
             pane.getChildren().add(cost);
             Text text = new Text(" " +price);
-            text.setX(space+40);
-            text.setY(height/5+170);
+            text.setX(space+width/(325/10)); //text.setX(space+40);
+            text.setY(height/5+height/4); //text.setY(height/5+170);
             text.setFont(Font.font ("Verdana", 15));
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
             int warningLocX = space-5;
-            int warningLocY = height/5-100;
+            int warningLocY = height/5-height/7; //int warningLocY = height/5-100;
 
             Node warn = warning(warningLocX, warningLocY);
             pane.getChildren().add(warn);
@@ -282,7 +285,7 @@ public class MerchantScene extends RoomScene  {
                 }
             });
 
-            space = space + 120;
+            space = space +  width/(108/10); //space = space + 120;
         }
 
     }
@@ -299,7 +302,7 @@ public class MerchantScene extends RoomScene  {
         rect.setFill(Color.GREY);
         rect.setStroke(Color.BLACK);
         rect.setWidth(len*6);
-        rect.setHeight(20);
+        rect.setHeight(origHeight/35); //rect.setHeight(20);
         rect.setVisible(true);
 
         Text relicText = new Text(desc);
@@ -326,25 +329,25 @@ public class MerchantScene extends RoomScene  {
             name = name + ".png";
             ImageView relicImage = new ImageView(new Image(name));
             relicImage.setPreserveRatio(true);
-            relicImage.setFitHeight(50);
+            relicImage.setFitHeight(height/14); //relicImage.setFitHeight(50);
             relicImage.setX(space);
-            relicImage.setY(height/5*2+100);
+            relicImage.setY(height/5*2+height/7); //relicImage.setY(height/5*2+100);
             pane.getChildren().add( relicImage );
 
             ImageView cost = new ImageView(new Image("cost.png"));
             cost.setPreserveRatio(true);
-            cost.setFitHeight(40);
+            cost.setFitHeight(height/17); //cost.setFitHeight(40);
             cost.setX(space);
-            cost.setY(height/5*2+150);
+            cost.setY(height/5*2+height/(46/10)); //cost.setY(height/5*2+150);
             pane.getChildren().add(cost);
             Text text = new Text(" " +price);
-            text.setX(space+30);
-            text.setY(height/5*2+170);
+            text.setX(space+width/43); //text.setX(space+30);
+            text.setY(height/5*2+height/4); //text.setY(height/5*2+170);
             text.setFont(Font.font ("Verdana", 15));
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
-            int warningLocX = space-50;
+            int warningLocX = space-width/26; //int warningLocX = space-50;
             int warningLocY = height/5*2+5;
 
             Node warn = warning(warningLocX, warningLocY);
@@ -389,7 +392,8 @@ public class MerchantScene extends RoomScene  {
                 }
             });
 
-            Node desc = relicDescription(relics,i, space+50, height/5*2+130);
+            //Node desc = relicDescription(relics,i, space+50, height/5*2+130);
+            Node desc = relicDescription(relics,i, space+width/26, height/5*2+height/(53/10));
             pane.getChildren().add(desc);
             desc.setVisible(false);
             relicImage.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
@@ -431,7 +435,7 @@ public class MerchantScene extends RoomScene  {
                 }
             });
 
-            space = space + 120;
+            space = space + width/(108/10); //space = space + 120;
         }
     }
 
@@ -441,7 +445,7 @@ public class MerchantScene extends RoomScene  {
         back.setFitHeight(height);
 
         ImageView image = new ImageView(new Image("papirus.png"));
-        image.setFitWidth(width-300);
+        image.setFitWidth(width-width/(43/10)); //image.setFitWidth(width-300);
         image.setFitHeight(height);
         root.getChildren().add(back);
         root.getChildren().add(image);

@@ -20,8 +20,9 @@ import static sts.Main.game;
 public class SmithPane extends StackPane {
     Pane pane;
     VBox vbox;
-    static int cardX;
-    static  int cardY;
+    int padX;
+    int padY;
+    //static int price;
     private int width;
     private int height;
     ImageView back;
@@ -30,12 +31,13 @@ public class SmithPane extends StackPane {
     public SmithPane(int width, int height){
         this.width = width;
         this.height = height;
-        int padX = width*3/2;
-        int padY = height*9/6;
+        padX = width*3/2;
+        padY = height*9/6;
+        //price = 75;
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
-        vbox = new VBox(10);
-        vbox.setPadding(new Insets(padX/9,padY/3,height/7,padX/5));
+        vbox = new VBox(padY/70);
+        vbox.setPadding(new Insets(padX/9,padY/3,padY/7,padX/5));
         //vbox.setPadding(new Insets(padX/9,400,100,250));
         this.setMinSize( width, height);
         this.getChildren().add(back);
@@ -54,7 +56,6 @@ public class SmithPane extends StackPane {
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
         int size = game.getPlayer().masterDeck.getSize();
-
         for (int i = 0; i < size; i++){
             HBox hbox = new HBox(); // ilk row last column'a üst üste iki tane ekliyor
             hbox.getChildren().clear();
@@ -64,15 +65,15 @@ public class SmithPane extends StackPane {
                 name = name + ".png";
                 Rectangle rect = new Rectangle();
                 rect.setFill(new ImagePattern(new Image(name)));
-                rect.setWidth(100);
-                rect.setHeight(150);
+                rect.setWidth(padX/13.0);
+                rect.setHeight(padY/(46/10));
                 rect.setVisible(true);
                 int price = 0; // şimdilik
                 int j = i;
                 rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent t) {
-                        if(game.getPlayer().masterDeck.getCard(j).isUpgradable()){
+                        if(game.getPlayer().masterDeck.getCard(j).isUpgradable() && game.getPlayer().getGold()>price){
                             game.getPlayer().masterDeck.getCard(j).upgrade();
                             rect.setStroke(Color.GREEN);
                             visible(false);
@@ -111,9 +112,7 @@ public class SmithPane extends StackPane {
                     break;
             }
             vbox.getChildren().add(hbox);
-
         }
-
     }
 
     public void addBackground() {
@@ -122,7 +121,5 @@ public class SmithPane extends StackPane {
         back.setOpacity(0.80);
 
     }
-
-
 
 }

@@ -43,7 +43,7 @@ public class Main extends Application {
             new Pair<String, Runnable>("START RUN", () -> {game.start();}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene() )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> window.setScene( new MerchantScene() )),
-            new Pair<String, Runnable>("OPTIONS", () -> {}),
+            new Pair<String, Runnable>("OPTIONS", () -> {startRest();}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
 
@@ -66,11 +66,11 @@ public class Main extends Application {
         return root;
     }
 
-    /*private void startRest(){
+    private void startRest(){
         game.currentScene = new RestScene();
         window.setScene(
                 game.currentScene); game.start();
-    }*/
+    }
 
     /*private void startMerchant() {
         game.currentScene = new MerchantScene();

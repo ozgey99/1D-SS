@@ -138,7 +138,8 @@ public class UpperPane extends GridPane {
         heart.setFitHeight(40);
         heart.setVisible(true);
         heart.setPreserveRatio(true);
-        box1.getChildren().addAll(heart, healthText);
+        box1.getChildren().add(heart);
+        box1.getChildren().add(healthText);
 
         // block box
         blockText.setText("" + game.getPlayer().getBlock());

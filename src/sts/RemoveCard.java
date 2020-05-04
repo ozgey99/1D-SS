@@ -24,7 +24,8 @@ import static sts.Main.game;
 public class RemoveCard extends StackPane {
     Pane pane;
     VBox vbox;
-    static int cardX;
+    int padX;
+    int padY;
     static  int cardY;
     private int width;
     private int height;
@@ -34,12 +35,12 @@ public class RemoveCard extends StackPane {
     public RemoveCard(int width, int height){
         this.width = width;
         this.height = height;
-        int padX = width*3/2;
-        int padY = height*9/6;
+        padX = width*3/2;
+        padY = height*9/6;
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
-        vbox = new VBox(10);
-        vbox.setPadding(new Insets(padX/9,padY/3,height/7,padX/5));
+        vbox = new VBox(height/70);
+        vbox.setPadding(new Insets(padX/9,padY/3,padY/7,padX/5));
         //vbox.setPadding(new Insets(150,400,100,250));
         this.setMinSize( width, height);
         this.getChildren().add(back);
@@ -69,8 +70,8 @@ public class RemoveCard extends StackPane {
                 name = name + ".png";
                 Rectangle rect = new Rectangle();
                 rect.setFill(new ImagePattern(new Image(name)));
-                rect.setWidth(100);
-                rect.setHeight(150);
+                rect.setWidth(padX/13);
+                rect.setHeight(padY/(46/10));
                 rect.setVisible(true);
                 int price = 0; // şimdilik
                 int j = i;
