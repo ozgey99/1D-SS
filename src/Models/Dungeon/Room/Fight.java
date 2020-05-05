@@ -10,10 +10,7 @@ import Models.Cards.Red.Anger;
 import Models.Cards.Red.Bash;
 import Models.Cards.Red.Clash;
 import Models.Creatures.AbstractCharacter;
-import Models.Creatures.Monsters.AbstractMonster;
-import Models.Creatures.Monsters.Cultist;
-import Models.Creatures.Monsters.JawWorm;
-import Models.Creatures.Monsters.Temp;
+import Models.Creatures.Monsters.*;
 import Models.Dungeon.AbstractRoom;
 import Models.Object.AbstractPower;
 import Models.Utils;
@@ -287,19 +284,32 @@ public class Fight extends AbstractRoom {
             // change this
          */
 
-        //change these monsters!!
         if(isElite){
-            monsters.add(new Cultist());
-            monsters.add(new Cultist());
+            ArrayList<AbstractMonster> elites = Utils.getAllElites();
+            Collections.shuffle(elites);
+
+            monsters.add(elites.get(0));
+
+            if(elites.get(0) instanceof Sentry){
+                monsters.add(new Sentry());
+                monsters.add(new Sentry());
+            }
         }
         else if(isBoss){
-            monsters.add(new Cultist());
-            monsters.add(new Cultist());
-            monsters.add(new Cultist());
+            ArrayList<AbstractMonster> bosses = Utils.getAllBosses();
+            Collections.shuffle(bosses);
+            monsters.add(bosses.get(0));
         }
-        else
-            monsters.add(new Cultist());
+        else{
+            ArrayList<AbstractMonster> m = Utils.getAllNonElites();
+            Collections.shuffle(m);
+            monsters.add(m.get(0));
 
+            if(m.get(0) instanceof RedLouse)
+                monsters.add(new GreenLouse());
+            else if(m.get(0) instanceof GreenLouse)
+                monsters.add(new RedLouse());
+        }
 
         generateRewards();
     }

@@ -1,5 +1,6 @@
 package Models.Creatures.Monsters;
 
+import Models.Cards.AbstractCard;
 import Models.Creatures.AbstractCreature;
 import Models.Object.AbstractPower;
 
@@ -11,10 +12,12 @@ public class MonsterMove {
     int block;
     boolean isSelf;
     ArrayList<AbstractPower> powers;
+    ArrayList<AbstractCard> addToDiscard;
 
     public MonsterMove(AbstractMonster o) {
         owner = o;
         powers = new ArrayList<>();
+        addToDiscard = new ArrayList<>();
         isSelf = false;
     }
 
@@ -36,6 +39,10 @@ public class MonsterMove {
         return powers;
     }
 
+    public ArrayList<AbstractCard> getAddToDiscard(){
+        return addToDiscard;
+    }
+
     void setDamage(int damage )
     {
         this.damage = damage;
@@ -52,4 +59,9 @@ public class MonsterMove {
     public void addPower(AbstractPower p) {
         powers.add(p);
     }
+
+    public void addToDiscard(AbstractCard c){
+        addToDiscard.add(c);
+    }
+
 }

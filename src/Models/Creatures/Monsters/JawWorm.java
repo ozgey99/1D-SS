@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class JawWorm extends AbstractMonster {
     public JawWorm() {
-        name = "Jaw Worm";
+        name = "JawWorm";
         maxHP = (int) (Math.random() * 4 + 40);
         currentHP = maxHP;
         initialize();

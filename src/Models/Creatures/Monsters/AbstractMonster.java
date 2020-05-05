@@ -3,6 +3,7 @@ package Models.Creatures.Monsters;
 
 import Models.Actions.FightActions;
 import Models.Actions.PowerActions;
+import Models.Cards.AbstractCard;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.AbstractCreature;
 import Models.Dungeon.Room.Fight;
@@ -37,6 +38,10 @@ public abstract class AbstractMonster extends AbstractCreature {
         {
             System.out.println("MONSTER POWR IS " + powers.get(r).getName() + " " + powers.get(r).getAmount());
 
+        }
+
+        for(AbstractCard c : next.addToDiscard){
+            f.getDiscard().addCard(c);
         }
     }
 

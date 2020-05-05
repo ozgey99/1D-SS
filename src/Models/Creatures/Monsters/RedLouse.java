@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class RedLouse extends AbstractMonster {
     public RedLouse() {
-        name = "Red Louse";
+        name = "RedLouse";
         maxHP = (int) (Math.random() * 5 + 10);
         currentHP = maxHP;
         initialize();
