@@ -77,7 +77,7 @@ public class Treasure extends AbstractRoom {
 
     @Override
     public RoomType getType() {
-        return null;
+        return type;
     }
 
     @Override

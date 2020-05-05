@@ -144,7 +144,7 @@ public class CardPane  extends GridPane {
 
 
                 box.getChildren().add(rect1);
-                box.setPadding(new Insets(0,0,0,50));
+                box.setPadding(new Insets(0,0,0,height/5*3));
 
 
             }
