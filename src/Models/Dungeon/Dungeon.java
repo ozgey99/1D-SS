@@ -41,7 +41,7 @@ public class Dungeon {
 
         //populate from top to bottom
         for(int i = 0; i < noOfPaths; i++){
-            children.clear();
+            children = new ArrayList<>();
             children.add(boss);
 
             for(int j = 0; j < length; j++){
@@ -71,8 +71,8 @@ public class Dungeon {
                     prevRooms.add(room);
                 }
 
-                children.clear();
-                //children.add(room);
+                children = new ArrayList<>();
+                children.add(room);
             }
         }
 
@@ -97,8 +97,9 @@ public class Dungeon {
 
     public void printMap(AbstractRoom r){
         System.out.println(r.getType());
-        for(int i = 0; i < r.getChildren().size(); i++)
-            printMap(r.getChildren().get(i));
+        if( r != null && r.getChildren() != null)
+            for(int i = 0; i < r.getChildren().size(); i++)
+                printMap(r.getChildren().get(i));
     }
 
     public String getName() {
