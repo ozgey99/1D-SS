@@ -34,10 +34,10 @@ public class Dungeon {
         ArrayList<AbstractRoom> prevRooms = new ArrayList<>();
 
         //randomize the number of paths
-        int noOfPaths = (int) (Math.random() * n) + 1;
+        int noOfPaths = (int) (Math.random() * n) + 2;
 
         //randomize the length
-        int length = (int) (Math.random() * n) + 1;
+        int length = (int) (Math.random() * n) + 2;
 
         //populate from top to bottom
         for(int i = 0; i < noOfPaths; i++){
@@ -67,11 +67,12 @@ public class Dungeon {
                 }
 
                 if(j == length - 1){
+                    System.out.println("room added");
                     prevRooms.add(room);
                 }
 
                 children.clear();
-                children.add(room);
+                //children.add(room);
             }
         }
 
@@ -85,11 +86,19 @@ public class Dungeon {
 
         currentRoom = beginningFight;
 
+        printMap(beginningFight);
+
         game.currentScene = new FightScene();
     }
 
     public int getAct() {
         return act;
+    }
+
+    public void printMap(AbstractRoom r){
+        System.out.println(r.getType());
+        for(int i = 0; i < r.getChildren().size(); i++)
+            printMap(r.getChildren().get(i));
     }
 
     public String getName() {
