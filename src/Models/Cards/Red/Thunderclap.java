@@ -5,7 +5,7 @@ import Models.Actions.PowerActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 import Models.Object.Powers.Vulnerable;
 
 public class Thunderclap extends AbstractCard {
@@ -43,6 +43,8 @@ public class Thunderclap extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.baseAttr.damage = 7;
+            this.name = this.name + "+";
+
         }
     }
 

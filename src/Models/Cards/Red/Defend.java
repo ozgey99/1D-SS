@@ -2,10 +2,7 @@ package Models.Cards.Red;
 
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
-import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
-
-import java.util.ArrayList;
+import Controller.Dungeon.Room.Fight;
 
 public class Defend extends AbstractCard {
 
@@ -36,6 +33,8 @@ public class Defend extends AbstractCard {
         if (upgradable) {
             this.baseAttr.block = 8;
             upgradable = false;
+            this.name = this.name + "+";
+
         }
     }
 

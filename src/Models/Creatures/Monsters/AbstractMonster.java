@@ -6,12 +6,10 @@ import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.AbstractCreature;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 import Models.Object.AbstractPower;
 
 import java.util.ArrayList;
-
-import static sts.Main.game;
 
 public abstract class AbstractMonster extends AbstractCreature {
     String name;

@@ -4,7 +4,7 @@ import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,6 +44,7 @@ public class SwordBoomerang extends AbstractCard {
     public void upgrade() {
         if(upgradable){
             upgradable = false;
+            this.name = this.name + "+";
             repeat = 4;
         }
     }

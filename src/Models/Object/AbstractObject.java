@@ -2,7 +2,7 @@ package Models.Object;
 
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.AbstractCreature;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 
 public abstract class AbstractObject {
     public int onAttack(int prevDamage) {

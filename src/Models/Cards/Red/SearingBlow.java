@@ -4,9 +4,8 @@ import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
-import Models.TextBasedUI;
-import sts.Controller;
+import Controller.Dungeon.Room.Fight;
+import View.Controller;
 
 public class SearingBlow extends AbstractCard {
 
@@ -38,8 +37,13 @@ public class SearingBlow extends AbstractCard {
 
     @Override
     public void upgrade() {
-        n++;
-        this.baseAttr.damage = n *(n + 7) / 2 + 12;
+        if(upgradable) {
+            n++;
+            this.baseAttr.damage = n * (n + 7) / 2 + 12;
+            this.name = this.name + "+";
+            upgradable = false;
+        }
+
     }
 
     @Override

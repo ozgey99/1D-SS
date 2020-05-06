@@ -1,5 +1,0 @@
-package Models.Dungeon.Room;
-
-public enum FightState {
-    PREFIGHT, PRETURN, TURN, POSTTURN, MONSTERPRETURN, MONSTERTURN, MONSTERPOSTTURN, POSTFIGHT
-}

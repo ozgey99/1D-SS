@@ -4,9 +4,8 @@ import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
-import Models.TextBasedUI;
-import sts.Controller;
+import Controller.Dungeon.Room.Fight;
+import View.Controller;
 
 public class PerfectedStrike extends AbstractCard {
 
@@ -56,6 +55,8 @@ public class PerfectedStrike extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             additionalDamage = 3;
+            this.name = this.name + "+";
+
         }
     }
 

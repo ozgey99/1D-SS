@@ -4,9 +4,8 @@ import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
-import Models.TextBasedUI;
-import sts.Controller;
+import Controller.Dungeon.Room.Fight;
+import View.Controller;
 
 public class PommelStrike extends AbstractCard {
 
@@ -45,6 +44,8 @@ public class PommelStrike extends AbstractCard {
             upgradable = false;
             this.baseAttr.damage = 10;
             this.baseAttr.draw = 2;
+            this.name = this.name + "+";
+
         }
     }
 

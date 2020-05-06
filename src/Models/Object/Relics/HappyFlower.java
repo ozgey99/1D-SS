@@ -2,7 +2,7 @@ package Models.Object.Relics;
 
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.AbstractCreature;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 import Models.Object.AbstractRelic;
 import Models.Object.RelicClass;
 import Models.Object.RelicRarity;
@@ -41,14 +41,14 @@ public class HappyFlower extends AbstractRelic {
     public void onDamage(AbstractCreature c) {}
 
     @Override
-    public void onTurnStart(Fight f) {
-        turn++;
-    }
+    public void onTurnStart(Fight f) {}
 
     @Override
     public void onTurnStart(AbstractCreature c) {
+        turn++;
         if(turn % 3 == 0 && c instanceof AbstractCharacter){
             ((AbstractCharacter) c).changeEnergy(amount);
         }
+        System.out.println("turn: " + turn);
     }
 }

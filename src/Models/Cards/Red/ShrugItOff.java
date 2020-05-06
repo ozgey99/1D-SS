@@ -2,7 +2,7 @@ package Models.Cards.Red;
 
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 
 public class ShrugItOff extends AbstractCard {
 
@@ -37,6 +37,8 @@ public class ShrugItOff extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.baseAttr.block = 11;
+            this.name = this.name + "+";
+
         }
     }
 

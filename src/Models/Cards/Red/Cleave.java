@@ -4,7 +4,7 @@ import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 
 public class Cleave extends AbstractCard{
 
@@ -37,6 +37,8 @@ public class Cleave extends AbstractCard{
         if(upgradable){
             upgradable = false;
             baseAttr.damage = 11;
+            this.name = this.name + "+";
+
         }
     }
 
