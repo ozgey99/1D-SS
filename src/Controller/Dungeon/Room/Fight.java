@@ -15,6 +15,7 @@ import Models.Object.AbstractRelic;
 import Models.TextBasedUI;
 import View.FightScene;
 
+import java.net.SocketTimeoutException;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -111,9 +112,10 @@ public class Fight extends AbstractRoom {
     private void preFight() {
         System.out.println("I AM IN PREFIGHT");
         state = FightState.PREFIGHT;
+        player.changeEnergy(-1 * player.currentEnergy);
         for (AbstractRelic r : player.relics) {
             r.onFightStart(this, player);
-            System.out.println("relic " + r.getName());
+            System.out.println("my energy " + player.currentEnergy);
         }
         game.currentScene.draw();
 
@@ -129,12 +131,14 @@ public class Fight extends AbstractRoom {
             r.onTurnStart(player);
         }
 
-        player.recharge();
-        player.resetBlock();
-
         if (turn != 1) {
+            player.recharge();
+            player.resetBlock();
             PowerActions.turnEndDecrease(player);
         }
+        else
+            player.changeEnergy( 3);
+
         game.currentScene.draw();
 
         nextState();
