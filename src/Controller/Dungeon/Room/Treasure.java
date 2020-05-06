@@ -28,12 +28,10 @@ public class Treasure extends AbstractRoom {
         done = false;
         relics = new ArrayList<>();
         cards = new ArrayList<>();
-        relicReward();
-        cardReward();
     }
 
     // created relic list (contain 1) goldAmount is determined
-    private void relicReward() {
+    public void relicReward() {
 
         ArrayList<AbstractRelic> allRelics = Utils.getAllRelics();
         Collections.shuffle(allRelics);
@@ -41,30 +39,33 @@ public class Treasure extends AbstractRoom {
 
             boolean exist = false;
             for (AbstractRelic y : game.getPlayer().relics) {
-                //System.out.println("MY  RELICS " + y.getName());
 
                 if(y.getName() == r.getName())
                     exist = true;
 
             }
-            if(exist == false)
+            if(!exist)
                 relics.add(r);
         }
 
         goldAmount = (int) (Math.random() * 100) + 10;
 
-
     }
 
 
-    private void cardReward() {
+    public void cardReward() {
         ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
         Collections.shuffle(allCards);
         for (AbstractCard c : allCards) {
-            if (!Utils.containsInstance(game.getPlayer().masterDeck.getCardList(), c.getClass())) {
-                cards.add(c);
-                break;
+            boolean exist = false;
+            for (AbstractCard y : game.getPlayer().masterDeck.getCardList()) {
+                //System.out.println("MY  RELICS " + y.getName());
+
+                if(y.getName() == c.getName())
+                    exist = true;
             }
+            if(!exist)
+                cards.add(c);
         }
     }
 

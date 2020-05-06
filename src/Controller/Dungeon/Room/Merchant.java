@@ -28,11 +28,14 @@ public class Merchant extends AbstractRoom {
         cardPrices = new ArrayList<>();
         relics = new ArrayList<>();
         relicPrices = new ArrayList<>();
-        generate();
     }
 
-    private void generate() {
+    public void generate() {
         ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
+
+        for (AbstractCard y : game.getPlayer().masterDeck.getCardList()) {
+            allCards.removeIf(c -> y.getName() == c.getName());
+        }
 
         int index = (int) (Math.random() * (allCards.size() - 1));
         cards.add(allCards.get(index));
@@ -47,10 +50,9 @@ public class Merchant extends AbstractRoom {
 
         ArrayList<AbstractRelic> allRelics = Utils.getAllRelics();
 
-        for(AbstractRelic r : game.getPlayer().relics){
-            if(allRelics.contains(r)){
-                allRelics.remove(r);
-            }
+        for (AbstractRelic y : game.getPlayer().relics) {
+            allRelics.removeIf(r -> y.getName() == r.getName());
+            System.out.println("duplicate relic" + y.getName());
         }
 
 

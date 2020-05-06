@@ -311,14 +311,19 @@ public class Fight extends AbstractRoom {
             else if(m.get(0) instanceof GreenLouse)
                 monsters.add(new RedLouse());
         }
-
-        generateRewards();
     }
 
-    private void generateRewards() {
+    public void generateRewards() {
         ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
 
         Collections.shuffle(allCards);
+
+        if(game.getPlayer() != null) {
+            for (AbstractCard y : game.getPlayer().masterDeck.getCardList()) {
+                allCards.removeIf(c -> y.getName() == c.getName());
+            }
+        }
+
         for (int i = 0; i < cardRewardAmount; i++)
             cardRewards.add(allCards.get(i));
 

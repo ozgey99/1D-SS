@@ -118,7 +118,17 @@ public class Dungeon {
             return false;
         }
         System.out.println("ASCEND IN");
-        this.currentRoom = this.currentRoom.getChildren().get(0); //change this to input from user
+        this.currentRoom = this.currentRoom.getChildren().get(0);//change this to input from user
+        if(currentRoom instanceof Fight){
+            ((Fight) currentRoom).generateRewards();
+        }
+        else if(currentRoom instanceof Merchant){
+            ((Merchant)currentRoom).generate();
+        }
+        else if(currentRoom instanceof Treasure){
+            ((Treasure)currentRoom).relicReward();
+            ((Treasure)currentRoom).cardReward();
+        }
         this.currentRoom.start();
         return true;
     }
