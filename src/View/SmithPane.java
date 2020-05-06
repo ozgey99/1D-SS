@@ -60,6 +60,8 @@ public class SmithPane extends StackPane {
             HBox hbox = new HBox(); // ilk row last column'a üst üste iki tane ekliyor
             hbox.getChildren().clear();
             for(int count = 0; count < 7; count++ ){
+                if(game.getPlayer().masterDeck.getCard(i).isUpgradable() == false)
+                    continue;
                 String name = game.getPlayer().masterDeck.getCard(i).getName();
                 System.out.println(name);
                 name = name + ".png";
