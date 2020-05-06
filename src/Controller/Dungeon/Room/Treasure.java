@@ -22,6 +22,7 @@ public class Treasure extends AbstractRoom {
     int goldAmount;
 
     public Treasure(ArrayList<AbstractRoom> c) {
+        System.out.println("TREASURE CALLED");
         type = RoomType.CHEST;
         children = c;
         done = false;
@@ -33,17 +34,28 @@ public class Treasure extends AbstractRoom {
 
     // created relic list (contain 1) goldAmount is determined
     private void relicReward() {
+
         ArrayList<AbstractRelic> allRelics = Utils.getAllRelics();
         Collections.shuffle(allRelics);
         for (AbstractRelic r : allRelics) {
-            if (!Utils.containsInstance(Main.game.getPlayer().relics, r.getClass())) {
-                relics.add(r);
-                break;
+
+            boolean exist = false;
+            for (AbstractRelic y : game.getPlayer().relics) {
+                //System.out.println("MY  RELICS " + y.getName());
+
+                if(y.getName() == r.getName())
+                    exist = true;
+
             }
+            if(exist == false)
+                relics.add(r);
         }
 
         goldAmount = (int) (Math.random() * 100) + 10;
+
+
     }
+
 
     private void cardReward() {
         ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
@@ -59,6 +71,11 @@ public class Treasure extends AbstractRoom {
     @Override
     public void start() {
 
+        System.out.println("TREASURE START CALLED");
+
+
+        relicReward();
+        cardReward();
         game.currentScene = new TreasureScene();
         Main.window.setScene(
                 game.currentScene);
