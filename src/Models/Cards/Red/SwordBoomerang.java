@@ -44,6 +44,7 @@ public class SwordBoomerang extends AbstractCard {
     public void upgrade() {
         if(upgradable){
             upgradable = false;
+            this.name = this.name + "+";
             repeat = 4;
         }
     }

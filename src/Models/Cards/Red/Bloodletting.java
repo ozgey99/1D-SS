@@ -39,6 +39,8 @@ public class Bloodletting extends AbstractCard {
         if(upgradable){
             upgradable = false;
             energyIncrease = 2;
+            this.name = this.name + "+";
+
         }
     }
 

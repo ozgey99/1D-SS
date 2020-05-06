@@ -38,6 +38,8 @@ public class BodySlam extends AbstractCard {
         if (upgradable) {
             this.cost = 0;
             this.upgradable = false;
+            this.name = this.name + "+";
+
         }
     }
 

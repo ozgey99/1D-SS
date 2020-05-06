@@ -38,6 +38,8 @@ public class Anger extends AbstractCard {
         if (upgradable) {
             this.baseAttr.damage = 8;
             upgradable = false;
+            this.name = this.name + "+";
+
         }
     }
 

@@ -37,6 +37,8 @@ public class Cleave extends AbstractCard{
         if(upgradable){
             upgradable = false;
             baseAttr.damage = 11;
+            this.name = this.name + "+";
+
         }
     }
 

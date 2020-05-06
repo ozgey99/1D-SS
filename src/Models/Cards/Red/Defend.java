@@ -33,6 +33,8 @@ public class Defend extends AbstractCard {
         if (upgradable) {
             this.baseAttr.block = 8;
             upgradable = false;
+            this.name = this.name + "+";
+
         }
     }
 

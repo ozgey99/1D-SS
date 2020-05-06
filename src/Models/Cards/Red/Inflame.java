@@ -42,6 +42,8 @@ public class Inflame extends AbstractCard {
     public void upgrade() {
         if (upgradable) {
             upgradable = false;
+            this.name = this.name + "+";
+
         }
     }
 

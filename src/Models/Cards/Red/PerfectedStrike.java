@@ -55,6 +55,8 @@ public class PerfectedStrike extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             additionalDamage = 3;
+            this.name = this.name + "+";
+
         }
     }
 

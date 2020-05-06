@@ -37,8 +37,13 @@ public class SearingBlow extends AbstractCard {
 
     @Override
     public void upgrade() {
-        n++;
-        this.baseAttr.damage = n *(n + 7) / 2 + 12;
+        if(upgradable) {
+            n++;
+            this.baseAttr.damage = n * (n + 7) / 2 + 12;
+            this.name = this.name + "+";
+            upgradable = false;
+        }
+
     }
 
     @Override

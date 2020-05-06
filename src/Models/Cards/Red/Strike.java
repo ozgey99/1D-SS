@@ -39,6 +39,7 @@ public class Strike extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.baseAttr.damage = 7;
+            this.name = this.name + "+";
         }
     }
 

@@ -40,6 +40,8 @@ public class IronWave extends AbstractCard {
             baseAttr.block = 7;
             baseAttr.damage = 7;
             upgradable = false;
+            this.name = this.name + "+";
+
         }
     }
 

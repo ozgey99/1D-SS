@@ -41,6 +41,8 @@ public class Headbutt extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.baseAttr.damage = 12;
+            this.name = this.name + "+";
+
         }
     }
 

@@ -40,6 +40,8 @@ public class Bludgeon extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.baseAttr.damage = 42;
+            this.name = this.name + "+";
+
         }
     }
 

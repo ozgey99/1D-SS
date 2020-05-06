@@ -102,7 +102,7 @@ public class WinScene extends RoomScene  {
             if(! root.getChildren().contains(lose))
             root.getChildren().add(lose);
         }
-            
+
     }
 
 }

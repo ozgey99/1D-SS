@@ -35,6 +35,8 @@ public class Havoc extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.cost = 0;
+            this.name = this.name + "+";
+
         }
     }
 

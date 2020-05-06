@@ -44,6 +44,8 @@ public class PommelStrike extends AbstractCard {
             upgradable = false;
             this.baseAttr.damage = 10;
             this.baseAttr.draw = 2;
+            this.name = this.name + "+";
+
         }
     }
 

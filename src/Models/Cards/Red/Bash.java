@@ -50,6 +50,8 @@ public class Bash extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.baseAttr.damage = 10;
+            this.name = this.name + "+";
+
         }
     }
 

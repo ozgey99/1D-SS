@@ -44,6 +44,8 @@ public class Clash extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.baseAttr.damage = 18;
+            this.name = this.name + "+";
+
         }
     }
 

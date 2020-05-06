@@ -32,6 +32,8 @@ public class Entrench extends AbstractCard {
         if (upgradable) {
             cost = 1;
             upgradable = false;
+            this.name = this.name + "+";
+
         }
     }
 

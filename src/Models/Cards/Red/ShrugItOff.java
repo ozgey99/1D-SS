@@ -37,6 +37,8 @@ public class ShrugItOff extends AbstractCard {
         if (upgradable) {
             upgradable = false;
             this.baseAttr.block = 11;
+            this.name = this.name + "+";
+
         }
     }
 

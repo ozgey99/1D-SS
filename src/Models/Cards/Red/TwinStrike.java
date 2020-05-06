@@ -41,6 +41,8 @@ public class TwinStrike extends AbstractCard {
         if(upgradable){
             upgradable = false;
             baseAttr.damage = 7;
+            this.name = this.name + "+";
+
         }
     }
 

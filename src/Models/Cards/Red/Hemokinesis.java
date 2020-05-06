@@ -47,6 +47,8 @@ public class Hemokinesis extends AbstractCard {
             upgradable = false;
             this.baseAttr.damage = 18;
             HPdecrease = 2;
+            this.name = this.name + "+";
+
         }
     }
 
