@@ -56,7 +56,7 @@ public class Merchant extends AbstractRoom {
         }
 
 
-        while (relics.size() != 4) {
+        while (allRelics.size() > 0 && relics.size() != 4) {
             int ind = (int) (Math.random() * (allRelics.size() - 1));
             relics.add(allRelics.get(ind));
             allRelics.remove(ind);
