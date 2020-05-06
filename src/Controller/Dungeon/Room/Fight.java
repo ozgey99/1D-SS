@@ -15,6 +15,7 @@ import Models.Object.AbstractRelic;
 import Models.TextBasedUI;
 import View.FightScene;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -112,8 +113,12 @@ public class Fight extends AbstractRoom {
         state = FightState.PREFIGHT;
         for (AbstractRelic r : player.relics) {
             r.onFightStart(this, player);
+            System.out.println("relic " + r.getName());
         }
+        game.currentScene.draw();
+
         nextState();
+
     }
 
     private void preTurn() {
@@ -130,6 +135,8 @@ public class Fight extends AbstractRoom {
         if (turn != 1) {
             PowerActions.turnEndDecrease(player);
         }
+        game.currentScene.draw();
+
         nextState();
     }
 

@@ -41,6 +41,7 @@ public class Treasure extends AbstractRoom {
                 break;
             }
         }
+
         goldAmount = (int) (Math.random() * 100) + 10;
     }
 

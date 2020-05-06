@@ -47,6 +47,12 @@ public class Merchant extends AbstractRoom {
 
         ArrayList<AbstractRelic> allRelics = Utils.getAllRelics();
 
+        for(AbstractRelic r : game.getPlayer().relics){
+            if(allRelics.contains(r)){
+                allRelics.remove(r);
+            }
+        }
+
 
         while (relics.size() != 4) {
             int ind = (int) (Math.random() * (allRelics.size() - 1));
