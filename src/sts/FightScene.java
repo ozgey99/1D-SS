@@ -23,7 +23,7 @@ import static sts.Main.game;
 
 public class FightScene extends RoomScene {
 
-
+    private FightRewardsPane fightRewards;
     private StackPane fightPane;
     private GridPane gridFight;
     CharPane gridLeft; //character pane
@@ -38,7 +38,7 @@ public class FightScene extends RoomScene {
     {
         fightPane = new StackPane();
         gridFight = new GridPane();
-
+        fightRewards = new FightRewardsPane(width, height);
         gridLeft = new CharPane(width/2, height/9*6);
         gridRight = new MonsterPane(width / 2, height / 9 * 6);
         gridLower  = new CardPane(width , height/9*6);
@@ -50,7 +50,11 @@ public class FightScene extends RoomScene {
 
     }
 
-
+    public  void getRewards(){
+        fightRewards.visible(true);
+        fightRewards.initialize();
+        root.getChildren().add(fightRewards);
+    }
 
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("background1.jpg"));
@@ -137,12 +141,16 @@ public class FightScene extends RoomScene {
 
         if(( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size() == 0 &&  game.getPlayer().getCurrentHP() > 0)
         {
-            if (game.getDungeon().getCurrentRoom().getChildren() == null) {
-                endTurn.setFill(new ImagePattern(new Image("win.jpg")));
-                endTurn.setHeight(height);
-                endTurn.setWidth(width);
+            if (game.getDungeon().getCurrentRoom().getChildren() != null) {
+                //endTurn.setFill(new ImagePattern(new Image("win.jpg")));
+                //endTurn.setHeight(height);
+                //endTurn.setWidth(width);     // ---- background'ı sen de böyle ekle
+                System.out.println("kazandın");
+                fightRewards.visible(true);
+                fightRewards.initialize();
+                root.getChildren().add(fightRewards);
             }
-            game.getDungeon().ascend();
+            //game.getDungeon().ascend();
 
         }
         else if( game.getPlayer().getCurrentHP() <= 0)
@@ -151,6 +159,8 @@ public class FightScene extends RoomScene {
             endTurn.setHeight(height);
             endTurn.setWidth(width);
             game.getDungeon().ascend();
+
+
 
         }
         else {
@@ -162,11 +172,15 @@ public class FightScene extends RoomScene {
         }
 
     }
+
+
     public void drawMonsters()
     {
         gridRight.draw();
 
     }
+
+
 
 
 }

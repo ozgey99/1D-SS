@@ -178,10 +178,7 @@ public class UpperPane extends GridPane {
             Node desc = relicDescription(game.getPlayer().relics,i, width/2, height-20);
             pane.getChildren().add(desc);
             desc.setVisible(false);
-            if(!relicDesc){
-                this.getChildren().add(pane);
-                relicDesc = true;
-            }
+
 
             relicImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
@@ -211,10 +208,6 @@ public class UpperPane extends GridPane {
             Node desc = powerDescription(game.getPlayer().powers,i, width/2, height-20);
             pane.getChildren().add(desc);
             desc.setVisible(false);
-            if(!powerDesc){
-                this.getChildren().add(pane);
-                powerDesc = true;
-            }
 
             powerImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
@@ -229,7 +222,7 @@ public class UpperPane extends GridPane {
                 }
             });
         }
-
+        this.getChildren().add(pane);
         box.getChildren().addAll(box1,block,energy,box2,box3,box4);
         this.getChildren().add(box);
 
@@ -248,6 +241,7 @@ public class UpperPane extends GridPane {
         box3.getChildren().removeAll();
         box3.getChildren().clear();
         box4.getChildren().removeAll();
+        box4.getChildren().clear();
         energy.getChildren().clear();
         energy.getChildren().removeAll();
     }
@@ -305,10 +299,7 @@ public class UpperPane extends GridPane {
             Node desc = relicDescription(game.getPlayer().relics,i, width/2, height-20);
             pane.getChildren().add(desc);
             desc.setVisible(false);
-            if(!relicDesc){
-                this.getChildren().add(pane);
-                relicDesc = true;
-            }
+
 
             relicImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
@@ -338,10 +329,7 @@ public class UpperPane extends GridPane {
             Node desc = powerDescription(game.getPlayer().powers,i, width/2, height-20);
             pane.getChildren().add(desc);
             desc.setVisible(false);
-            if(!powerDesc){
-                this.getChildren().add(pane);
-                powerDesc = true;
-            }
+
 
             powerImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override

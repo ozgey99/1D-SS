@@ -57,7 +57,7 @@ public class SmithPane extends StackPane {
         vbox.getChildren().clear();
         int size = game.getPlayer().masterDeck.getSize();
         for (int i = 0; i < size; i++){
-            HBox hbox = new HBox(); // ilk row last column'a üst üste iki tane ekliyor
+            HBox hbox = new HBox();
             hbox.getChildren().clear();
             for(int count = 0; count < 7; count++ ){
                 String name = game.getPlayer().masterDeck.getCard(i).getName();
