@@ -85,10 +85,24 @@ public class WinScene extends RoomScene  {
 
     }
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image("win.jpg"));
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-        root.getChildren().add(imageView);
+        ImageView win = new ImageView(new Image("win.jpg"));
+        win.setFitWidth(width);
+        win.setFitHeight(height);
+
+
+        ImageView lose = new ImageView(new Image("lose.png"));
+        lose.setFitWidth(width);
+        lose.setFitHeight(height);
+
+        if(game.getPlayer().getCurrentHP() > 0) {
+            if(! root.getChildren().contains(win))
+            root.getChildren().add(win);
+        }
+        else {
+            if(! root.getChildren().contains(lose))
+            root.getChildren().add(lose);
+        }
+            
     }
 
 }

@@ -147,10 +147,13 @@ public class FightScene extends RoomScene {
         }
         else if( game.getPlayer().getCurrentHP() <= 0)
         {
-            endTurn.setFill(new ImagePattern(new Image("lose.png")));
-            endTurn.setHeight(height);
-            endTurn.setWidth(width);
-            game.getDungeon().ascend();
+
+
+                game.currentScene = new WinScene();
+                Main.window.setScene(
+                        game.currentScene);
+                game.currentScene.initialize();
+
 
         }
         else {
