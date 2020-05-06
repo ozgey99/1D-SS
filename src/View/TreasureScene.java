@@ -1,7 +1,7 @@
-package sts;
+package View;
 
 import Models.Cards.AbstractCard;
-import Models.Dungeon.Room.Treasure;
+import Controller.Dungeon.Room.Treasure;
 import Models.Object.AbstractRelic;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,7 +20,7 @@ import Models.Actions.RelicActions;
 
 import java.util.ArrayList;
 
-import static sts.Main.game;
+import static View.Main.game;
 
 public class TreasureScene extends RoomScene {
 
@@ -36,6 +36,7 @@ public class TreasureScene extends RoomScene {
 
     public TreasureScene()
     {
+        super(new StackPane());
         tick = new ImageView(new Image("tick.png"));
         chest = new ImageView(new Image("SmallChest.png"));
         pane = new Pane();
@@ -46,6 +47,7 @@ public class TreasureScene extends RoomScene {
         root.setMinSize( width, height);
         origWidth = width;
         origHeight = height;
+
     }
 
     public void initialize()
@@ -167,6 +169,7 @@ public class TreasureScene extends RoomScene {
                 cardRect.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
+                        System.out.println("I AM ADDING CARD " + cards.get(0).getName());
                         game.getPlayer().masterDeck.addCard(cards.get(0));
                         cardRect.setVisible(false);
                         text.setDisable(true);

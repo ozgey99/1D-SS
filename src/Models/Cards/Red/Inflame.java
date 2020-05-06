@@ -3,7 +3,7 @@ package Models.Cards.Red;
 import Models.Actions.PowerActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 import Models.Object.Powers.Strength;
 
 public class Inflame extends AbstractCard {

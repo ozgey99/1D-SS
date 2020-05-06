@@ -1,7 +1,6 @@
-package sts;
+package View;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -18,7 +17,7 @@ public abstract class RoomScene extends Scene {
     protected int height = 700;*/
     StackPane root;
 
-    public RoomScene(){
+    public RoomScene(StackPane stackPane){
         super(new StackPane());
         this.root = (StackPane) this.getRoot();
         //addBackground();

@@ -1,10 +1,8 @@
-package sts;
+package View;
 
 import Models.Actions.FightActions;
-import Models.Cards.AbstractCard;
-import Models.Cards.Deck;
 import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -12,7 +10,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -29,7 +26,7 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
-import static sts.Main.game;
+import static View.Main.game;
 
 
 public class MonsterPane extends StackPane {
@@ -58,6 +55,7 @@ public class MonsterPane extends StackPane {
         // this.setMinSize( width, height);
         box = new VBox();
         rectangleBox = new HBox(20);
+
 
 
 

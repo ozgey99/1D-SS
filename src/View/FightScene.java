@@ -1,13 +1,8 @@
-package sts;
+package View;
 
-import Models.Cards.Deck;
-import Models.Creatures.AbstractCharacter;
-import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
-import Models.TextBasedUI;
+import Controller.Dungeon.Room.Fight;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,9 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-import java.util.ArrayList;
-
-import static sts.Main.game;
+import static View.Main.game;
 
 
 public class FightScene extends RoomScene {
@@ -36,6 +29,7 @@ public class FightScene extends RoomScene {
 
     public FightScene()
     {
+        super(new StackPane());
         fightPane = new StackPane();
         gridFight = new GridPane();
 
@@ -138,11 +132,17 @@ public class FightScene extends RoomScene {
         if(( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size() == 0 &&  game.getPlayer().getCurrentHP() > 0)
         {
             if (game.getDungeon().getCurrentRoom().getChildren() == null) {
-                endTurn.setFill(new ImagePattern(new Image("win.jpg")));
-                endTurn.setHeight(height);
-                endTurn.setWidth(width);
+
+                game.currentScene = new WinScene();
+                Main.window.setScene(
+                        game.currentScene);
+                game.currentScene.initialize();
+
             }
-            game.getDungeon().ascend();
+            else {
+                ((Fight) game.getDungeon().getCurrentRoom()).postFight();
+                game.getDungeon().ascend();
+            }
 
         }
         else if( game.getPlayer().getCurrentHP() <= 0)

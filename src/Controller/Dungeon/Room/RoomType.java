@@ -1,4 +1,4 @@
-package Models.Dungeon.Room;
+package Controller.Dungeon.Room;
 
 public enum RoomType {
     SHOP,

@@ -2,7 +2,7 @@ package Models.Object.Relics;
 
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.AbstractCreature;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 import Models.Object.AbstractRelic;
 import Models.Object.RelicClass;
 import Models.Object.RelicRarity;

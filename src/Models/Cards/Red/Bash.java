@@ -5,10 +5,9 @@ import Models.Actions.PowerActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Fight;
 import Models.Object.Powers.Vulnerable;
-import Models.TextBasedUI;
-import sts.Controller;
+import View.Controller;
 
 public class Bash extends AbstractCard {
     public Bash(){

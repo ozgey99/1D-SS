@@ -1,4 +1,4 @@
-package sts;
+package View;
 
 import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
@@ -10,35 +10,33 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-import static sts.Main.game;
+import static View.Main.game;
 
-public class SmithPane extends StackPane {
+public class RemoveCard extends StackPane {
     Pane pane;
     VBox vbox;
     int padX;
     int padY;
-    //static int price;
+    static  int cardY;
     private int width;
     private int height;
     ImageView back;
     MerchantScene merchant;
 
-    public SmithPane(int width, int height){
+    public RemoveCard(int width, int height){
         this.width = width;
         this.height = height;
         padX = width*3/2;
         padY = height*9/6;
-        //price = 75;
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
-        vbox = new VBox(padY/70);
+        vbox = new VBox(height/70);
         vbox.setPadding(new Insets(padX/9,padY/3,padY/7,padX/5));
-        //vbox.setPadding(new Insets(padX/9,400,100,250));
+        //vbox.setPadding(new Insets(150,400,100,250));
         this.setMinSize( width, height);
         this.getChildren().add(back);
         this.getChildren().add(pane);
@@ -49,6 +47,7 @@ public class SmithPane extends StackPane {
         this.setVisible(bool);
     }
 
+    public void draw(){initialize();}
 
     public void initialize() {
 
@@ -56,8 +55,9 @@ public class SmithPane extends StackPane {
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
         int size = game.getPlayer().masterDeck.getSize();
+
         for (int i = 0; i < size; i++){
-            HBox hbox = new HBox(); // ilk row last column'a üst üste iki tane ekliyor
+            HBox hbox = new HBox();
             hbox.getChildren().clear();
             for(int count = 0; count < 7; count++ ){
                 String name = game.getPlayer().masterDeck.getCard(i).getName();
@@ -65,7 +65,7 @@ public class SmithPane extends StackPane {
                 name = name + ".png";
                 Rectangle rect = new Rectangle();
                 rect.setFill(new ImagePattern(new Image(name)));
-                rect.setWidth(padX/13.0);
+                rect.setWidth(padX/13);
                 rect.setHeight(padY/(46/10));
                 rect.setVisible(true);
                 int price = 0; // şimdilik
@@ -73,10 +73,21 @@ public class SmithPane extends StackPane {
                 rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent t) {
-                        if(game.getPlayer().masterDeck.getCard(j).isUpgradable() && game.getPlayer().getGold()>price){
-                            game.getPlayer().masterDeck.getCard(j).upgrade();
-                            rect.setStroke(Color.GREEN);
-                            visible(false);
+
+                        if (game.getPlayer().getGold() >= price) {
+                            System.out.println("gold before: "+ game.getPlayer().getGold());
+                            game.getPlayer().changeGold(-price);
+
+                            System.out.println("gold after :" + game.getPlayer().getGold());
+                            game.getPlayer().masterDeck.removeCard(game.getPlayer().masterDeck.getCard(j));
+                            draw();
+                            System.out.println("========AFTER CLICK MASTER DECK=========");
+                            for(int k=0; k<game.getPlayer().masterDeck.getSize(); k++){
+                                System.out.println(game.getPlayer().masterDeck.getCard(k).getName());
+                            }
+
+                        } else {
+                            System.out.println("You don't have enough gold for card");
                         }
 
                     }
@@ -106,13 +117,15 @@ public class SmithPane extends StackPane {
                 });
 
                 hbox.getChildren().add(rect);
-                if(count  != 6)
+                if(count != 6)
                 i++;
                 if(i == size)
                     break;
             }
             vbox.getChildren().add(hbox);
+
         }
+
     }
 
     public void addBackground() {
@@ -121,5 +134,4 @@ public class SmithPane extends StackPane {
         back.setOpacity(0.80);
 
     }
-
 }

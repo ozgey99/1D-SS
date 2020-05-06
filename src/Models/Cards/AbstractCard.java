@@ -1,10 +1,7 @@
 package Models.Cards;
 
 import Models.Creatures.AbstractCharacter;
-import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
-
-import java.util.ArrayList;
+import Controller.Dungeon.Room.Fight;
 
 public abstract class AbstractCard {
     protected String name;

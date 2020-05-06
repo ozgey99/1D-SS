@@ -1,35 +1,14 @@
-package sts;
+package View;
 
-import Models.Cards.AbstractCard;
-import Models.Cards.Deck;
-import Models.Dungeon.Room.Fight;
-import Models.Dungeon.Room.Rest;
-import Models.Dungeon.Room.Treasure;
-import Models.Game;
-import Models.Object.AbstractRelic;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.NodeOrientation;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.*;
-import javafx.scene.text.Text;
 
-import java.util.ArrayList;
-
-import static sts.Main.game;
+import static View.Main.game;
 public class RestScene extends RoomScene {
     Pane pane;
     HBox box;
@@ -41,6 +20,7 @@ public class RestScene extends RoomScene {
     ImageView smith;
     public RestScene()
     {
+        super(new StackPane());
         pane = new Pane();
         box = new HBox();
         options = new HBox();

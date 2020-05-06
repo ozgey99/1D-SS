@@ -4,9 +4,8 @@ import Models.Actions.FightActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
-import Models.TextBasedUI;
-import sts.Controller;
+import Controller.Dungeon.Room.Fight;
+import View.Controller;
 
 public class Strike extends AbstractCard {
 
@@ -19,7 +18,7 @@ public class Strike extends AbstractCard {
         rarity = CardRarity.BASIC;
         target = CardTarget.ENEMY;
         baseAttr = new BaseCardAttributes();
-        baseAttr.damage = 5;
+        baseAttr.damage = 100;
         usable = true;
         upgradable = true;
     }

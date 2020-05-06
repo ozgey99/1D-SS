@@ -1,6 +1,6 @@
-package Models.Dungeon;
+package Controller.Dungeon;
 
-import Models.Dungeon.Room.RoomType;
+import Controller.Dungeon.Room.RoomType;
 
 import java.util.ArrayList;
 

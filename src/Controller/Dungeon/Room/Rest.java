@@ -1,13 +1,10 @@
-package Models.Dungeon.Room;
+package Controller.Dungeon.Room;
 
-import Models.Creatures.AbstractCharacter;
-import Models.Dungeon.AbstractRoom;
-import Models.TextBasedUI;
-import sts.Main;
-import sts.RestScene;
-import sts.TreasureScene;
+import Controller.Dungeon.AbstractRoom;
+import View.Main;
+import View.RestScene;
 
-import static sts.Main.game;
+import static View.Main.game;
 
 import java.util.ArrayList;
 

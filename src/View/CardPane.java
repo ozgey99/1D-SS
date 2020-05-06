@@ -1,48 +1,21 @@
-package sts;
+package View;
 
 import Models.Cards.AbstractCard;
 import Models.Cards.Deck;
-import Models.Creatures.Monsters.AbstractMonster;
-import Models.Dungeon.Room.Fight;
-import Models.TextBasedUI;
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
+import Controller.Dungeon.Room.Fight;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-import javafx.util.Pair;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javafx.event.EventHandler;
 
-import static sts.Main.game;
+import static View.Main.game;
 
 public class CardPane  extends GridPane {
     private int maxHand = 5;
@@ -80,6 +53,7 @@ public class CardPane  extends GridPane {
         this.setMinSize(width, height);
         this.scene = scene;
         box = new HBox(10);
+
 
     }
 

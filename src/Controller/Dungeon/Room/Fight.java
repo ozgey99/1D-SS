@@ -1,37 +1,26 @@
-package Models.Dungeon.Room;
+package Controller.Dungeon.Room;
 
-import Models.Actions.FightActions;
 import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Models.Cards.CardTarget;
 import Models.Cards.Deck;
-import Models.Cards.Red.Anger;
-import Models.Cards.Red.Bash;
-import Models.Cards.Red.Clash;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.*;
-import Models.Dungeon.AbstractRoom;
+import Controller.Dungeon.AbstractRoom;
 import Models.Object.AbstractPower;
 import Models.Utils;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import sts.Main;
+import View.Main;
 import Models.Object.AbstractRelic;
-import Models.Object.Powers.Strength;
-import Models.Object.Powers.Vulnerable;
 import Models.TextBasedUI;
-import javafx.scene.control.Control;
-import sts.Controller;
-import sts.FightScene;
+import View.FightScene;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static sts.Main.game;
+import static View.Main.game;
+import Controller.Dungeon.Dungeon;
+import View.RoomScene;
 
 public class Fight extends AbstractRoom {
 
@@ -258,7 +247,7 @@ public class Fight extends AbstractRoom {
     }
 
 
-    private void postFight() {
+    public void postFight() {
         System.out.println("I AM IN POSTFIGHT");
 
         state = FightState.POSTFIGHT;

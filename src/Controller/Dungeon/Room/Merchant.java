@@ -1,20 +1,18 @@
-package Models.Dungeon.Room;
+package Controller.Dungeon.Room;
 
-import Models.Actions.RelicActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
-import Models.Creatures.AbstractCharacter;
-import Models.Dungeon.AbstractRoom;
+import Controller.Dungeon.AbstractRoom;
 import Models.Object.AbstractRelic;
 import Models.Utils;
-import sts.Main;
-import sts.MerchantScene;
+import View.Main;
+import View.MerchantScene;
 
 
 
 import java.util.ArrayList;
 
-import static sts.Main.game;
+import static View.Main.game;
 
 public class Merchant extends AbstractRoom {
     ArrayList<AbstractCard> cards;
@@ -62,6 +60,8 @@ public class Merchant extends AbstractRoom {
                     relicPrices.add((int) (Math.random() * 400));
                     break;
                 case SHOP:
+                    relicPrices.add((int) (Math.random() * 370));
+                    break;
                 case EVENT:
                     relicPrices.add((int) (Math.random() * 350));
                     break;

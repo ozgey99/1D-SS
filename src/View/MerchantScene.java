@@ -1,25 +1,16 @@
-package sts;
+package View;
 
 import javafx.event.EventHandler;
 import Models.Cards.AbstractCard;
-import Models.Dungeon.Room.Merchant;
+import Controller.Dungeon.Room.Merchant;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import Models.Cards.Deck;
-import Models.Creatures.AbstractCharacter;
-import Models.Game;
-import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 
 import javafx.scene.input.MouseEvent;
@@ -27,14 +18,13 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import Models.Object.AbstractRelic;
 
 import java.util.ArrayList;
 
-import static sts.Main.game;
+import static View.Main.game;
 import Models.Actions.RelicActions;
 
 public class MerchantScene extends RoomScene  {
@@ -52,6 +42,7 @@ public class MerchantScene extends RoomScene  {
     static  int origHeight;
 
     public MerchantScene() {
+        super(new StackPane());
         pane = new Pane();
         gridUpper = new UpperPane(width,height/15);
         root.setMinSize( width, height);

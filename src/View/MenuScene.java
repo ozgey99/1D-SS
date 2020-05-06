@@ -1,57 +1,70 @@
-package sts;
+package View;
 
-
-import Models.Dungeon.Room.Fight;
-import Models.Game;
-import javafx.animation.*;
-import javafx.application.Application;
+import static View.Main.game;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
-import java.io.File;
+
+
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class Main extends Application {
-
-    public static Game game = new Game();
-
-    private static int width = 1300; //1920;
-    private static int height = 700; //1080;
-
-    public static Stage window;
+public class MenuScene extends RoomScene {
+    int width;
+    int height;
+    private Pane root;
+    private VBox menuBox;
 
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("START RUN", () -> {game.start();}),
-            new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> window.setScene( new TreasureScene() )),
-            new Pair<String, Runnable>("VIEW STATISTICS", () -> window.setScene( new MerchantScene() )),
-            new Pair<String, Runnable>("OPTIONS", () -> {}),
+            new Pair<String, Runnable>("START RUN", () -> {  Main.game.start();}),
+            new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> Main.window.setScene( new TreasureScene() )),
+            new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
 
 
-    private Pane root = new Pane();
-    private VBox menuBox = new VBox(-5);
+
+    public MenuScene(  ){
+        super( new StackPane() );
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        width = dim.width;
+        height = dim.height;
+          root = new Pane();
+          menuBox = new VBox(-5);
+          root = (StackPane) this.getRoot();
+        root = (StackPane) createContent();
+        root.setMinSize(width, height);
+        //root.setBackground( new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+
+    }
+    public void draw()
+    {
+
+    }
+
+    @Override
+    public void initialize() {
+
+    }
 
     private Parent createContent() {
+
         addBackground();
         addTitle();
 
@@ -65,7 +78,6 @@ public class Main extends Application {
 
         return root;
     }
-
 
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("hall.jpg"));
@@ -108,7 +120,7 @@ public class Main extends Application {
             item.setOnAction(data.getValue());
             item.setTranslateX(-300);
 
-            Rectangle clip = new Rectangle(300, 30);
+            javafx.scene.shape.Rectangle clip = new Rectangle(300, 30);
             clip.translateXProperty().bind(item.translateXProperty().negate());
 
             item.setClip(clip);
@@ -120,36 +132,7 @@ public class Main extends Application {
     }
     public void addMusic()
     {
-        Media media = new Media( "src/music.mp3" );
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-        mediaPlayer.play();
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        primaryStage.setTitle("Slay The Spire Menu");
-        primaryStage.setScene(new Scene(createContent()));
-        window = primaryStage;
-        primaryStage.show();
-        //addMusic();
-    }
-
-    public void changeWindowSize( int width, int height ){
-
-        this.width = width;
-        this.height = height;
-    }
-    public void switch2Fight( Stage stage ){
-        Pane fight = new Pane();
-        // stage.setScene( new Scene() );
-    }
-
-    public static void main(String[] args) {
-
-        game.getDungeon().generate();
-        launch(args);
-
+        AudioClip music = new AudioClip(this.getClass().getResource("music.mp3").toString());
+        music.play();
     }
 }

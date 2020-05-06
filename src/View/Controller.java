@@ -1,14 +1,14 @@
-package sts;
+package View;
 
 import Models.Cards.AbstractCard;
 import Models.Cards.Deck;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
 import Models.Creatures.Monsters.MonsterMove;
-import Models.Dungeon.Dungeon;
-import Models.Dungeon.Room.Fight;
+import Controller.Dungeon.Dungeon;
+import Controller.Dungeon.Room.Fight;
 
-import static sts.Main.game;
+import static View.Main.game;
 
 public class Controller {
 

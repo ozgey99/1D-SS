@@ -1,4 +1,4 @@
-package sts;
+package View;
 
 import Models.Object.AbstractPower;
 import Models.Object.AbstractRelic;
@@ -11,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -21,7 +20,7 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
-import static sts.Main.game;
+import static View.Main.game;
 
 public class UpperPane extends GridPane {
     private ArrayList<Text> textList;
@@ -129,6 +128,7 @@ public class UpperPane extends GridPane {
 
     public void initialize()
     {
+        clearPane();
         // box 1 -- health
         healthText.setText(game.getPlayer().getCurrentHP()+ " / "+ game.getPlayer().getMaxHP());
         healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
@@ -178,7 +178,8 @@ public class UpperPane extends GridPane {
             Node desc = relicDescription(game.getPlayer().relics,i, width/2, height-20);
             pane.getChildren().add(desc);
             desc.setVisible(false);
-            if(!relicDesc){
+
+            if(! this.getChildren().contains(pane)){
                 this.getChildren().add(pane);
                 relicDesc = true;
             }
@@ -211,9 +212,9 @@ public class UpperPane extends GridPane {
             Node desc = powerDescription(game.getPlayer().powers,i, width/2, height-20);
             pane.getChildren().add(desc);
             desc.setVisible(false);
-            if(!powerDesc){
+            if(! this.getChildren().contains(pane)){
                 this.getChildren().add(pane);
-                powerDesc = true;
+                relicDesc = true;
             }
 
             powerImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -237,6 +238,7 @@ public class UpperPane extends GridPane {
     }
 
     private void clearPane(){
+
         box.getChildren().clear();
         box.getChildren().removeAll();
         box1.getChildren().clear();
@@ -247,6 +249,7 @@ public class UpperPane extends GridPane {
         box2.getChildren().clear();
         box3.getChildren().removeAll();
         box3.getChildren().clear();
+        box4.getChildren().clear();
         box4.getChildren().removeAll();
         energy.getChildren().clear();
         energy.getChildren().removeAll();
@@ -305,10 +308,6 @@ public class UpperPane extends GridPane {
             Node desc = relicDescription(game.getPlayer().relics,i, width/2, height-20);
             pane.getChildren().add(desc);
             desc.setVisible(false);
-            if(!relicDesc){
-                this.getChildren().add(pane);
-                relicDesc = true;
-            }
 
             relicImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
@@ -338,10 +337,6 @@ public class UpperPane extends GridPane {
             Node desc = powerDescription(game.getPlayer().powers,i, width/2, height-20);
             pane.getChildren().add(desc);
             desc.setVisible(false);
-            if(!powerDesc){
-                this.getChildren().add(pane);
-                powerDesc = true;
-            }
 
             powerImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override

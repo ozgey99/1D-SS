@@ -1,6 +1,5 @@
-package sts;
+package View;
 
-import javafx.beans.binding.Bindings;
 import javafx.scene.effect.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;

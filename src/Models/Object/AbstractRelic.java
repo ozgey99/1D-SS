@@ -1,8 +1,5 @@
 package Models.Object;
 
-import Models.Creatures.AbstractCharacter;
-import Models.Dungeon.Room.Fight;
-
 public abstract class AbstractRelic extends AbstractObject {
     protected String name;
     protected String description;

@@ -6,12 +6,11 @@ import Models.Cards.Deck;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;
 import Models.Creatures.Monsters.MonsterMove;
-import Models.Dungeon.Dungeon;
-import Models.Dungeon.Room.Fight;
-import Models.Dungeon.Room.Merchant;
-import Models.Dungeon.Room.Treasure;
+import Controller.Dungeon.Dungeon;
+import Controller.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Treasure;
 import Models.Object.AbstractRelic;
-import sts.Main;
+import View.Main;
 
 import java.util.Scanner;
 

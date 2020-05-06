@@ -2,9 +2,7 @@ package Models.Cards.Red;
 
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
-import Models.Dungeon.Room.Fight;
-
-import java.util.ArrayList;
+import Controller.Dungeon.Room.Fight;
 
 public class Bloodletting extends AbstractCard {
 

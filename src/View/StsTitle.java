@@ -1,4 +1,4 @@
-package sts;
+package View;
 
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Pane;

@@ -1,13 +1,13 @@
-package Models.Dungeon;
+package Controller.Dungeon;
 
-import Models.Dungeon.Room.Fight;
-import Models.Dungeon.Room.Merchant;
-import Models.Dungeon.Room.Rest;
-import Models.Dungeon.Room.Treasure;
-import sts.FightScene;
+import Controller.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Merchant;
+import Controller.Dungeon.Room.Rest;
+import Controller.Dungeon.Room.Treasure;
+import View.FightScene;
 import java.util.ArrayList;
 
-import static sts.Main.game;
+import static View.Main.game;
 
 public class Dungeon {
     private int act;
@@ -22,7 +22,8 @@ public class Dungeon {
         this.name = "The Exordium";
     }
 
-    public void generate() {
+    public void
+    generate() {
 
         //assign number to n
         int n = 5;
