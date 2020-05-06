@@ -3,6 +3,7 @@ package Controller.Dungeon.Room;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Controller.Dungeon.AbstractRoom;
+import Models.Creatures.Pet;
 import Models.Object.AbstractRelic;
 import Models.Utils;
 import View.Main;
@@ -19,6 +20,8 @@ public class Merchant extends AbstractRoom {
     ArrayList<Integer> cardPrices;
     ArrayList<AbstractRelic> relics;
     ArrayList<Integer> relicPrices;
+    Pet pet;
+    int petPrice;
 
     public Merchant(ArrayList<AbstractRoom> c) {
         type = RoomType.SHOP;
@@ -28,9 +31,14 @@ public class Merchant extends AbstractRoom {
         cardPrices = new ArrayList<>();
         relics = new ArrayList<>();
         relicPrices = new ArrayList<>();
+        petPrice = 100;
     }
 
     public void generate() {
+        if(game.getPlayer().getPet() == null){
+            pet = new Pet();
+        }
+
         ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
 
         for (AbstractCard y : game.getPlayer().masterDeck.getCardList()) {
@@ -152,5 +160,13 @@ public class Merchant extends AbstractRoom {
 
     public ArrayList<Integer> getRelicPrices() {
         return relicPrices;
+    }
+
+    public Pet getPet(){
+        return pet;
+    }
+
+    public int getPetPrice(){
+        return petPrice;
     }
 }
