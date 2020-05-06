@@ -41,14 +41,14 @@ public class HappyFlower extends AbstractRelic {
     public void onDamage(AbstractCreature c) {}
 
     @Override
-    public void onTurnStart(Fight f) {
-        turn++;
-    }
+    public void onTurnStart(Fight f) {}
 
     @Override
     public void onTurnStart(AbstractCreature c) {
+        turn++;
         if(turn % 3 == 0 && c instanceof AbstractCharacter){
             ((AbstractCharacter) c).changeEnergy(amount);
         }
+        System.out.println("turn: " + turn);
     }
 }

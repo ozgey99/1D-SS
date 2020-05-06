@@ -126,10 +126,6 @@ public class Fight extends AbstractRoom {
     private void preTurn() {
         System.out.println("I AM IN PRETURN");
         state = FightState.PRETURN;
-        for (AbstractRelic r : player.relics) {
-            r.onTurnStart(this);
-            r.onTurnStart(player);
-        }
 
         if (turn != 1) {
             player.recharge();
@@ -138,6 +134,11 @@ public class Fight extends AbstractRoom {
         }
         else
             player.changeEnergy( 3);
+
+        for (AbstractRelic r : player.relics) {
+            r.onTurnStart(player);
+            r.onTurnStart(this);
+        }
 
         game.currentScene.draw();
 
@@ -185,8 +186,8 @@ public class Fight extends AbstractRoom {
     private void postTurn() {
         System.out.println("I AM IN POSTTURN");
         state = FightState.POSTTURN;
+        turn++;
         nextState();
-
     }
 
     private void monsterPreTurn() {
