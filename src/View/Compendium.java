@@ -1,71 +1,38 @@
 package View;
 
-import Controller.Dungeon.Room.Merchant;
-import Models.Cards.AbstractCard;
-import Models.Object.AbstractRelic;
-import javafx.animation.ScaleTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-
-import java.util.ArrayList;
 
 import static View.Main.game;
 
 public class Compendium extends RoomScene {
-    Pane redPane;
-    VBox vbox;
-    private UpperPane gridUpper;
-    RemoveCard removeCardPane;
-    ArrayList<AbstractCard> cards;
-
+    Pane pane;
+    HBox box;
+    HBox options;
+    SmithPane smithPane;
     ImageView turnBack;
-    ImageView removeButton;
-    static boolean added;
-    static int origWidth;
-    static  int origHeight;
+    ImageView cardLibrary;
+    ImageView relicCollection;
     ImageView back;
-    final ScrollBar sc;
+    ImageView ss_back;
+    static boolean added;
 
     public Compendium(){
         super(new StackPane());
-        redPane = new Pane();
-        sc = new ScrollBar();
-        gridUpper = new UpperPane(width,height/15);
-        root.setMinSize( width, height);
-        removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
-        removeButton = new ImageView(new Image("removeButton.png"));
-        cards = game.getPlayer().masterDeck.getCardList();
-
-        added = false;
-
+        pane = new Pane();
+        box = new HBox(100);
+        options = new HBox();
+        turnBack = new ImageView(new Image("goAhead.png"));
+        ss_back = new ImageView(new Image("ss_back.jpg"));
+        cardLibrary = new ImageView(new Image("cardLibrary.png"));
+        relicCollection = new ImageView(new Image("relicCollection.png"));
         back = new ImageView(new Image("up.png"));
-        //pane.setPadding(new Insets(150,400,300,250));
-        redPane.setPrefSize(250, 150);
-        redPane.setPrefHeight(400);
-        redPane.setPrefWidth(650);
-        vbox = new VBox(height/70);
-        vbox.setPadding(new Insets(height/(46.0/10),width/(32.0/10),height/(46.0/10),width/(52.0/10)));
-        //vbox.setPadding(new Insets(150,400,100,250));
         root.setMinSize( width, height);
-        root.getChildren().add(back);
-        root.getChildren().add(redPane);
+        added = false;
 
     }
     @Override
@@ -73,132 +40,93 @@ public class Compendium extends RoomScene {
 
     }
 
+    public void  cardLibrary(){
+        game.currentScene = new CardCollection();
+        Main.window.setScene(
+                game.currentScene);
+        game.currentScene.initialize();
+    }
+
     @Override
     public void initialize() {
         addBackground();
-        cards();
-        tab();
+        showOptions();
+        pane.getChildren().add(cardLibrary);
+        pane.getChildren().add(relicCollection);
+        root.getChildren().add(pane);
+        proceed();
+
     }
 
-    public void tab(){
-        TabPane tabpane = new TabPane();
-        tabpane.setTabMinHeight(20);
-        tabpane.setTabMinWidth(200);
-        tabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-        // create multiple tabs
-        String[] types = {"RED", "GREEN", "BLUE", "COLORLESS", "CURSES"};
-        int count = 0;
-        for (int i = 0; i < 5; i++) {
-
-            Tab tab = new Tab(types[i]);
-            if(count == 0)
-                tab.setContent(redPane);
-
-            count++;
-            // add tab
-            tabpane.getTabs().add(tab);
-        }
-        root.getChildren().add(tabpane);
-        root.setAlignment(tabpane, Pos.CENTER);
+    public void proceed(){
+        turnBack.setPreserveRatio(true);
+        turnBack.setFitHeight(height/7);
+        turnBack.setX(width/5+ width/3*2);
+        turnBack.setY(height/4*3);
+        pane.getChildren().add( turnBack );
+        turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                game.currentScene = new MenuScene();
+                Main.window.setScene(
+                        game.currentScene);
+                game.currentScene.initialize();
+            }
+        });
     }
 
-    public void cards(){
-        Group group = new Group();
-        sc.setMin(0);
-        sc.setOrientation(Orientation.VERTICAL);
-        sc.setPrefHeight(height-20);
-        sc.setMax(360);
-        group.getChildren().addAll(vbox, sc);
-        redPane.getChildren().addAll(group);
-        //pane.getChildren().add(vbox);
-        sc.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                                Number old_val, Number new_val) {
-                vbox.setLayoutY(-new_val.doubleValue());
+    public void showOptions(){
+        System.out.println("INITIALIZE IN REST SCENE");
+        int imageWidth = width / 6;
+        int imageHeight = height / 2;
+
+        cardLibrary.setFitWidth(imageWidth);
+        cardLibrary.setFitHeight(imageHeight);
+        cardLibrary.setX(width/6*2);
+        cardLibrary.setY(height/3);
+        cardLibrary.setVisible(true);
+        cardLibrary.setPreserveRatio(true);
+        cardLibrary.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                {
+                    System.out.println("ASCENDING CALLED IN REST SCENE");
+                    int hp = (game.getPlayer().getMaxHP() * 3) / 10;
+                    game.getPlayer().changeHealth(hp);
+                    draw();
+                    cardLibrary();
+
+                }
             }
         });
 
-        System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
-        vbox.getChildren().removeAll();
-        vbox.getChildren().clear();
-        int size = game.getPlayer().masterDeck.getSize();
 
-        for (int i = 0; i < size; i++){
-            HBox hbox = new HBox();
-            hbox.getChildren().clear();
-            for(int count = 0; count < 7; count++ ){
-                String name = game.getPlayer().masterDeck.getCard(i).getName();
-                System.out.println(name);
-                name = name + ".png";
-                Rectangle rect = new Rectangle();
-                rect.setFill(new ImagePattern(new Image(name)));
-                rect.setWidth(width/13);
-                rect.setHeight(height/(46/10));
-                rect.setVisible(true);
-                int price = 0; // şimdilik
-                int j = i;
-                rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent t) {
+        relicCollection.setVisible(true);
+        relicCollection.setPreserveRatio(true);
+        relicCollection.setFitWidth(imageWidth);
+        relicCollection.setFitHeight(imageHeight);
+        relicCollection.setX(width/6*2+ imageWidth);
+        relicCollection.setY(height/3);
+        relicCollection.setVisible(true);
+        relicCollection.setPreserveRatio(true);
+        relicCollection.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                {
+                    // yap şovunu
+                    draw();
 
-                        if (game.getPlayer().getGold() >= price) {
-                            System.out.println("gold before: "+ game.getPlayer().getGold());
-                            game.getPlayer().changeGold(-price);
+                }
 
-                            System.out.println("gold after :" + game.getPlayer().getGold());
-                            game.getPlayer().masterDeck.removeCard(game.getPlayer().masterDeck.getCard(j));
-                            draw();
-                            System.out.println("========AFTER CLICK MASTER DECK=========");
-                            for(int k=0; k<game.getPlayer().masterDeck.getSize(); k++){
-                                System.out.println(game.getPlayer().masterDeck.getCard(k).getName());
-                            }
-
-                        } else {
-                            System.out.println("You don't have enough gold for card");
-                        }
-
-                    }
-                });
-
-                rect.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect);
-                        scaleTransition.setToX(1.5f);
-                        scaleTransition.setToY(1.5f);
-                        scaleTransition.setCycleCount(1);
-                        scaleTransition.setAutoReverse(true);
-                        scaleTransition.play();
-                    }
-                });
-
-                rect.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect);
-                        scaleTransition.setToX(1);
-                        scaleTransition.setToY(1);
-                        scaleTransition.setAutoReverse(true);
-                        scaleTransition.play();
-                    }
-                });
-
-                hbox.getChildren().add(rect);
-                if(count != 6)
-                    i++;
-                if(i == size)
-                    break;
             }
-            vbox.getChildren().add(hbox);
-
-        }
+        });
     }
-
 
     public void addBackground() {
         back.setFitWidth(width);
         back.setFitHeight(height);
-        back.setOpacity(0.80);
-
+        back.setOpacity(0.90);
+        root.getChildren().add(ss_back);
+        root.getChildren().add(back);
     }
 }
