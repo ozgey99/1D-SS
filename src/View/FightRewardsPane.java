@@ -1,10 +1,10 @@
-package sts;
+package View;
 
 import Models.Actions.RelicActions;
 import Models.Cards.AbstractCard;
-import Models.Dungeon.Room.Fight;
-import Models.Dungeon.Room.Treasure;
+import Controller.Dungeon.Room.Fight;
 import Models.Object.AbstractRelic;
+import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -23,10 +23,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
-import static sts.Main.game;
+import static View.Main.game;
 
 public class FightRewardsPane extends StackPane {
 
@@ -36,22 +37,42 @@ public class FightRewardsPane extends StackPane {
     Node fightRewards;
     ImageView proceed;
     Pane pane;
-
+    ImageView tick;
 
     public FightRewardsPane(int width, int height){
         this.width = width;
         this.height = height;
         pane =  new Pane();
         fightRewards = rewards();
-        this.getChildren().add(fightRewards);
         proceed = new ImageView(new Image("goAhead.png"));
         back = new ImageView(new Image("up.png"));
+        tick = new ImageView(new Image("tick.png"));
         this.getChildren().add(pane);
+        System.out.println("width : "+width);
+        System.out.println("height : "+height);
     }
 
     public void initialize(){
         background();
-        proceed();
+        pane.getChildren().add(fightRewards);
+        chosen();
+    }
+
+    public void chosen(){
+        tick.setPreserveRatio(true);
+        tick.setFitHeight(height/(93.0/10)); //tick.setFitHeight(75);
+        tick.setX(width/2); //tick.setX(width/2-100+100); // x of node
+        tick.setY(height/2.0-height/5.0+ height/(35.0/10)); //tick.setY(height/2-140+200);
+        tick.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                fightRewards.setVisible(false);
+                tick.setVisible(false);
+                //draw();
+                proceed();
+            }
+        });
+        pane.getChildren().add( tick );
     }
 
     public void visible(boolean bool){
@@ -138,7 +159,7 @@ public class FightRewardsPane extends StackPane {
                 relicImage.setPreserveRatio(true);
                 relicImage.setFitHeight(height/7.0); //relicImage.setFitHeight(100);
                 //box2.setPadding(new Insets(y/2,100, 100, x/2-90 ));
-                box2.setPadding(new Insets(height/2.0,height/13.0, height/7.0, height/(232.0/100) ));
+                box2.setPadding(new Insets(height/2.0,width/13.0, height/7.0, width/(232.0/100) ));
                 box2.getChildren().addAll(relicImage, relicDesc);
                 g.getChildren().add(box2);
                 relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -204,7 +225,7 @@ public class FightRewardsPane extends StackPane {
     private  void background(){
         back.setFitWidth(width);
         back.setFitHeight(height);
-        back.setOpacity(0.80);
+        back.setOpacity(0.90);
         pane.getChildren().add(back);
     }
 }

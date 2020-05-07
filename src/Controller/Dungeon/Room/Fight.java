@@ -43,12 +43,16 @@ public class Fight extends AbstractRoom {
     int goldAmount;
     ArrayList<AbstractCard> cardRewards;
 
+    static boolean added;
+
     public Fight(ArrayList<AbstractRoom> c, boolean isElite, boolean isBoss) {
         type = RoomType.FIGHT;
         this.isBoss = isBoss;
         this.isElite = isElite;
         children = c;
         done = false;
+        added = false;
+        cardRewardAmount = 3;
         cardRewards = new ArrayList<>();
         monsters = new ArrayList<>();
         relics = new ArrayList<>();
@@ -310,6 +314,12 @@ public class Fight extends AbstractRoom {
             else if(m.get(0) instanceof GreenLouse)
                 monsters.add(new RedLouse());
         }
+        if(!added){
+            generateRewards();
+            relicReward();
+            added = true;
+        }
+
     }
 
     public void generateRewards() {
@@ -323,39 +333,32 @@ public class Fight extends AbstractRoom {
             }
         }
 
-        for (int i = 0; i < cardRewardAmount; i++)
+        for (int i = 0; i < cardRewardAmount; i++){
             cardRewards.add(allCards.get(i));
-            break; // sonradan ekledim
         }
-
-
         goldAmount = (int) (Math.random() * 100) + 10;
+
     }
 
-    /*private void generateRewards() {
-        ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
-        Collections.shuffle(allCards);
-        cardRewardAmount = 0;
-        for (AbstractCard c : allCards) {
-            if(cardRewardAmount ==3) break;
-            if (!Utils.containsInstance(game.getPlayer().masterDeck.getCardList(), c.getClass())) {
-                cardRewards.add(c);
-            }
-            cardRewardAmount++;
-        }
-        goldAmount = (int) (Math.random() * 100) + 10;
-    }*/
 
-    private void relicReward() {
+    public void relicReward() {
+
         ArrayList<AbstractRelic> allRelics = Utils.getAllRelics();
         Collections.shuffle(allRelics);
         for (AbstractRelic r : allRelics) {
-            if (!Utils.containsInstance(Main.game.getPlayer().relics, r.getClass())) {
-                relics.add(r);
-                break;
+
+            boolean exist = false;
+            for (AbstractRelic y : game.getPlayer().relics) {
+
+                if(y.getName() == r.getName())
+                    exist = true;
+
             }
+            if(!exist)
+                relics.add(r);
         }
-        goldAmount = (int) (Math.random() * 100) + 10;
+
+
     }
 
     // Getters and setters.

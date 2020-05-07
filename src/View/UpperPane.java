@@ -230,9 +230,12 @@ public class UpperPane extends GridPane {
                 }
             });
         }
-        this.getChildren().add(pane);
         box.getChildren().addAll(box1,block,energy,box2,box3,box4);
-        this.getChildren().add(box);
+
+        if(! this.getChildren().contains(box)){
+            this.getChildren().add(box);
+            relicDesc = true;
+        }
 
 
     }

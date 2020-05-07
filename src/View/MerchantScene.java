@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import Models.Cards.AbstractCard;
 import Controller.Dungeon.Room.Merchant;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -43,18 +44,19 @@ public class MerchantScene extends RoomScene  {
 
     public MerchantScene() {
         super(new StackPane());
+        root.setMinSize( width, height);
+        added = false;
+        origWidth = width;
+        origHeight = height;
         pane = new Pane();
         gridUpper = new UpperPane(width,height/15);
-        root.setMinSize( width, height);
         removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
         removeButton = new ImageView(new Image("removeButton.png"));
+        turnBack = new ImageView(new Image("goAhead.png"));
         cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
         cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
         relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
         relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
-        added = false;
-        origWidth = width;
-        origHeight = height;
     }
 
     @Override
@@ -63,43 +65,43 @@ public class MerchantScene extends RoomScene  {
         addBackground();
         shopCards();
         shopRelics();
-        nextButton();
+        proceed();
         cardRemovalService();
         root.getChildren().add(pane);
+        pane.getChildren().add(gridUpper);
+        removeCardPane.stack.getChildren().add( turnBack );
 
     }
 
-    private void initializeUpper()
+    public void initializeUpper()
     {
         gridUpper.initialize();
         gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
         gridUpper.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         GridPane.setConstraints(gridUpper, 0,0,1,1);
-        pane.getChildren().add(gridUpper);
         gridUpper.setMinWidth(width);
-        //gridUpper.setMinHeight(height/9);
 
     }
 
     public void turnBack(){
-        turnBack = new ImageView(new Image("turnBack.png"));
+
         turnBack.setPreserveRatio(true);
         turnBack.setFitHeight(height/7); //turnBack.setFitHeight(100);
         turnBack.setX(width/5);
         turnBack.setY(height/4*3);
-
-        removeCardPane.pane.getChildren().add( turnBack );
+        removeCardPane.stack.setAlignment(turnBack,Pos.BOTTOM_RIGHT);
         turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 removeCardPane.visible(false);
             }
         });
+        draw();
     }
 
     @Override
-    public void draw() {}
+    public void draw() {initializeUpper();}
 
     public void cardRemovalService(){
         removeButton.setPreserveRatio(true);
@@ -122,8 +124,8 @@ public class MerchantScene extends RoomScene  {
         });
     }
 
-    public void nextButton(){
-        ImageView nextButton = new ImageView(new Image("nextButton.png"));
+    public void proceed(){
+        ImageView nextButton = new ImageView(new Image("goAhead.png"));
         nextButton.setPreserveRatio(true);
         nextButton.setFitHeight(height/14);
         nextButton.setX(width-width/3); //nextButton.setX(width-400);

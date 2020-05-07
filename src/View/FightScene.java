@@ -44,7 +44,7 @@ public class FightScene extends RoomScene {
 
     }
 
-    public  void getRewards(){
+    public void getRewards(){
         fightRewards.visible(true);
         fightRewards.initialize();
         root.getChildren().add(fightRewards);
@@ -145,14 +145,9 @@ public class FightScene extends RoomScene {
             }
             else {
                 ((Fight) game.getDungeon().getCurrentRoom()).postFight();
-                //game.getDungeon().ascend();
-                //endTurn.setFill(new ImagePattern(new Image("win.jpg")));
-                //endTurn.setHeight(height);
-                //endTurn.setWidth(width);     // ---- background'ı sen de böyle ekle
                 System.out.println("kazandın");
-                fightRewards.visible(true);
-                fightRewards.initialize();
-                root.getChildren().add(fightRewards);
+                getRewards();
+                //game.getDungeon().ascend();
             }
 
         }
@@ -164,8 +159,6 @@ public class FightScene extends RoomScene {
                 Main.window.setScene(
                         game.currentScene);
                 game.currentScene.initialize();
-
-
 
 
         }
