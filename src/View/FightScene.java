@@ -145,9 +145,7 @@ public class FightScene extends RoomScene {
             }
             else {
                 ((Fight) game.getDungeon().getCurrentRoom()).postFight();
-                System.out.println("kazandın");
                 getRewards();
-                //game.getDungeon().ascend();
             }
 
         }

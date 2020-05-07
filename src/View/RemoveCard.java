@@ -46,11 +46,16 @@ public class RemoveCard extends StackPane {
         price = 75;
 
         stack = new StackPane();
+        back.setFitWidth(width);
+        back.setFitHeight(height);
+        stack.getChildren().add(back);
+
         stack.setPadding(new Insets(150, 200, 150, 250));
         vbox = new VBox(height/70);
 
         stack.getChildren().add(sp);
         stack.setAlignment(sp, Pos.CENTER);
+
         this.setMinSize( width, height);
         this.getChildren().add(stack);
 

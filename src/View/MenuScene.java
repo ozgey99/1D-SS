@@ -33,7 +33,7 @@ public class MenuScene extends RoomScene {
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("START RUN", () -> {  Main.game.start();}),
-            new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> Main.window.setScene( new TreasureScene() )),
+            new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> {startCom();}),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
@@ -56,6 +56,13 @@ public class MenuScene extends RoomScene {
     public void draw()
     {
 
+    }
+
+    public void startCom(){
+        game.currentScene = new Compendium();
+        Main.window.setScene(
+                game.currentScene);
+        game.currentScene.initialize();
     }
 
     @Override

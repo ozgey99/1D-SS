@@ -9,8 +9,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -25,14 +29,12 @@ import java.util.ArrayList;
 import static View.Main.game;
 
 public class Compendium extends RoomScene {
-    Pane pane;
+    Pane redPane;
     VBox vbox;
     private UpperPane gridUpper;
     RemoveCard removeCardPane;
     ArrayList<AbstractCard> cards;
-    ArrayList<AbstractRelic> relics;
-    ArrayList<Integer> cardPrices;
-    ArrayList<Integer> relicPrices;
+
     ImageView turnBack;
     ImageView removeButton;
     static boolean added;
@@ -43,30 +45,28 @@ public class Compendium extends RoomScene {
 
     public Compendium(){
         super(new StackPane());
-        pane = new Pane();
+        redPane = new Pane();
         sc = new ScrollBar();
         gridUpper = new UpperPane(width,height/15);
         root.setMinSize( width, height);
         removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
         removeButton = new ImageView(new Image("removeButton.png"));
-        cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
-        cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
-        relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
-        relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
+        cards = game.getPlayer().masterDeck.getCardList();
+
         added = false;
 
         back = new ImageView(new Image("up.png"));
-        pane = new Pane();
         //pane.setPadding(new Insets(150,400,300,250));
-        pane.setPrefSize(250, 150);
-        pane.setPrefHeight(400);
-        pane.setPrefWidth(650);
+        redPane.setPrefSize(250, 150);
+        redPane.setPrefHeight(400);
+        redPane.setPrefWidth(650);
         vbox = new VBox(height/70);
         vbox.setPadding(new Insets(height/(46.0/10),width/(32.0/10),height/(46.0/10),width/(52.0/10)));
         //vbox.setPadding(new Insets(150,400,100,250));
         root.setMinSize( width, height);
         root.getChildren().add(back);
-        root.getChildren().add(pane);
+        root.getChildren().add(redPane);
+
     }
     @Override
     public void draw() {
@@ -75,9 +75,31 @@ public class Compendium extends RoomScene {
 
     @Override
     public void initialize() {
-        initializeUpper();
         addBackground();
         cards();
+        tab();
+    }
+
+    public void tab(){
+        TabPane tabpane = new TabPane();
+        tabpane.setTabMinHeight(20);
+        tabpane.setTabMinWidth(200);
+        tabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        // create multiple tabs
+        String[] types = {"RED", "GREEN", "BLUE", "COLORLESS", "CURSES"};
+        int count = 0;
+        for (int i = 0; i < 5; i++) {
+
+            Tab tab = new Tab(types[i]);
+            if(count == 0)
+                tab.setContent(redPane);
+
+            count++;
+            // add tab
+            tabpane.getTabs().add(tab);
+        }
+        root.getChildren().add(tabpane);
+        root.setAlignment(tabpane, Pos.CENTER);
     }
 
     public void cards(){
@@ -86,10 +108,8 @@ public class Compendium extends RoomScene {
         sc.setOrientation(Orientation.VERTICAL);
         sc.setPrefHeight(height-20);
         sc.setMax(360);
-
-
         group.getChildren().addAll(vbox, sc);
-        pane.getChildren().addAll(group);
+        redPane.getChildren().addAll(group);
         //pane.getChildren().add(vbox);
         sc.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov,
@@ -102,9 +122,6 @@ public class Compendium extends RoomScene {
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
         int size = game.getPlayer().masterDeck.getSize();
-        int paneSize = size/7;
-        if(size % 7 != 0)
-            paneSize++;
 
         for (int i = 0; i < size; i++){
             HBox hbox = new HBox();
@@ -177,18 +194,6 @@ public class Compendium extends RoomScene {
         }
     }
 
-    private void initializeUpper()
-    {
-        gridUpper.initialize();
-        gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
-        gridUpper.setBorder(new Border(new BorderStroke(Color.BLACK,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        GridPane.setConstraints(gridUpper, 0,0,1,1);
-        pane.getChildren().add(gridUpper);
-        gridUpper.setMinWidth(width);
-        //gridUpper.setMinHeight(height/9);
-
-    }
 
     public void addBackground() {
         back.setFitWidth(width);

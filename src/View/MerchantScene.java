@@ -95,6 +95,7 @@ public class MerchantScene extends RoomScene  {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 removeCardPane.visible(false);
+                initializeUpper();
             }
         });
         draw();
@@ -120,6 +121,7 @@ public class MerchantScene extends RoomScene  {
                     added = true;
                 }
                 turnBack();
+
             }
         });
     }
