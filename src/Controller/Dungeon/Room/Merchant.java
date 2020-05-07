@@ -56,11 +56,13 @@ public class Merchant extends AbstractRoom {
         }
 
 
-        while (relics.size() != 4) {
+        while (allRelics.size() > 0 && relics.size() != 4) {
             int ind = (int) (Math.random() * (allRelics.size() - 1));
-            relics.add(allRelics.get(ind));
+            AbstractRelic temp = allRelics.get(ind);
+            relics.add(temp);
             allRelics.remove(ind);
-            switch (allRelics.get(ind).getRarity()){
+
+            switch (temp.getRarity()){
                 case BOSS:
                     relicPrices.add((int) (Math.random() * 450));
                     break;
