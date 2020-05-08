@@ -28,6 +28,13 @@ public class Game {
         dungeon.getCurrentRoom().start();
     }
 
+    public void startMap(){
+        dungeon = new Dungeon();
+        player = new Ironclad();
+        player.initialize();
+        game.getDungeon().generate();
+    }
+
     public Dungeon getDungeon() {
         return dungeon;
     }

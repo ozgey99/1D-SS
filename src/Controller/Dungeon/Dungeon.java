@@ -82,7 +82,7 @@ public class Dungeon {
 
         ArrayList<AbstractRoom> c = new ArrayList<>();
         c.add(beginningTreasure);
-
+        System.out.println("____________________________________________");
         Fight beginningFight = new Fight(c, false, false);
 
         currentRoom = beginningFight;
@@ -97,10 +97,13 @@ public class Dungeon {
     }
 
     public void printMap(AbstractRoom r){
-        System.out.println(r.getType());
-        if( r != null && r.getChildren() != null)
-            for(int i = 0; i < r.getChildren().size(); i++)
-                printMap(r.getChildren().get(i));
+        if( r != null ) {
+            System.out.println(r.getType());
+            if (r.getChildren() != null) {
+                for (int i = 0; i < r.getChildren().size(); i++)
+                    printMap(r.getChildren().get(i));
+            }
+        }
     }
 
     public String getName() {

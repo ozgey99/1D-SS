@@ -33,6 +33,7 @@ public class MenuScene extends RoomScene {
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("START RUN", () -> {  Main.game.start();}),
+            new Pair<String, Runnable>("VIEW MAP", () -> Main.window.setScene( new MapScene() )),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> Main.window.setScene( new TreasureScene() )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
@@ -40,7 +41,7 @@ public class MenuScene extends RoomScene {
 
 
 
-    public MenuScene(  ){
+    public MenuScene(){
         super( new StackPane() );
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         width = dim.width;
