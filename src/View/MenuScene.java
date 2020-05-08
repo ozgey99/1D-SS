@@ -59,6 +59,13 @@ public class MenuScene extends RoomScene {
 
     }
 
+    public void startCom(){
+        game.currentScene = new Compendium();
+        Main.window.setScene(
+                game.currentScene);
+        game.currentScene.initialize();
+    }
+
     @Override
     public void initialize() {
 

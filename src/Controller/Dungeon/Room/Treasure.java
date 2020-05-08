@@ -74,7 +74,6 @@ public class Treasure extends AbstractRoom {
 
         System.out.println("TREASURE START CALLED");
 
-
         relicReward();
         cardReward();
         game.currentScene = new TreasureScene();

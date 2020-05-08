@@ -2,6 +2,7 @@ package View;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,6 +19,7 @@ public class RestScene extends RoomScene {
     ImageView turnBack;
     ImageView rest;
     ImageView smith;
+    static boolean added;
     public RestScene()
     {
         super(new StackPane());
@@ -30,7 +32,24 @@ public class RestScene extends RoomScene {
         gridUpper = new UpperPane(width,height/15);
         smithPane  = new SmithPane(width/3*2 , height/9*6);
         root.setMinSize( width, height);
+        added = false;
+    }
 
+    public void turnBack(){
+        turnBack = new ImageView(new Image("goAhead.png"));
+        turnBack.setPreserveRatio(true);
+        turnBack.setFitHeight(height/7); //turnBack.setFitHeight(100);
+        turnBack.setX(width/5);
+        turnBack.setY(height/4*3);
+
+        smithPane.stack.getChildren().add( turnBack );
+        smithPane.stack.setAlignment(turnBack, Pos.BOTTOM_RIGHT);
+        turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                smithPane.visible(false);
+            }
+        });
     }
 
     private void initializeUpper()
@@ -53,6 +72,8 @@ public class RestScene extends RoomScene {
         pane.getChildren().add(rest);
         pane.getChildren().add(smith);
         root.getChildren().add(pane);
+        proceed();
+
     }
 
     public void proceed(){
@@ -70,16 +91,6 @@ public class RestScene extends RoomScene {
         });
     }
 
-    /*public void proceedForSmith(){
-        smithPane.pane.getChildren().add( turnBack );
-        turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                smithPane.visible(false);
-                game.getDungeon().ascend();
-            }
-        });
-    }*/
 
     public void showOptions(){
         System.out.println("INITIALIZE IN REST SCENE");
@@ -99,10 +110,10 @@ public class RestScene extends RoomScene {
                     System.out.println("ASCENDING CALLED IN REST SCENE");
                     int hp = (game.getPlayer().getMaxHP() * 3) / 10;
                     game.getPlayer().changeHealth(hp);
-                    proceed();
                     draw();
                     rest.setDisable(true);
                     smith.setDisable(true);
+
                 }
             }
         });
@@ -123,9 +134,12 @@ public class RestScene extends RoomScene {
                     smithPane.visible(true);
                     smithPane.addBackground();
                     smithPane.initialize();
-                    root.getChildren().add(smithPane);
-                    proceed();
+                    if(!added){
+                        root.getChildren().add(smithPane);
+                        added = true;
+                    }
                     draw();
+                    turnBack();
                     rest.setDisable(true);
                     smith.setDisable(true);
                 }

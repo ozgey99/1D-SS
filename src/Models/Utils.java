@@ -2,6 +2,7 @@ package Models;
 
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
+import Models.Cards.Colorless.Dazed;
 import Models.Cards.Red.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.*;
@@ -28,6 +29,7 @@ public class Utils {
         c.add(new Clash());
         c.add(new Cleave());
         c.add(new Combust());
+        c.add(new Dazed()); // -------
         c.add(new Entrench());
         c.add(new Havoc());
         c.add(new Hemokinesis());

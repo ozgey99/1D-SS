@@ -16,7 +16,7 @@ import static View.Main.game;
 
 public class FightScene extends RoomScene {
 
-
+    private FightRewardsPane fightRewards;
     private StackPane fightPane;
     private GridPane gridFight;
     CharPane gridLeft; //character pane
@@ -32,7 +32,7 @@ public class FightScene extends RoomScene {
         super(new StackPane());
         fightPane = new StackPane();
         gridFight = new GridPane();
-
+        fightRewards = new FightRewardsPane(width, height);
         gridLeft = new CharPane(width/2, height/9*6);
         gridRight = new MonsterPane(width / 2, height / 9 * 6);
         gridLower  = new CardPane(width , height/9*6);
@@ -44,7 +44,11 @@ public class FightScene extends RoomScene {
 
     }
 
-
+    public void getRewards(){
+        fightRewards.visible(true);
+        fightRewards.initialize();
+        root.getChildren().add(fightRewards);
+    }
 
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("background1.jpg"));
@@ -141,7 +145,7 @@ public class FightScene extends RoomScene {
             }
             else {
                 ((Fight) game.getDungeon().getCurrentRoom()).postFight();
-                game.getDungeon().ascend();
+                getRewards();
             }
 
         }
@@ -165,11 +169,15 @@ public class FightScene extends RoomScene {
         }
 
     }
+
+
     public void drawMonsters()
     {
         gridRight.draw();
 
     }
+
+
 
 
 }
