@@ -35,7 +35,6 @@ public class CardPane  extends GridPane {
     private int privLen;
     Pane pane = new Pane();
     private GridPane general = new GridPane();
-    AbstractCard returnedCard;
     private FightScene scene;
     int id = 0;
     HBox box;

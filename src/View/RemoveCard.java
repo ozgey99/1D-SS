@@ -25,7 +25,6 @@ public class RemoveCard extends StackPane {
     private int width;
     private int height;
     ImageView back;
-    MerchantScene merchant;
 
     public RemoveCard(int width, int height){
         this.width = width;

@@ -32,7 +32,6 @@ import static View.Main.game;
 public class MonsterPane extends StackPane {
     private int width;
     private int height;
-    private AbstractMonster monster;
     ArrayList<String> MonsterNames = new ArrayList<>();
     ArrayList<Rectangle> Rectangles = new ArrayList<>();
     ArrayList<AbstractMonster> monsters = new ArrayList<>();
