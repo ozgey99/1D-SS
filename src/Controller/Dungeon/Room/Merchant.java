@@ -101,27 +101,7 @@ public class Merchant extends AbstractRoom {
 
         game.currentScene.initialize();
         System.out.println(" I AM IN MERCHANT ROOM");
-        /*AbstractCharacter player = Main.game.getPlayer();
-        game.currentScene.initialize();
-        System.out.println(" I AM IN MERCHANT ROOM");
-        while (!done) {
-            int max = TextBasedUI.displayMerchant(this);
-            int choose = TextBasedUI.getInput(-1, max);
-            if (choose == -1) done = true;
-            else if (player.getGold() >= cardPrices.get(choose)) {
-                    player.masterDeck.addCard(cards.get(choose));
-                    cards.remove(choose);
-                    cardPrices.remove(choose);
-            }
-            else if(player.getGold() >= relicPrices.get(choose)){
-                RelicActions.addRelic(player, relics.get(choose));
-                relics.remove(choose);
-                relicPrices.remove(choose);
-            }
-            else {
-                System.out.println("You don't have enough gold to purchase this item.");
-            }
-        }*/
+
     }
 
     @Override

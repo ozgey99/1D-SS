@@ -42,7 +42,7 @@ public class TreasureScene extends RoomScene {
         pane = new Pane();
         relics = new ArrayList<>();
         rectangles = new ArrayList<>();
-        gridUpper = new UpperPane(width,height/15);
+        gridUpper = new UpperPane(width,height/9);
 
         root.setMinSize( width, height);
         origWidth = width;
@@ -81,7 +81,7 @@ public class TreasureScene extends RoomScene {
         Text goldText = new Text();
         int gold = ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount();
         goldText.setText(gold + " gold");
-        goldText.setFill(Color.WHITE);
+        goldText.setFill(Color.BLACK);
         goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         ImageView goldImage = new ImageView(new Image("gold.png"));
         goldImage.setFitWidth(origWidth/(325.0/10)); //goldImage.setFitWidth(40);
@@ -96,6 +96,7 @@ public class TreasureScene extends RoomScene {
         ArrayList<AbstractCard> cards = ((Treasure)game.getDungeon().getCurrentRoom()).getCards();
         String label = "add a card to your deck";
         Text text = new Text(label);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
         vbox.getChildren().add(text);
 
         // relic reward
@@ -103,11 +104,12 @@ public class TreasureScene extends RoomScene {
         String desc = relics.get(0).getDescription();
         String s = "get a relic";
         Text relicText = new Text(s);
+        relicText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
         String name = relics.get(0).getName();
         Text relicDesc = new Text();
         relicDesc.setText(name+" : "+ desc);
         relicDesc.setFill(Color.WHITE);
-        relicDesc.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 10));
+        relicDesc.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
         vbox.getChildren().add(relicText);
 
 
@@ -201,9 +203,9 @@ public class TreasureScene extends RoomScene {
     }
 
     public void nextButton(){
-        ImageView nextButton = new ImageView(new Image("nextButton.png"));
+        ImageView nextButton = new ImageView(new Image("goAhead.png"));
         nextButton.setPreserveRatio(true);
-        nextButton.setFitHeight(height/14.0); //nextButton.setFitHeight(50);
+        nextButton.setFitHeight(height/7); //nextButton.setFitHeight(50);
         nextButton.setX(width/(14.0/10)); //((nextButton.setX(width-400);
         nextButton.setY(height/7*5);
         pane.getChildren().add( nextButton );

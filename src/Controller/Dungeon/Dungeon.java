@@ -38,7 +38,7 @@ public class Dungeon {
         int noOfPaths = (int) (Math.random() * n) + 2;
 
         //randomize the length
-        int length = (int) (Math.random() * 50) + 2;
+        int length = (int) (Math.random() * n) + 2;
 
         //populate from top to bottom
         for(int i = 0; i < noOfPaths; i++){

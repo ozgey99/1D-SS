@@ -38,6 +38,9 @@ public class MerchantScene extends RoomScene  {
     ArrayList<Integer> relicPrices;
     ImageView turnBack;
     ImageView removeButton;
+    ImageView nextButton;
+    ImageView papirus;
+    ImageView back;
     static boolean added;
     static int origWidth;
     static  int origHeight;
@@ -49,10 +52,13 @@ public class MerchantScene extends RoomScene  {
         origWidth = width;
         origHeight = height;
         pane = new Pane();
-        gridUpper = new UpperPane(width,height/15);
+        gridUpper = new UpperPane(width,height/9);
         removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
         removeButton = new ImageView(new Image("removeButton.png"));
         turnBack = new ImageView(new Image("goAhead.png"));
+        nextButton = new ImageView(new Image("goAhead.png"));
+        back = new ImageView(new Image("back_merchant.jpg"));
+        papirus = new ImageView(new Image("papirus.png"));
         cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
         cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
         relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
@@ -63,10 +69,10 @@ public class MerchantScene extends RoomScene  {
     public void initialize(){
         initializeUpper();
         addBackground();
+        cardRemovalService();
         shopCards();
         shopRelics();
         proceed();
-        cardRemovalService();
         root.getChildren().add(pane);
         pane.getChildren().add(gridUpper);
         removeCardPane.stack.getChildren().add( turnBack );
@@ -108,7 +114,7 @@ public class MerchantScene extends RoomScene  {
         removeButton.setPreserveRatio(true);
         removeButton.setFitHeight(height/5); //removeButton.setFitHeight(150);
         removeButton.setX(width/9*6);
-        removeButton.setY(height/5+height/(43/10)); //removeButton.setY(height/5+160);
+        removeButton.setY(height/2);
         pane.getChildren().add( removeButton );
         removeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -127,10 +133,10 @@ public class MerchantScene extends RoomScene  {
     }
 
     public void proceed(){
-        ImageView nextButton = new ImageView(new Image("goAhead.png"));
+
         nextButton.setPreserveRatio(true);
-        nextButton.setFitHeight(height/14);
-        nextButton.setX(width-width/3); //nextButton.setX(width-400);
+        nextButton.setFitHeight(height/14.0);
+        nextButton.setX(width-width/3.0); //nextButton.setX(width-400);
         nextButton.setY(height/7*5);
         pane.getChildren().add( nextButton );
         nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -148,7 +154,7 @@ public class MerchantScene extends RoomScene  {
         warning.setPreserveRatio(true);
         warning.setX(x);
         warning.setY(y);
-        warning.setFitWidth(origWidth/13);
+        warning.setFitWidth(origWidth/13.0);
         g.getChildren().add(warning);
         return g;
     }
@@ -184,7 +190,7 @@ public class MerchantScene extends RoomScene  {
                 price = price/2;
                 saleText.setX(space+15);
                 saleText.setY(height/5-5);
-                saleText.setFont(Font.font ("family", 30));
+                saleText.setFont(Font.font ("family", height/24.0));
                 saleText.setFill(Color.RED);
                 pane.getChildren().add(saleText);
             }
@@ -199,7 +205,7 @@ public class MerchantScene extends RoomScene  {
             Text text = new Text(" " +price);
             text.setX(space+width/(325/10)); //text.setX(space+40);
             text.setY(height/5+height/4); //text.setY(height/5+170);
-            text.setFont(Font.font ("Verdana", 15));
+            text.setFont(Font.font ("Verdana", height/48.0));
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
@@ -303,7 +309,7 @@ public class MerchantScene extends RoomScene  {
         Text relicText = new Text(desc);
         relicText.setX(x+5);
         relicText.setY(y+13);
-        relicText.setFont(Font.font ("Verdana", 10));
+        relicText.setFont(Font.font ("Verdana", origHeight/72));
         relicText.setFill(Color.WHITE);
 
         g.getChildren().add(rect);
@@ -338,7 +344,7 @@ public class MerchantScene extends RoomScene  {
             Text text = new Text(" " +price);
             text.setX(space+width/43); //text.setX(space+30);
             text.setY(height/5*2+height/4); //text.setY(height/5*2+170);
-            text.setFont(Font.font ("Verdana", 15));
+            text.setFont(Font.font ("Verdana", height/48.0));
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
@@ -435,15 +441,12 @@ public class MerchantScene extends RoomScene  {
     }
 
     private void addBackground() {
-        ImageView back = new ImageView(new Image("back_merchant.jpg"));
         back.setFitWidth(width);
         back.setFitHeight(height);
-
-        ImageView image = new ImageView(new Image("papirus.png"));
-        image.setFitWidth(width-width/(43/10)); //image.setFitWidth(width-300);
-        image.setFitHeight(height);
+        papirus.setFitWidth(width-width/(43/10)); //image.setFitWidth(width-300);
+        papirus.setFitHeight(height);
         root.getChildren().add(back);
-        root.getChildren().add(image);
+        root.getChildren().add(papirus);
 
     }
 

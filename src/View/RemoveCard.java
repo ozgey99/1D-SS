@@ -32,6 +32,7 @@ public class RemoveCard extends StackPane {
     private int width;
     private int height;
     ImageView back;
+    ImageView nextButton;
     MerchantScene merchant;
     StackPane stack;
     final ScrollPane sp = new ScrollPane();
@@ -43,13 +44,15 @@ public class RemoveCard extends StackPane {
         padY = height*9/6;
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
+        pane.setMinSize(padX, padY);
         price = 75;
-
+        nextButton = new ImageView(new Image("goAhead.png"));
         stack = new StackPane();
-        back.setFitWidth(width);
-        back.setFitHeight(height);
+        back.setFitWidth(padX);
+        back.setFitHeight(padY);
         stack.getChildren().add(back);
-
+        System.out.println("remove card width "+ width);
+        System.out.println("remove card height: "+ height);
         stack.setPadding(new Insets(150, 200, 150, 250));
         vbox = new VBox(height/70);
 
@@ -60,6 +63,22 @@ public class RemoveCard extends StackPane {
         this.getChildren().add(stack);
 
     }
+
+    /*public void proceedScreen(){
+        pane.getChildren().add(back);
+        nextButton.setPreserveRatio(true);
+        nextButton.setFitHeight(height/7);
+        nextButton.setX(width/5+ width/3*2);
+        nextButton.setY(height/4*3);
+        pane.getChildren().add( nextButton );
+        this.getChildren().add(pane);
+        nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                game.getDungeon().ascend();
+            }
+        });
+    }*/
 
     public void clickable(){
         vbox.setDisable(true);
@@ -116,7 +135,7 @@ public class RemoveCard extends StackPane {
                             for(int k=0; k<game.getPlayer().masterDeck.getSize(); k++){
                                 System.out.println(game.getPlayer().masterDeck.getCard(k).getName());
                             }
-
+                            //proceedScreen();
 
                         } else {
                             System.out.println("You don't have enough gold to remove a card");

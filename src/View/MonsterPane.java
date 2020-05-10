@@ -32,15 +32,12 @@ import static View.Main.game;
 public class MonsterPane extends StackPane {
     private int width;
     private int height;
-    private AbstractMonster monster;
 
     ArrayList<AbstractMonster> monsters = new ArrayList<>();
-    private ArrayList<Text> textList = new ArrayList<Text>();
 
     private HBox rectangleBox;
     private VBox box;
 
-    Pane pane = new Pane();
 
     public MonsterPane( int width, int height){
         this.setEffect( new DropShadow(30, Color.RED) );
@@ -50,9 +47,6 @@ public class MonsterPane extends StackPane {
         // this.setMinSize( width, height);
         box = new VBox();
         rectangleBox = new HBox(20);
-
-
-
 
     }
 
@@ -85,7 +79,7 @@ public class MonsterPane extends StackPane {
     public void initialize()
     {
         monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
-        initializeTexts();
+        //initializeTexts();
         initializeRectangles();
 
 
@@ -93,7 +87,7 @@ public class MonsterPane extends StackPane {
     public void draw()
     {
         drawRectangles();
-        drawTexts();
+        //drawTexts();
     }
 
     private void initializeRectangles()
@@ -112,8 +106,8 @@ public class MonsterPane extends StackPane {
             firstName = firstName + ".png";
             Rectangle rect1 = new Rectangle();
             rect1.setFill(new ImagePattern(new Image(firstName)));
-            rect1.setWidth(100);
-            rect1.setHeight(100);
+            rect1.setWidth(width/(64.0/10));
+            rect1.setHeight(height/(48.0/10));
             rectangleBox.getChildren().add(rect1);
             int j = i + 1;
             String s = "  Monster (" + j + ") health is " + monsters.get(i).getCurrentHP() + "\n"+
@@ -181,8 +175,8 @@ public class MonsterPane extends StackPane {
             firstName = firstName + ".png";
             Rectangle rect1 = new Rectangle();
             rect1.setFill(new ImagePattern(new Image(firstName)));
-            rect1.setWidth(100);
-            rect1.setHeight(100);
+            rect1.setWidth(width/(64.0/10));
+            rect1.setHeight(height/(48.0/10));
             rectangleBox.getChildren().add(rect1);
             int j = i + 1;
             String s = "  Monster (" + j + ") health is " + monsters.get(i).getCurrentHP() + "\n"+
@@ -228,6 +222,7 @@ public class MonsterPane extends StackPane {
         }
 
     }
+
     public void initializeTexts()
     {
         monsters = ( (Fight) game.getDungeon().getCurrentRoom()).getMonsters();
@@ -242,9 +237,9 @@ public class MonsterPane extends StackPane {
         }
         box.setAlignment(Pos.TOP_LEFT);
         this.getChildren().add(box);
-
-
     }
+
+
     public void drawTexts()
     {
         box.getChildren().removeAll();
@@ -257,7 +252,7 @@ public class MonsterPane extends StackPane {
             text.setText("Monster " + j + " health is " + monsters.get(i).getCurrentHP() +
                     " block is " +monsters.get(i).getBlock() + "next move damage is " +
                     FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage()));
-/*
+            /*
             for(int r = 0; r < monsters.get(i).powers.size();r++)
             {
                 System.out.println("MONSTER POWR IS " + monsters.get(i).powers.get(r).getName() + " " + monsters.get(i).powers.get(r).getAmount());

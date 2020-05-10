@@ -29,7 +29,7 @@ public class RestScene extends RoomScene {
         turnBack = new ImageView(new Image("goAhead.png"));
         rest = new ImageView(new Image("Rest.png"));
         smith = new ImageView(new Image("Smith.png"));
-        gridUpper = new UpperPane(width,height/15);
+        gridUpper = new UpperPane(width,height/9);
         smithPane  = new SmithPane(width/3*2 , height/9*6);
         root.setMinSize( width, height);
         added = false;
