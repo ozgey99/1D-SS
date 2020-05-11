@@ -42,4 +42,12 @@ public abstract class AbstractCharacter extends AbstractCreature {
     public Pet getPet(){
         return pet;
     }
+
+    public boolean buyPet(Pet p){
+        if(pet == null) {
+            pet = p;
+            return true;
+        }
+        return false;
+    }
 }

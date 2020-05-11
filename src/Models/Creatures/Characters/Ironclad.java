@@ -14,7 +14,7 @@ public class Ironclad extends AbstractCharacter {
         currentHP = maxHP;
         maxEnergy = 3;
         gold = 1000;
-
+        pet = null;
         isAlive = true;
     }
 
@@ -44,11 +44,6 @@ public class Ironclad extends AbstractCharacter {
     @Override
     public void recharge() {
         currentEnergy = maxEnergy;
-    }
-
-    public void buyPet(){
-        if(pet == null)
-            pet = new Pet();
     }
 
 }
