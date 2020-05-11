@@ -28,7 +28,7 @@ import View.RoomScene;
 public class Fight extends AbstractRoom {
 
     ArrayList<AbstractMonster> monsters;
-
+    ArrayList<AbstractRelic> relics;
     private FightState state;
     private Deck draw;
     private Deck discard;
@@ -38,18 +38,13 @@ public class Fight extends AbstractRoom {
     private boolean isElite;
     private boolean isBoss;
     private AbstractMonster selectedMonster;
-
-
-
-
     private AbstractCharacter player;
     int cardRewardAmount;
-
-
     int drawAmount;
-
     int goldAmount;
     ArrayList<AbstractCard> cardRewards;
+
+    static boolean added;
 
     public Fight(ArrayList<AbstractRoom> c, boolean isElite, boolean isBoss) {
         type = RoomType.FIGHT;
@@ -57,17 +52,23 @@ public class Fight extends AbstractRoom {
         this.isElite = isElite;
         children = c;
         done = false;
+        added = false;
+        cardRewardAmount = 3;
+        cardRewards = new ArrayList<>();
         monsters = new ArrayList<>();
+        relics = new ArrayList<>();
         generate();
     }
     public void setSelectedMonster(AbstractMonster monster)
     {
         selectedMonster = monster;
     }
+
     public AbstractMonster getSelectedMonster()
     {
         return selectedMonster;
     }
+
     public void nextState()
     {
         switch(state) {
@@ -160,6 +161,7 @@ public class Fight extends AbstractRoom {
         game.fightScene.lower.draw();
         game.fightScene.right.draw();*/
     }
+
     public boolean useCard(AbstractCard card)
     {
         System.out.println("I AM USING CARD");
@@ -235,7 +237,8 @@ public class Fight extends AbstractRoom {
 
     }
 
-    private void monsterTurn() {/*
+    private void monsterTurn() {
+        /*
         for (AbstractMonster m : monsters) {
             for (AbstractPower p : m.powers) {
                 p.onTurnStart(m);
@@ -323,6 +326,12 @@ public class Fight extends AbstractRoom {
             else if(m.get(0) instanceof GreenLouse)
                 monsters.add(new RedLouse());
         }
+        if(!added){
+            generateRewards();
+            relicReward();
+            added = true;
+        }
+
     }
 
     public void generateRewards() {
@@ -336,10 +345,32 @@ public class Fight extends AbstractRoom {
             }
         }
 
-        for (int i = 0; i < cardRewardAmount; i++)
+        for (int i = 0; i < cardRewardAmount; i++){
             cardRewards.add(allCards.get(i));
-
+        }
         goldAmount = (int) (Math.random() * 100) + 10;
+
+    }
+
+
+    public void relicReward() {
+
+        ArrayList<AbstractRelic> allRelics = Utils.getAllRelics();
+        Collections.shuffle(allRelics);
+        for (AbstractRelic r : allRelics) {
+
+            boolean exist = false;
+            for (AbstractRelic y : game.getPlayer().relics) {
+
+                if(y.getName() == r.getName())
+                    exist = true;
+
+            }
+            if(!exist)
+                relics.add(r);
+        }
+
+
     }
 
     // Getters and setters.
@@ -364,6 +395,8 @@ public class Fight extends AbstractRoom {
         return monsters;
     }
 
+    public ArrayList<AbstractCard> getCards(){ return cardRewards;}
+
     public Deck getDraw(){ return draw; }
 
     public Deck getDiscard(){ return discard; }
@@ -371,6 +404,14 @@ public class Fight extends AbstractRoom {
     public Deck getExhaust(){ return exhaust; }
 
     public Deck getHand() { return hand; }
+
+    public int getGoldAmount() {
+        return goldAmount;
+    }
+
+    public ArrayList<AbstractRelic> getRelics() {
+        return relics;
+    }
 
     public boolean getIsElite() { return isElite; }
 

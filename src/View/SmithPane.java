@@ -3,6 +3,8 @@ package View;
 import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,21 +29,23 @@ public class SmithPane extends StackPane {
     private int height;
     ImageView back;
 
+    RestScene restScene;
+    StackPane stack;
+    final ScrollPane sp = new ScrollPane();
+
     public SmithPane(int width, int height){
-        this.width = width;
-        this.height = height;
         padX = width*3/2;
         padY = height*9/6;
-        //price = 75;
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
-        vbox = new VBox(padY/70);
-        vbox.setPadding(new Insets(padX/9,padY/3,padY/7,padX/5));
-        //vbox.setPadding(new Insets(padX/9,400,100,250));
+        stack = new StackPane();
+        stack.setPadding(new Insets(150, 200, 150, 250));
+        vbox = new VBox(height/70);
+
+        stack.getChildren().add(sp);
+        stack.setAlignment(sp, Pos.CENTER);
         this.setMinSize( width, height);
-        this.getChildren().add(back);
-        this.getChildren().add(pane);
-        pane.getChildren().add(vbox);
+        this.getChildren().add(stack);
     }
 
     public void visible(boolean bool){
@@ -49,17 +53,26 @@ public class SmithPane extends StackPane {
     }
 
 
+    public void draw(){
+        initialize();
+        vbox.setDisable(true);
+    }
+
     public void initialize() {
+        sp.setContent(vbox);
+        sp.setPrefSize(width,height);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
         int size = game.getPlayer().masterDeck.getSize();
         for (int i = 0; i < size; i++){
-            HBox hbox = new HBox(); // ilk row last column'a üst üste iki tane ekliyor
+            HBox hbox = new HBox();
             hbox.getChildren().clear();
             for(int count = 0; count < 7; count++ ){
-                if(game.getPlayer().masterDeck.getCard(i).isUpgradable() == false)
+                if(!game.getPlayer().masterDeck.getCard(i).isUpgradable())
                     continue;
                 String name = game.getPlayer().masterDeck.getCard(i).getName();
                 System.out.println(name);
@@ -77,7 +90,8 @@ public class SmithPane extends StackPane {
                         if(game.getPlayer().masterDeck.getCard(j).isUpgradable() && game.getPlayer().getGold()>price){
                             game.getPlayer().masterDeck.getCard(j).upgrade();
                             rect.setStroke(Color.GREEN);
-                            visible(false);
+                            //visible(false);
+                            draw();
                         }
 
                     }

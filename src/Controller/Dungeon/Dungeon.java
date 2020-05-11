@@ -38,7 +38,7 @@ public class Dungeon {
         int noOfPaths = (int) (Math.random() * n) + 2;
 
         //randomize the length
-        int length = (int) (Math.random() * n) + 2;
+        int length = (int) (Math.random() * 50) + 2;
 
         //populate from top to bottom
         for(int i = 0; i < noOfPaths; i++){
@@ -82,7 +82,7 @@ public class Dungeon {
 
         ArrayList<AbstractRoom> c = new ArrayList<>();
         c.add(beginningTreasure);
-
+        System.out.println("____________________________________________");
         Fight beginningFight = new Fight(c, false, false);
 
         currentRoom = beginningFight;
@@ -97,10 +97,13 @@ public class Dungeon {
     }
 
     public void printMap(AbstractRoom r){
-        System.out.println(r.getType());
-        if( r != null && r.getChildren() != null)
-            for(int i = 0; i < r.getChildren().size(); i++)
-                printMap(r.getChildren().get(i));
+        if( r != null ) {
+            System.out.println(r.getType());
+            if (r.getChildren() != null) {
+                for (int i = 0; i < r.getChildren().size(); i++)
+                    printMap(r.getChildren().get(i));
+            }
+        }
     }
 
     public String getName() {
@@ -121,6 +124,7 @@ public class Dungeon {
         this.currentRoom = this.currentRoom.getChildren().get(0);//change this to input from user
         if(currentRoom instanceof Fight){
             ((Fight) currentRoom).generateRewards();
+            ((Fight) currentRoom).relicReward();
         }
         else if(currentRoom instanceof Merchant){
             ((Merchant)currentRoom).generate();

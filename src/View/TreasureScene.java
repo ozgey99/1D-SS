@@ -56,6 +56,8 @@ public class TreasureScene extends RoomScene {
         addBackground();
         smallChest();
         root.getChildren().add(pane);
+        System.out.println("width : "+width);
+        System.out.println("height : "+height);
     }
 
     private void initializeUpper()

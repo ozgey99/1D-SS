@@ -34,17 +34,14 @@ public class MonsterPane extends StackPane {
     private int height;
     ArrayList<String> MonsterNames = new ArrayList<>();
     ArrayList<Rectangle> Rectangles = new ArrayList<>();
+
     ArrayList<AbstractMonster> monsters = new ArrayList<>();
     private ArrayList<Text> textList = new ArrayList<Text>();
 
     private HBox rectangleBox;
     private VBox box;
 
-
     Pane pane = new Pane();
-    int privLen;
-    int space = 100;
-    int id;
 
     public MonsterPane( int width, int height){
         this.setEffect( new DropShadow(30, Color.RED) );
@@ -124,7 +121,7 @@ public class MonsterPane extends StackPane {
                     "  block is " +monsters.get(i).getBlock() + "\n"+
                     "  next move damage is " + FightActions.getAttackAmount(monsters.get(i), game.getPlayer(), monsters.get(i).getNextMove().getDamage());
             Node movement = initializeMonsterMove(s, width/4*3, height/2);
-            this.getChildren().add(movement);
+            this.getChildren().add(movement); // add each movement
             movement.setVisible(false);
             ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), rect1);
             rect1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
