@@ -1,9 +1,10 @@
 package Models.Cards;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Deck {
+public class Deck implements Serializable {
     public static Deck drawCard(Deck draw, Deck discard, int amount) {
         Deck drawn = new Deck();
 

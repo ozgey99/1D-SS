@@ -1,6 +1,6 @@
 package Models.Object.Relics;
 
-import Models.Actions.PowerActions;
+import Controller.Actions.PowerActions;
 import Models.Creatures.AbstractCharacter;
 import Controller.Dungeon.Room.Fight;
 import Models.Object.AbstractRelic;

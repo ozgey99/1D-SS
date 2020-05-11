@@ -1,4 +1,4 @@
-package Models.Actions;
+package Controller.Actions;
 
 import Models.Creatures.AbstractCreature;
 import Models.Object.AbstractPower;
@@ -6,8 +6,11 @@ import Models.Object.AbstractPower;
 public class FightActions {
     public static int getAttackAmount(AbstractCreature from, AbstractCreature to, int amount) {
         if(amount == 0) return 0;
-        for (AbstractPower p : from.powers) {
-            amount = p.onAttack(amount);
+
+        if (from != null) {
+            for (AbstractPower p : from.powers) {
+                amount = p.onAttack(amount);
+            }
         }
 
         for (AbstractPower p : to.powers) {
@@ -19,8 +22,10 @@ public class FightActions {
 
     public static void attack(AbstractCreature from, AbstractCreature to, int amount) {
         if(amount == 0) return;
-        for (AbstractPower p : from.powers) {
-            amount = p.onAttack(amount);
+        if (from != null) {
+            for (AbstractPower p : from.powers) {
+                amount = p.onAttack(amount);
+            }
         }
 
         for (AbstractPower p : to.powers) {
@@ -45,4 +50,5 @@ public class FightActions {
 
         to.changeBlock(amount);
     }
+
 }

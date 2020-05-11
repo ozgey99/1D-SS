@@ -1,6 +1,6 @@
 package Models.Cards.Red;
 
-import Models.Actions.PowerActions;
+import Controller.Actions.PowerActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Controller.Dungeon.Room.Fight;

@@ -5,11 +5,13 @@ import Controller.Dungeon.Room.Merchant;
 import Controller.Dungeon.Room.Rest;
 import Controller.Dungeon.Room.Treasure;
 import View.FightScene;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static View.Main.game;
 
-public class Dungeon {
+public class Dungeon implements Serializable {
     private int act;
     private String name;
 

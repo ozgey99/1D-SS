@@ -1,6 +1,6 @@
 package View;
 
-import Models.Actions.FightActions;
+import Controller.Actions.FightActions;
 import Models.Creatures.Monsters.AbstractMonster;
 import Controller.Dungeon.Room.Fight;
 import javafx.animation.ScaleTransition;

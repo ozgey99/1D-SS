@@ -1,6 +1,6 @@
 package Controller.Dungeon.Room;
 
-import Models.Actions.PowerActions;
+import Controller.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Models.Cards.CardTarget;
@@ -15,14 +15,10 @@ import Models.Object.AbstractRelic;
 import Models.TextBasedUI;
 import View.FightScene;
 
-import java.net.SocketTimeoutException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import static View.Main.game;
-import Controller.Dungeon.Dungeon;
-import View.RoomScene;
 
 public class Fight extends AbstractRoom {
 

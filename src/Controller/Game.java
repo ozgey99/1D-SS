@@ -4,10 +4,13 @@ import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Characters.Ironclad;
 import Controller.Dungeon.Dungeon;
 import View.RoomScene;
+
+import java.io.Serializable;
+
 import static View.Main.game;
 
 
-public class Game {
+public class Game implements Serializable {
     private Dungeon dungeon;
     private AbstractCharacter player;
     public RoomScene currentScene;

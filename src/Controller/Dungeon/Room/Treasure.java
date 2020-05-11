@@ -1,6 +1,6 @@
 package Controller.Dungeon.Room;
 
-import Models.Actions.RelicActions;
+import Controller.Actions.RelicActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Models.Creatures.AbstractCharacter;

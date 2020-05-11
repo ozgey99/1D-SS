@@ -1,6 +1,7 @@
 package Models.Creatures;
 
 import Models.Cards.Deck;
+import Models.Object.AbstractPotion;
 import Models.Object.AbstractRelic;
 
 import java.util.ArrayList;
@@ -14,6 +15,9 @@ public abstract class AbstractCharacter extends AbstractCreature {
 
     public Deck masterDeck = new Deck();
     public ArrayList<AbstractRelic> relics = new ArrayList<>();
+    public ArrayList<AbstractPotion> potions = new ArrayList<>();
+
+    public int maxPotionAmount = 3;
 
     public boolean changeEnergy(int amount) {
         if (currentEnergy + amount < 0) return false;

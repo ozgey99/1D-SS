@@ -16,7 +16,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
 import javafx.scene.text.Text;
-import Models.Actions.RelicActions;
+import Controller.Actions.RelicActions;
 
 import java.util.ArrayList;
 
