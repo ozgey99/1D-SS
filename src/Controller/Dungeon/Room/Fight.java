@@ -15,14 +15,10 @@ import Models.Object.AbstractRelic;
 import Models.TextBasedUI;
 import View.FightScene;
 
-import java.net.SocketTimeoutException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import static View.Main.game;
-import Controller.Dungeon.Dungeon;
-import View.RoomScene;
 
 public class Fight extends AbstractRoom {
 
@@ -42,16 +38,16 @@ public class Fight extends AbstractRoom {
     int drawAmount;
     int goldAmount;
     ArrayList<AbstractCard> cardRewards;
+    boolean isFirstRoom;
 
-    static boolean added;
-
-    public Fight(ArrayList<AbstractRoom> c, boolean isElite, boolean isBoss) {
+    public Fight(ArrayList<AbstractRoom> c, boolean isElite, boolean isBoss, boolean isFirstRoom) {
         type = RoomType.FIGHT;
         this.isBoss = isBoss;
         this.isElite = isElite;
+        this.isFirstRoom = isFirstRoom;
         children = c;
         done = false;
-        added = false;
+
         cardRewardAmount = 3;
         cardRewards = new ArrayList<>();
         monsters = new ArrayList<>();
@@ -314,10 +310,9 @@ public class Fight extends AbstractRoom {
             else if(m.get(0) instanceof GreenLouse)
                 monsters.add(new RedLouse());
         }
-        if(!added){
+        if(isFirstRoom){
             generateRewards();
             relicReward();
-            added = true;
         }
 
     }

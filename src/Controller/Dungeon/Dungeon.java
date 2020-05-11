@@ -29,7 +29,7 @@ public class Dungeon {
         int n = 5;
 
         //create boss
-        Fight boss = new Fight(null, false, true);
+        Fight boss = new Fight(null, false, true, false);
 
         ArrayList<AbstractRoom> children = new ArrayList<>();
         ArrayList<AbstractRoom> prevRooms = new ArrayList<>();
@@ -51,7 +51,7 @@ public class Dungeon {
 
                 switch(rand){
                     case 1:
-                        room = new Fight(children, true, false);
+                        room = new Fight(children, true, false, false);
                         break;
                     case 2:
                         room = new Merchant(children);
@@ -63,7 +63,7 @@ public class Dungeon {
                         room = new Treasure(children);
                         break;
                     default:
-                        room = new Fight(children, false, false);
+                        room = new Fight(children, false, false, false);
                         break;
                 }
 
@@ -83,7 +83,7 @@ public class Dungeon {
         ArrayList<AbstractRoom> c = new ArrayList<>();
         c.add(beginningTreasure);
 
-        Fight beginningFight = new Fight(c, false, false);
+        Fight beginningFight = new Fight(c, false, false, true);
 
         currentRoom = beginningFight;
 
