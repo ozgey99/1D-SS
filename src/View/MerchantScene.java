@@ -43,7 +43,7 @@ public class MerchantScene extends RoomScene  {
     static  int origHeight;
 
     public MerchantScene() {
-        super(new StackPane());
+        super();
         root.setMinSize( width, height);
         added = false;
         origWidth = width;

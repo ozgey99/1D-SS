@@ -9,7 +9,7 @@ import javafx.scene.layout.*;
 
 import static View.Main.game;
 
-public class Compendium extends RoomScene {
+public class Compendium extends GameScene {
     Pane pane;
     HBox box;
     HBox options;
@@ -22,7 +22,7 @@ public class Compendium extends RoomScene {
     static boolean added;
 
     public Compendium(){
-        super(new StackPane());
+        super();
         pane = new Pane();
         box = new HBox(100);
         options = new HBox();

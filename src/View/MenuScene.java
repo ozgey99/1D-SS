@@ -24,17 +24,16 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenuScene extends RoomScene {
+public class MenuScene extends GameScene {
     int width;
     int height;
-    private Pane root;
     private VBox menuBox;
 
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("START RUN", () -> {  Main.game.start();}),
-            new Pair<String, Runnable>("VIEW MAP", () -> Main.window.setScene( new MapScene() )),
-            new Pair<String, Runnable>("VIEW COMPENDIUM",  () -> Main.window.setScene( new TreasureScene() )),
+            new Pair<String, Runnable>("START NEW RUN", () -> Main.window.setScene( new MapScene() )),
+            new Pair<String, Runnable>("CONTINUE EXISTING RUN", () -> {}),
+            new Pair<String, Runnable>("VIEW COMPENDIUM",  () ->  Main.window.setScene( new Compendium() )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
@@ -42,11 +41,10 @@ public class MenuScene extends RoomScene {
 
 
     public MenuScene(){
-        super( new StackPane() );
+        super();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         width = dim.width;
         height = dim.height;
-          root = new Pane();
           menuBox = new VBox(-5);
           root = (StackPane) this.getRoot();
         root = (StackPane) createContent();
@@ -59,7 +57,7 @@ public class MenuScene extends RoomScene {
 
     }
 
-    public void startCom(){
+    public void startCompendium(){
         game.currentScene = new Compendium();
         Main.window.setScene(
                 game.currentScene);
@@ -138,7 +136,7 @@ public class MenuScene extends RoomScene {
 
         root.getChildren().add(menuBox);
     }
-    public void addMusic()
+    private void addMusic()
     {
         AudioClip music = new AudioClip(this.getClass().getResource("music.mp3").toString());
         music.play();

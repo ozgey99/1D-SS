@@ -81,7 +81,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        game.getDungeon().generate();
+        game.startMap();
         launch(args);
 
     }

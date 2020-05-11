@@ -22,17 +22,17 @@ public class MapPane extends BorderPane {
 
     }
     void sketch(){
-        Main.game.startMap();
         AbstractRoom room;
         room  = Main.game.getDungeon().getCurrentRoom();
-        recurse(room , 1,1);
+        recurseRooms(room , 0,0);
     }
-    private void recurse( AbstractRoom room, int translationX, int translationY ){
+    private void recurseRooms( AbstractRoom room, int translationX, int translationY ){
+        int spacing = 50;
         if( room != null ) {
             int beginningX = width/2;
             int beginningY = height*14/15;
-            int posX = beginningX - translationX* 100;
-            int posY = beginningY - translationY * 100;
+            int posX = beginningX - translationX* spacing;
+            int posY = beginningY - translationY * spacing;
             System.out.println("The added room is: " + room.getType());
             MapRoomNode roomNode = new MapRoomNode(room);
             roomNode.setCenterX(posX);
@@ -41,14 +41,27 @@ public class MapPane extends BorderPane {
             if( room.getChildren() != null )
             {
                 int branchingSize = room.getChildren().size();
-                for (int i = 0; i < branchingSize; i++) {
-                    int posSuccessorX = beginningX-(translationX+i)*100;
-                    int posSuccessorY = beginningY - (translationY+1) * 100;
-                    Line passage = new Line(posX, posY, posSuccessorX, posSuccessorY );
-                    passage.setStroke(Color.RED);
-                    passage.setEffect(new DropShadow(30, Color.YELLOW));
-                    this.getChildren().add(passage);
-                    recurse(room.getChildren().get(i), translationX+i,translationY+1);
+                int posSuccessorY = beginningY - (translationY + 1) * spacing;
+                if( !( room.getChildren().get(0).isUnion() ) ) {
+
+                    for (int i = 0; i < branchingSize; i++) {
+                        int posSuccessorX = beginningX - (translationX + i) * spacing;
+                        Line passage = new Line(posX, posY, posSuccessorX, posSuccessorY);
+                        passage.setStroke(Color.RED);
+                        passage.setEffect(new DropShadow(30, Color.YELLOW));
+                        this.getChildren().add(passage);
+                        recurseRooms(room.getChildren().get(i), translationX + i, translationY + 1);
+                    }
+                }
+                else{
+                    for (int i = 0; i < branchingSize; i++) {
+                        int posSuccessorX = beginningX;
+                        Line passage = new Line(posX, posY, posSuccessorX, posSuccessorY);
+                        passage.setStroke(Color.RED);
+                        passage.setEffect(new DropShadow(30, Color.YELLOW));
+                        this.getChildren().add(passage);
+                        recurseRooms(room.getChildren().get(i), 0, translationY + 1);
+                    }
                 }
             }
         }

@@ -22,7 +22,7 @@ public class RestScene extends RoomScene {
     static boolean added;
     public RestScene()
     {
-        super(new StackPane());
+        super();
         pane = new Pane();
         box = new HBox();
         options = new HBox();

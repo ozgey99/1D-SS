@@ -7,23 +7,18 @@ import javafx.scene.layout.StackPane;
 
 import java.awt.*;
 
-public abstract class RoomScene extends Scene {
+public abstract class RoomScene extends GameScene {
 
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    protected int width = screenSize.width;
-    protected int height = screenSize.height;
+
 
     /*protected int width = 1300;
     protected int height = 700;*/
-    StackPane root;
 
-    public RoomScene(StackPane stackPane){
-        super(new StackPane());
-        this.root = (StackPane) this.getRoot();
+    public RoomScene(){
+        super();
         //addBackground();
     }
-    public abstract void draw();
-    public abstract void initialize();
+
 
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("background1.jpg"));

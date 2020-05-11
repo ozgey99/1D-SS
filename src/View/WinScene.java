@@ -37,7 +37,7 @@ public class WinScene extends RoomScene  {
 
     public WinScene()
     {
-        super(new StackPane());
+        super();
         backToMenu = new Rectangle();
         root.setMinSize( width, height);
         box = new VBox();

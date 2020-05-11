@@ -57,6 +57,7 @@ public class Fight extends AbstractRoom {
         monsters = new ArrayList<>();
         relics = new ArrayList<>();
         generate();
+        isUnion = isBoss;
     }
     public void setSelectedMonster(AbstractMonster monster)
     {
@@ -360,6 +361,7 @@ public class Fight extends AbstractRoom {
 
 
     }
+
 
     // Getters and setters.
     // --------------------------------------------------------------------------------------------------------

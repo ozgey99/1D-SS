@@ -36,7 +36,7 @@ public class TreasureScene extends RoomScene {
 
     public TreasureScene()
     {
-        super(new StackPane());
+        super();
         tick = new ImageView(new Image("tick.png"));
         chest = new ImageView(new Image("SmallChest.png"));
         pane = new Pane();
@@ -79,6 +79,7 @@ public class TreasureScene extends RoomScene {
         // gold reward
         HBox box1 = new HBox();
         Text goldText = new Text();
+        //Here is a big issue, SOLVE IT
         int gold = ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount();
         goldText.setText(gold + " gold");
         goldText.setFill(Color.WHITE);

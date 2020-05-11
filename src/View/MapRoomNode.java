@@ -2,7 +2,10 @@ package View;
 
 import Controller.Dungeon.AbstractRoom;
 import Controller.Dungeon.Dungeon;
+import Controller.Dungeon.Room.Fight;
+import Controller.Dungeon.Room.Merchant;
 import Controller.Dungeon.Room.RoomType;
+import Controller.Dungeon.Room.Treasure;
 import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
@@ -31,15 +34,13 @@ import javafx.util.Duration;
 
 import java.util.IllegalFormatException;
 
+import static View.Main.game;
+
 public class MapRoomNode extends Circle {
-    RoomType roomType;
-    int nodeRadius = 50;
-    AbstractRoom room;
+    AbstractRoom currentRoom;
     boolean active;
     public MapRoomNode(AbstractRoom room){
-        this.setRadius(nodeRadius);
-        this.room = room;
-        roomType = room.getType();
+        this.currentRoom = room;
         active = !(room.getDone());
         //active = active && room.anyRootActive();
         defineRoom();
@@ -47,20 +48,31 @@ public class MapRoomNode extends Circle {
        // this.setFill( Color.BLUE);
     }
     private void defineRoom(){
+
+        int nodeRadius = 20;
         String roomTypeName = ".png";
-        if( roomType == RoomType.SHOP )
+        RoomType type = currentRoom.getType();
+        if( type == RoomType.SHOP )
             roomTypeName = "merchantIcon" + roomTypeName;
-        else if( roomType == RoomType.FIGHT )
+        else if( type == RoomType.FIGHT && ((Fight)currentRoom).getIsBoss() ) {
+            roomTypeName = "bossIcon" + roomTypeName;
+            nodeRadius = 50;
+        }
+        else if( type == RoomType.FIGHT && ((Fight)currentRoom).getIsElite() )
+            roomTypeName = "eliteIcon" + roomTypeName;
+        else if( type == RoomType.FIGHT  )
             roomTypeName = "monsterIcon" + roomTypeName;
-        else if( roomType == RoomType.CHEST )
+        else if( type == RoomType.CHEST )
             roomTypeName = "chestIcon" + roomTypeName;
-        else if( roomType == RoomType.REST )
+        else if( type == RoomType.REST )
             roomTypeName = "restIcon" + roomTypeName;
+
         else
             throw new IllegalArgumentException("Undefined Room");
 
         ImagePattern imageFilled = new ImagePattern(new Image(roomTypeName), 0, 0, 1, 1, true);
         this.setFill(imageFilled );
+        this.setRadius(nodeRadius);
     }
     private void addRoomTransition(){
         if( active == true )
@@ -70,6 +82,6 @@ public class MapRoomNode extends Circle {
     }
     private void switchToRoom(){
         //Implement switch function
-        room.start();
+        currentRoom.start();
     }
 }

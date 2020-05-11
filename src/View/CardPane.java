@@ -18,24 +18,13 @@ import javafx.event.EventHandler;
 import static View.Main.game;
 
 public class CardPane  extends GridPane {
-    private int maxHand = 5;
     private int space;
-    private StackPane root;
-    private Text text;
+
     private Deck deck;
     private int width;
     private int height;
-    boolean selected = false;
-    boolean selected2 = false;
-    Rectangle rect1;
-    Rectangle rect2;
-    Rectangle rect3;
-    Rectangle rect4;
-    Rectangle rect5;
     private int privLen;
     Pane pane = new Pane();
-    private GridPane general = new GridPane();
-    AbstractCard returnedCard;
     private FightScene scene;
     int id = 0;
     HBox box;
