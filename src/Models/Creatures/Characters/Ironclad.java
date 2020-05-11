@@ -3,6 +3,7 @@ package Models.Creatures.Characters;
 import Models.Cards.Red.Defend;
 import Models.Cards.Red.Strike;
 import Models.Creatures.AbstractCharacter;
+import Models.Creatures.Pet;
 import Models.Object.Relics.BurningBlood;
 
 public class Ironclad extends AbstractCharacter {
@@ -13,7 +14,7 @@ public class Ironclad extends AbstractCharacter {
         currentHP = maxHP;
         maxEnergy = 3;
         gold = 1000;
-
+        pet = null;
         isAlive = true;
     }
 
@@ -44,4 +45,5 @@ public class Ironclad extends AbstractCharacter {
     public void recharge() {
         currentEnergy = maxEnergy;
     }
+
 }

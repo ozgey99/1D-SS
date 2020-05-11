@@ -69,7 +69,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         primaryStage.setTitle("Slay The Spire Menu");
-        primaryStage.setScene(new MenuScene( ));
+        primaryStage.setScene(new MenuScene());
         window = primaryStage;
         primaryStage.show();
 

@@ -1,5 +1,6 @@
 package Controller.Dungeon.Room;
 
+import Models.Actions.FightActions;
 import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
@@ -71,10 +72,11 @@ public class Fight extends AbstractRoom {
             case PREFIGHT:preTurn(); break;
             case PRETURN:turn(); break;
             case TURN:postTurn();break;
-            case POSTTURN:monsterPreTurn();break;
-            case MONSTERPRETURN:monsterTurn();break;
-            case MONSTERTURN:monsterPostTurn();break;
-            case MONSTERPOSTTURN:preTurn();break;
+            case POSTTURN: petTurn(); break;
+            case PETTURN: monsterPreTurn(); break;
+            case MONSTERPRETURN:monsterTurn(); break;
+            case MONSTERTURN:monsterPostTurn(); break;
+            case MONSTERPOSTTURN:preTurn(); break;
 
         }
     }
@@ -185,6 +187,17 @@ public class Fight extends AbstractRoom {
         System.out.println("I AM IN POSTTURN");
         state = FightState.POSTTURN;
         turn++;
+        nextState();
+    }
+
+    private void petTurn(){
+        state = FightState.PETTURN;
+
+        if(player.getPet() != null && monsters.size() > 0){
+            for(AbstractMonster m : monsters)
+                FightActions.attack(player.getPet(), m, player.getPet().getDamage());
+        }
+
         nextState();
     }
 

@@ -33,7 +33,6 @@ public class RemoveCard extends StackPane {
     private int height;
     ImageView back;
     ImageView nextButton;
-    MerchantScene merchant;
     StackPane stack;
     final ScrollPane sp = new ScrollPane();
 
