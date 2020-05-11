@@ -198,7 +198,8 @@ public class Fight extends AbstractRoom {
         state = FightState.PETTURN;
 
         if(player.getPet() != null && monsters.size() > 0){
-            FightActions.attack(player.getPet(), monsters.get(0), player.getPet().getDamage());
+            for(AbstractMonster m : monsters)
+                FightActions.attack(player.getPet(), m, player.getPet().getDamage());
         }
 
         nextState();

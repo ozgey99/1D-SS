@@ -295,7 +295,7 @@ public class UpperPane extends GridPane {
         box2.getChildren().addAll(gold, goldText);
 
         // energy box
-        energyText.setText("Your enery is: " + game.getPlayer().currentEnergy);
+        energyText.setText("Your energy is: " + game.getPlayer().currentEnergy);
         energyText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
         energy.getChildren().add(energyText);
 
