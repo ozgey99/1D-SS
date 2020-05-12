@@ -13,7 +13,7 @@ public class Ironclad extends AbstractCharacter {
         maxHP = 100;
         currentHP = maxHP;
         maxEnergy = 3;
-        gold = 0;
+        gold = 100;
         pet = null;
         isAlive = true;
     }
