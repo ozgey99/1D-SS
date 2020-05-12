@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,7 @@ public class CharPane extends StackPane {
     private int height;
     boolean selected = false;
     Circle circle;
+    ImageView pet;
 
 
     public CharPane(int width, int height){
@@ -34,14 +36,26 @@ public class CharPane extends StackPane {
     public void initialize()
     {
         ImageView imageView = new ImageView(new Image("Ironclad.png"));
+        pet = new ImageView(new Image("dragon.gif"));
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(width/5);
 
         this.getChildren().add( imageView );
         this.setAlignment(imageView, Pos.BOTTOM_CENTER );
-
+        System.out.println("char pane width: "+ width);
+        System.out.println("char pane height: "+ height);
+        charPet();
     }
 
+    public void charPet(){
+        pet.setPreserveRatio(true);
+        pet.setFitHeight(height/3);
+        pet.setEffect( new DropShadow(30, Color.RED) );
+        if(game.getPlayer().getPet() != null){
+            this.getChildren().add( pet );
+            this.setAlignment(pet, Pos.BOTTOM_RIGHT );
+        }
+    }
 
     public void draw()
     {
@@ -54,9 +68,7 @@ public class CharPane extends StackPane {
 
         int player = game.getPlayer().currentEnergy;
         String playerEnergy = ""+ player;
-        String maxEnergy = "3 / ";
-        String energy = maxEnergy + playerEnergy;
-        Text text = new Text(energy);
+        Text text = new Text(playerEnergy);
         text.setFill(Color.BLACK);
         text.setFont(Font.font ("Verdana", height/20));
         text.setBoundsType(TextBoundsType.VISUAL);

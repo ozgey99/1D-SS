@@ -5,6 +5,7 @@ import Models.Creatures.Monsters.AbstractMonster;
 import Controller.Dungeon.Room.Fight;
 import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -47,6 +48,7 @@ public class MonsterPane extends StackPane {
         // this.setMinSize( width, height);
         box = new VBox();
         rectangleBox = new HBox(20);
+        rectangleBox.setPadding(new Insets(0,0,0,width/3));
 
     }
 
