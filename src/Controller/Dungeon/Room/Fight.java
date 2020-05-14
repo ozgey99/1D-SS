@@ -197,7 +197,10 @@ public class Fight extends AbstractRoom {
             for(AbstractMonster m : monsters)
                 FightActions.attack(player.getPet(), m, player.getPet().getDamage());
         }
-
+        monsters.removeIf(m -> m.getCurrentHP() <= 0);
+        if (monsters.isEmpty()) {
+            done = true;
+        }
         nextState();
     }
 

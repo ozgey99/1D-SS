@@ -78,7 +78,6 @@ public class FightScene extends RoomScene {
     {
         gridUpper.initialize();
         gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
-
         GridPane.setConstraints(gridUpper, 0,0,1,1);
         division.getChildren().add(gridUpper);
         gridUpper.setMinWidth(width);

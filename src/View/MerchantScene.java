@@ -47,8 +47,9 @@ public class MerchantScene extends RoomScene  {
     ImageView petMessage;
     ImageView upgradeMessage;
     ImageView papirus;
-
+    ImageView hadPet;
     ImageView back;
+    ImageView upgradedPet;
     ImageView pet;
     static boolean added;
     boolean petClicked;
@@ -68,6 +69,8 @@ public class MerchantScene extends RoomScene  {
         gridUpper = new UpperPane(width,height/9);
         removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
         removeButton = new ImageView(new Image("removeButton.png"));
+        hadPet = new ImageView(new Image("youHavePet.png"));
+        upgradedPet = new ImageView(new Image("removeButton.png"));
         turnBack = new ImageView(new Image("goAhead.png"));
         pet = new ImageView(new Image("dragon.gif"));
         nextButton = new ImageView(new Image("goAhead.png"));
@@ -98,6 +101,10 @@ public class MerchantScene extends RoomScene  {
         pane.getChildren().add(petWarning);
         pane.getChildren().add(petMessage);
         pane.getChildren().add(upgradeMessage);
+        pane.getChildren().add(upgradedPet);
+        pane.getChildren().add(hadPet);
+        hadPet.setVisible(false);
+        upgradedPet.setVisible(false);
         petWarning.setVisible(false);
         petMessage.setVisible(false);
         upgradeMessage.setVisible(false);
@@ -190,6 +197,16 @@ public class MerchantScene extends RoomScene  {
         cost.setY(height/5*2+height/4.0 + height/36.0);
         pane.getChildren().add(cost);
 
+        upgradedPet.setPreserveRatio(true);
+        upgradedPet.setFitWidth(origWidth/13.0);
+        upgradedPet.setX(width/10*7-width/(106.0/10));
+        upgradedPet.setY(height/5*2+height/7.0 - height/9.0);
+
+        hadPet.setPreserveRatio(true);
+        hadPet.setFitWidth(origWidth/13.0);
+        hadPet.setX(width/10*7-width/(106.0/10));
+        hadPet.setY(height/5*2+height/7.0 - height/9.0);
+
         petWarning.setPreserveRatio(true);
         petWarning.setFitWidth(origWidth/13.0);
         petWarning.setX(width/10*7-width/(106.0/10));
@@ -221,16 +238,23 @@ public class MerchantScene extends RoomScene  {
                     if(game.getPlayer().getGold() < petPrice){
                         if(petMessage.isVisible())
                             petMessage.setVisible(false);
-                        if(upgradeMessage.isVisible())
-                            upgradeMessage.setVisible(false);
                         petWarning.setVisible(true);
                     }
                     else{
-                        System.out.println("gold after pet:" + game.getPlayer().getGold());
-                        // message = now you have a pet
-                        game.getPlayer().buyPet(p);
-                        game.getPlayer().changeGold(-petPrice);
-                        gridUpper.draw();
+                        if(game.getPlayer().getGold() < petPrice){
+                            if(upgradeMessage.isVisible())
+                                upgradeMessage.setVisible(false);
+                            petWarning.setVisible(true);
+                        }
+                        else{
+                            System.out.println("gold after pet:" + game.getPlayer().getGold());
+                            hadPet.setVisible(true);
+                            petMessage.setVisible(false);
+                            game.getPlayer().buyPet(p);
+                            game.getPlayer().changeGold(-petPrice);
+                            gridUpper.draw();
+                        }
+
                     }
                 }
 
@@ -305,6 +329,12 @@ public class MerchantScene extends RoomScene  {
 
                 if(upgradeMessage.isVisible())
                     upgradeMessage.setVisible(false);
+
+                if(hadPet.isVisible())
+                    hadPet.setVisible(false);
+
+                if(upgradedPet.isVisible())
+                    upgradedPet.setVisible(false);
             }
         });
         if(petClicked)

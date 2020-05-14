@@ -155,8 +155,6 @@ public class MonsterPane extends StackPane {
 
         }
 
-
-
         rectangleBox.setAlignment(Pos.BOTTOM_LEFT);
         this.getChildren().addAll(rectangleBox);
     }
@@ -169,10 +167,9 @@ public class MonsterPane extends StackPane {
         int len = monsters.size();
         int i;
         for( i = 0; i < len;i++)
+
         {
-
             AbstractMonster monster = monsters.get(i);
-
             String firstName = monster.getName();
             firstName = firstName + ".png";
             Rectangle rect1 = new Rectangle();
