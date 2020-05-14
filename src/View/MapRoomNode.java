@@ -53,7 +53,6 @@ public class MapRoomNode extends Circle {
     public void checkStatus(){
         AbstractRoom currentRoom = Main.game.getDungeon().getCurrentRoom();
         if( nodeRoom == currentRoom ){
-            active = true;
             this.setEffect(new DropShadow(30, Color.RED));
         }
         if( currentRoom.getChildren() != null ) {

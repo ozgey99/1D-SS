@@ -93,8 +93,12 @@ public class Dungeon {
 
         Fight beginningFight = new Fight(c, false, false);
 
+        ArrayList<AbstractRoom> childOfEmpty = new ArrayList<>();
+        childOfEmpty.add(beginningFight);
+
+        Fight emptyFight = new Fight(childOfEmpty,false, false);
         beginningRoom = beginningFight;
-        currentRoom = beginningFight;
+        currentRoom = emptyFight;
     }
 
     public AbstractRoom getBeginningRoom(){
