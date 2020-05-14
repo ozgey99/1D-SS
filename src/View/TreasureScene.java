@@ -38,7 +38,7 @@ public class TreasureScene extends RoomScene {
 
     public TreasureScene()
     {
-        super(new StackPane());
+        super();
         tick = new ImageView(new Image("tick.png"));
         chest = new ImageView(new Image("SmallChest.png"));
         rewardHeader = new ImageView(new Image("rewardHeader.png"));
@@ -50,7 +50,7 @@ public class TreasureScene extends RoomScene {
         root.setMinSize( width, height);
         origWidth = width;
         origHeight = height;
-
+        initialize();
     }
 
     public void initialize()
@@ -81,6 +81,7 @@ public class TreasureScene extends RoomScene {
         HBox box1 = new HBox();
         box1.setPadding(new Insets(origHeight/30, 0, 0, 0));
         Text goldText = new Text();
+        //Here is a big issue, SOLVE IT
         int gold = ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount();
         goldText.setText(gold + " gold");
         goldText.setFill(Color.BLACK);

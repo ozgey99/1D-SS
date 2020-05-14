@@ -22,7 +22,7 @@ public class RestScene extends RoomScene {
     static boolean added;
     public RestScene()
     {
-        super(new StackPane());
+        super();
         pane = new Pane();
         box = new HBox();
         options = new HBox();
@@ -33,6 +33,7 @@ public class RestScene extends RoomScene {
         smithPane  = new SmithPane(width/3*2 , height/9*6);
         root.setMinSize( width, height);
         added = false;
+        initialize();
     }
 
     public void turnBack(){

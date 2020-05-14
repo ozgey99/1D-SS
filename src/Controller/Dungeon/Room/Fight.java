@@ -54,6 +54,7 @@ public class Fight extends AbstractRoom {
         monsters = new ArrayList<>();
         relics = new ArrayList<>();
         generate();
+        isUnion = isBoss;
     }
     public void setSelectedMonster(AbstractMonster monster)
     {
@@ -83,11 +84,6 @@ public class Fight extends AbstractRoom {
 
     @Override
     public void start() {
-
-        game.currentScene = new FightScene();
-        Main.window.setScene(
-                game.currentScene);
-
         System.out.println("I AM IN START");
         player = Main.game.getPlayer();
 
@@ -100,12 +96,19 @@ public class Fight extends AbstractRoom {
 
         drawAmount = 5;
         turn = 1;
-        game.currentScene.initialize();
+
+        game.currentScene = new FightScene();
+        Main.window.setScene(
+                game.currentScene);
 
         preFight();
 
 
-        TextBasedUI.displayFightStart(this);
+        //game.currentScene.initialize();
+
+
+
+
     }
 
     private void preFight() {
@@ -370,6 +373,7 @@ public class Fight extends AbstractRoom {
 
 
     }
+
 
     // Getters and setters.
     // --------------------------------------------------------------------------------------------------------

@@ -22,7 +22,6 @@ public class Treasure extends AbstractRoom {
     int goldAmount;
 
     public Treasure(ArrayList<AbstractRoom> c) {
-        System.out.println("TREASURE CALLED");
         type = RoomType.CHEST;
         children = c;
         done = false;

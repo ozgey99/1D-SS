@@ -30,7 +30,8 @@ public class FightScene extends RoomScene {
 
     public FightScene()
     {
-        super(new StackPane());
+        super();
+
         fightPane = new StackPane();
         gridFight = new GridPane();
         fightRewards = new FightRewardsPane(width, height);
@@ -40,8 +41,9 @@ public class FightScene extends RoomScene {
         gridUpper = new UpperPane(width,height/9);
         division = new GridPane();
         endTurn = new Rectangle();
-
         root.setMinSize( width, height);
+
+        initialize();
 
     }
 

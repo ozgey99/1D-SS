@@ -58,7 +58,7 @@ public class MerchantScene extends RoomScene  {
     static int petPrice = 30;
 
     public MerchantScene() {
-        super(new StackPane());
+        super();
         root.setMinSize( width, height);
         p = new Pet();
         added = false;
@@ -80,10 +80,12 @@ public class MerchantScene extends RoomScene  {
         petWarning= new ImageView(new Image("warning.png"));
         petMessage= new ImageView(new Image("petMessage.png"));
         upgradeMessage= new ImageView(new Image("upgradeMessage.png"));
+        System.out.println(((Merchant) game.getDungeon().getCurrentRoom()).getCards().toString());
         cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
         cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
         relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
         relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
+        initialize();
     }
 
     @Override
@@ -98,6 +100,7 @@ public class MerchantScene extends RoomScene  {
         root.getChildren().add(pane);
         pane.getChildren().add(gridUpper);
         removeCardPane.stack.getChildren().add( turnBack );
+
         pane.getChildren().add(petWarning);
         pane.getChildren().add(petMessage);
         pane.getChildren().add(upgradeMessage);
@@ -188,14 +191,16 @@ public class MerchantScene extends RoomScene  {
         pet.setFitHeight(height/9.0);
         pet.setX(width/10.0*7-width/13.0);
         pet.setY(height/5.0*2+height/7.0);
-        pane.getChildren().add( pet );
+        if(!pane.getChildren().contains(pet))
+            pane.getChildren().add( pet );
 
         ImageView cost = new ImageView(new Image("cost.png"));
         cost.setPreserveRatio(true);
         cost.setFitHeight(height/17.0);
         cost.setX(width/10.0*7-width/15.0);
         cost.setY(height/5*2+height/4.0 + height/36.0);
-        pane.getChildren().add(cost);
+        if(!pane.getChildren().contains(cost))
+            pane.getChildren().add(cost);
 
         upgradedPet.setPreserveRatio(true);
         upgradedPet.setFitWidth(origWidth/13.0);
@@ -227,7 +232,8 @@ public class MerchantScene extends RoomScene  {
         text.setY(height/5*2+height/4.0 + height/36.0);
         text.setFont(Font.font ("Verdana", height/48.0));
         text.setFill(Color.WHITE);
-        pane.getChildren().add(text);
+        if(!pane.getChildren().contains(text))
+            pane.getChildren().add(text);
 
         pet.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

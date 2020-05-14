@@ -3,14 +3,17 @@ package Controller;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Characters.Ironclad;
 import Controller.Dungeon.Dungeon;
+import View.GameScene;
 import View.RoomScene;
+import javafx.scene.Scene;
+
 import static View.Main.game;
 
 
 public class Game {
     private Dungeon dungeon;
     private AbstractCharacter player;
-    public RoomScene currentScene;
+    public GameScene currentScene;
 
     public Game() {
         dungeon = new Dungeon();
@@ -19,7 +22,7 @@ public class Game {
         player.initialize();
     }
 
-    public void start() {
+  /*  public void start() {
 
         dungeon = new Dungeon();
         player = new Ironclad();
@@ -27,7 +30,7 @@ public class Game {
         game.getDungeon().generate();
         dungeon.getCurrentRoom().start();
     }
-
+*/
     public void startMap(){
         dungeon = new Dungeon();
         player = new Ironclad();

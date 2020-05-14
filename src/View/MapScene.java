@@ -14,18 +14,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+import java.awt.*;
 
 
-public class MapScene extends Scene {
-    int width = 1920;
-    int height = 1080;
+public class MapScene extends GameScene {
+    int width = 1280;
+    int height = 720;
 
     StackPane root;
 
     GridPane divisionUpper;
 
     UpperPane mapUpper;
-    GridPane mapLower;
+    StackPane mapLower;
 
     GridPane mapDivision;
 
@@ -34,16 +35,13 @@ public class MapScene extends Scene {
     StackPane right;
 
     public MapScene(){
-        super( new StackPane() );
+        super();
         root = (StackPane) this.getRoot();
-       /* Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        width = dim.width;
-        height = dim.height;*/
         initialize();
     }
-    private void initialize(){
+    @Override
+    public void initialize(){
         root.setMinSize( width, height );
-        root.setEffect(new DropShadow(30, Color.RED));
         divisionUpper = new GridPane();
         divisionUpper.setMinSize(width, height);
         divisionUpper.setGridLinesVisible(true);
@@ -62,7 +60,7 @@ public class MapScene extends Scene {
         divisionUpper.getChildren().add(mapUpper);
     }
     private void initializeLowerMap(){
-        mapLower = new GridPane();
+        mapLower = new StackPane();
         mapLower.setMinSize(width, 9*height/10 );
         mapLower.setEffect(  new DropShadow(30, Color.YELLOW));
         mapDivision = new GridPane();
@@ -72,7 +70,6 @@ public class MapScene extends Scene {
         ImageView imageView = new ImageView(new Image("mapGeneral.png"));
         mapLower.getChildren().add(imageView);
 
-        mapLower.setBackground( new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)) );
 
         initializeLeft();
        initializeCanvas();
@@ -110,6 +107,9 @@ public class MapScene extends Scene {
         mapCanvas.setMinSize(width*3/5, 9*height/10);
         GridPane.setConstraints(mapCanvas, 1,0,1,1);
         mapDivision.getChildren().add(mapCanvas);
+
+    }
+    public void draw(){
 
     }
 

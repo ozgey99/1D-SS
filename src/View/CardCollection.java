@@ -43,7 +43,7 @@ public class CardCollection extends RoomScene {
     final ScrollBar sc;
 
     public CardCollection(){
-        super(new StackPane());
+        super();
         redPane = new Pane();
         colorlessPane = new Pane();
         sc = new ScrollBar();

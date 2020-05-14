@@ -8,7 +8,7 @@ import Models.Object.AbstractRelic;
 import Models.Utils;
 import View.Main;
 import View.MerchantScene;
-
+import View.RestScene;
 
 
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ public class Merchant extends AbstractRoom {
         relics = new ArrayList<>();
         relicPrices = new ArrayList<>();
         petPrice = 100;
+
     }
 
     public void generate() {
@@ -103,8 +104,9 @@ public class Merchant extends AbstractRoom {
         game.currentScene = new MerchantScene();
         Main.window.setScene(
                 game.currentScene);
-
         game.currentScene.initialize();
+
+
         System.out.println(" I AM IN MERCHANT ROOM");
 
     }
