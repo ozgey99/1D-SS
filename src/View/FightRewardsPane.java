@@ -7,6 +7,7 @@ import Models.Object.AbstractRelic;
 import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -38,12 +39,15 @@ public class FightRewardsPane extends StackPane {
     ImageView proceed;
     Pane pane;
     ImageView tick;
+    ImageView rewardHeader;
+    boolean visible;
 
     public FightRewardsPane(int width, int height){
         this.width = width;
         this.height = height;
         pane =  new Pane();
         fightRewards = rewards();
+        visible = true;
         proceed = new ImageView(new Image("goAhead.png"));
         back = new ImageView(new Image("up.png"));
         tick = new ImageView(new Image("tick.png"));
@@ -56,11 +60,14 @@ public class FightRewardsPane extends StackPane {
         background();
         pane.getChildren().add(fightRewards);
         chosen();
+        rewardHeader = new ImageView(new Image("rewardHeader.png"));
+        this.getChildren().add(rewardHeader);
+        this.setAlignment(rewardHeader, Pos.CENTER);
     }
 
     public void chosen(){
         tick.setPreserveRatio(true);
-        tick.setFitHeight(height/(93.0/10)); //tick.setFitHeight(75);
+        tick.setFitHeight(height/7.0); //tick.setFitHeight(75);
         tick.setX(width/2); //tick.setX(width/2-100+100); // x of node
         tick.setY(height/2.0-height/5.0+ height/(35.0/10)); //tick.setY(height/2-140+200);
         tick.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -69,6 +76,8 @@ public class FightRewardsPane extends StackPane {
                 fightRewards.setVisible(false);
                 tick.setVisible(false);
                 //draw();
+                rewardHeader.setVisible(false);
+                visible = false;
                 proceed();
             }
         });
@@ -77,6 +86,10 @@ public class FightRewardsPane extends StackPane {
 
     public void visible(boolean bool){
         this.setVisible(bool);
+    }
+
+    public boolean checkVisibility(){
+        return visible;
     }
 
     public void proceed(){
@@ -98,9 +111,9 @@ public class FightRewardsPane extends StackPane {
 
         Group g = new Group();
         VBox vbox = new VBox(height/35);
-
         // gold reward
         HBox box1 = new HBox();
+        box1.setPadding(new Insets(height/30, 0, 0, 0));
         Text goldText = new Text();
         int gold = ((Fight)game.getDungeon().getCurrentRoom()).getGoldAmount();
         goldText.setText(gold + " gold");
@@ -217,11 +230,10 @@ public class FightRewardsPane extends StackPane {
                 });
             }
         });
-
         Rectangle rect = new Rectangle();
         rect.setX(width/2.0- width/13.0); //rect.setX(x/2-100);
         rect.setY(height/2-(height/(46.0/10))); //rect.setY(y/2-150);
-        rect.setFill(Color.GREY);
+        rect.setFill(new ImagePattern(new Image("rewardsBack.png")));
         rect.setStroke(Color.BLACK);
         rect.setWidth(width/(65.0/10)); //rect.setWidth(200);
         rect.setHeight(height/(233.0/100)); //rect.setHeight(300);

@@ -5,6 +5,7 @@ import Controller.Dungeon.Room.Treasure;
 import Models.Object.AbstractRelic;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -33,12 +34,14 @@ public class TreasureScene extends RoomScene {
     Node rect;
     static int origWidth;
     static  int origHeight;
+    ImageView rewardHeader;
 
     public TreasureScene()
     {
         super(new StackPane());
         tick = new ImageView(new Image("tick.png"));
         chest = new ImageView(new Image("SmallChest.png"));
+        rewardHeader = new ImageView(new Image("rewardHeader.png"));
         pane = new Pane();
         relics = new ArrayList<>();
         rectangles = new ArrayList<>();
@@ -76,6 +79,7 @@ public class TreasureScene extends RoomScene {
 
         // gold reward
         HBox box1 = new HBox();
+        box1.setPadding(new Insets(origHeight/30, 0, 0, 0));
         Text goldText = new Text();
         int gold = ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount();
         goldText.setText(gold + " gold");
@@ -196,7 +200,7 @@ public class TreasureScene extends RoomScene {
         Rectangle rect = new Rectangle();
         rect.setX(origWidth/2.0- origWidth/13.0); //rect.setX(x/2-100);
         rect.setY(origHeight/2-(origHeight/(46.0/10))); //rect.setY(y/2-150);
-        rect.setFill(Color.GREY);
+        rect.setFill(new ImagePattern(new Image("rewardsBack.png")));
         rect.setStroke(Color.BLACK);
         rect.setWidth(origWidth/(65.0/10)); //rect.setWidth(200);
         rect.setHeight(origHeight/(233.0/100)); //rect.setHeight(300);
@@ -235,6 +239,7 @@ public class TreasureScene extends RoomScene {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 rect.setVisible(false);
+                rewardHeader.setVisible(false);
                 tick.setVisible(false);
                 draw();
                 nextButton();
@@ -250,6 +255,7 @@ public class TreasureScene extends RoomScene {
         chest.setVisible(true);
         chest.setPreserveRatio(true);
         rect = rewards();
+
         chest.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
@@ -258,6 +264,8 @@ public class TreasureScene extends RoomScene {
                     pane.getChildren().add(rect);
                     chosen();
                     chest.setDisable(true);
+                    root.getChildren().add(rewardHeader);
+                    root.setAlignment(rewardHeader, Pos.CENTER);
                 }
 
             }

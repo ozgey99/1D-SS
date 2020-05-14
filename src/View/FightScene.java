@@ -3,6 +3,7 @@ package View;
 import Controller.Dungeon.Room.Fight;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -45,11 +46,12 @@ public class FightScene extends RoomScene {
     }
 
 
-
     public void getRewards(){
+
         fightRewards.visible(true);
         fightRewards.initialize();
         root.getChildren().add(fightRewards);
+
     }
 
     private void addBackground() {
