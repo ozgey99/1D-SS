@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+import java.awt.*;
 
 
 public class MapScene extends GameScene {
@@ -36,9 +37,6 @@ public class MapScene extends GameScene {
     public MapScene(){
         super();
         root = (StackPane) this.getRoot();
-       /* Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        width = dim.width;
-        height = dim.height;*/
         initialize();
     }
     @Override

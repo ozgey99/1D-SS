@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -26,9 +27,12 @@ import Models.Object.AbstractRelic;
 import java.util.ArrayList;
 
 import static View.Main.game;
+import Models.Creatures.Pet;
 import Models.Actions.RelicActions;
 
+
 public class MerchantScene extends RoomScene  {
+    Pet p;
     Pane pane;
     private UpperPane gridUpper;
     RemoveCard removeCardPane;
@@ -38,38 +42,75 @@ public class MerchantScene extends RoomScene  {
     ArrayList<Integer> relicPrices;
     ImageView turnBack;
     ImageView removeButton;
+    ImageView nextButton;
+    ImageView petWarning;
+    ImageView petMessage;
+    ImageView upgradeMessage;
+    ImageView papirus;
+    ImageView hadPet;
+    ImageView back;
+    ImageView upgradedPet;
+    ImageView pet;
     static boolean added;
+    boolean petClicked;
     static int origWidth;
     static  int origHeight;
+    static int petPrice = 30;
 
     public MerchantScene() {
         super();
         root.setMinSize( width, height);
+        p = new Pet();
         added = false;
+        petClicked = false;
         origWidth = width;
         origHeight = height;
         pane = new Pane();
-        gridUpper = new UpperPane(width,height/15);
+        gridUpper = new UpperPane(width,height/9);
         removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
         removeButton = new ImageView(new Image("removeButton.png"));
+        hadPet = new ImageView(new Image("youHavePet.png"));
+        upgradedPet = new ImageView(new Image("removeButton.png"));
         turnBack = new ImageView(new Image("goAhead.png"));
+        pet = new ImageView(new Image("dragon.gif"));
+        nextButton = new ImageView(new Image("goAhead.png"));
+        back = new ImageView(new Image("back_merchant.jpg"));
+        papirus = new ImageView(new Image("papirus.png"));
+
+        petWarning= new ImageView(new Image("warning.png"));
+        petMessage= new ImageView(new Image("petMessage.png"));
+        upgradeMessage= new ImageView(new Image("upgradeMessage.png"));
+        System.out.println(((Merchant) game.getDungeon().getCurrentRoom()).getCards().toString());
         cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
         cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
         relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
         relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
+        initialize();
     }
 
     @Override
     public void initialize(){
         initializeUpper();
+        shopPet();
         addBackground();
+        cardRemovalService();
         shopCards();
         shopRelics();
         proceed();
-        cardRemovalService();
         root.getChildren().add(pane);
         pane.getChildren().add(gridUpper);
         removeCardPane.stack.getChildren().add( turnBack );
+
+        pane.getChildren().add(petWarning);
+        pane.getChildren().add(petMessage);
+        pane.getChildren().add(upgradeMessage);
+        pane.getChildren().add(upgradedPet);
+        pane.getChildren().add(hadPet);
+        hadPet.setVisible(false);
+        upgradedPet.setVisible(false);
+        petWarning.setVisible(false);
+        petMessage.setVisible(false);
+        upgradeMessage.setVisible(false);
 
     }
 
@@ -105,14 +146,32 @@ public class MerchantScene extends RoomScene  {
     public void draw() {initializeUpper();}
 
     public void cardRemovalService(){
+        ImageView cost = new ImageView(new Image("cost.png"));
         removeButton.setPreserveRatio(true);
         removeButton.setFitHeight(height/5); //removeButton.setFitHeight(150);
-        removeButton.setX(width/9*6);
-        removeButton.setY(height/5+height/(43/10)); //removeButton.setY(height/5+160);
+        removeButton.setX(width/10*7);
+        removeButton.setY(height/2);
+        cost.setPreserveRatio(true);
+        cost.setFitHeight(height/17.0);
+        cost.setX(width/10*7+height/15);
+        cost.setY(height/2+height/6);
+        pane.getChildren().add(cost);
+
+        int price = removeCardPane.getPrice();
+        String p = ""+ price;
+        Text text = new Text(p);
+        text.setX(width/10*7 +75);
+        text.setY(height/2+height/5);
+        text.setFont(Font.font ("Verdana", height/48.0));
+        text.setFill(Color.WHITE);
+        pane.getChildren().add(text);
+
+
         pane.getChildren().add( removeButton );
         removeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+
                 removeCardPane.visible(true);
                 removeCardPane.addBackground();
                 removeCardPane.initialize();
@@ -126,12 +185,175 @@ public class MerchantScene extends RoomScene  {
         });
     }
 
+    public void shopPet(){
+
+        pet.setPreserveRatio(true);
+        pet.setFitHeight(height/9.0);
+        pet.setX(width/10.0*7-width/13.0);
+        pet.setY(height/5.0*2+height/7.0);
+        if(!pane.getChildren().contains(pet))
+            pane.getChildren().add( pet );
+
+        ImageView cost = new ImageView(new Image("cost.png"));
+        cost.setPreserveRatio(true);
+        cost.setFitHeight(height/17.0);
+        cost.setX(width/10.0*7-width/15.0);
+        cost.setY(height/5*2+height/4.0 + height/36.0);
+        if(!pane.getChildren().contains(cost))
+            pane.getChildren().add(cost);
+
+        upgradedPet.setPreserveRatio(true);
+        upgradedPet.setFitWidth(origWidth/13.0);
+        upgradedPet.setX(width/10*7-width/(106.0/10));
+        upgradedPet.setY(height/5*2+height/7.0 - height/9.0);
+
+        hadPet.setPreserveRatio(true);
+        hadPet.setFitWidth(origWidth/13.0);
+        hadPet.setX(width/10*7-width/(106.0/10));
+        hadPet.setY(height/5*2+height/7.0 - height/9.0);
+
+        petWarning.setPreserveRatio(true);
+        petWarning.setFitWidth(origWidth/13.0);
+        petWarning.setX(width/10*7-width/(106.0/10));
+        petWarning.setY(height/5*2+height/7.0 - height/9.0);
+
+        petMessage.setPreserveRatio(true);
+        petMessage.setFitWidth(origWidth/13.0);
+        petMessage.setX(width/10*7-width/(106/10));
+        petMessage.setY(height/5*2+height/7.0 - height/9.0);
+
+        upgradeMessage.setPreserveRatio(true);
+        upgradeMessage.setFitWidth(origWidth/13.0);
+        upgradeMessage.setX(width/10*7-width/(106/10));
+        upgradeMessage.setY(height/5*2+height/7.0 - height/9.0);
+
+        Text text = new Text(" " +petPrice);
+        text.setX(width/10*7-width/20.0);
+        text.setY(height/5*2+height/4.0 + height/36.0);
+        text.setFont(Font.font ("Verdana", height/48.0));
+        text.setFill(Color.WHITE);
+        if(!pane.getChildren().contains(text))
+            pane.getChildren().add(text);
+
+        pet.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("gold before pet: "+ game.getPlayer().getGold());
+
+                if(game.getPlayer().getPet() == null){
+                    if(game.getPlayer().getGold() < petPrice){
+                        if(petMessage.isVisible())
+                            petMessage.setVisible(false);
+                        petWarning.setVisible(true);
+                    }
+                    else{
+                        if(game.getPlayer().getGold() < petPrice){
+                            if(upgradeMessage.isVisible())
+                                upgradeMessage.setVisible(false);
+                            petWarning.setVisible(true);
+                        }
+                        else{
+                            System.out.println("gold after pet:" + game.getPlayer().getGold());
+                            hadPet.setVisible(true);
+                            petMessage.setVisible(false);
+                            game.getPlayer().buyPet(p);
+                            game.getPlayer().changeGold(-petPrice);
+                            gridUpper.draw();
+                        }
+
+                    }
+                }
+
+                else{
+                    if(game.getPlayer().getGold() > petPrice){
+                        // message = upgraded
+                        System.out.println("gold after pet:" + game.getPlayer().getGold());
+                        game.getPlayer().getPet().upgrade();
+                        game.getPlayer().changeGold(-petPrice);
+                        gridUpper.draw();
+                    }
+
+                }
+
+                pet.setEffect( new DropShadow(30, Color.YELLOW) );
+                petPrice += 10;
+                petClicked = true;
+            }
+        });
+
+        pet.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(!petClicked){
+                    ScaleTransition relicTransition = new ScaleTransition(Duration.millis(200), pet);
+                    relicTransition.setToX(1.5f);
+                    relicTransition.setToY(1.5f);
+                    relicTransition.setCycleCount(1);
+                    relicTransition.setAutoReverse(true);
+                    relicTransition.play();
+                    ScaleTransition relicCostTransition = new ScaleTransition(Duration.millis(200), cost);
+                    relicCostTransition.setToX(1.5f);
+                    relicCostTransition.setToY(1.5f);
+                    relicCostTransition.setCycleCount(1);
+                    relicCostTransition.setAutoReverse(true);
+                    relicCostTransition.play();
+                }
+
+                if(!petClicked){  // if not clicked
+                    if(game.getPlayer().getPet() == null){
+                        petMessage.setVisible(true);
+                    }
+                    else
+                        upgradeMessage.setVisible(true);
+                }
+
+                if(petClicked && game.getPlayer().getPet() == null){
+                    petMessage.setVisible(true);
+                }
+
+            }
+        });
+
+        pet.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), pet);
+                scaleTransition.setToX(1);
+                scaleTransition.setToY(1);
+                scaleTransition.setAutoReverse(true);
+                scaleTransition.play();
+                ScaleTransition scaleTransition1 = new ScaleTransition(Duration.millis(200), cost);
+                scaleTransition1.setToX(1);
+                scaleTransition1.setToY(1);
+                scaleTransition1.setAutoReverse(true);
+                scaleTransition1.play();
+                if(petMessage.isVisible())
+                    petMessage.setVisible(false);
+
+                if(petWarning.isVisible())
+                    petWarning.setVisible(false);
+
+                if(upgradeMessage.isVisible())
+                    upgradeMessage.setVisible(false);
+
+                if(hadPet.isVisible())
+                    hadPet.setVisible(false);
+
+                if(upgradedPet.isVisible())
+                    upgradedPet.setVisible(false);
+            }
+        });
+        if(petClicked)
+            pet.setDisable(true);
+
+    }
+
     public void proceed(){
-        ImageView nextButton = new ImageView(new Image("goAhead.png"));
+
         nextButton.setPreserveRatio(true);
-        nextButton.setFitHeight(height/14);
-        nextButton.setX(width-width/3); //nextButton.setX(width-400);
-        nextButton.setY(height/7*5);
+        nextButton.setFitHeight(height/11.0);
+        nextButton.setX(width-width/3.0); //nextButton.setX(width-400);
+        nextButton.setY(height/8*6);
         pane.getChildren().add( nextButton );
         nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -148,7 +370,7 @@ public class MerchantScene extends RoomScene  {
         warning.setPreserveRatio(true);
         warning.setX(x);
         warning.setY(y);
-        warning.setFitWidth(origWidth/13);
+        warning.setFitWidth(origWidth/13.0);
         g.getChildren().add(warning);
         return g;
     }
@@ -159,24 +381,19 @@ public class MerchantScene extends RoomScene  {
         boolean saleAdded = false;
         int rand = (int) (Math.random() * 5);
 
-        System.out.println("========INITIAL MASTER DECK=========");
-        for(int k=0; k<game.getPlayer().masterDeck.getSize(); k++){
-            System.out.println(game.getPlayer().masterDeck.getCard(k).getName());
-        }
-        System.out.println("========INITIAL MASTER DECK=========");
-
         cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
 
         for (int i = 0; i < cards.size(); i++){
             int price = cardPrices.get(i);
             String name = cards.get(i).getName();
+            System.out.println("card "+i +" "+name);
             name = name + ".png";
             Rectangle rect = new Rectangle();
             rect.setFill(new ImagePattern(new Image(name)));
             rect.setX(space);
-            rect.setY(height/5);
-            rect.setWidth(width/13); // rect.setWidth(100);
-            rect.setHeight(height/(466/100)); //rect.setHeight(150);
+            rect.setY(height/5.0);
+            rect.setWidth(width/(128.0/10)); // rect.setWidth(100);
+            rect.setHeight(height/(466.0/100)); //rect.setHeight(150);
             rect.setVisible(true);
             Text saleText = new Text("SALE");
             if(!saleAdded && rand == i ){
@@ -184,7 +401,7 @@ public class MerchantScene extends RoomScene  {
                 price = price/2;
                 saleText.setX(space+15);
                 saleText.setY(height/5-5);
-                saleText.setFont(Font.font ("family", 30));
+                saleText.setFont(Font.font ("family", height/24.0));
                 saleText.setFill(Color.RED);
                 pane.getChildren().add(saleText);
             }
@@ -199,12 +416,12 @@ public class MerchantScene extends RoomScene  {
             Text text = new Text(" " +price);
             text.setX(space+width/(325/10)); //text.setX(space+40);
             text.setY(height/5+height/4); //text.setY(height/5+170);
-            text.setFont(Font.font ("Verdana", 15));
+            text.setFont(Font.font ("Verdana", height/48.0));
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
-            int warningLocX = space-5;
-            int warningLocY = height/5-height/7; //int warningLocY = height/5-100;
+            int warningLocX = space+(width/130) - width/13; // cardX - warningWidth
+            int warningLocY = height/4; //int warningLocY = height/5-100;
 
             Node warn = warning(warningLocX, warningLocY);
             pane.getChildren().add(warn);
@@ -218,10 +435,10 @@ public class MerchantScene extends RoomScene  {
                 public void handle(MouseEvent t) {
 
                     if (game.getPlayer().getGold() >= cardPrice) {
-                        System.out.println("gold before: "+ game.getPlayer().getGold());
+
                         game.getPlayer().changeGold(-cardPrice);
                         gridUpper.draw();
-                        System.out.println("gold after :" + game.getPlayer().getGold());
+
                         game.getPlayer().masterDeck.addCard(cards.get(j));
                         pane.getChildren().remove(rect);
                         pane.getChildren().remove(text);
@@ -296,14 +513,14 @@ public class MerchantScene extends RoomScene  {
         rect.setY(y);
         rect.setFill(Color.GREY);
         rect.setStroke(Color.BLACK);
-        rect.setWidth(len*6);
+        rect.setWidth(len*(origWidth/213));
         rect.setHeight(origHeight/35); //rect.setHeight(20);
         rect.setVisible(true);
 
         Text relicText = new Text(desc);
         relicText.setX(x+5);
         relicText.setY(y+13);
-        relicText.setFont(Font.font ("Verdana", 10));
+        relicText.setFont(Font.font ("Verdana", origHeight/72));
         relicText.setFill(Color.WHITE);
 
         g.getChildren().add(rect);
@@ -338,7 +555,7 @@ public class MerchantScene extends RoomScene  {
             Text text = new Text(" " +price);
             text.setX(space+width/43); //text.setX(space+30);
             text.setY(height/5*2+height/4); //text.setY(height/5*2+170);
-            text.setFont(Font.font ("Verdana", 15));
+            text.setFont(Font.font ("Verdana", height/48.0));
             text.setFill(Color.WHITE);
             pane.getChildren().add(text);
 
@@ -355,33 +572,15 @@ public class MerchantScene extends RoomScene  {
                 public void handle(MouseEvent t) {
                     System.out.println("current gold: "+ game.getPlayer().getGold());
                     if (game.getPlayer().getGold() >= relicPrices.get(j)) {
-
-                        game.getPlayer().changeGold(-relicPrices.get(j));
-
-                        System.out.println("gold after purchase: "+ game.getPlayer().getGold());
-
-                        System.out.println("========BEFORE ADDING NEW RELIC=========");
-                        for(int k=0; k<game.getPlayer().relics.size(); k++){
-                            System.out.println(game.getPlayer().relics.get(k).getName() );
-                        }
-                        System.out.println("========BEFORE NEW RELIC=========");
-
+                        game.getPlayer().changeGold(-(relicPrices.get(j)));
                         RelicActions.addRelic(game.getPlayer(),relics.get(j));
                         gridUpper.draw();
-
-                        System.out.println("========AFTER ADDING NEW RELIC=========");
-                        for(int k=0; k<game.getPlayer().relics.size(); k++){
-                            System.out.println(game.getPlayer().relics.get(k).getName() );
-                        }
-                        System.out.println("========ADDED NEW RELIC=========");
-
                         pane.getChildren().remove(relicImage);
                         pane.getChildren().remove(text);
                         pane.getChildren().remove(cost);
                     }
                     else {
                         warn.setVisible(true);
-                        System.out.println("You don't have enough gold for relic");
                     }
 
                 }
@@ -435,15 +634,12 @@ public class MerchantScene extends RoomScene  {
     }
 
     private void addBackground() {
-        ImageView back = new ImageView(new Image("back_merchant.jpg"));
         back.setFitWidth(width);
         back.setFitHeight(height);
-
-        ImageView image = new ImageView(new Image("papirus.png"));
-        image.setFitWidth(width-width/(43/10)); //image.setFitWidth(width-300);
-        image.setFitHeight(height);
+        papirus.setFitWidth(width-width/(43/10)); //image.setFitWidth(width-300);
+        papirus.setFitHeight(height);
         root.getChildren().add(back);
-        root.getChildren().add(image);
+        root.getChildren().add(papirus);
 
     }
 

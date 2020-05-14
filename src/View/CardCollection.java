@@ -94,6 +94,23 @@ public class CardCollection extends RoomScene {
         // create multiple tabs
         Label label = new Label("ya yemin ediyorum imdat ya");
         String[] types = {"RED", "GREEN", "BLUE", "COLORLESS", "CURSES"};
+        /* TabPane tabPane = new TabPane();
+
+        Tab tab1 = new Tab("Planes", new Label("Show all planes available"));
+        Tab tab2 = new Tab("Cars"  , new Label("Show all cars available"));
+        Tab tab3 = new Tab("Boats" , new Label("Show all boats available"));
+
+        tabPane.getTabs().add(tab1);
+        tabPane.getTabs().add(tab2);
+        tabPane.getTabs().add(tab3);
+
+        VBox vBox = new VBox(tabPane);
+        Scene scene = new Scene(vBox);
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("JavaFX App");
+
+        primaryStage.show();*/
         for (int i = 0; i < 5; i++) {
             Tab tab = new Tab(types[i]);
             if( i == 0)

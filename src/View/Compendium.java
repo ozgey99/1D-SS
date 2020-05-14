@@ -33,7 +33,7 @@ public class Compendium extends GameScene {
         back = new ImageView(new Image("up.png"));
         root.setMinSize( width, height);
         added = false;
-
+        initialize();
     }
     @Override
     public void draw() {

@@ -5,6 +5,7 @@ import Controller.Dungeon.Room.Treasure;
 import Models.Object.AbstractRelic;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -33,21 +34,23 @@ public class TreasureScene extends RoomScene {
     Node rect;
     static int origWidth;
     static  int origHeight;
+    ImageView rewardHeader;
 
     public TreasureScene()
     {
         super();
         tick = new ImageView(new Image("tick.png"));
         chest = new ImageView(new Image("SmallChest.png"));
+        rewardHeader = new ImageView(new Image("rewardHeader.png"));
         pane = new Pane();
         relics = new ArrayList<>();
         rectangles = new ArrayList<>();
-        gridUpper = new UpperPane(width,height/15);
+        gridUpper = new UpperPane(width,height/9);
 
         root.setMinSize( width, height);
         origWidth = width;
         origHeight = height;
-
+        initialize();
     }
 
     public void initialize()
@@ -56,8 +59,6 @@ public class TreasureScene extends RoomScene {
         addBackground();
         smallChest();
         root.getChildren().add(pane);
-        System.out.println("width : "+width);
-        System.out.println("height : "+height);
     }
 
     private void initializeUpper()
@@ -78,11 +79,12 @@ public class TreasureScene extends RoomScene {
 
         // gold reward
         HBox box1 = new HBox();
+        box1.setPadding(new Insets(origHeight/30, 0, 0, 0));
         Text goldText = new Text();
         //Here is a big issue, SOLVE IT
         int gold = ((Treasure)game.getDungeon().getCurrentRoom()).getGoldAmount();
         goldText.setText(gold + " gold");
-        goldText.setFill(Color.WHITE);
+        goldText.setFill(Color.BLACK);
         goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         ImageView goldImage = new ImageView(new Image("gold.png"));
         goldImage.setFitWidth(origWidth/(325.0/10)); //goldImage.setFitWidth(40);
@@ -97,19 +99,28 @@ public class TreasureScene extends RoomScene {
         ArrayList<AbstractCard> cards = ((Treasure)game.getDungeon().getCurrentRoom()).getCards();
         String label = "add a card to your deck";
         Text text = new Text(label);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
         vbox.getChildren().add(text);
 
         // relic reward
         ArrayList<AbstractRelic> relics = ((Treasure)game.getDungeon().getCurrentRoom()).getRelics();
-        String desc = relics.get(0).getDescription();
-        String s = "get a relic";
-        Text relicText = new Text(s);
-        String name = relics.get(0).getName();
+        Text relicText = new Text();
         Text relicDesc = new Text();
-        relicDesc.setText(name+" : "+ desc);
-        relicDesc.setFill(Color.WHITE);
-        relicDesc.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 10));
-        vbox.getChildren().add(relicText);
+        if(relics.size() != 0){
+            String desc = relics.get(0).getDescription();
+            String s = "get a relic";
+            relicText.setText(s);
+            relicText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
+            String name = relics.get(0).getName();
+            relicDesc.setText(name+" : "+ desc);
+            relicDesc.setFill(Color.WHITE);
+            relicDesc.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
+            vbox.getChildren().add(relicText);
+        }
+        else{
+            relicText.setText("no relic rewards"+ "\n" +"you already have all relic ");
+            relicText.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, origWidth/100));
+        }
 
 
         // gold reward event listener
@@ -128,33 +139,36 @@ public class TreasureScene extends RoomScene {
 
         // relic reward event listener
         HBox box2 = new HBox();
-        relicText.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                String name = relics.get(0).getName();
-                name = name + ".png";
-                ImageView relicImage = new ImageView(new Image(name));
-                relicImage.setPreserveRatio(true);
-                relicImage.setFitHeight(origHeight/7.0); //relicImage.setFitHeight(100);
-                //box2.setPadding(new Insets(y/2,100, 100, x/2-90 ));
-                box2.setPadding(new Insets(origHeight/2.0,origWidth/13.0, origHeight/7.0, origWidth/(232.0/100) ));
-                box2.getChildren().addAll(relicImage, relicDesc);
-                g.getChildren().add(box2);
-                relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        RelicActions.addRelic(game.getPlayer(),relics.get(0));
-                        relicImage.setVisible(false);
-                        relicDesc.setVisible(false);
-                        relicText.setDisable(true);
-                        goldImage.setDisable(true);
-                        text.setDisable(true);
+        if(relics.size() != 0){
+            relicText.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    String name = relics.get(0).getName();
+                    name = name + ".png";
+                    ImageView relicImage = new ImageView(new Image(name));
+                    relicImage.setPreserveRatio(true);
+                    relicImage.setFitHeight(origHeight/7.0); //relicImage.setFitHeight(100);
+                    //box2.setPadding(new Insets(y/2,100, 100, x/2-90 ));
+                    box2.setPadding(new Insets(origHeight/2.0,origWidth/13.0, origHeight/7.0, origWidth/(232.0/100) ));
+                    box2.getChildren().addAll(relicImage, relicDesc);
+                    g.getChildren().add(box2);
+                    relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            RelicActions.addRelic(game.getPlayer(),relics.get(0));
+                            relicImage.setVisible(false);
+                            relicDesc.setVisible(false);
+                            relicText.setDisable(true);
+                            goldImage.setDisable(true);
+                            text.setDisable(true);
 
-                    }
-                });
+                        }
+                    });
 
-            }
-        });
+                }
+            });
+        }
+
 
         // card reward event listener
         text.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -187,7 +201,7 @@ public class TreasureScene extends RoomScene {
         Rectangle rect = new Rectangle();
         rect.setX(origWidth/2.0- origWidth/13.0); //rect.setX(x/2-100);
         rect.setY(origHeight/2-(origHeight/(46.0/10))); //rect.setY(y/2-150);
-        rect.setFill(Color.GREY);
+        rect.setFill(new ImagePattern(new Image("rewardsBack.png")));
         rect.setStroke(Color.BLACK);
         rect.setWidth(origWidth/(65.0/10)); //rect.setWidth(200);
         rect.setHeight(origHeight/(233.0/100)); //rect.setHeight(300);
@@ -202,9 +216,9 @@ public class TreasureScene extends RoomScene {
     }
 
     public void nextButton(){
-        ImageView nextButton = new ImageView(new Image("nextButton.png"));
+        ImageView nextButton = new ImageView(new Image("goAhead.png"));
         nextButton.setPreserveRatio(true);
-        nextButton.setFitHeight(height/14.0); //nextButton.setFitHeight(50);
+        nextButton.setFitHeight(height/7); //nextButton.setFitHeight(50);
         nextButton.setX(width/(14.0/10)); //((nextButton.setX(width-400);
         nextButton.setY(height/7*5);
         pane.getChildren().add( nextButton );
@@ -226,6 +240,7 @@ public class TreasureScene extends RoomScene {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 rect.setVisible(false);
+                rewardHeader.setVisible(false);
                 tick.setVisible(false);
                 draw();
                 nextButton();
@@ -241,6 +256,7 @@ public class TreasureScene extends RoomScene {
         chest.setVisible(true);
         chest.setPreserveRatio(true);
         rect = rewards();
+
         chest.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
@@ -249,6 +265,8 @@ public class TreasureScene extends RoomScene {
                     pane.getChildren().add(rect);
                     chosen();
                     chest.setDisable(true);
+                    root.getChildren().add(rewardHeader);
+                    root.setAlignment(rewardHeader, Pos.CENTER);
                 }
 
             }

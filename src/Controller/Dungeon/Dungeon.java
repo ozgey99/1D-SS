@@ -47,7 +47,7 @@ public class Dungeon {
         }
 
         //Create boss
-        Fight boss = new Fight(null, false, true);
+        Fight boss = new Fight(null, false, true, false);
         boss.setUnion(true);
 
         ArrayList<AbstractRoom> prevRooms = new ArrayList<>();
@@ -91,12 +91,12 @@ public class Dungeon {
         ArrayList<AbstractRoom> c = new ArrayList<>();
         c.add(beginningTreasure);
 
-        Fight beginningFight = new Fight(c, false, false);
+        Fight beginningFight = new Fight(c, false, false, true);
 
         ArrayList<AbstractRoom> childOfEmpty = new ArrayList<>();
         childOfEmpty.add(beginningFight);
 
-        Fight emptyFight = new Fight(childOfEmpty,false, false);
+        Fight emptyFight = new Fight(childOfEmpty,false, false, false);
         beginningRoom = beginningFight;
         currentRoom = emptyFight;
     }
@@ -111,7 +111,7 @@ public class Dungeon {
         int rand = (int) (Math.random() * 5) + 1; //for 5 room types
         switch(rand){
             case 1:
-                room = new Fight(children, true, false);
+                room = new Fight(children, true, false, false);
                 break;
             case 2:
                 room = new Merchant(children);
@@ -123,7 +123,7 @@ public class Dungeon {
                 room = new Treasure(children);
                 break;
             default:
-                room = new Fight(children, false, false);
+                room = new Fight(children, false, false, false);
                 break;
         }
         return room;

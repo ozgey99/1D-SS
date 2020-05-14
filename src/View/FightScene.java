@@ -3,6 +3,7 @@ package View;
 import Controller.Dungeon.Room.Fight;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,33 +40,37 @@ public class FightScene extends RoomScene {
         gridUpper = new UpperPane(width,height/9);
         division = new GridPane();
         endTurn = new Rectangle();
-
         root.setMinSize( width, height);
+
+        initialize();
 
     }
 
+
     public void getRewards(){
+
         fightRewards.visible(true);
         fightRewards.initialize();
         root.getChildren().add(fightRewards);
+
     }
 
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image("background1.jpg"));
+        ImageView imageView = new ImageView(new Image("fightRoom.jpg"));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         root.getChildren().add(imageView);
     }
     private void initializeLeft(){
         gridLeft.initialize();
-        gridLeft.setBackground( new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)) );
+        //gridLeft.setBackground( new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)) );
         GridPane.setConstraints(gridLeft, 0,0,1,1);
         gridFight.getChildren().add(gridLeft);
     }
 
     private void initializeRight(){
         gridRight.initialize();
-        gridRight.setBackground( new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)) );
+        //gridRight.setBackground( new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)) );
         GridPane.setConstraints(gridRight, 1,0,1,1);
         gridFight.getChildren().add(gridRight);
 
@@ -74,7 +79,6 @@ public class FightScene extends RoomScene {
     {
         gridUpper.initialize();
         gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
-
         GridPane.setConstraints(gridUpper, 0,0,1,1);
         division.getChildren().add(gridUpper);
         gridUpper.setMinWidth(width);
@@ -85,7 +89,7 @@ public class FightScene extends RoomScene {
     private void initializeLower()
     {
         gridLower.initialize();
-        gridLower.setBackground( new Background(new BackgroundFill(Color.BROWN, CornerRadii.EMPTY, Insets.EMPTY)) );
+        //gridLower.setBackground( new Background(new BackgroundFill(Color.BROWN, CornerRadii.EMPTY, Insets.EMPTY)) );
         GridPane.setConstraints(gridLower, 0,2,1,1);
         division.getChildren().add(gridLower);
     }
@@ -110,10 +114,10 @@ public class FightScene extends RoomScene {
 
 
         endTurn.setFill(new ImagePattern(new Image("endturn.png")));
-        endTurn.setX(200);
-        endTurn.setY(0);
-        endTurn.setWidth(100);
-        endTurn.setHeight(100);
+        //endTurn.setX(200);
+        //endTurn.setY(0);
+        endTurn.setWidth(width/(128.0/10));
+        endTurn.setHeight(height/(72.0/10));
         endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
@@ -151,13 +155,10 @@ public class FightScene extends RoomScene {
         }
         else if( game.getPlayer().getCurrentHP() <= 0)
         {
-
-
                 game.currentScene = new WinScene();
                 Main.window.setScene(
                         game.currentScene);
                 game.currentScene.initialize();
-
 
         }
         else {

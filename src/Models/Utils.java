@@ -29,7 +29,6 @@ public class Utils {
         c.add(new Clash());
         c.add(new Cleave());
         c.add(new Combust());
-        c.add(new Dazed()); // -------
         c.add(new Entrench());
         c.add(new Havoc());
         c.add(new Hemokinesis());

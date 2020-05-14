@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -71,6 +73,14 @@ public class Main extends Application {
         window = primaryStage;
         primaryStage.show();
 
+        primaryStage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+            if (KeyCode.ESCAPE == event.getCode()) {
+                game.currentScene = new MenuScene();
+                Main.window.setScene(
+                        game.currentScene);
+                game.currentScene.initialize();
+            }
+        });
         //addMusic();
     }
 

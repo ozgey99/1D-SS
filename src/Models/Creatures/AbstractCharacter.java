@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public abstract class AbstractCharacter extends AbstractCreature {
     public int currentEnergy;
     public int maxEnergy;
+    public Pet pet;
 
     protected int gold;
     protected boolean isAlive;
@@ -36,5 +37,17 @@ public abstract class AbstractCharacter extends AbstractCreature {
 
     public int getGold() {
         return gold;
+    }
+
+    public Pet getPet(){
+        return pet;
+    }
+
+    public boolean buyPet(Pet p){
+        if(pet == null) {
+            pet = p;
+            return true;
+        }
+        return false;
     }
 }

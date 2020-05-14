@@ -1,5 +1,6 @@
 package Controller.Dungeon.Room;
 
+import Models.Actions.FightActions;
 import Models.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
@@ -15,14 +16,10 @@ import Models.Object.AbstractRelic;
 import Models.TextBasedUI;
 import View.FightScene;
 
-import java.net.SocketTimeoutException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import static View.Main.game;
-import Controller.Dungeon.Dungeon;
-import View.RoomScene;
 
 public class Fight extends AbstractRoom {
 
@@ -42,16 +39,16 @@ public class Fight extends AbstractRoom {
     int drawAmount;
     int goldAmount;
     ArrayList<AbstractCard> cardRewards;
+    boolean isFirstRoom;
 
-    static boolean added;
-
-    public Fight(ArrayList<AbstractRoom> c, boolean isElite, boolean isBoss) {
+    public Fight(ArrayList<AbstractRoom> c, boolean isElite, boolean isBoss, boolean isFirstRoom) {
         type = RoomType.FIGHT;
         this.isBoss = isBoss;
         this.isElite = isElite;
+        this.isFirstRoom = isFirstRoom;
         children = c;
         done = false;
-        added = false;
+
         cardRewardAmount = 3;
         cardRewards = new ArrayList<>();
         monsters = new ArrayList<>();
@@ -76,21 +73,17 @@ public class Fight extends AbstractRoom {
             case PREFIGHT:preTurn(); break;
             case PRETURN:turn(); break;
             case TURN:postTurn();break;
-            case POSTTURN:monsterPreTurn();break;
-            case MONSTERPRETURN:monsterTurn();break;
-            case MONSTERTURN:monsterPostTurn();break;
-            case MONSTERPOSTTURN:preTurn();break;
+            case POSTTURN: petTurn(); break;
+            case PETTURN: monsterPreTurn(); break;
+            case MONSTERPRETURN:monsterTurn(); break;
+            case MONSTERTURN:monsterPostTurn(); break;
+            case MONSTERPOSTTURN:preTurn(); break;
 
         }
     }
 
     @Override
     public void start() {
-
-        game.currentScene = new FightScene();
-        Main.window.setScene(
-                game.currentScene);
-
         System.out.println("I AM IN START");
         player = Main.game.getPlayer();
 
@@ -103,12 +96,19 @@ public class Fight extends AbstractRoom {
 
         drawAmount = 5;
         turn = 1;
-        game.currentScene.initialize();
+
+        game.currentScene = new FightScene();
+        Main.window.setScene(
+                game.currentScene);
 
         preFight();
 
 
-        TextBasedUI.displayFightStart(this);
+        //game.currentScene.initialize();
+
+
+
+
     }
 
     private void preFight() {
@@ -193,6 +193,20 @@ public class Fight extends AbstractRoom {
         nextState();
     }
 
+    private void petTurn(){
+        state = FightState.PETTURN;
+
+        if(player.getPet() != null && monsters.size() > 0){
+            for(AbstractMonster m : monsters)
+                FightActions.attack(player.getPet(), m, player.getPet().getDamage());
+        }
+        monsters.removeIf(m -> m.getCurrentHP() <= 0);
+        if (monsters.isEmpty()) {
+            done = true;
+        }
+        nextState();
+    }
+
     private void monsterPreTurn() {
       //  ( (FightScene)(game.currentScene)).drawMonsters();
 
@@ -267,7 +281,6 @@ public class Fight extends AbstractRoom {
         System.out.println("I AM IN POSTFIGHT");
 
         state = FightState.POSTFIGHT;
-        player.changeGold(goldAmount);
         for (AbstractRelic r : player.relics) {
             r.onFightEnd(player);
         }
@@ -315,10 +328,9 @@ public class Fight extends AbstractRoom {
             else if(m.get(0) instanceof GreenLouse)
                 monsters.add(new RedLouse());
         }
-        if(!added){
+        if(isFirstRoom){
             generateRewards();
             relicReward();
-            added = true;
         }
 
     }

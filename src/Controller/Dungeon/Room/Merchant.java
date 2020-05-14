@@ -3,11 +3,12 @@ package Controller.Dungeon.Room;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Controller.Dungeon.AbstractRoom;
+import Models.Creatures.Pet;
 import Models.Object.AbstractRelic;
 import Models.Utils;
 import View.Main;
 import View.MerchantScene;
-
+import View.RestScene;
 
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class Merchant extends AbstractRoom {
     ArrayList<Integer> cardPrices;
     ArrayList<AbstractRelic> relics;
     ArrayList<Integer> relicPrices;
+    Pet pet;
+    int petPrice;
 
     public Merchant(ArrayList<AbstractRoom> c) {
         type = RoomType.SHOP;
@@ -28,23 +31,26 @@ public class Merchant extends AbstractRoom {
         cardPrices = new ArrayList<>();
         relics = new ArrayList<>();
         relicPrices = new ArrayList<>();
+        petPrice = 100;
+
     }
 
     public void generate() {
+        if(game.getPlayer().getPet() == null){
+            pet = new Pet();
+        }
+
         ArrayList<AbstractCard> allCards = Utils.getAllCardsOfColor(CardColor.RED);
 
         for (AbstractCard y : game.getPlayer().masterDeck.getCardList()) {
             allCards.removeIf(c -> y.getName() == c.getName());
         }
 
-        int index = (int) (Math.random() * (allCards.size() - 1));
-        cards.add(allCards.get(index));
-        cardPrices.add((int) (Math.random() * 250));
-        allCards.remove(index);
-
-        while (cards.size() != 5 ) {
-            index = (int) (Math.random() * (allCards.size() - 1));
-            cards.add(allCards.get(index));
+        while (allCards.size() > 0 && cards.size() != 5) {
+            int ind = (int) (Math.random() * (allCards.size() - 1));
+            AbstractCard temp = allCards.get(ind);
+            cards.add(temp);
+            allCards.remove(ind);
             cardPrices.add((int) (Math.random() * 250));
         }
 
@@ -98,30 +104,11 @@ public class Merchant extends AbstractRoom {
         game.currentScene = new MerchantScene();
         Main.window.setScene(
                 game.currentScene);
+        game.currentScene.initialize();
 
-        game.currentScene.initialize();
+
         System.out.println(" I AM IN MERCHANT ROOM");
-        /*AbstractCharacter player = Main.game.getPlayer();
-        game.currentScene.initialize();
-        System.out.println(" I AM IN MERCHANT ROOM");
-        while (!done) {
-            int max = TextBasedUI.displayMerchant(this);
-            int choose = TextBasedUI.getInput(-1, max);
-            if (choose == -1) done = true;
-            else if (player.getGold() >= cardPrices.get(choose)) {
-                    player.masterDeck.addCard(cards.get(choose));
-                    cards.remove(choose);
-                    cardPrices.remove(choose);
-            }
-            else if(player.getGold() >= relicPrices.get(choose)){
-                RelicActions.addRelic(player, relics.get(choose));
-                relics.remove(choose);
-                relicPrices.remove(choose);
-            }
-            else {
-                System.out.println("You don't have enough gold to purchase this item.");
-            }
-        }*/
+
     }
 
     @Override
@@ -152,5 +139,13 @@ public class Merchant extends AbstractRoom {
 
     public ArrayList<Integer> getRelicPrices() {
         return relicPrices;
+    }
+
+    public Pet getPet(){
+        return pet;
+    }
+
+    public int getPetPrice(){
+        return petPrice;
     }
 }

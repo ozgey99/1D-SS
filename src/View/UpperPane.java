@@ -29,15 +29,14 @@ public class UpperPane extends GridPane {
     Text healthText;
     Text goldText;
     Text blockText;
-    Text energyText;
-    int space;
+    static int padY;
+    static int padX;
     HBox box;
     HBox box1;
     HBox block;
     HBox box2;
     HBox box3;
     HBox box4;
-    HBox energy;
     Pane pane;
     boolean relicDesc;
     boolean powerDesc;
@@ -51,15 +50,14 @@ public class UpperPane extends GridPane {
         healthText = new Text();
         goldText = new Text();
         blockText = new Text();
-        energyText = new Text();
-        space = 800;
+        padY = height;
+        padX = width;
         box = new HBox(70);
         box1 = new HBox();
         block = new HBox();
         box2 = new HBox();
         box3 = new HBox(10);
         box4 = new HBox(10);
-        energy = new HBox();
         relicDesc = false;
         powerDesc = false;
         //addBackground();
@@ -83,14 +81,15 @@ public class UpperPane extends GridPane {
         rect.setY(y);
         rect.setFill(Color.GREY);
         rect.setStroke(Color.BLACK);
-        rect.setWidth(len*6);
-        rect.setHeight(20);
+        rect.setWidth(len*(padX/213));
+        rect.setHeight(padY/4);
+        System.out.println("padY: "+padY);
         rect.setVisible(true);
 
         Text relicText = new Text(desc);
         relicText.setX(x+5);
         relicText.setY(y+13);
-        relicText.setFont(Font.font ("Verdana", 10));
+        relicText.setFont(Font.font ("Verdana", padY/8));
         relicText.setFill(Color.WHITE);
 
         g.getChildren().add(rect);
@@ -110,14 +109,14 @@ public class UpperPane extends GridPane {
         rect.setY(y);
         rect.setFill(Color.GREY);
         rect.setStroke(Color.BLACK);
-        rect.setWidth(len*6);
-        rect.setHeight(20);
+        rect.setWidth(len*(padX/213));
+        rect.setHeight(padY/4);
         rect.setVisible(true);
 
         Text powerText = new Text(desc);
         powerText.setX(x+5);
         powerText.setY(y+13);
-        powerText.setFont(Font.font ("Verdana", 10));
+        powerText.setFont(Font.font ("Verdana", padY/8));
         powerText.setFill(Color.WHITE);
 
         g.getChildren().add(rect);
@@ -131,11 +130,11 @@ public class UpperPane extends GridPane {
         clearPane();
         // box 1 -- health
         healthText.setText(game.getPlayer().getCurrentHP()+ " / "+ game.getPlayer().getMaxHP());
-        healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, height/5));
         healthText.setFill(Color.RED);
         ImageView heart = new ImageView(new Image("heart.png"));
-        heart.setFitWidth(40);
-        heart.setFitHeight(40);
+        heart.setFitWidth(height/2);
+        heart.setFitHeight(height/2);
         heart.setVisible(true);
         heart.setPreserveRatio(true);
         box1.getChildren().add(heart);
@@ -143,28 +142,23 @@ public class UpperPane extends GridPane {
 
         // block box
         blockText.setText("" + game.getPlayer().getBlock());
-        blockText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        blockText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, height/5));
         ImageView blockPic = new ImageView(new Image("blockPic.png"));
-        blockPic.setFitWidth(40);
-        blockPic.setFitHeight(40);
+        blockPic.setFitWidth(height/2);
+        blockPic.setFitHeight(height/2);
         blockPic.setVisible(true);
         blockPic.setPreserveRatio(true);
         block.getChildren().addAll(blockPic, blockText);
 
         // box 2 -- gold
         goldText.setText("" + game.getPlayer().getGold());
-        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, height/5));
         ImageView gold = new ImageView(new Image("gold.png"));
-        gold.setFitWidth(40);
-        gold.setFitHeight(40);
+        gold.setFitWidth(height/2);
+        gold.setFitHeight(height/2);
         gold.setVisible(true);
         gold.setPreserveRatio(true);
         box2.getChildren().addAll(gold, goldText);
-
-        // energy box
-        energyText.setText("Your enery is: " + game.getPlayer().currentEnergy);
-        energyText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        energy.getChildren().add(energyText);
 
         // box 3 -- relic
         for(int i=0; i< game.getPlayer().relics.size(); i++){
@@ -173,9 +167,9 @@ public class UpperPane extends GridPane {
             name = name + ".png";
             ImageView relicImage = new ImageView(new Image(name));
             relicImage.setPreserveRatio(true);
-            relicImage.setFitHeight(30);
+            relicImage.setFitHeight(height/2);
 
-            Node desc = relicDescription(game.getPlayer().relics,i, width/2, height-20);
+            Node desc = relicDescription(game.getPlayer().relics,i, width/2, height-(height/4));
             pane.getChildren().add(desc);
             desc.setVisible(false);
 
@@ -206,10 +200,10 @@ public class UpperPane extends GridPane {
             name = name + ".png";
             ImageView powerImage = new ImageView(new Image(name));
             powerImage.setPreserveRatio(true);
-            powerImage.setFitHeight(30);
+            powerImage.setFitHeight(height/2);
             box4.getChildren().add(powerImage);
 
-            Node desc = powerDescription(game.getPlayer().powers,i, width/2, height-20);
+            Node desc = powerDescription(game.getPlayer().powers,i, width/2, height-(height/4));
             pane.getChildren().add(desc);
             desc.setVisible(false);
             if(! this.getChildren().contains(pane)){
@@ -230,7 +224,7 @@ public class UpperPane extends GridPane {
                 }
             });
         }
-        box.getChildren().addAll(box1,block,energy,box2,box3,box4);
+        box.getChildren().addAll(box1,block,box2,box3,box4);
 
         if(! this.getChildren().contains(box)){
             this.getChildren().add(box);
@@ -255,8 +249,6 @@ public class UpperPane extends GridPane {
         box4.getChildren().clear();
         box4.getChildren().removeAll();
         box4.getChildren().clear();
-        energy.getChildren().clear();
-        energy.getChildren().removeAll();
     }
 
     public void draw()
@@ -265,39 +257,36 @@ public class UpperPane extends GridPane {
 
         // box 1 -- health
         healthText.setText(game.getPlayer().getCurrentHP()+ " / "+ game.getPlayer().getMaxHP());
-        healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, height/5));
         healthText.setFill(Color.RED);
         ImageView heart = new ImageView(new Image("heart.png"));
-        heart.setFitWidth(40);
-        heart.setFitHeight(40);
+        heart.setFitWidth(height/2);
+        heart.setFitHeight(height/2);
         heart.setVisible(true);
         heart.setPreserveRatio(true);
-        box1.getChildren().addAll(heart, healthText);
+        box1.getChildren().add(heart);
+        box1.getChildren().add(healthText);
 
         // block box
         blockText.setText("" + game.getPlayer().getBlock());
-        blockText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        blockText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, height/5));
         ImageView blockPic = new ImageView(new Image("blockPic.png"));
-        blockPic.setFitWidth(40);
-        blockPic.setFitHeight(40);
+        blockPic.setFitWidth(height/2);
+        blockPic.setFitHeight(height/2);
         blockPic.setVisible(true);
         blockPic.setPreserveRatio(true);
         block.getChildren().addAll(blockPic, blockText);
 
         // box 2 -- gold
         goldText.setText("" + game.getPlayer().getGold());
-        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        goldText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, height/5));
         ImageView gold = new ImageView(new Image("gold.png"));
-        gold.setFitWidth(40);
-        gold.setFitHeight(40);
+        gold.setFitWidth(height/2);
+        gold.setFitHeight(height/2);
         gold.setVisible(true);
         gold.setPreserveRatio(true);
         box2.getChildren().addAll(gold, goldText);
 
-        // energy box
-        energyText.setText("Your enery is: " + game.getPlayer().currentEnergy);
-        energyText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        energy.getChildren().add(energyText);
 
         // box 3 -- relic
         for(int i=0; i< game.getPlayer().relics.size(); i++){
@@ -306,12 +295,16 @@ public class UpperPane extends GridPane {
             name = name + ".png";
             ImageView relicImage = new ImageView(new Image(name));
             relicImage.setPreserveRatio(true);
-            relicImage.setFitHeight(30);
-            box3.getChildren().add(relicImage);
+            relicImage.setFitHeight(height/2);
 
-            Node desc = relicDescription(game.getPlayer().relics,i, width/2, height-20);
+            Node desc = relicDescription(game.getPlayer().relics,i, width/2, height-(height/4));
             pane.getChildren().add(desc);
             desc.setVisible(false);
+
+            if(! this.getChildren().contains(pane)){
+                this.getChildren().add(pane);
+                relicDesc = true;
+            }
 
             relicImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
@@ -325,7 +318,7 @@ public class UpperPane extends GridPane {
                     desc.setVisible(false);
                 }
             });
-
+            box3.getChildren().add(relicImage);
         }
 
         // box 4 -- power
@@ -335,12 +328,16 @@ public class UpperPane extends GridPane {
             name = name + ".png";
             ImageView powerImage = new ImageView(new Image(name));
             powerImage.setPreserveRatio(true);
-            powerImage.setFitHeight(30);
+            powerImage.setFitHeight(height/2);
             box4.getChildren().add(powerImage);
 
-            Node desc = powerDescription(game.getPlayer().powers,i, width/2, height-20);
+            Node desc = powerDescription(game.getPlayer().powers,i, width/2, height-(height/4));
             pane.getChildren().add(desc);
             desc.setVisible(false);
+            if(! this.getChildren().contains(pane)){
+                this.getChildren().add(pane);
+                relicDesc = true;
+            }
 
             powerImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
@@ -355,7 +352,7 @@ public class UpperPane extends GridPane {
                 }
             });
         }
-        box.getChildren().addAll(box1,block,energy,box2,box3,box4);
+        box.getChildren().addAll(box1,block,box2,box3,box4);
     }
 
 
