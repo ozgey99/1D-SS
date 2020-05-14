@@ -30,6 +30,7 @@ public class UpperPane extends GridPane {
     Text goldText;
     Text blockText;
     static int padY;
+    static int padX;
     HBox box;
     HBox box1;
     HBox block;
@@ -50,6 +51,7 @@ public class UpperPane extends GridPane {
         goldText = new Text();
         blockText = new Text();
         padY = height;
+        padX = width;
         box = new HBox(70);
         box1 = new HBox();
         block = new HBox();
@@ -79,7 +81,7 @@ public class UpperPane extends GridPane {
         rect.setY(y);
         rect.setFill(Color.GREY);
         rect.setStroke(Color.BLACK);
-        rect.setWidth(len*6);
+        rect.setWidth(len*(padX/213));
         rect.setHeight(padY/4);
         System.out.println("padY: "+padY);
         rect.setVisible(true);
@@ -107,7 +109,7 @@ public class UpperPane extends GridPane {
         rect.setY(y);
         rect.setFill(Color.GREY);
         rect.setStroke(Color.BLACK);
-        rect.setWidth(len*6);
+        rect.setWidth(len*(padX/213));
         rect.setHeight(padY/4);
         rect.setVisible(true);
 

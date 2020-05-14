@@ -1,5 +1,7 @@
 package View;
 
+import Models.Object.AbstractPower;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -8,11 +10,14 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
+
+import java.util.ArrayList;
 
 import static View.Main.game;
 
@@ -23,11 +28,15 @@ public class CharPane extends StackPane {
     boolean selected = false;
     Circle circle;
     ImageView pet;
+    static  int origWidth;
+    static int origHeight;
 
 
     public CharPane(int width, int height){
         this.width = width;
         this.height = height;
+        origHeight = height;
+        origWidth = width;
         this.setMinSize( width, height);
         this.getChildren().clear();
         this.getChildren().removeAll();
@@ -56,6 +65,7 @@ public class CharPane extends StackPane {
             this.setAlignment(pet, Pos.BOTTOM_RIGHT );
         }
     }
+
 
     public void draw()
     {

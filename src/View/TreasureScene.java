@@ -56,8 +56,6 @@ public class TreasureScene extends RoomScene {
         addBackground();
         smallChest();
         root.getChildren().add(pane);
-        System.out.println("width : "+width);
-        System.out.println("height : "+height);
     }
 
     private void initializeUpper()
@@ -101,16 +99,23 @@ public class TreasureScene extends RoomScene {
 
         // relic reward
         ArrayList<AbstractRelic> relics = ((Treasure)game.getDungeon().getCurrentRoom()).getRelics();
-        String desc = relics.get(0).getDescription();
-        String s = "get a relic";
-        Text relicText = new Text(s);
-        relicText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
-        String name = relics.get(0).getName();
+        Text relicText = new Text();
         Text relicDesc = new Text();
-        relicDesc.setText(name+" : "+ desc);
-        relicDesc.setFill(Color.WHITE);
-        relicDesc.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
-        vbox.getChildren().add(relicText);
+        if(relics.size() != 0){
+            String desc = relics.get(0).getDescription();
+            String s = "get a relic";
+            relicText.setText(s);
+            relicText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
+            String name = relics.get(0).getName();
+            relicDesc.setText(name+" : "+ desc);
+            relicDesc.setFill(Color.WHITE);
+            relicDesc.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
+            vbox.getChildren().add(relicText);
+        }
+        else{
+            relicText.setText("no relic rewards"+ "\n" +"you already have all relic ");
+            relicText.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, origWidth/100));
+        }
 
 
         // gold reward event listener
@@ -129,33 +134,36 @@ public class TreasureScene extends RoomScene {
 
         // relic reward event listener
         HBox box2 = new HBox();
-        relicText.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                String name = relics.get(0).getName();
-                name = name + ".png";
-                ImageView relicImage = new ImageView(new Image(name));
-                relicImage.setPreserveRatio(true);
-                relicImage.setFitHeight(origHeight/7.0); //relicImage.setFitHeight(100);
-                //box2.setPadding(new Insets(y/2,100, 100, x/2-90 ));
-                box2.setPadding(new Insets(origHeight/2.0,origWidth/13.0, origHeight/7.0, origWidth/(232.0/100) ));
-                box2.getChildren().addAll(relicImage, relicDesc);
-                g.getChildren().add(box2);
-                relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        RelicActions.addRelic(game.getPlayer(),relics.get(0));
-                        relicImage.setVisible(false);
-                        relicDesc.setVisible(false);
-                        relicText.setDisable(true);
-                        goldImage.setDisable(true);
-                        text.setDisable(true);
+        if(relics.size() != 0){
+            relicText.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    String name = relics.get(0).getName();
+                    name = name + ".png";
+                    ImageView relicImage = new ImageView(new Image(name));
+                    relicImage.setPreserveRatio(true);
+                    relicImage.setFitHeight(origHeight/7.0); //relicImage.setFitHeight(100);
+                    //box2.setPadding(new Insets(y/2,100, 100, x/2-90 ));
+                    box2.setPadding(new Insets(origHeight/2.0,origWidth/13.0, origHeight/7.0, origWidth/(232.0/100) ));
+                    box2.getChildren().addAll(relicImage, relicDesc);
+                    g.getChildren().add(box2);
+                    relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            RelicActions.addRelic(game.getPlayer(),relics.get(0));
+                            relicImage.setVisible(false);
+                            relicDesc.setVisible(false);
+                            relicText.setDisable(true);
+                            goldImage.setDisable(true);
+                            text.setDisable(true);
 
-                    }
-                });
+                        }
+                    });
 
-            }
-        });
+                }
+            });
+        }
+
 
         // card reward event listener
         text.setOnMouseClicked(new EventHandler<MouseEvent>() {

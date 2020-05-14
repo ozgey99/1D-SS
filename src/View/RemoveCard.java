@@ -50,8 +50,6 @@ public class RemoveCard extends StackPane {
         back.setFitWidth(padX);
         back.setFitHeight(padY);
         stack.getChildren().add(back);
-        System.out.println("remove card width "+ width);
-        System.out.println("remove card height: "+ height);
         stack.setPadding(new Insets(150, 200, 150, 250));
         vbox = new VBox(height/70);
 

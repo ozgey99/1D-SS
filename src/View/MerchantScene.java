@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -48,6 +49,7 @@ public class MerchantScene extends RoomScene  {
     ImageView petMessage;
     ImageView upgradeMessage;
     ImageView papirus;
+    ImageView cost;
     ImageView back;
     ImageView pet;
     static boolean added;
@@ -73,13 +75,14 @@ public class MerchantScene extends RoomScene  {
         nextButton = new ImageView(new Image("goAhead.png"));
         back = new ImageView(new Image("back_merchant.jpg"));
         papirus = new ImageView(new Image("papirus.png"));
+        cost = new ImageView(new Image("cost.png"));
+        petWarning= new ImageView(new Image("warning.png"));
+        petMessage= new ImageView(new Image("petMessage.png"));
+        upgradeMessage= new ImageView(new Image("upgradeMessage.png"));
         cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
         cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
         relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
         relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
-        petWarning= new ImageView(new Image("warning.png"));
-        petMessage= new ImageView(new Image("petMessage.png"));
-        upgradeMessage= new ImageView(new Image("upgradeMessage.png"));
     }
 
     @Override
@@ -163,7 +166,6 @@ public class MerchantScene extends RoomScene  {
         pet.setY(height/5*2+height/7.0);
         pane.getChildren().add( pet );
 
-        ImageView cost = new ImageView(new Image("cost.png"));   // -------------------BUNU YUKARI YAZ
         cost.setPreserveRatio(true);
         cost.setFitHeight(height/17.0);
         cost.setX(width/70.0-width/13.0);
@@ -171,8 +173,8 @@ public class MerchantScene extends RoomScene  {
 
         petWarning.setPreserveRatio(true);
         petWarning.setFitWidth(origWidth/13.0);
-        petWarning.setX(width/10*7-width/(106.0/10));           // 20 ilerde hayvandan
-        petWarning.setY(height/5*2+height/7.0 - height/9.0); // hayvanın boyu + 5
+        petWarning.setX(width/10*7-width/(106.0/10));
+        petWarning.setY(height/5*2+height/7.0 - height/9.0);
 
         petMessage.setPreserveRatio(true);
         petMessage.setFitWidth(origWidth/13.0);
@@ -218,7 +220,7 @@ public class MerchantScene extends RoomScene  {
 
                 }
 
-
+                pet.setEffect( new DropShadow(30, Color.YELLOW) );
                 price += 10;
                 petClicked = true;
             }
@@ -227,18 +229,20 @@ public class MerchantScene extends RoomScene  {
         pet.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                ScaleTransition relicTransition = new ScaleTransition(Duration.millis(200), pet);
-                relicTransition.setToX(1.5f);
-                relicTransition.setToY(1.5f);
-                relicTransition.setCycleCount(1);
-                relicTransition.setAutoReverse(true);
-                relicTransition.play();
-                ScaleTransition relicCostTransition = new ScaleTransition(Duration.millis(200), cost);
-                relicCostTransition.setToX(1.5f);
-                relicCostTransition.setToY(1.5f);
-                relicCostTransition.setCycleCount(1);
-                relicCostTransition.setAutoReverse(true);
-                relicCostTransition.play();
+                if(!petClicked){
+                    ScaleTransition relicTransition = new ScaleTransition(Duration.millis(200), pet);
+                    relicTransition.setToX(1.5f);
+                    relicTransition.setToY(1.5f);
+                    relicTransition.setCycleCount(1);
+                    relicTransition.setAutoReverse(true);
+                    relicTransition.play();
+                    ScaleTransition relicCostTransition = new ScaleTransition(Duration.millis(200), cost);
+                    relicCostTransition.setToX(1.5f);
+                    relicCostTransition.setToY(1.5f);
+                    relicCostTransition.setCycleCount(1);
+                    relicCostTransition.setAutoReverse(true);
+                    relicCostTransition.play();
+                }
 
                 if(!petClicked){  // if not clicked
                     if(game.getPlayer().getPet() == null){
@@ -321,6 +325,7 @@ public class MerchantScene extends RoomScene  {
         for (int i = 0; i < cards.size(); i++){
             int price = cardPrices.get(i);
             String name = cards.get(i).getName();
+            System.out.println("card "+i +" "+name);
             name = name + ".png";
             Rectangle rect = new Rectangle();
             rect.setFill(new ImagePattern(new Image(name)));
@@ -447,7 +452,7 @@ public class MerchantScene extends RoomScene  {
         rect.setY(y);
         rect.setFill(Color.GREY);
         rect.setStroke(Color.BLACK);
-        rect.setWidth(len*6);
+        rect.setWidth(len*(origWidth/213));
         rect.setHeight(origHeight/35); //rect.setHeight(20);
         rect.setVisible(true);
 

@@ -275,7 +275,6 @@ public class Fight extends AbstractRoom {
         System.out.println("I AM IN POSTFIGHT");
 
         state = FightState.POSTFIGHT;
-        player.changeGold(goldAmount);
         for (AbstractRelic r : player.relics) {
             r.onFightEnd(player);
         }
