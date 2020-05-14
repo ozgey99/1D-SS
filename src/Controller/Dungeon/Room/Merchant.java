@@ -45,14 +45,11 @@ public class Merchant extends AbstractRoom {
             allCards.removeIf(c -> y.getName() == c.getName());
         }
 
-        int index = (int) (Math.random() * (allCards.size() - 1));
-        cards.add(allCards.get(index));
-        cardPrices.add((int) (Math.random() * 250));
-        allCards.remove(index);
-
-        while (cards.size() != 5 ) {
-            index = (int) (Math.random() * (allCards.size() - 1));
-            cards.add(allCards.get(index));
+        while (allCards.size() > 0 && cards.size() != 5) {
+            int ind = (int) (Math.random() * (allCards.size() - 1));
+            AbstractCard temp = allCards.get(ind);
+            cards.add(temp);
+            allCards.remove(ind);
             cardPrices.add((int) (Math.random() * 250));
         }
 

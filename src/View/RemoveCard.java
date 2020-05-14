@@ -28,7 +28,7 @@ public class RemoveCard extends StackPane {
     Pane pane;
     int padX;
     int padY;
-    static  int price;
+    static  int price = 75;
     private int width;
     private int height;
     ImageView back;
@@ -44,7 +44,7 @@ public class RemoveCard extends StackPane {
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
         pane.setMinSize(padX, padY);
-        price = 75;
+
         nextButton = new ImageView(new Image("goAhead.png"));
         stack = new StackPane();
         back.setFitWidth(padX);
@@ -60,22 +60,6 @@ public class RemoveCard extends StackPane {
         this.getChildren().add(stack);
 
     }
-
-    /*public void proceedScreen(){
-        pane.getChildren().add(back);
-        nextButton.setPreserveRatio(true);
-        nextButton.setFitHeight(height/7);
-        nextButton.setX(width/5+ width/3*2);
-        nextButton.setY(height/4*3);
-        pane.getChildren().add( nextButton );
-        this.getChildren().add(pane);
-        nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                game.getDungeon().ascend();
-            }
-        });
-    }*/
 
     public void clickable(){
         vbox.setDisable(true);
@@ -121,7 +105,6 @@ public class RemoveCard extends StackPane {
                     public void handle(MouseEvent t) {
 
                         if (game.getPlayer().getGold() >= price) {
-                            price += 25;
                             System.out.println("gold before: "+ game.getPlayer().getGold());
                             game.getPlayer().changeGold(-price);
 
@@ -132,7 +115,7 @@ public class RemoveCard extends StackPane {
                             for(int k=0; k<game.getPlayer().masterDeck.getSize(); k++){
                                 System.out.println(game.getPlayer().masterDeck.getCard(k).getName());
                             }
-                            //proceedScreen();
+                            price += 25;
 
                         } else {
                             System.out.println("You don't have enough gold to remove a card");
@@ -174,6 +157,10 @@ public class RemoveCard extends StackPane {
 
         }
 
+    }
+
+    public int getPrice(){
+        return price;
     }
 
     public void addBackground() {
