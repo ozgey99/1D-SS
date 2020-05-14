@@ -13,28 +13,29 @@ import javafx.scene.shape.Line;
 public class MapPane extends BorderPane {
     int width;
     int height;
+    int nodeSize;
     public MapPane( int width, int height){
+
         this.width = width;
         this.height = height;
+        nodeSize = (int) Math.sqrt(Math.pow(width,2)+ Math.pow(height,2))/100;
         //this.setBackground( new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)) );
         sketch();
         this.setVisible(true);
-
     }
     void sketch(){
-        AbstractRoom room;
-        room  = Main.game.getDungeon().getCurrentRoom();
-        recurseRooms(room , 0,0);
+        AbstractRoom broom;
+        broom  = Main.game.getDungeon().getBeginningRoom();
+        recurseRooms(broom , 0,0);
     }
     private void recurseRooms( AbstractRoom room, int translationX, int translationY ){
-        int spacing = 50;
+        int spacing = 5*nodeSize;
         if( room != null ) {
             int beginningX = width/2;
             int beginningY = height*14/15;
             int posX = beginningX - translationX* spacing;
             int posY = beginningY - translationY * spacing;
-            System.out.println("The added room is: " + room.getType());
-            MapRoomNode roomNode = new MapRoomNode(room);
+            MapRoomNode roomNode = new MapRoomNode(room, nodeSize );
             roomNode.setCenterX(posX);
             roomNode.setCenterY(posY);
             this.getChildren().add(roomNode);
