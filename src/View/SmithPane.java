@@ -70,16 +70,14 @@ public class SmithPane extends StackPane {
         vbox.getChildren().clear();
         int size = game.getPlayer().masterDeck.getSize();
 
-        int cardSize = 0;
         ArrayList<AbstractCard> cards = new ArrayList<AbstractCard>();
         for (int i = 0; i < size; i++){
             if(game.getPlayer().masterDeck.getCard(i).isUpgradable()){
                 cards.add(game.getPlayer().masterDeck.getCard(i));
-                cardSize++;
             }
         }
 
-        for (int i = 0; i < cardSize; i++){
+        for (int i = 0; i < cards.size(); i++){
             HBox hbox = new HBox();
             hbox.getChildren().clear();
             for(int count = 0; count < 7; count++ ){

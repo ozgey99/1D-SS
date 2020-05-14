@@ -72,6 +72,7 @@ public class MapRoomNode extends Circle {
     }
     private void switchToRoom(){
         Main.game.getDungeon().setCurrentRoom(nodeRoom);
+        Main.game.getDungeon().addTreasure();
         nodeRoom.start();
     }
 }

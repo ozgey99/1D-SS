@@ -101,11 +101,10 @@ public class Merchant extends AbstractRoom {
 
     @Override
     public void start() {
+
         game.currentScene = new MerchantScene();
         Main.window.setScene(
                 game.currentScene);
-        game.currentScene.initialize();
-
 
         System.out.println(" I AM IN MERCHANT ROOM");
 

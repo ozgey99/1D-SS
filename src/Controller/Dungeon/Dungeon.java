@@ -146,7 +146,6 @@ public class Dungeon {
     }
 
     public boolean ascend() {
-        addTreasure();
         game.currentScene = new MapScene();
         Main.window.setScene(game.currentScene);
         return true;

@@ -50,7 +50,7 @@ public class TreasureScene extends RoomScene {
         root.setMinSize( width, height);
         origWidth = width;
         origHeight = height;
-        initialize();
+
     }
 
     public void initialize()
