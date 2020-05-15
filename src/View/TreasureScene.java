@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -35,12 +36,14 @@ public class TreasureScene extends RoomScene {
     static int origWidth;
     static  int origHeight;
     ImageView rewardHeader;
+    ImageView rewardWarn;
 
     public TreasureScene()
     {
         super();
         tick = new ImageView(new Image("tick.png"));
         chest = new ImageView(new Image("SmallChest.png"));
+        rewardWarn = new ImageView(new Image("rewardWarn.png"));
         rewardHeader = new ImageView(new Image("rewardHeader.png"));
         pane = new Pane();
         relics = new ArrayList<>();
@@ -70,6 +73,15 @@ public class TreasureScene extends RoomScene {
         GridPane.setConstraints(gridUpper, 0,0,1,1);
         pane.getChildren().add(gridUpper);
         gridUpper.setMinWidth(width);
+    }
+
+    private void info(){
+        rewardWarn.setPreserveRatio(true);
+        rewardWarn.setFitWidth(width/13.0);
+        rewardWarn.setX(width/10*7-width/(106.0/10));
+        rewardWarn.setY(height/5*2);
+        pane.getChildren().add(rewardWarn);
+
     }
 
     static Node rewards() {
@@ -128,8 +140,8 @@ public class TreasureScene extends RoomScene {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 game.getPlayer().changeGold(((Treasure) game.getDungeon().getCurrentRoom()).getGoldAmount());
-                goldImage.setVisible(false);
-                goldText.setVisible(false);
+                goldImage.setEffect( new DropShadow(10, Color.RED) );
+                goldText.setEffect( new DropShadow(10, Color.RED) );
                 relicText.setDisable(true);
                 text.setDisable(true);
                 goldImage.setDisable(true);
@@ -164,7 +176,7 @@ public class TreasureScene extends RoomScene {
 
                         }
                     });
-
+                    relicText.setEffect( new DropShadow(10, Color.RED) );
                 }
             });
         }
@@ -195,6 +207,7 @@ public class TreasureScene extends RoomScene {
                         text.setDisable(true);
                     }
                 });
+                text.setEffect( new DropShadow(10, Color.RED) );
             }
         });
 
@@ -244,23 +257,24 @@ public class TreasureScene extends RoomScene {
                 tick.setVisible(false);
                 draw();
                 nextButton();
+                rewardWarn.setVisible(false);
             }
         });
     }
 
     public void smallChest()
     {
+        rect = rewards();
         chest.setFitWidth(width/8);
         chest.setX(width/2-width/8);
         chest.setY(height/3*2);
         chest.setVisible(true);
         chest.setPreserveRatio(true);
-        rect = rewards();
-
         chest.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 {
+                    info();
                     System.out.println("ASCENDING CALLED IN TREASURE SCENE");
                     pane.getChildren().add(rect);
                     chosen();

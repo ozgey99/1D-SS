@@ -147,7 +147,6 @@ public class RelicLibraryScene extends GameScene {
                 game.currentScene = new CompendiumScene();
                 Main.window.setScene(
                         game.currentScene);
-                game.currentScene.initialize();
             }
         });
     }

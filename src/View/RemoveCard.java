@@ -25,7 +25,6 @@ import static View.Main.game;
 
 public class RemoveCard extends StackPane {
     VBox vbox;
-    Pane pane;
     int padX;
     int padY;
     static  int price = 75;
@@ -42,8 +41,6 @@ public class RemoveCard extends StackPane {
         padX = width*3/2;
         padY = height*9/6;
         back = new ImageView(new Image("up.png"));
-        pane = new Pane();
-        pane.setMinSize(padX, padY);
 
         nextButton = new ImageView(new Image("goAhead.png"));
         stack = new StackPane();

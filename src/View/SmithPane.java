@@ -65,11 +65,11 @@ public class SmithPane extends StackPane {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
+        //System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
-        int size = game.getPlayer().masterDeck.getSize();
 
+        int size = game.getPlayer().masterDeck.getSize();
         ArrayList<AbstractCard> cards = new ArrayList<AbstractCard>();
         for (int i = 0; i < size; i++){
             if(game.getPlayer().masterDeck.getCard(i).isUpgradable()){
