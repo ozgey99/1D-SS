@@ -17,7 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 
 import static View.Main.game;
 
-public class CardCollection extends RoomScene {
+public class CardCollectionScene extends GameScene {
     Pane redPane;
     Pane colorlessPane;
     VBox redvbox;
@@ -40,9 +39,9 @@ public class CardCollection extends RoomScene {
 
     ImageView back;
     ImageView ss_back;
-    final ScrollBar sc;
+    ScrollBar sc;
 
-    public CardCollection(){
+    public CardCollectionScene(){
         super();
         redPane = new Pane();
         colorlessPane = new Pane();
@@ -54,8 +53,8 @@ public class CardCollection extends RoomScene {
         back = new ImageView(new Image("up.png"));
 
         redPane.setPrefSize(250, 150);
-        redPane.setPrefHeight(400);
-        redPane.setPrefWidth(650);
+        redPane.setPrefHeight(height/(18.0/10));
+        redPane.setPrefWidth(width/2);
 
         colorlessPane.setPrefSize(250, 150);
         colorlessPane.setPrefHeight(400);
@@ -92,7 +91,6 @@ public class CardCollection extends RoomScene {
         tabpane.setTabMinWidth(200);
         tabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         // create multiple tabs
-        Label label = new Label("ya yemin ediyorum imdat ya");
         String[] types = {"RED", "GREEN", "BLUE", "COLORLESS", "CURSES"};
         /* TabPane tabPane = new TabPane();
 
@@ -117,7 +115,6 @@ public class CardCollection extends RoomScene {
                 tab.setContent(redPane);
             if( i == 3){
                 //tab.setContent(colorlessPane); // redPane ekleyince, red tab'taki gözükmüyor
-                System.out.println(label);
             }
             tabpane.getTabs().add(tab);
         }
@@ -137,7 +134,7 @@ public class CardCollection extends RoomScene {
         turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                game.currentScene = new Compendium();
+                game.currentScene = new CompendiumScene();
                 Main.window.setScene(
                         game.currentScene);
                 game.currentScene.initialize();
@@ -223,7 +220,7 @@ public class CardCollection extends RoomScene {
         sc.setMin(0);
         sc.setOrientation(Orientation.VERTICAL);
         sc.setPrefHeight(height-height/15);
-        sc.setPrefWidth(20);
+        sc.setPrefWidth(width/64.0);
         sc.setMax(10000);
         group.getChildren().addAll(redvbox, sc);
         redPane.getChildren().addAll(group);
@@ -248,7 +245,7 @@ public class CardCollection extends RoomScene {
                 name = name + ".png";
                 Rectangle rect = new Rectangle();
                 rect.setFill(new ImagePattern(new Image(name)));
-                rect.setWidth(width/13);
+                rect.setWidth(width/(128.0/10));
                 rect.setHeight(height/(46/10));
                 rect.setVisible(true);
 

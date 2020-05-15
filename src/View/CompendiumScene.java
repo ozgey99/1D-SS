@@ -9,7 +9,7 @@ import javafx.scene.layout.*;
 
 import static View.Main.game;
 
-public class Compendium extends GameScene {
+public class CompendiumScene extends GameScene {
     Pane pane;
     HBox box;
     HBox options;
@@ -21,7 +21,7 @@ public class Compendium extends GameScene {
     ImageView ss_back;
     static boolean added;
 
-    public Compendium(){
+    public CompendiumScene(){
         super();
         pane = new Pane();
         box = new HBox(100);
@@ -40,8 +40,15 @@ public class Compendium extends GameScene {
 
     }
 
-    public void  cardLibrary(){
-        game.currentScene = new CardCollection();
+    public void  cardCollection(){
+        game.currentScene = new CardCollectionScene();
+        Main.window.setScene(
+                game.currentScene);
+        game.currentScene.initialize();
+    }
+
+    public void relicLibrary(){
+        game.currentScene = new RelicLibraryScene();
         Main.window.setScene(
                 game.currentScene);
         game.currentScene.initialize();
@@ -90,11 +97,8 @@ public class Compendium extends GameScene {
             @Override
             public void handle(MouseEvent t) {
                 {
-                    System.out.println("ASCENDING CALLED IN REST SCENE");
-                    int hp = (game.getPlayer().getMaxHP() * 3) / 10;
-                    game.getPlayer().changeHealth(hp);
                     draw();
-                    cardLibrary();
+                    cardCollection();
 
                 }
             }
@@ -113,9 +117,8 @@ public class Compendium extends GameScene {
             @Override
             public void handle(MouseEvent t) {
                 {
-                    // yap şovunu
                     draw();
-
+                    relicLibrary();
                 }
 
             }

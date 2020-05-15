@@ -1,13 +1,20 @@
 package View;
 
+import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 import static View.Main.game;
 public class RestScene extends RoomScene {
@@ -16,6 +23,7 @@ public class RestScene extends RoomScene {
     HBox options;
     SmithPane smithPane;
     private UpperPane gridUpper;
+    ImageView next;
     ImageView turnBack;
     ImageView rest;
     ImageView smith;
@@ -26,7 +34,7 @@ public class RestScene extends RoomScene {
         pane = new Pane();
         box = new HBox();
         options = new HBox();
-        turnBack = new ImageView(new Image("goAhead.png"));
+        next = new ImageView(new Image("goAhead.png"));
         rest = new ImageView(new Image("Rest.png"));
         smith = new ImageView(new Image("Smith.png"));
         gridUpper = new UpperPane(width,height/9);
@@ -48,7 +56,9 @@ public class RestScene extends RoomScene {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 smithPane.visible(false);
+                next.setEffect( new DropShadow(50, Color.RED) );
             }
+
         });
     }
 
@@ -77,12 +87,12 @@ public class RestScene extends RoomScene {
     }
 
     public void proceed(){
-        turnBack.setPreserveRatio(true);
-        turnBack.setFitHeight(height/7);
-        turnBack.setX(width/5+ width/3*2);
-        turnBack.setY(height/4*3);
-        pane.getChildren().add( turnBack );
-        turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        next.setPreserveRatio(true);
+        next.setFitHeight(height/7);
+        next.setX(width/5+ width/3*2);
+        next.setY(height/4*3);
+        pane.getChildren().add( next );
+        next.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 System.out.println(" you are in next scene");
@@ -96,6 +106,24 @@ public class RestScene extends RoomScene {
         System.out.println("INITIALIZE IN REST SCENE");
         int imageWidth = width / 10;
         int imageHeight = height / 4;
+
+        Label message = new Label("Heal for %30 of your max HP");
+        message.setTextFill(Color.WHITE);
+        message.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, width/100));
+        message.setLayoutX(width/6*2);
+        message.setLayoutY(height/3-height/36);
+        message.setFont(Font.font ("Verdana", height/48.0));
+        message.setVisible(false);
+        pane.getChildren().add(message);
+
+        Label messageSmith = new Label("Upgrade a card in your deck");
+        messageSmith.setTextFill(Color.WHITE);
+        messageSmith.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, width/100));
+        messageSmith.setLayoutX(width/6*3);
+        messageSmith.setLayoutY(height/3-height/36);
+        messageSmith.setFont(Font.font ("Verdana", height/48.0));
+        messageSmith.setVisible(false);
+        pane.getChildren().add(messageSmith);
 
         rest.setFitWidth(imageWidth);
         rest.setFitHeight(imageHeight);
@@ -113,8 +141,24 @@ public class RestScene extends RoomScene {
                     draw();
                     rest.setDisable(true);
                     smith.setDisable(true);
+                    rest.setEffect( new DropShadow(30, Color.YELLOW) );
 
                 }
+            }
+        });
+
+
+        rest.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                message.setVisible(true);
+            }
+        });
+
+        rest.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                message.setVisible(false);
             }
         });
 
@@ -142,8 +186,23 @@ public class RestScene extends RoomScene {
                     turnBack();
                     rest.setDisable(true);
                     smith.setDisable(true);
+                    smith.setEffect( new DropShadow(30, Color.YELLOW) );
                 }
 
+            }
+        });
+
+        smith.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                messageSmith.setVisible(true);
+            }
+        });
+
+        smith.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                messageSmith.setVisible(false);
             }
         });
 

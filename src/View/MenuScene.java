@@ -4,16 +4,12 @@ import static View.Main.game;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -33,7 +29,7 @@ public class MenuScene extends GameScene {
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("START NEW RUN", () -> Main.window.setScene( new MapScene() )),
             new Pair<String, Runnable>("CONTINUE EXISTING RUN", () -> {}),
-            new Pair<String, Runnable>("VIEW COMPENDIUM",  () ->  Main.window.setScene( new Compendium() )),
+            new Pair<String, Runnable>("VIEW COMPENDIUM",  () ->  Main.window.setScene( new CompendiumScene() )),
             new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
@@ -58,7 +54,7 @@ public class MenuScene extends GameScene {
     }
 
     public void startCompendium(){
-        game.currentScene = new Compendium();
+        game.currentScene = new CompendiumScene();
         Main.window.setScene(
                 game.currentScene);
         game.currentScene.initialize();

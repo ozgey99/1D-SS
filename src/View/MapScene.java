@@ -86,6 +86,8 @@ public class MapScene extends GameScene {
         right = new StackPane();
         right.setMinSize(width/5, 9*height/10 );
         ImageView imageView = new ImageView(new Image("legend.png"));
+        imageView.setFitHeight(height*7/10.0);
+        imageView.setFitWidth(width/5);
         right.getChildren().add(imageView);
         right.setAlignment( Pos.CENTER_LEFT );
         GridPane.setConstraints(right, 2,0,1,1);
