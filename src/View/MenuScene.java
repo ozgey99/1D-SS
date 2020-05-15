@@ -51,12 +51,6 @@ public class MenuScene extends GameScene {
 
     }
 
-    public void startCompendium(){
-        game.currentScene = new CompendiumScene();
-        Main.window.setScene(
-                game.currentScene);
-        game.currentScene.initialize();
-    }
 
     @Override
     public void initialize() {
