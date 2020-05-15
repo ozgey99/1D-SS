@@ -89,18 +89,13 @@ public class SmithPane extends StackPane {
                 rect.setWidth(padX/13.0);
                 rect.setHeight(padY/(46/10));
                 rect.setVisible(true);
-                int price = 0; // şimdilik
                 int j = i;
                 rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent t) {
-                        if(game.getPlayer().getGold()>price){
-                            cards.get(j).upgrade();
-                            rect.setStroke(Color.GREEN);
-                            //visible(false);
-                            draw();
-                        }
-
+                        cards.get(j).upgrade();
+                        rect.setStroke(Color.GREEN);
+                        draw();
                     }
                 });
 
@@ -129,8 +124,8 @@ public class SmithPane extends StackPane {
 
                 hbox.getChildren().add(rect);
                 if(count  != 6)
-                i++;
-                if(i == size)
+                    i++;
+                if(i == cards.size() || count == cards.size())
                     break;
             }
             vbox.getChildren().add(hbox);
