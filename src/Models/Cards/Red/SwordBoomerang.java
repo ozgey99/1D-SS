@@ -24,7 +24,7 @@ public class SwordBoomerang extends AbstractCard {
         baseAttr = new BaseCardAttributes();
         baseAttr.damage = 3;
         usable = true;
-        upgradable = true;
+        upgradable = false;
         repeat = 3;
     }
 

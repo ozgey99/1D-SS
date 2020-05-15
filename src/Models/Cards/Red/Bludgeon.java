@@ -20,7 +20,7 @@ public class Bludgeon extends AbstractCard {
         baseAttr = new BaseCardAttributes();
         baseAttr.damage = 32;
         usable = true;
-        upgradable = true;
+        upgradable = false;
     }
 
     @Override

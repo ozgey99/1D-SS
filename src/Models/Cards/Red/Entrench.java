@@ -16,7 +16,7 @@ public class Entrench extends AbstractCard {
         target = CardTarget.SELF;
         baseAttr = new BaseCardAttributes();
         usable = true;
-        upgradable = true;
+        upgradable = false;
     }
 
     @Override

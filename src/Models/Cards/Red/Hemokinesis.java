@@ -19,7 +19,7 @@ public class Hemokinesis extends AbstractCard {
         rarity = CardRarity.UNCOMMON;
         target = CardTarget.ENEMY;
         usable = true;
-        upgradable = true;
+        upgradable = false;
         HPdecrease = 3;
         baseAttr = new BaseCardAttributes();
         baseAttr.damage = 14;

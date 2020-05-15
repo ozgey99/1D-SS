@@ -16,7 +16,7 @@ public class Havoc extends AbstractCard {
         target = CardTarget.NONE;
         baseAttr = new BaseCardAttributes();
         usable = true;
-        upgradable = true;
+        upgradable = false;
     }
 
     @Override

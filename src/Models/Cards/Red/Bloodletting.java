@@ -17,7 +17,7 @@ public class Bloodletting extends AbstractCard {
         rarity = CardRarity.UNCOMMON;
         target = CardTarget.SELF;
         usable = true;
-        upgradable = true;
+        upgradable = false;
         HPdecrease = 3;
         energyIncrease = 1;
     }
