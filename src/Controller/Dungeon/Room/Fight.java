@@ -15,7 +15,10 @@ import View.Main;
 import Models.Object.AbstractRelic;
 import Models.TextBasedUI;
 import View.FightScene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -40,6 +43,7 @@ public class Fight extends AbstractRoom {
     int goldAmount;
     ArrayList<AbstractCard> cardRewards;
     boolean isFirstRoom;
+    MediaPlayer mediaPlayer;
 
     public Fight(ArrayList<AbstractRoom> c, boolean isElite, boolean isBoss, boolean isFirstRoom) {
         type = RoomType.FIGHT;
@@ -80,6 +84,11 @@ public class Fight extends AbstractRoom {
             case MONSTERPOSTTURN:preTurn(); break;
 
         }
+    }
+
+
+    public boolean isFirstRoom(){
+        return  isFirstRoom;
     }
 
     @Override

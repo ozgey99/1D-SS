@@ -11,6 +11,8 @@ import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 
+import static View.Main.game;
+
 
 public class MapRoomNode extends Circle {
     AbstractRoom nodeRoom;
@@ -71,8 +73,15 @@ public class MapRoomNode extends Circle {
         }
     }
     private void switchToRoom(){
+
+        if((game.getDungeon().getCurrentRoom()).getType() != RoomType.FIGHT ){
+           //Main.game.getDungeon().getCurrentRoom().stopMusic();
+        }
         Main.game.getDungeon().setCurrentRoom(nodeRoom);
         Main.game.getDungeon().addTreasure();
         nodeRoom.start();
+        //nodeRoom.addMusic();
+
+
     }
 }

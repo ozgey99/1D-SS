@@ -48,7 +48,10 @@ public class MapScene extends GameScene {
         initializeUpper();
         initializeLowerMap();
         root.getChildren().add(divisionUpper);
+
     }
+
+
 
     private void initializeUpper()
     {

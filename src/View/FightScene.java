@@ -8,9 +8,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+
+import java.nio.file.Paths;
 
 import static View.Main.game;
 
@@ -46,6 +50,8 @@ public class FightScene extends RoomScene {
         initialize();
 
     }
+
+
 
 
     public void getRewards(){
@@ -96,7 +102,7 @@ public class FightScene extends RoomScene {
     }
     public void initialize()
     {
-
+        Main.mediaPlayer.addMusic();
         initializeLeft();
         initializeRight();
         initializeUpper();
@@ -140,6 +146,7 @@ public class FightScene extends RoomScene {
 
         if(( (Fight) game.getDungeon().getCurrentRoom()).getMonsters().size() == 0 &&  game.getPlayer().getCurrentHP() > 0)
         {
+
             if (game.getDungeon().getCurrentRoom().getChildren() == null) {
 
                 game.currentScene = new WinScene();

@@ -100,6 +100,7 @@ public class FightRewardsPane extends StackPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 System.out.println(" you are in next scene");
+                Main.mediaPlayer.addMenuMusic();
                 game.getDungeon().ascend();
             }
         });

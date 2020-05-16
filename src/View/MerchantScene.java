@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.animation.ScaleTransition;
 
@@ -24,6 +26,7 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import Models.Object.AbstractRelic;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static View.Main.game;
@@ -57,6 +60,7 @@ public class MerchantScene extends RoomScene  {
     static int origWidth;
     static  int origHeight;
     static int petPrice = 30;
+
 
     public MerchantScene() {
         super();
@@ -93,6 +97,7 @@ public class MerchantScene extends RoomScene  {
 
     @Override
     public void initialize(){
+
         initializeUpper();
         shopPet();
         addBackground();
@@ -147,6 +152,7 @@ public class MerchantScene extends RoomScene  {
 
     @Override
     public void draw() {initializeUpper();}
+
 
     public void cardRemovalService(){
         ImageView cost = new ImageView(new Image("cost.png"));

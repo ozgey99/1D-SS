@@ -9,8 +9,11 @@ import Models.Utils;
 import View.Main;
 import View.MerchantScene;
 import View.RestScene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static View.Main.game;
@@ -22,6 +25,7 @@ public class Merchant extends AbstractRoom {
     ArrayList<Integer> relicPrices;
     Pet pet;
     int petPrice;
+    MediaPlayer mediaPlayer;
 
     public Merchant(ArrayList<AbstractRoom> c) {
         type = RoomType.SHOP;

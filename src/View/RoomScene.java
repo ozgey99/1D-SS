@@ -14,6 +14,10 @@ public abstract class RoomScene extends GameScene {
         //addBackground();
     }
 
+    @Override
+    public void initialize() {
+        Main.mediaPlayer.addMusic();
+    }
 
     private void addBackground() {
         ImageView imageView = new ImageView(new Image("background1.jpg"));

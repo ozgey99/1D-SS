@@ -51,8 +51,6 @@ public class CharPane extends StackPane {
 
         this.getChildren().add( imageView );
         this.setAlignment(imageView, Pos.BOTTOM_CENTER );
-        System.out.println("char pane width: "+ width);
-        System.out.println("char pane height: "+ height);
         charPet();
     }
 
@@ -98,13 +96,11 @@ public class CharPane extends StackPane {
         if( selected == false ) {
             this.setEffect( new Shadow(30, Color.YELLOW));
             selected = true;
-            System.out.println("The HP of the selected character is " + game.getPlayer().getCurrentHP());
         }
         else
         {
             this.setEffect(null);
             selected = false;
-            System.out.println("The HP of the deselected character is " + game.getPlayer().getCurrentHP());
         }
     }
 }

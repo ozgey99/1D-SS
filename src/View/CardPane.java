@@ -96,10 +96,8 @@ public class CardPane  extends GridPane {
                         AbstractCard firstHandCard = deck.getCard(finalI);
                         if(((Fight) game.getDungeon().getCurrentRoom()).useCard(firstHandCard) ) {
                             firstHandCard.setSelected();
-                            System.out.println("PRESSED ID " + firstHandCard.getName());
                             id = finalI;
                             deck = ((Fight) game.getDungeon().getCurrentRoom()).getHand();
-                            System.out.println("NEW BLOCK " + game.getPlayer().getBlock());
                             game.currentScene.draw();
                         }
 

@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -17,6 +19,7 @@ import javafx.util.Pair;
 
 
 import java.awt.*;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -69,7 +72,7 @@ public class MenuScene extends GameScene {
         addMenu(lineX + 5, lineY + 5);
 
         startAnimation();
-
+        Main.mediaPlayer.addMenuMusic();
         return root;
     }
 
@@ -124,9 +127,6 @@ public class MenuScene extends GameScene {
 
         root.getChildren().add(menuBox);
     }
-    private void addMusic()
-    {
-        AudioClip music = new AudioClip(this.getClass().getResource("music.mp3").toString());
-        music.play();
-    }
+
+
 }
