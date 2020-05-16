@@ -23,7 +23,7 @@ public class Main extends Application {
     public static OptionsManager optionsManager = new OptionsManager();
     int height;
     int width;
-   // public static MusicPlayer mediaPlayer = new MusicPlayer();
+    public static MusicPlayer mediaPlayer = new MusicPlayer();
 
     public static Stage window;
 

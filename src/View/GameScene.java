@@ -17,7 +17,6 @@ public abstract class GameScene extends Scene {
         this.root = (StackPane) this.getRoot();
         root.setMinSize( width, height );
     }
-
     public abstract void initialize();
     public abstract void draw();
 }

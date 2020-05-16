@@ -66,7 +66,7 @@ public class MenuScene extends GameScene {
         addMenu(lineX + 5, lineY + 5);
 
         startAnimation();
-        //Main.mediaPlayer.addMenuMusic();
+        Main.mediaPlayer.addMenuMusic();
         return root;
     }
 

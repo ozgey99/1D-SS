@@ -100,7 +100,7 @@ public class FightScene extends RoomScene {
     }
     public void initialize()
     {
-        //Main.mediaPlayer.addMusic();
+        Main.mediaPlayer.addMusic();
         initializeLeft();
         initializeRight();
         initializeUpper();
@@ -123,17 +123,14 @@ public class FightScene extends RoomScene {
         //endTurn.setY(0);
         endTurn.setWidth(width/(128.0/10));
         endTurn.setHeight(height/(72.0/10));
-        endTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-
-                ((Fight) game.getDungeon().getCurrentRoom()).getDiscard().addDeck(((Fight) game.getDungeon().getCurrentRoom()).getHand());
+        endTurn.setOnMouseClicked(e -> {
+            ((Fight) game.getDungeon().getCurrentRoom()).getDiscard().addDeck(((Fight) game.getDungeon().getCurrentRoom()).getHand());
                 draw();
                 ((Fight) game.getDungeon().getCurrentRoom()).nextState();
 
 
             }
-        });
+        );
 
         root.getChildren().add(endTurn);
 
@@ -176,15 +173,5 @@ public class FightScene extends RoomScene {
         }
 
     }
-
-
-    public void drawMonsters()
-    {
-        gridRight.draw();
-
-    }
-
-
-
 
 }

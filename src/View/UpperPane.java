@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 
 import static View.Main.game;
 
-public class UpperPane extends GridPane {
+public class UpperPane extends StackPane {
     private ArrayList<Text> textList;
     private  int width;
     private int height;
@@ -181,18 +182,14 @@ public class UpperPane extends GridPane {
                 relicDesc = true;
             }
 
-            relicImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            relicImage.setOnMouseEntered(e->{
                     desc.setVisible(true);
                 }
-            });
-            relicImage.setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            );
+            relicImage.setOnMouseExited( e->{
                     desc.setVisible(false);
                 }
-            });
+            );
             box3.getChildren().add(relicImage);
         }
 

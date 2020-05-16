@@ -98,7 +98,7 @@ public class FightRewardsPane extends StackPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 System.out.println(" you are in next scene");
-                //Main.mediaPlayer.addMenuMusic();
+                Main.mediaPlayer.addMenuMusic();
                 game.getDungeon().ascend();
             }
         });
@@ -180,9 +180,7 @@ public class FightRewardsPane extends StackPane {
         // relic reward event listener
         HBox box2 = new HBox();
         if (relics.size() != 0){
-            relicText.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            relicText.setOnMouseClicked(e -> {
                     String name = relics.get(0).getName();
                     name = name + ".png";
                     ImageView relicImage = new ImageView(new Image(name));
@@ -206,14 +204,12 @@ public class FightRewardsPane extends StackPane {
                     relicText.setEffect( new DropShadow(10, Color.RED) );
                 }
 
-            });
+            );
         }
 
 
         // card reward event listener
-        text.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        text.setOnMouseClicked(e -> {
                 String name = cards.get(0).getName();
                 name = name + ".png";
                 cardRect.setX(width/(232.0/100)); //cardRect.setX(x/2-90);
@@ -236,7 +232,7 @@ public class FightRewardsPane extends StackPane {
                 });
                 text.setEffect( new DropShadow(10, Color.RED) );
             }
-        });
+        );
         Rectangle rect = new Rectangle();
         rect.setX(width/2.0- width/13.0); //rect.setX(x/2-100);
         rect.setY(height/2-(height/(46.0/10))); //rect.setY(y/2-150);

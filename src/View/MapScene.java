@@ -38,7 +38,7 @@ public class MapScene extends GameScene {
         divisionUpper = new GridPane();
         divisionUpper.setMinSize(width, height);
         divisionUpper.setGridLinesVisible(true);
-        //initializeUpper();
+        initializeUpper();
         initializeLowerMap();
         root.getChildren().add(divisionUpper);
 
@@ -57,15 +57,16 @@ public class MapScene extends GameScene {
     }
     private void initializeLowerMap(){
         mapLower = new StackPane();
-        mapLower.setMinSize(width, 9*height/10 );
+        mapLower.setMaxSize(width, 9*height/10 );
         mapLower.setEffect(  new DropShadow(30, Color.YELLOW));
         mapDivision = new GridPane();
         mapDivision.setMinSize( width , 9*height/10  );
         mapDivision.setGridLinesVisible(true);
 
         ImageView imageView = new ImageView(new Image("mapGeneral.png"));
-        imageView.setFitWidth(width);
-        imageView.setFitHeight( 9*height/10);
+        System.out.println( width  + " " + height);
+        imageView.maxHeight(9*height/10);
+        imageView.maxWidth(width);
         mapLower.getChildren().add(imageView);
 
 
@@ -85,7 +86,6 @@ public class MapScene extends GameScene {
         right.setMinSize(width*3/16, 9*height/10 );
         ImageView imageView = new ImageView(new Image("legend.png"));
         imageView.setFitHeight(height*6/10);
-        //imageView.setFitWidth(width/5);i
         right.getChildren().add(imageView);
         right.setAlignment( Pos.CENTER_LEFT );
         GridPane.setConstraints(right, 2,0,1,1);

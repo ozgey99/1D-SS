@@ -63,16 +63,14 @@ public class WinScene extends RoomScene  {
         backToMenu.setY(50);
         backToMenu.setFill( new ImagePattern(new Image("BackToHome.png")));
 
-        backToMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
+        backToMenu.setOnMouseClicked(e -> {
                 game.currentScene = new MenuScene();
                 Main.window.setScene(
                         game.currentScene);
                 game.currentScene.initialize();
 
             }
-        });
+        );
 
 
 
