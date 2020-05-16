@@ -12,6 +12,7 @@ import java.security.spec.ECField;
 import java.util.ArrayList;
 
 import static View.Main.game;
+import static View.Main.main;
 
 public class Dungeon {
     private int act;
@@ -146,9 +147,9 @@ public class Dungeon {
     }
 
     public boolean ascend() {
-        addTreasure();
         game.currentScene = new MapScene();
         Main.window.setScene(game.currentScene);
+
         return true;
     }
     public void addTreasure(){

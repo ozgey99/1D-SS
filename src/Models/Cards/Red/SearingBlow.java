@@ -23,7 +23,7 @@ public class SearingBlow extends AbstractCard {
         baseAttr = new BaseCardAttributes();
         baseAttr.damage = 12;
         usable = true;
-        upgradable = true;
+        upgradable = false;
     }
 
     @Override

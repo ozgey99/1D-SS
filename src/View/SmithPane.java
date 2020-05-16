@@ -65,21 +65,19 @@ public class SmithPane extends StackPane {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
+        //System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
-        int size = game.getPlayer().masterDeck.getSize();
 
-        int cardSize = 0;
+        int size = game.getPlayer().masterDeck.getSize();
         ArrayList<AbstractCard> cards = new ArrayList<AbstractCard>();
         for (int i = 0; i < size; i++){
             if(game.getPlayer().masterDeck.getCard(i).isUpgradable()){
                 cards.add(game.getPlayer().masterDeck.getCard(i));
-                cardSize++;
             }
         }
 
-        for (int i = 0; i < cardSize; i++){
+        for (int i = 0; i < cards.size(); i++){
             HBox hbox = new HBox();
             hbox.getChildren().clear();
             for(int count = 0; count < 7; count++ ){
@@ -91,18 +89,13 @@ public class SmithPane extends StackPane {
                 rect.setWidth(padX/13.0);
                 rect.setHeight(padY/(46/10));
                 rect.setVisible(true);
-                int price = 0; // şimdilik
                 int j = i;
                 rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent t) {
-                        if(game.getPlayer().getGold()>price){
-                            cards.get(j).upgrade();
-                            rect.setStroke(Color.GREEN);
-                            //visible(false);
-                            draw();
-                        }
-
+                        cards.get(j).upgrade();
+                        rect.setStroke(Color.GREEN);
+                        draw();
                     }
                 });
 
@@ -131,8 +124,8 @@ public class SmithPane extends StackPane {
 
                 hbox.getChildren().add(rect);
                 if(count  != 6)
-                i++;
-                if(i == size)
+                    i++;
+                if(i == cards.size() || count == cards.size())
                     break;
             }
             vbox.getChildren().add(hbox);

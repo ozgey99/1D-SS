@@ -1,4 +1,4 @@
-package View;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    package View;
 
 
 import Controller.Game;
@@ -10,6 +10,11 @@ import javafx.scene.input.KeyEvent;
 
 import javafx.stage.Stage;
 
+import javafx.application.Application;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import Controller.MusicPlayer;
 
 
 public class Main extends Application {
@@ -18,6 +23,8 @@ public class Main extends Application {
     public static OptionsManager optionsManager = new OptionsManager();
     int height;
     int width;
+   // public static MusicPlayer mediaPlayer = new MusicPlayer();
+
     public static Stage window;
 
 
@@ -37,14 +44,9 @@ public class Main extends Application {
                 game.currentScene.initialize();
             }
         });
-        //addMusic();
-    }
-    public void changeSize( int width, int height ){
-        this.height = height;
-        this.width = width;
+
     }
     public static void main(String[] args) {
-
         game.startMap();
         launch(args);
 

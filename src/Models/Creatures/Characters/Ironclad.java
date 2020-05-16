@@ -1,5 +1,6 @@
 package Models.Creatures.Characters;
 
+import Models.Cards.Red.Bash;
 import Models.Cards.Red.Defend;
 import Models.Cards.Red.Strike;
 import Models.Creatures.AbstractCharacter;
@@ -24,6 +25,8 @@ public class Ironclad extends AbstractCharacter {
             masterDeck.addCard(new Strike());
             masterDeck.addCard(new Defend());
         }
+        masterDeck.addCard(new Strike());
+        masterDeck.addCard(new Bash());
         relics.add(new BurningBlood());
     }
 

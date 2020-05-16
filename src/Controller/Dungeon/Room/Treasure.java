@@ -9,8 +9,11 @@ import Models.Object.AbstractRelic;
 import Models.Utils;
 import View.Main;
 import View.TreasureScene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,6 +23,7 @@ public class Treasure extends AbstractRoom {
     ArrayList<AbstractRelic> relics;
     ArrayList<AbstractCard> cards;
     int goldAmount;
+    MediaPlayer mediaPlayer;
 
     public Treasure(ArrayList<AbstractRoom> c) {
         type = RoomType.CHEST;
@@ -58,7 +62,6 @@ public class Treasure extends AbstractRoom {
         for (AbstractCard c : allCards) {
             boolean exist = false;
             for (AbstractCard y : game.getPlayer().masterDeck.getCardList()) {
-                //System.out.println("MY  RELICS " + y.getName());
 
                 if(y.getName() == c.getName())
                     exist = true;
@@ -81,13 +84,7 @@ public class Treasure extends AbstractRoom {
         game.currentScene.initialize();
     }
 
-    public void addRewards() {
-        AbstractCharacter player = game.getPlayer();
-        player.changeGold(goldAmount);
-        for (AbstractRelic r : relics) {
-            RelicActions.addRelic(player, r);
-        }
-    }
+
 
     @Override
     public RoomType getType() {

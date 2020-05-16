@@ -4,16 +4,14 @@ import static View.Main.game;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -21,6 +19,7 @@ import javafx.util.Pair;
 
 
 import java.awt.*;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class MenuScene extends GameScene {
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("START NEW RUN", () -> Main.window.setScene( new MapScene() )),
             new Pair<String, Runnable>("CONTINUE EXISTING RUN", () -> {}),
-            new Pair<String, Runnable>("VIEW COMPENDIUM",  () ->  Main.window.setScene( new Compendium() )),
+            new Pair<String, Runnable>("VIEW COMPENDIUM",  () ->  Main.window.setScene( new CompendiumScene() )),
             new Pair<String, Runnable>("OPTIONS",  () -> Main.window.setScene( new OptionsScene() ) ),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
@@ -39,7 +38,6 @@ public class MenuScene extends GameScene {
     public MenuScene(){
         super();
         menuBox = new VBox(-5);
-        root = (StackPane) this.getRoot();
         root = (StackPane) createContent();
         root.setMinSize(width, height);
         //root.setBackground( new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -50,12 +48,6 @@ public class MenuScene extends GameScene {
 
     }
 
-    public void startCompendium(){
-        game.currentScene = new Compendium();
-        Main.window.setScene(
-                game.currentScene);
-        game.currentScene.initialize();
-    }
 
     @Override
     public void initialize() {
@@ -74,7 +66,7 @@ public class MenuScene extends GameScene {
         addMenu(lineX + 5, lineY + 5);
 
         startAnimation();
-
+        //Main.mediaPlayer.addMenuMusic();
         return root;
     }
 
@@ -129,9 +121,6 @@ public class MenuScene extends GameScene {
 
         root.getChildren().add(menuBox);
     }
-    private void addMusic()
-    {
-        AudioClip music = new AudioClip(this.getClass().getResource("music.mp3").toString());
-        music.play();
-    }
+
+
 }
