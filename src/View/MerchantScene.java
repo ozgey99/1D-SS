@@ -35,28 +35,59 @@ public class MerchantScene extends RoomScene  {
     Pet p;
     Pane pane;
     private UpperPane gridUpper;
-    RemoveCard removeCardPane;
-    ArrayList<AbstractCard> cards;
-    ArrayList<AbstractRelic> relics;
-    ArrayList<Integer> cardPrices;
-    ArrayList<Integer> relicPrices;
-    ImageView turnBack;
-    ImageView removeButton;
-    ImageView nextButton;
-    ImageView petWarning;
-    ImageView petMessage;
-    ImageView upgradeMessage;
-    ImageView papirus;
-    ImageView hadPet;
-    ImageView back;
-    ImageView upgradedPet;
-    ImageView pet;
-    static boolean added;
-    boolean petClicked;
-    static int origWidth;
-    static  int origHeight;
-    static int petPrice = 30;
+    private RemoveCard removeCardPane;
+    private ArrayList<AbstractCard> cards;
+    private ArrayList<AbstractRelic> relics;
+    private ArrayList<Integer> cardPrices;
+    private ArrayList<Integer> relicPrices;
+    private ImageView turnBack;
+    private ImageView removeButton;
+    private ImageView nextButton;
+    private ImageView petWarning;
+    private ImageView petMessage;
+    private ImageView upgradeMessage;
+    private ImageView papirus;
+    private ImageView hadPet;
+    private ImageView back;
+    private ImageView upgradedPet;
+    private ImageView pet;
+    private static boolean added;
+    private boolean petClicked;
+    private static int origWidth;
+    private static  int origHeight;
+    private static int petPrice = 30;
 
+    public MerchantScene( int width, int height ) {
+        super();
+        width = this.width;
+        height = this.height;
+        root.setMinSize( width, height);
+        p = new Pet();
+        added = false;
+        petClicked = false;
+        origWidth = width;
+        origHeight = height;
+        pane = new Pane();
+        gridUpper = new UpperPane(width,height/9);
+        removeCardPane  = new RemoveCard(width/3*2 , height/9*6);
+        removeButton = new ImageView(new Image("removeButton.png"));
+        hadPet = new ImageView(new Image("youHavePet.png"));
+        upgradedPet = new ImageView(new Image("removeButton.png"));
+        turnBack = new ImageView(new Image("goAhead.png"));
+        pet = new ImageView(new Image("dragon.gif"));
+        nextButton = new ImageView(new Image("goAhead.png"));
+        back = new ImageView(new Image("back_merchant.jpg"));
+        papirus = new ImageView(new Image("papirus.png"));
+        petWarning= new ImageView(new Image("warning.png"));
+        petMessage= new ImageView(new Image("petMessage.png"));
+        upgradeMessage= new ImageView(new Image("upgradeMessage.png"));
+        System.out.println(((Merchant) game.getDungeon().getCurrentRoom()).getCards().toString());
+        cards = ((Merchant) game.getDungeon().getCurrentRoom()).getCards();
+        cardPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getCardPrices();
+        relics = ((Merchant) game.getDungeon().getCurrentRoom()).getRelics();
+        relicPrices = ((Merchant) game.getDungeon().getCurrentRoom()).getRelicPrices();
+        initialize();
+    }
     public MerchantScene() {
         super();
         root.setMinSize( width, height);
@@ -76,7 +107,6 @@ public class MerchantScene extends RoomScene  {
         nextButton = new ImageView(new Image("goAhead.png"));
         back = new ImageView(new Image("back_merchant.jpg"));
         papirus = new ImageView(new Image("papirus.png"));
-
         petWarning= new ImageView(new Image("warning.png"));
         petMessage= new ImageView(new Image("petMessage.png"));
         upgradeMessage= new ImageView(new Image("upgradeMessage.png"));
@@ -235,9 +265,7 @@ public class MerchantScene extends RoomScene  {
         if(!pane.getChildren().contains(text))
             pane.getChildren().add(text);
 
-        pet.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        pet.setOnMouseClicked( e -> {
                 System.out.println("gold before pet: "+ game.getPlayer().getGold());
 
                 if(game.getPlayer().getPet() == null){
@@ -278,7 +306,6 @@ public class MerchantScene extends RoomScene  {
                 pet.setEffect( new DropShadow(30, Color.YELLOW) );
                 petPrice += 10;
                 petClicked = true;
-            }
         });
 
         pet.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
@@ -355,12 +382,10 @@ public class MerchantScene extends RoomScene  {
         nextButton.setX(width-width/3.0); //nextButton.setX(width-400);
         nextButton.setY(height/8*6);
         pane.getChildren().add( nextButton );
-        nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        nextButton.setOnMouseClicked( e -> {
                 game.getDungeon().ascend();
             }
-        });
+        );
     }
 
     static Node warning(int x, int y){
@@ -430,9 +455,8 @@ public class MerchantScene extends RoomScene  {
             boolean sale_added = saleAdded;
             int cardPrice = price;
             int j = i;
-            rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent t) {
+            rect.setOnMouseClicked(e -> {
+
 
                     if (game.getPlayer().getGold() >= cardPrice) {
 
@@ -458,12 +482,9 @@ public class MerchantScene extends RoomScene  {
                         System.out.println("You don't have enough gold for card");
                     }
 
-                }
             });
 
-            rect.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            rect.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
                     ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect);
                     scaleTransition.setToX(1.5f);
                     scaleTransition.setToY(1.5f);
@@ -477,11 +498,10 @@ public class MerchantScene extends RoomScene  {
                     scaleTransition1.setAutoReverse(true);
                     scaleTransition1.play();
                 }
-            });
+            );
 
-            rect.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            rect.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
+
                     ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect);
                     scaleTransition.setToX(1);
                     scaleTransition.setToY(1);
@@ -493,8 +513,6 @@ public class MerchantScene extends RoomScene  {
                     scaleTransition1.setAutoReverse(true);
                     scaleTransition1.play();
                     warn.setVisible(false);
-
-                }
             });
 
             space = space +  width/(108/10); //space = space + 120;
@@ -611,9 +629,7 @@ public class MerchantScene extends RoomScene  {
                 }
             });
 
-            relicImage.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            relicImage.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
                     ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), relicImage);
                     scaleTransition.setToX(1);
                     scaleTransition.setToY(1);
@@ -627,7 +643,7 @@ public class MerchantScene extends RoomScene  {
                     warn.setVisible(false);
                     desc.setVisible(false);
                 }
-            });
+            );
 
             space = space + width/(108/10); //space = space + 120;
         }

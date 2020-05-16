@@ -34,7 +34,7 @@ public class RemoveCard extends StackPane {
     ImageView back;
     ImageView nextButton;
     StackPane stack;
-    final ScrollPane sp = new ScrollPane();
+    ScrollPane sp = new ScrollPane();
 
     public RemoveCard(int width, int height){
         this.width = width;

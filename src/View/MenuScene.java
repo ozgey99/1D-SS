@@ -25,8 +25,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MenuScene extends GameScene {
-    int width;
-    int height;
     private VBox menuBox;
 
 
@@ -34,24 +32,19 @@ public class MenuScene extends GameScene {
             new Pair<String, Runnable>("START NEW RUN", () -> Main.window.setScene( new MapScene() )),
             new Pair<String, Runnable>("CONTINUE EXISTING RUN", () -> {}),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () ->  Main.window.setScene( new Compendium() )),
-            new Pair<String, Runnable>("VIEW STATISTICS", () -> {}),
+            new Pair<String, Runnable>("OPTIONS",  () -> Main.window.setScene( new OptionsScene() ) ),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
 
-
-
     public MenuScene(){
         super();
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        width = dim.width;
-        height = dim.height;
-          menuBox = new VBox(-5);
-          root = (StackPane) this.getRoot();
+        menuBox = new VBox(-5);
+        root = (StackPane) this.getRoot();
         root = (StackPane) createContent();
         root.setMinSize(width, height);
         //root.setBackground( new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-
     }
+
     public void draw()
     {
 

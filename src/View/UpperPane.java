@@ -18,6 +18,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import static View.Main.game;
@@ -44,6 +45,8 @@ public class UpperPane extends GridPane {
 
     public UpperPane(int width,int height)
     {
+        this.setMinSize( width, height );
+        System.out.println("UPP");
         pane = new Pane();
         this.width = width;
         this.height = height;

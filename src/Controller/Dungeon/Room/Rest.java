@@ -22,8 +22,6 @@ public class Rest extends AbstractRoom {
         game.currentScene = new RestScene();
         Main.window.setScene(
                 game.currentScene);
-        game.currentScene.initialize();
-
     }
 
     @Override

@@ -43,7 +43,6 @@ public class FightScene extends RoomScene {
         root.setMinSize( width, height);
 
         initialize();
-
     }
 
 

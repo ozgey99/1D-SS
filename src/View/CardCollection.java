@@ -40,7 +40,7 @@ public class CardCollection extends RoomScene {
 
     ImageView back;
     ImageView ss_back;
-    final ScrollBar sc;
+    ScrollBar sc;
 
     public CardCollection(){
         super();

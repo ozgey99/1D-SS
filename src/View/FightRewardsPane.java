@@ -52,8 +52,6 @@ public class FightRewardsPane extends StackPane {
         back = new ImageView(new Image("up.png"));
         tick = new ImageView(new Image("tick.png"));
         this.getChildren().add(pane);
-        System.out.println("width : "+width);
-        System.out.println("height : "+height);
     }
 
     public void initialize(){

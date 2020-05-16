@@ -32,7 +32,7 @@ public class MapRoomNode extends Circle {
             roomTypeName = "merchantIcon" + roomTypeName;
         else if( type == RoomType.FIGHT && ((Fight) nodeRoom).getIsBoss() ) {
             roomTypeName = "bossIcon" + roomTypeName;
-            nodeSize = 10*nodeSize/3;
+            nodeSize = 4*nodeSize;
         }
         else if( type == RoomType.FIGHT && ((Fight) nodeRoom).getIsElite() )
             roomTypeName = "eliteIcon" + roomTypeName;

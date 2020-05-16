@@ -63,6 +63,7 @@ public class TreasureScene extends RoomScene {
 
     private void initializeUpper()
     {
+        System.out.println("Treasure UPP");
         gridUpper.initialize();
         gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
         gridUpper.setBorder(new Border(new BorderStroke(Color.BLACK,

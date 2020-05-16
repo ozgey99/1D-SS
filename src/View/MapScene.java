@@ -1,25 +1,18 @@
 package View;
 
-import Controller.Dungeon.AbstractRoom;
-import Controller.Dungeon.Dungeon;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
 
 
 public class MapScene extends GameScene {
-    int width = 1920;
-    int height = 1080;
 
     StackPane root;
 
