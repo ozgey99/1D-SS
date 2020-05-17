@@ -1,6 +1,6 @@
 package Models.Object.Powers;
 
-import Models.Actions.PowerActions;
+import Controller.Actions.PowerActions;
 import Models.Creatures.AbstractCreature;
 import Models.Object.AbstractPower;
 

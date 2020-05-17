@@ -31,7 +31,8 @@ import java.util.ArrayList;
 
 import static View.Main.game;
 import Models.Creatures.Pet;
-import Models.Actions.RelicActions;
+/*import Models.Actions.RelicActions;*/
+import Controller.Actions.RelicActions;
 
 
 public class MerchantScene extends RoomScene  {

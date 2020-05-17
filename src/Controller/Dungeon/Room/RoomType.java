@@ -1,6 +1,8 @@
 package Controller.Dungeon.Room;
 
-public enum RoomType {
+import java.io.Serializable;
+
+public enum RoomType implements Serializable {
     SHOP,
     FIGHT,
     REST,

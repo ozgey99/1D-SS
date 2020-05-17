@@ -41,6 +41,7 @@ public class RestScene extends RoomScene {
         smithPane  = new SmithPane(width/3*2 , height/9*6);
         root.setMinSize( width, height);
         added = false;
+        initialize();
     }
 
     public void turnBack(){

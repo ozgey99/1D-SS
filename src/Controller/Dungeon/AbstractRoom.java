@@ -2,9 +2,10 @@ package Controller.Dungeon;
 
 import Controller.Dungeon.Room.RoomType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class AbstractRoom {
+public abstract class AbstractRoom implements Serializable {
     protected RoomType type;
     protected ArrayList<AbstractRoom> children;
     protected boolean done;

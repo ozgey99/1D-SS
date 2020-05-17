@@ -1,7 +1,9 @@
 package Controller.Dungeon.Room;
 
-import Models.Actions.FightActions;
-import Models.Actions.PowerActions;
+/*import Models.Actions.FightActions;
+import Models.Actions.PowerActions;*/
+import Controller.Actions.FightActions;
+import Controller.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
 import Models.Cards.CardTarget;
@@ -43,7 +45,6 @@ public class Fight extends AbstractRoom {
     int goldAmount;
     ArrayList<AbstractCard> cardRewards;
     boolean isFirstRoom;
-    MediaPlayer mediaPlayer;
 
     public Fight(ArrayList<AbstractRoom> c, boolean isElite, boolean isBoss, boolean isFirstRoom) {
         type = RoomType.FIGHT;

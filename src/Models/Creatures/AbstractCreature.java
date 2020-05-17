@@ -2,9 +2,10 @@ package Models.Creatures;
 
 import Models.Object.AbstractPower;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class AbstractCreature {
+public abstract class AbstractCreature implements Serializable {
     protected int maxHP;
     protected int currentHP;
     protected int block;

@@ -7,10 +7,12 @@ import View.GameScene;
 import View.RoomScene;
 import javafx.scene.Scene;
 
+import java.io.Serializable;
+
 import static View.Main.game;
 
 
-public class Game {
+public class Game implements Serializable {
     private Dungeon dungeon;
     private AbstractCharacter player;
     public GameScene currentScene;

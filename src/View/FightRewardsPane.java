@@ -1,10 +1,9 @@
 package View;
 
-import Models.Actions.RelicActions;
+import Controller.Actions.RelicActions;
 import Models.Cards.AbstractCard;
 import Controller.Dungeon.Room.Fight;
 import Models.Object.AbstractRelic;
-import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,7 +24,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 

@@ -9,12 +9,14 @@ import View.Main;
 import View.MapScene;
 
 import java.security.spec.ECField;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static View.Main.game;
 import static View.Main.main;
 
-public class Dungeon {
+public class Dungeon implements Serializable {
     private int act;
     private String name;
 
