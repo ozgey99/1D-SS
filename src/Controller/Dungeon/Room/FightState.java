@@ -1,0 +1,5 @@
+package Controller.Dungeon.Room;
+
+public enum FightState {
+    PREFIGHT, PRETURN, TURN, POSTTURN, PETTURN, MONSTERPRETURN, MONSTERTURN, MONSTERPOSTTURN, POSTFIGHT
+}
