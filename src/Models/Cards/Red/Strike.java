@@ -18,7 +18,7 @@ public class Strike extends AbstractCard {
         rarity = CardRarity.BASIC;
         target = CardTarget.ENEMY;
         baseAttr = new BaseCardAttributes();
-        baseAttr.damage = 100;
+        baseAttr.damage = 5;
         usable = true;
         upgradable = true;
     }
