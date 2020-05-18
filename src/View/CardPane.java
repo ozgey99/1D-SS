@@ -17,7 +17,7 @@ import javafx.event.EventHandler;
 
 import static View.Main.game;
 
-public class CardPane  extends GridPane {
+public class CardPane  extends StackPane {
     private int space;
 
     private Deck deck;
@@ -37,10 +37,8 @@ public class CardPane  extends GridPane {
     public CardPane(int width, int height) {
         this.width = width;
         this.height = height;
-        this.deck = deck;
         space = width / 10;
         this.setMinSize(width, height);
-        this.scene = scene;
         box = new HBox(10);
 
 

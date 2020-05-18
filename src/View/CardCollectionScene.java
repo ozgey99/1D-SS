@@ -271,6 +271,8 @@ public class CardCollectionScene extends GameScene {
         back.setFitWidth(width);
         back.setFitHeight(height);
         back.setOpacity(0.90);
+        ss_back.setFitWidth(width);
+        ss_back.setFitHeight(height);
 
     }
 }

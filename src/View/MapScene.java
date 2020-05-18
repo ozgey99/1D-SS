@@ -5,6 +5,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.SepiaTone;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -13,8 +16,6 @@ import javafx.scene.paint.Color;
 
 
 public class MapScene extends GameScene {
-
-    StackPane root;
 
     GridPane divisionUpper;
 
@@ -29,7 +30,6 @@ public class MapScene extends GameScene {
 
     public MapScene(){
         super();
-        root = (StackPane) this.getRoot();
         initialize();
     }
     @Override
@@ -37,7 +37,6 @@ public class MapScene extends GameScene {
         root.setMinSize( width, height );
         divisionUpper = new GridPane();
         divisionUpper.setMinSize(width, height);
-        divisionUpper.setGridLinesVisible(true);
         initializeUpper();
         initializeLowerMap();
         root.getChildren().add(divisionUpper);
@@ -48,26 +47,28 @@ public class MapScene extends GameScene {
 
     private void initializeUpper()
     {
-        mapUpper = new UpperPane(width, height/10);
+
+        mapUpper = new UpperPane(width, height/14);
         mapUpper.initialize();
         mapUpper.setBackground( new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)) );
-
+        mapUpper.setPadding(new Insets(30,0,0,0));
         GridPane.setConstraints(mapUpper, 0,0,1,1);
         divisionUpper.getChildren().add(mapUpper);
     }
     private void initializeLowerMap(){
         mapLower = new StackPane();
         mapLower.setMaxSize(width, 9*height/10 );
-        mapLower.setEffect(  new DropShadow(30, Color.YELLOW));
+        mapLower.setEffect(  new DropShadow( 30,Color.RED) );
+        mapLower.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
         mapDivision = new GridPane();
         mapDivision.setMinSize( width , 9*height/10  );
-        mapDivision.setGridLinesVisible(true);
 
-        ImageView imageView = new ImageView(new Image("mapGeneral.png"));
-        System.out.println( width  + " " + height);
-        imageView.maxHeight(9*height/10);
-        imageView.maxWidth(width);
+        Image mapBackground = new Image("mapGeneral.jpg");
+        ImageView imageView = new ImageView(mapBackground);
+        imageView.setFitHeight(37*height/40);
+        imageView.setFitWidth(width);
         mapLower.getChildren().add(imageView);
+        mapLower.setAlignment(Pos.CENTER);
 
 
         initializeLeft();
@@ -85,9 +86,10 @@ public class MapScene extends GameScene {
         right = new StackPane();
         right.setMinSize(width*3/16, 9*height/10 );
         ImageView imageView = new ImageView(new Image("legend.png"));
-        imageView.setFitHeight(height*6/10);
+        imageView.setFitHeight(height*4/10);
+        imageView.setFitWidth(width*2/10);
         right.getChildren().add(imageView);
-        right.setAlignment( Pos.CENTER_LEFT );
+        right.setAlignment( Pos.CENTER );
         GridPane.setConstraints(right, 2,0,1,1);
         mapDivision.getChildren().add(right);
 

@@ -23,7 +23,6 @@ public class OptionsScene extends GameScene {
             new Pair<String, Runnable>("1600x900", () -> { setSize(1600,900); draw();} ),
             new Pair<String, Runnable>("1366x768", () -> { setSize(1366,768) ; draw();}),
             new Pair<String, Runnable>("1280x720", () -> { setSize(1280,720) ; draw();} ),
-            new Pair<String, Runnable>("800×600", () -> {setSize(800,600) ; draw();} ),
             new Pair<String, Runnable>("Confirm", () -> confirm() )
 
     );

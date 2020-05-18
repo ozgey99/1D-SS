@@ -38,9 +38,10 @@ public class FightScene extends RoomScene {
         fightPane = new StackPane();
         gridFight = new GridPane();
         fightRewards = new FightRewardsPane(width, height);
-        gridLeft = new CharPane(width/2, height/9*6);
-        gridRight = new MonsterPane(width / 2, height / 9 * 6);
+        gridLeft = new CharPane(5*width/10, 11*height/18);
+        gridRight = new MonsterPane(5*width / 10, 11*height / 18 );
         gridLower  = new CardPane(width , height/9*6);
+        //gridLower.setPadding(new Insets(0,0,height/100,0));
         gridUpper = new UpperPane(width,height/9);
         division = new GridPane();
         endTurn = new Rectangle();
@@ -61,10 +62,10 @@ public class FightScene extends RoomScene {
     }
 
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image("fightRoom.jpg"));
+        ImageView imageView = new ImageView(new Image("background1.jpg"));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
-        root.getChildren().add(imageView);
+        root.getChildren().add( imageView);
     }
     private void initializeLeft(){
         gridLeft.initialize();
@@ -83,11 +84,12 @@ public class FightScene extends RoomScene {
     private void initializeUpper()
     {
         gridUpper.initialize();
-        gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
+        gridUpper.setBackground( new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)) );
         GridPane.setConstraints(gridUpper, 0,0,1,1);
         division.getChildren().add(gridUpper);
         gridUpper.setMinWidth(width);
         gridUpper.setMinHeight(height/9);
+        gridUpper.setPadding( new Insets(height/50,0,0,0));
 
 
     }
@@ -100,21 +102,21 @@ public class FightScene extends RoomScene {
     }
     public void initialize()
     {
+        addBackground();
         Main.mediaPlayer.addMusic();
         initializeLeft();
         initializeRight();
         initializeUpper();
         initializeLower();
-        addBackground();
 
 
-        gridFight.setGridLinesVisible(true);
+
+
         GridPane.setConstraints(gridFight, 0,1,1,1);
         division.getChildren().add(gridFight);
         division.setPadding(new Insets(5,5,5,5));
         division.setMinWidth(width);
         division.setMinHeight(height);
-        division.setGridLinesVisible(true);
         root.getChildren().add(division);
 
 
@@ -133,6 +135,8 @@ public class FightScene extends RoomScene {
         );
 
         root.getChildren().add(endTurn);
+
+        draw();
 
     }
 

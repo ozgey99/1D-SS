@@ -3,15 +3,13 @@ package View;
 import Models.Object.AbstractPower;
 import Models.Object.AbstractRelic;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -64,7 +62,7 @@ public class UpperPane extends StackPane {
         box4 = new HBox(10);
         relicDesc = false;
         powerDesc = false;
-        //addBackground();
+        pane.setBackground( new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)) );
     }
 
     private void addBackground() {

@@ -34,6 +34,7 @@ public class Main extends Application {
         primaryStage.setTitle("Slay The Spire Menu");
         primaryStage.setScene(new MenuScene());
         window = primaryStage;
+        window.setResizable(false);
         primaryStage.show();
 
         primaryStage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
