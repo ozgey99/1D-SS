@@ -175,6 +175,8 @@ public class CompendiumScene extends GameScene {
     }
 
     public void addBackground() {
+        ss_back.setFitWidth(width);
+        ss_back.setFitHeight(height);
         back.setFitWidth(width);
         back.setFitHeight(height);
         back.setOpacity(0.90);

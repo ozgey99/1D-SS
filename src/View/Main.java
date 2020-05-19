@@ -45,7 +45,6 @@ public class Main extends Application {
                 game.currentScene.initialize();
             }
         });
-
     }
     public static void main(String[] args) {
         game.startMap();

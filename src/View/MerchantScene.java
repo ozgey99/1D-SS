@@ -574,9 +574,7 @@ public class MerchantScene extends RoomScene  {
             warn.setVisible(false);
 
             int j = i;
-            relicImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent t) {
+            relicImage.setOnMouseClicked(e -> {
                     System.out.println("current gold: "+ game.getPlayer().getGold());
                     if (game.getPlayer().getGold() >= relicPrices.get(j)) {
                         game.getPlayer().changeGold(-(relicPrices.get(j)));
@@ -589,9 +587,8 @@ public class MerchantScene extends RoomScene  {
                     else {
                         warn.setVisible(true);
                     }
-
                 }
-            });
+            );
 
             //Node desc = relicDescription(relics,i, space+50, height/5*2+130);
             Node desc = relicDescription(relics,i, space+width/26, height/5*2+height/(53/10));

@@ -80,7 +80,7 @@ public class TreasureScene extends RoomScene {
         rewardWarn.setPreserveRatio(true);
         rewardWarn.setFitWidth(width/13.0);
         rewardWarn.setX(width/10*7-width/(106.0/10));
-        rewardWarn.setY(height/5*2);
+        rewardWarn.setY(height/6*2);
         pane.getChildren().add(rewardWarn);
 
     }
