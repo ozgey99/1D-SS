@@ -12,7 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 
 public class MapScene extends GameScene {
@@ -40,7 +42,7 @@ public class MapScene extends GameScene {
         initializeUpper();
         initializeLowerMap();
         root.getChildren().add(divisionUpper);
-
+        addMenuExit();
     }
 
 
@@ -113,6 +115,18 @@ public class MapScene extends GameScene {
     }
     public void draw(){
 
+    }
+
+    private void addMenuExit(){
+        Rectangle exitMenu = new Rectangle(90,60);
+        mapUpper.getChildren().add(exitMenu);
+        mapUpper.setAlignment( exitMenu,Pos.TOP_RIGHT);
+        exitMenu.setOnMouseClicked( e-> returnToMenu());
+        ImagePattern imageFilled = new ImagePattern(new Image("BackToHome.png"), 0, 0, 1, 1, true);
+        exitMenu.setFill( imageFilled);
+    }
+    private void returnToMenu(){
+        Main.window.setScene( new MenuScene() );
     }
 
 }

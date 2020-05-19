@@ -50,6 +50,7 @@ public class MapPane extends BorderPane {
                         int posSuccessorX = beginningX - translationVertical * spacing;
                         Line passage = new Line(posX, posY, posSuccessorX, posSuccessorY);
                         passage.setStroke(Color.RED);
+                        passage.setStrokeDashOffset(20);
                         passage.setEffect(new DropShadow(30, Color.YELLOW));
                         this.getChildren().add(passage);
                         recurseRooms(room.getChildren().get(i), translationVertical, translationY + 1);

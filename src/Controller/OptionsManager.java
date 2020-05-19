@@ -1,5 +1,8 @@
 package Controller;
 
+import View.GameScene;
+import View.Main;
+
 import java.awt.*;
 
 public class OptionsManager {
@@ -13,7 +16,8 @@ public class OptionsManager {
     public void changeSize( int width, int height){
         this.width = width;
         this.height = height;
-        System.out.println(width + " " + height );
+        System.out.println( "HEREEE");
+        ( (GameScene) Main.window.getScene()).draw();
     }
     public int getWidth(){
         return width;

@@ -10,7 +10,7 @@ import java.awt.*;
 public abstract class RoomScene extends GameScene {
     public RoomScene(){
         super();
-        //addBackground();
+        addBackground();
     }
 
     @Override

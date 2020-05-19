@@ -37,4 +37,7 @@ public class MusicPlayer {
         mediaPlayer.setVolume(0.07);
         mediaPlayer.play();
     }
+    public void setVolume( double volume ){
+        mediaPlayer.setVolume(volume);
+    }
 }
