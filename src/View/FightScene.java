@@ -89,7 +89,6 @@ public class FightScene extends RoomScene {
         division.getChildren().add(gridUpper);
         gridUpper.setMinWidth(width);
         gridUpper.setMinHeight(height/9);
-        gridUpper.setPadding( new Insets(height/50,0,0,0));
 
 
     }

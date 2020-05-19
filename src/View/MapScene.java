@@ -53,7 +53,6 @@ public class MapScene extends GameScene {
         mapUpper = new UpperPane(width, height/14);
         mapUpper.initialize();
         mapUpper.setBackground( new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)) );
-        mapUpper.setPadding(new Insets(30,0,0,0));
         GridPane.setConstraints(mapUpper, 0,0,1,1);
         divisionUpper.getChildren().add(mapUpper);
     }
