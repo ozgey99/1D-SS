@@ -41,7 +41,6 @@ public class FightScene extends RoomScene {
         gridLeft = new CharPane(5*width/10, 11*height/18);
         gridRight = new MonsterPane(5*width / 10, 11*height / 18 );
         gridLower  = new CardPane(width , height/9*6);
-        //gridLower.setPadding(new Insets(0,0,height/100,0));
         gridUpper = new UpperPane(width,height/9);
         division = new GridPane();
         endTurn = new Rectangle();
@@ -69,14 +68,12 @@ public class FightScene extends RoomScene {
     }
     private void initializeLeft(){
         gridLeft.initialize();
-        //gridLeft.setBackground( new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)) );
         GridPane.setConstraints(gridLeft, 0,0,1,1);
         gridFight.getChildren().add(gridLeft);
     }
 
     private void initializeRight(){
         gridRight.initialize();
-        //gridRight.setBackground( new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)) );
         GridPane.setConstraints(gridRight, 1,0,1,1);
         gridFight.getChildren().add(gridRight);
 
@@ -95,7 +92,6 @@ public class FightScene extends RoomScene {
     private void initializeLower()
     {
         gridLower.initialize();
-        //gridLower.setBackground( new Background(new BackgroundFill(Color.BROWN, CornerRadii.EMPTY, Insets.EMPTY)) );
         GridPane.setConstraints(gridLower, 0,2,1,1);
         division.getChildren().add(gridLower);
     }
@@ -109,8 +105,6 @@ public class FightScene extends RoomScene {
         initializeLower();
 
 
-
-
         GridPane.setConstraints(gridFight, 0,1,1,1);
         division.getChildren().add(gridFight);
         division.setPadding(new Insets(5,5,5,5));
@@ -120,8 +114,6 @@ public class FightScene extends RoomScene {
 
 
         endTurn.setFill(new ImagePattern(new Image("endturn.png")));
-        //endTurn.setX(200);
-        //endTurn.setY(0);
         endTurn.setWidth(width/(128.0/10));
         endTurn.setHeight(height/(72.0/10));
         endTurn.setOnMouseClicked(e -> {

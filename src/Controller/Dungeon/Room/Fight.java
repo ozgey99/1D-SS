@@ -165,10 +165,7 @@ public class Fight extends AbstractRoom {
         if(hand == null)
             System.out.println("HAND IS NULL");
         game.currentScene.draw();
-        /*
-        game.fightScene.draw();
-        game.fightScene.lower.draw();
-        game.fightScene.right.draw();*/
+
     }
 
     public boolean useCard(AbstractCard card)
@@ -179,13 +176,11 @@ public class Fight extends AbstractRoom {
             return false;
         }
         if (!card.use(this, player)) {
-            System.out.println("You do not have enough energy to use this card.");
             return false;
         } else {
             TextBasedUI.displayCard(card);
             hand.removeCard(card);
             discard.addCard(card);
-           // TextBasedUI.displayDeck(discard, "dıscard");
         }
 
         monsters.removeIf(m -> m.getCurrentHP() <= 0);

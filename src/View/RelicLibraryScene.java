@@ -135,7 +135,7 @@ public class RelicLibraryScene extends GameScene {
 
     public void turnBack(){
         turnBack.setPreserveRatio(true);
-        turnBack.setFitHeight(height/7); //turnBack.setFitHeight(100);
+        turnBack.setFitHeight(height/7);
         turnBack.setX(width/5);
         turnBack.setY(height/4*3);
 

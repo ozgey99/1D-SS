@@ -65,7 +65,6 @@ public class SmithPane extends StackPane {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        //System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
 

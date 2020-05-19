@@ -15,7 +15,6 @@ public class CompendiumScene extends GameScene {
     Pane pane;
     HBox box;
     HBox options;
-    SmithPane smithPane;
     ImageView turnBack;
     ImageView cardLibrary;
     ImageView relicCollection;
@@ -85,7 +84,6 @@ public class CompendiumScene extends GameScene {
     }
 
     public void showOptions(){
-        System.out.println("INITIALIZE IN REST SCENE");
         int imageWidth = width / 6;
         int imageHeight = height / 2;
 
@@ -95,38 +93,29 @@ public class CompendiumScene extends GameScene {
         cardLibrary.setY(height/3);
         cardLibrary.setVisible(true);
         cardLibrary.setPreserveRatio(true);
-        cardLibrary.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                {
-                    draw();
-                    cardCollection();
+        cardLibrary.setOnMouseClicked(e -> {
+            draw();
+            cardCollection();
 
-                }
-            }
         });
 
-        cardLibrary.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), cardLibrary);
-                scaleTransition.setToX(1.25f);
-                scaleTransition.setToY(1.25f);
-                scaleTransition.setCycleCount(1);
-                scaleTransition.setAutoReverse(true);
-                scaleTransition.play();
-            }
+        cardLibrary.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), cardLibrary);
+            scaleTransition.setToX(1.25f);
+            scaleTransition.setToY(1.25f);
+            scaleTransition.setCycleCount(1);
+            scaleTransition.setAutoReverse(true);
+            scaleTransition.play();
         });
 
-        cardLibrary.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), cardLibrary);
-                scaleTransition.setToX(1);
-                scaleTransition.setToY(1);
-                scaleTransition.setAutoReverse(true);
-                scaleTransition.play();
-            }
+        cardLibrary.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
+
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), cardLibrary);
+            scaleTransition.setToX(1);
+            scaleTransition.setToY(1);
+            scaleTransition.setAutoReverse(true);
+            scaleTransition.play();
+
         });
 
 
@@ -138,38 +127,30 @@ public class CompendiumScene extends GameScene {
         relicCollection.setY(height/3);
         relicCollection.setVisible(true);
         relicCollection.setPreserveRatio(true);
-        relicCollection.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                {
-                    draw();
-                    relicLibrary();
-                }
+        relicCollection.setOnMouseClicked(e ->{
+            draw();
+            relicLibrary();
 
-            }
         });
 
-        relicCollection.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), relicCollection);
-                scaleTransition.setToX(1.25f);
-                scaleTransition.setToY(1.25f);
-                scaleTransition.setCycleCount(1);
-                scaleTransition.setAutoReverse(true);
-                scaleTransition.play();
-            }
+        relicCollection.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET,e -> {
+
+            ScaleTransition relicScaleTransition = new ScaleTransition(Duration.millis(200), relicCollection);
+            relicScaleTransition.setToX(1.25f);
+            relicScaleTransition.setToY(1.25f);
+            relicScaleTransition.setCycleCount(1);
+            relicScaleTransition.setAutoReverse(true);
+            relicScaleTransition.play();
+
         });
 
-        relicCollection.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), relicCollection);
-                scaleTransition.setToX(1);
-                scaleTransition.setToY(1);
-                scaleTransition.setAutoReverse(true);
-                scaleTransition.play();
-            }
+        relicCollection.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
+            ScaleTransition relicScaleTransition = new ScaleTransition(Duration.millis(100), relicCollection);
+            relicScaleTransition.setToX(1);
+            relicScaleTransition.setToY(1);
+            relicScaleTransition.setAutoReverse(true);
+            relicScaleTransition.play();
+
         });
 
     }
