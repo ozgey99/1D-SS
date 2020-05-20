@@ -20,7 +20,7 @@ public class Thunderclap extends AbstractCard {
         baseAttr = new BaseCardAttributes();
         baseAttr.damage = 4;
         usable = true;
-        upgradable = true;
+        upgradable = false;
     }
 
     @Override
