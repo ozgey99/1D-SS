@@ -38,7 +38,7 @@ public class RestScene extends RoomScene {
         rest = new ImageView(new Image("Rest.png"));
         smith = new ImageView(new Image("Smith.png"));
         gridUpper = new UpperPane(width,height/9);
-        smithPane  = new SmithPane(width/3*2 , height/9*6);
+        smithPane  = new SmithPane(width/4*3 , height/9*6);
         root.setMinSize( width, height);
         added = false;
         initialize();
