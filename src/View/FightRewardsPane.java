@@ -150,7 +150,7 @@ public class FightRewardsPane extends StackPane {
         }
         else{
             relicText.setText("no relic rewards"+ "\n" +"you already have all relic ");
-            relicDesc.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, width/100.0));
+            relicText.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, width/100.0));
         }
 
         vbox.getChildren().add(relicText);
