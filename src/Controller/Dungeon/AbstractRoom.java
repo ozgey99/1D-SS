@@ -11,6 +11,14 @@ public abstract class AbstractRoom implements Serializable {
     protected boolean done;
     protected boolean isUnion = false;
 
+
+
+    protected boolean isUnknown = false;
+
+
+
+
+
     public abstract void start();
 
     public void setUnion( boolean isUnion ){
@@ -20,6 +28,12 @@ public abstract class AbstractRoom implements Serializable {
         return this.isUnion;
     }
 
+    public void setUnknown(boolean unknown) {
+        isUnknown = unknown;
+    }
+    public boolean isUnknown() {
+        return isUnknown;
+    }
 
     public abstract RoomType getType();
     public abstract ArrayList<AbstractRoom> getChildren();

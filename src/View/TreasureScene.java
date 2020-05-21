@@ -68,7 +68,6 @@ public class TreasureScene extends RoomScene {
 
     private void initializeUpper()
     {
-        System.out.println("Treasure UPP");
         gridUpper.initialize();
         gridUpper.setBackground( new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)) );
         gridUpper.setBorder(new Border(new BorderStroke(Color.BLACK,
@@ -234,34 +233,30 @@ public class TreasureScene extends RoomScene {
     public void nextButton(){
         ImageView nextButton = new ImageView(new Image("goAhead.png"));
         nextButton.setPreserveRatio(true);
-        nextButton.setFitHeight(height/7); //nextButton.setFitHeight(50);
-        nextButton.setX(width/(14.0/10)); //((nextButton.setX(width-400);
+        nextButton.setFitHeight(height/7);
+        nextButton.setX(width/(14.0/10));
         nextButton.setY(height/7*5);
         pane.getChildren().add( nextButton );
-        nextButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                game.getDungeon().ascend();
-            }
+        nextButton.setOnMouseClicked(e -> {
+            game.getDungeon().ascend();
+
         });
     }
 
     public void chosen(){
         tick.setPreserveRatio(true);
-        tick.setFitHeight(height/(93.0/10)); //tick.setFitHeight(75);
-        tick.setX(width/2); //tick.setX(width/2-100+100); // x of node
-        tick.setY(height/2.0-height/5.0+ height/(35.0/10)); //tick.setY(height/2-140+200);
+        tick.setFitHeight(height/(93.0/10));
+        tick.setX(width/2);
+        tick.setY(height/2.0-height/5.0+ height/(35.0/10));
         pane.getChildren().add( tick );
-        tick.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                rect.setVisible(false);
-                rewardHeader.setVisible(false);
-                tick.setVisible(false);
-                draw();
-                nextButton();
-                rewardWarn.setVisible(false);
-            }
+        tick.setOnMouseClicked(e -> {
+            rect.setVisible(false);
+            rewardHeader.setVisible(false);
+            tick.setVisible(false);
+            draw();
+            nextButton();
+            rewardWarn.setVisible(false);
+
         });
     }
 
@@ -273,21 +268,15 @@ public class TreasureScene extends RoomScene {
         chest.setY(height/3*2);
         chest.setVisible(true);
         chest.setPreserveRatio(true);
-        chest.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                {
-                    info();
-                    System.out.println("ASCENDING CALLED IN TREASURE SCENE");
-                    pane.getChildren().add(rect);
-                    chosen();
-                    chest.setDisable(true);
-                    pane.getChildren().add(rewardHeader);
-                    rewardHeader.setX(15*width/48);
-                    rewardHeader.setY(height/9);
-                }
+        chest.setOnMouseClicked(e -> {
+            info();
+            pane.getChildren().add(rect);
+            chosen();
+            chest.setDisable(true);
+            pane.getChildren().add(rewardHeader);
+            rewardHeader.setX(15*width/48);
+            rewardHeader.setY(height/9);
 
-            }
         });
         pane.getChildren().add(chest);
 

@@ -10,7 +10,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
 
 import javafx.event.EventHandler;
@@ -95,11 +94,30 @@ public class CardPane  extends StackPane {
                             firstHandCard.setSelected();
                             id = finalI;
                             deck = ((Fight) game.getDungeon().getCurrentRoom()).getHand();
-                            game.currentScene.draw();
+                            Main.currentScene.draw();
                         }
 
                     }
                 });
+
+                /*rect1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
+                            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect1);
+                            scaleTransition.setToX(1.5f);
+                            scaleTransition.setToY(1.5f);
+                            scaleTransition.setCycleCount(1);
+                            scaleTransition.setAutoReverse(true);
+                            scaleTransition.play();
+                        }
+                );
+
+                rect1.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
+
+                    ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect1);
+                    scaleTransition.setToX(1);
+                    scaleTransition.setToY(1);
+                    scaleTransition.setAutoReverse(true);
+                    scaleTransition.play();
+                });*/
 
                 box.getChildren().add(rect1);
                 box.setPadding(new Insets(0,0,0,height/5*3));

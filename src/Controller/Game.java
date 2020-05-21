@@ -15,7 +15,6 @@ import static View.Main.game;
 public class Game implements Serializable {
     private Dungeon dungeon;
     private AbstractCharacter player;
-    public GameScene currentScene;
 
     public Game() {
         dungeon = new Dungeon();

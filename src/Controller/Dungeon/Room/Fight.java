@@ -17,10 +17,7 @@ import View.Main;
 import Models.Object.AbstractRelic;
 import Models.TextBasedUI;
 import View.FightScene;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -107,9 +104,9 @@ public class Fight extends AbstractRoom {
         drawAmount = 5;
         turn = 1;
 
-        game.currentScene = new FightScene();
+        Main.currentScene = new FightScene();
         Main.window.setScene(
-                game.currentScene);
+                Main.currentScene);
 
         preFight();
 
@@ -129,7 +126,7 @@ public class Fight extends AbstractRoom {
             r.onFightStart(this, player);
             System.out.println("my energy " + player.currentEnergy);
         }
-        game.currentScene.draw();
+        Main.currentScene.draw();
 
         nextState();
 
@@ -152,7 +149,7 @@ public class Fight extends AbstractRoom {
             r.onTurnStart(this);
         }
 
-        game.currentScene.draw();
+        Main.currentScene.draw();
 
         nextState();
     }
@@ -164,11 +161,8 @@ public class Fight extends AbstractRoom {
         hand = Deck.drawCard(draw, discard, drawAmount);
         if(hand == null)
             System.out.println("HAND IS NULL");
-        game.currentScene.draw();
-        /*
-        game.fightScene.draw();
-        game.fightScene.lower.draw();
-        game.fightScene.right.draw();*/
+        Main.currentScene.draw();
+
     }
 
     public boolean useCard(AbstractCard card)
@@ -179,13 +173,11 @@ public class Fight extends AbstractRoom {
             return false;
         }
         if (!card.use(this, player)) {
-            System.out.println("You do not have enough energy to use this card.");
             return false;
         } else {
             TextBasedUI.displayCard(card);
             hand.removeCard(card);
             discard.addCard(card);
-           // TextBasedUI.displayDeck(discard, "dıscard");
         }
 
         monsters.removeIf(m -> m.getCurrentHP() <= 0);

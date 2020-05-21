@@ -14,7 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
-
+import Controller.Game;
 
 
 import java.net.URI;
@@ -137,7 +137,7 @@ public class MenuScene extends GameScene {
         }
     }
     private void loadRun(){
-        loadObjectFromFile();
+        Main.game = (Game) loadObjectFromFile();
         Main.window.setScene( new MapScene() );
     }
 }

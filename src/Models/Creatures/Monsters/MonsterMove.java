@@ -4,9 +4,10 @@ import Models.Cards.AbstractCard;
 import Models.Creatures.AbstractCreature;
 import Models.Object.AbstractPower;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MonsterMove {
+public class MonsterMove implements Serializable {
     AbstractMonster owner;
     int damage;
     int block;

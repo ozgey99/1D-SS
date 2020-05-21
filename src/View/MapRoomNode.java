@@ -30,7 +30,10 @@ public class MapRoomNode extends Circle {
         checkStatus();
         String roomTypeName = ".png";
         RoomType type = nodeRoom.getType();
-        if( type == RoomType.SHOP )
+        if( nodeRoom.isUnknown() ){
+            roomTypeName = "unknownIcon" + roomTypeName;
+        }
+        else if( type == RoomType.SHOP )
             roomTypeName = "merchantIcon" + roomTypeName;
         else if( type == RoomType.FIGHT && ((Fight) nodeRoom).getIsBoss() ) {
             roomTypeName = "bossIcon" + roomTypeName;
@@ -44,7 +47,6 @@ public class MapRoomNode extends Circle {
             roomTypeName = "chestIcon" + roomTypeName;
         else if( type == RoomType.REST )
             roomTypeName = "restIcon" + roomTypeName;
-
         else
             throw new IllegalArgumentException("Undefined Room");
 

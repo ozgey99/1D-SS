@@ -36,11 +36,11 @@ public class SmithPane extends StackPane {
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
         stack = new StackPane();
-        stack.setPadding(new Insets(400, 400, 400, 400));
-        vbox = new VBox(height/70);
+        stack.setPadding(new Insets(height/5.0, width/(66.0/10), height/5.0, width/5.0));
+        vbox = new VBox(height/70.0);
         sp = new ScrollPane();
         stack.getChildren().add(sp);
-        stack.setAlignment(sp, Pos.CENTER);
+        setAlignment(sp, Pos.CENTER);
         this.setMinSize( width, height);
         this.getChildren().add(stack);
         vbox.setBackground( new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -63,7 +63,6 @@ public class SmithPane extends StackPane {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        //System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
 

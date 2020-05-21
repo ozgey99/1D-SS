@@ -2,34 +2,12 @@ package View;
 
 import static View.Main.game;
 
-import Controller.Dungeon.Room.Fight;
-import Models.Cards.AbstractCard;
-import View.TreasureScene;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-import javafx.util.Pair;
 
-
-
-import java.awt.*;
-import java.util.Arrays;
-import java.util.List;
 public class WinScene extends RoomScene  {
 
     Rectangle backToMenu;
@@ -64,10 +42,10 @@ public class WinScene extends RoomScene  {
         backToMenu.setFill( new ImagePattern(new Image("BackToHome.png")));
 
         backToMenu.setOnMouseClicked(e -> {
-                game.currentScene = new MenuScene();
+                Main.currentScene = new MenuScene();
                 Main.window.setScene(
-                        game.currentScene);
-                game.currentScene.initialize();
+                        Main.currentScene);
+                Main.currentScene.initialize();
 
             }
         );

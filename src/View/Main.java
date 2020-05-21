@@ -16,6 +16,7 @@ public class Main extends Application {
 
     public static Game game = new Game();
     public static OptionsManager optionsManager = new OptionsManager();
+    public static GameScene currentScene;
     int height;
     int width;
     public static MusicPlayer mediaPlayer = new MusicPlayer();
@@ -34,18 +35,15 @@ public class Main extends Application {
 
         primaryStage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
             if (KeyCode.ESCAPE == event.getCode()) {
-                game.currentScene = new MenuScene();
+                currentScene = new MenuScene();
                 Main.window.setScene(
-                        game.currentScene);
-                game.currentScene.initialize();
+                        currentScene);
+                currentScene.initialize();
             }
         });
     }
     public static void main(String[] args) {
         game.startMap();
         launch(args);
-
     }
-
-
 }

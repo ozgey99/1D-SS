@@ -4,17 +4,11 @@ import Controller.Dungeon.Room.Fight;
 import Controller.Dungeon.Room.Merchant;
 import Controller.Dungeon.Room.Rest;
 import Controller.Dungeon.Room.Treasure;
-import View.FightScene;
 import View.Main;
 import View.MapScene;
 
-import java.security.spec.ECField;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import static View.Main.game;
-import static View.Main.main;
 
 public class Dungeon implements Serializable {
     private int act;
@@ -130,6 +124,10 @@ public class Dungeon implements Serializable {
                 room = new Fight(children, false, false, false);
                 break;
         }
+        rand = (int) (Math.random()*10);
+        if( rand == 1 ) {
+            room.setUnknown( true );
+        }
         return room;
     }
 
@@ -150,8 +148,8 @@ public class Dungeon implements Serializable {
     }
 
     public boolean ascend() {
-        game.currentScene = new MapScene();
-        Main.window.setScene(game.currentScene);
+        Main.currentScene = new MapScene();
+        Main.window.setScene(Main.currentScene);
 
         return true;
     }

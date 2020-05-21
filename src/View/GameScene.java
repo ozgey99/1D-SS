@@ -5,8 +5,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class GameScene extends Scene {
+public abstract class GameScene extends Scene implements Serializable {
     protected int width;
     protected int height;
     StackPane root;

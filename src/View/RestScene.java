@@ -38,7 +38,7 @@ public class RestScene extends RoomScene {
         rest = new ImageView(new Image("Rest.png"));
         smith = new ImageView(new Image("Smith.png"));
         gridUpper = new UpperPane(width,height/9);
-        smithPane  = new SmithPane(width/3*2 , height/9*6);
+        smithPane  = new SmithPane(width/4*3 , height/9*6);
         root.setMinSize( width, height);
         added = false;
         initialize();
@@ -47,12 +47,12 @@ public class RestScene extends RoomScene {
     public void turnBack(){
         turnBack = new ImageView(new Image("goAhead.png"));
         turnBack.setPreserveRatio(true);
-        turnBack.setFitHeight(height/7); //turnBack.setFitHeight(100);
+        turnBack.setFitHeight(height/7);
         turnBack.setX(width/5);
         turnBack.setY(height/4*3);
 
         smithPane.stack.getChildren().add( turnBack );
-        smithPane.stack.setAlignment(turnBack, Pos.BOTTOM_RIGHT);
+        StackPane.setAlignment(turnBack, Pos.BOTTOM_RIGHT);
         turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -72,7 +72,6 @@ public class RestScene extends RoomScene {
         GridPane.setConstraints(gridUpper, 0,0,1,1);
         pane.getChildren().add(gridUpper);
         gridUpper.setMinWidth(width);
-        //gridUpper.setMinHeight(height/9);
 
     }
 
@@ -96,7 +95,6 @@ public class RestScene extends RoomScene {
         next.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println(" you are in next scene");
                 game.getDungeon().ascend();
             }
         });
@@ -104,7 +102,6 @@ public class RestScene extends RoomScene {
 
 
     public void showOptions(){
-        System.out.println("INITIALIZE IN REST SCENE");
         int imageWidth = width / 10;
         int imageHeight = height / 4;
 
@@ -136,7 +133,6 @@ public class RestScene extends RoomScene {
             @Override
             public void handle(MouseEvent t) {
                 {
-                    System.out.println("ASCENDING CALLED IN REST SCENE");
                     int hp = (game.getPlayer().getMaxHP() * 3) / 10;
                     game.getPlayer().changeHealth(hp);
                     draw();

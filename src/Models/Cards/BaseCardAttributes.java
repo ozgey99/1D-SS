@@ -1,6 +1,8 @@
 package Models.Cards;
 
-public class BaseCardAttributes {
+import java.io.Serializable;
+
+public class BaseCardAttributes implements Serializable {
     public int damage;
     public int block;
     public int heal;

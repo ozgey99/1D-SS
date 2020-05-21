@@ -21,9 +21,6 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
-
-import static View.Main.game;
-
 public class RelicLibraryScene extends GameScene {
     Pane pane;
     VBox vbox;
@@ -135,7 +132,7 @@ public class RelicLibraryScene extends GameScene {
 
     public void turnBack(){
         turnBack.setPreserveRatio(true);
-        turnBack.setFitHeight(height/7); //turnBack.setFitHeight(100);
+        turnBack.setFitHeight(height/7);
         turnBack.setX(width/5);
         turnBack.setY(height/4*3);
 
@@ -144,9 +141,9 @@ public class RelicLibraryScene extends GameScene {
         turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                game.currentScene = new CompendiumScene();
+                Main.currentScene = new CompendiumScene();
                 Main.window.setScene(
-                        game.currentScene);
+                        Main.currentScene);
             }
         });
     }

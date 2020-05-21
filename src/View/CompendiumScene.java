@@ -9,13 +9,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 
-import static View.Main.game;
-
 public class CompendiumScene extends GameScene {
     Pane pane;
     HBox box;
     HBox options;
-    SmithPane smithPane;
     ImageView turnBack;
     ImageView cardLibrary;
     ImageView relicCollection;
@@ -43,17 +40,17 @@ public class CompendiumScene extends GameScene {
     }
 
     public void  cardCollection(){
-        game.currentScene = new CardCollectionScene();
+        Main.currentScene = new CardCollectionScene();
         Main.window.setScene(
-                game.currentScene);
-        game.currentScene.initialize();
+                Main.currentScene);
+        Main.currentScene.initialize();
     }
 
     public void relicLibrary(){
-        game.currentScene = new RelicLibraryScene();
+        Main.currentScene = new RelicLibraryScene();
         Main.window.setScene(
-                game.currentScene);
-        game.currentScene.initialize();
+                Main.currentScene);
+        Main.currentScene.initialize();
     }
 
     @Override
@@ -76,16 +73,15 @@ public class CompendiumScene extends GameScene {
         turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                game.currentScene = new MenuScene();
+                Main.currentScene = new MenuScene();
                 Main.window.setScene(
-                        game.currentScene);
-                game.currentScene.initialize();
+                        Main.currentScene);
+                Main.currentScene.initialize();
             }
         });
     }
 
     public void showOptions(){
-        System.out.println("INITIALIZE IN REST SCENE");
         int imageWidth = width / 6;
         int imageHeight = height / 2;
 
@@ -95,33 +91,30 @@ public class CompendiumScene extends GameScene {
         cardLibrary.setY(height/3);
         cardLibrary.setVisible(true);
         cardLibrary.setPreserveRatio(true);
-        cardLibrary.setOnMouseClicked( e -> {
-                {
-                    draw();
-                    cardCollection();
+        cardLibrary.setOnMouseClicked(e -> {
+            draw();
+            cardCollection();
 
-                }
-            }
-        );
+        });
 
         cardLibrary.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), cardLibrary);
-                scaleTransition.setToX(1.25f);
-                scaleTransition.setToY(1.25f);
-                scaleTransition.setCycleCount(1);
-                scaleTransition.setAutoReverse(true);
-                scaleTransition.play();
-            }
-        );
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), cardLibrary);
+            scaleTransition.setToX(1.25f);
+            scaleTransition.setToY(1.25f);
+            scaleTransition.setCycleCount(1);
+            scaleTransition.setAutoReverse(true);
+            scaleTransition.play();
+        });
 
         cardLibrary.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), cardLibrary);
-                scaleTransition.setToX(1);
-                scaleTransition.setToY(1);
-                scaleTransition.setAutoReverse(true);
-                scaleTransition.play();
-            }
-        );
+
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), cardLibrary);
+            scaleTransition.setToX(1);
+            scaleTransition.setToY(1);
+            scaleTransition.setAutoReverse(true);
+            scaleTransition.play();
+
+        });
 
 
         relicCollection.setVisible(true);
@@ -132,33 +125,31 @@ public class CompendiumScene extends GameScene {
         relicCollection.setY(height/3);
         relicCollection.setVisible(true);
         relicCollection.setPreserveRatio(true);
-        relicCollection.setOnMouseClicked( e -> {
-                {
-                    draw();
-                    relicLibrary();
-                }
+        relicCollection.setOnMouseClicked(e ->{
+            draw();
+            relicLibrary();
 
-            }
-        );
+        });
 
-        relicCollection.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e ->  {
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), relicCollection);
-                scaleTransition.setToX(1.25f);
-                scaleTransition.setToY(1.25f);
-                scaleTransition.setCycleCount(1);
-                scaleTransition.setAutoReverse(true);
-                scaleTransition.play();
-            }
-        );
+        relicCollection.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET,e -> {
+
+            ScaleTransition relicScaleTransition = new ScaleTransition(Duration.millis(200), relicCollection);
+            relicScaleTransition.setToX(1.25f);
+            relicScaleTransition.setToY(1.25f);
+            relicScaleTransition.setCycleCount(1);
+            relicScaleTransition.setAutoReverse(true);
+            relicScaleTransition.play();
+
+        });
 
         relicCollection.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), relicCollection);
-                scaleTransition.setToX(1);
-                scaleTransition.setToY(1);
-                scaleTransition.setAutoReverse(true);
-                scaleTransition.play();
-            }
-        );
+            ScaleTransition relicScaleTransition = new ScaleTransition(Duration.millis(100), relicCollection);
+            relicScaleTransition.setToX(1);
+            relicScaleTransition.setToY(1);
+            relicScaleTransition.setAutoReverse(true);
+            relicScaleTransition.play();
+
+        });
 
     }
 

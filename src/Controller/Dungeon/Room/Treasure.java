@@ -1,19 +1,15 @@
 package Controller.Dungeon.Room;
 
-import Controller.Actions.RelicActions;
 import Models.Cards.AbstractCard;
 import Models.Cards.CardColor;
-import Models.Creatures.AbstractCharacter;
 import Controller.Dungeon.AbstractRoom;
 import Models.Object.AbstractRelic;
 import Models.Utils;
 import View.Main;
 import View.TreasureScene;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -78,10 +74,10 @@ public class Treasure extends AbstractRoom {
 
         relicReward();
         cardReward();
-        game.currentScene = new TreasureScene();
+        Main.currentScene = new TreasureScene();
         Main.window.setScene(
-                game.currentScene);
-        game.currentScene.initialize();
+                Main.currentScene);
+        Main.currentScene.initialize();
     }
 
 
