@@ -32,7 +32,8 @@ public class OptionsScene extends GameScene {
     private List<Pair<String, Runnable>> volumeOptions = Arrays.asList(
             new Pair<String, Runnable>("High", () ->  setVolume( 0.1) ),
             new Pair<String, Runnable>("Normal", () ->  setVolume( 0.06) ),
-            new Pair<String, Runnable>("Low", () ->  setVolume( 0.04))
+            new Pair<String, Runnable>("Low", () ->  setVolume( 0.04)),
+            new Pair<String, Runnable>("Off", () ->  setVolume( 0.0 ))
 
     );
     VBox resBox;

@@ -16,7 +16,6 @@ public class OptionsManager {
     public void changeSize( int width, int height){
         this.width = width;
         this.height = height;
-        System.out.println( "HEREEE");
         ( (GameScene) Main.window.getScene()).draw();
     }
     public int getWidth(){

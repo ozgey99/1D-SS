@@ -42,7 +42,7 @@ public class RemoveCard extends StackPane {
         padY = height*9/6;
         back = new ImageView(new Image("up.png"));
 
-        nextButton = new ImageView(new Image("goAhead.png"));
+        nextButton = new ImageView( new Image("goAhead.png") );
         stack = new StackPane();
         back.setFitWidth(padX);
         back.setFitHeight(padY);

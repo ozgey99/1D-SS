@@ -9,10 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -39,13 +36,14 @@ public class SmithPane extends StackPane {
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
         stack = new StackPane();
-        stack.setPadding(new Insets(150, 200, 150, 250));
+        stack.setPadding(new Insets(400, 400, 400, 400));
         vbox = new VBox(height/70);
         sp = new ScrollPane();
         stack.getChildren().add(sp);
         stack.setAlignment(sp, Pos.CENTER);
         this.setMinSize( width, height);
         this.getChildren().add(stack);
+        vbox.setBackground( new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     public void visible(boolean bool){

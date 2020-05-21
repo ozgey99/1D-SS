@@ -59,8 +59,9 @@ public class FightRewardsPane extends StackPane {
         chosen();
         info();
         rewardHeader = new ImageView(new Image("rewardHeader.png"));
-        this.getChildren().add(rewardHeader);
-        this.setAlignment(rewardHeader, Pos.CENTER);
+        pane.getChildren().add(rewardHeader);
+        rewardHeader.setX(15*width/48);
+        rewardHeader.setY(height/9);
     }
 
     public void chosen(){
@@ -134,7 +135,7 @@ public class FightRewardsPane extends StackPane {
         // card reward
         Rectangle cardRect = new Rectangle();
         ArrayList<AbstractCard> cards = ((Fight)game.getDungeon().getCurrentRoom()).getCards();
-        String label = "add a card to your deck";
+        String label = "Add a Card to Your Deck";
         Text text = new Text(label);
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, width/100));
         vbox.getChildren().add(text);
@@ -145,7 +146,7 @@ public class FightRewardsPane extends StackPane {
         Text relicDesc = new Text();
         if (relics.size() != 0){
             String desc = relics.get(0).getDescription();
-            String s = "get a relic";
+            String s = "Get a Relic";
             relicText.setText(s);
             relicText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, width/100));
             String name = relics.get(0).getName();
@@ -154,7 +155,7 @@ public class FightRewardsPane extends StackPane {
             relicDesc.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, width/100));
         }
         else{
-            relicText.setText("no relic rewards"+ "\n" +"you already have all relic ");
+            relicText.setText("No relic rewards"+ "\n" +"you already have all relic ");
             relicDesc.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, width/100));
         }
 
@@ -213,8 +214,8 @@ public class FightRewardsPane extends StackPane {
                 cardRect.setX(width/(232.0/100)); //cardRect.setX(x/2-90);
                 cardRect.setY(height/(33.0/10)); //cardRect.setY(y/2-140);
                 cardRect.setFill(new ImagePattern(new Image(name)));
-                cardRect.setWidth(width/(65/10.0)); //cardRect.setWidth(200);
-                cardRect.setHeight(height/3.0); //cardRect.setHeight(250);
+                cardRect.setWidth(width/8); //cardRect.setWidth(200);
+                cardRect.setHeight(height/3); //cardRect.setHeight(250);
                 cardRect.setVisible(true);
                 g.getChildren().add(cardRect);
                 cardRect.setOnMouseClicked(new EventHandler<MouseEvent>() {

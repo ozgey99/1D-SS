@@ -34,7 +34,7 @@ public class Dungeon implements Serializable {
         //Assign the max number of paths
         int maxPath = 3;
         //Randomize the number of paths
-        int noOfPaths = (int) (Math.random() * maxPath) + 2;
+        int noOfPaths;
 
         //Assign the max path length
         int maxLength = 3;
@@ -59,6 +59,7 @@ public class Dungeon implements Serializable {
         //Populate from top to bottom
         for( int k = 0; k < numOfUnions; k++ ) {
             prevRooms = new ArrayList<>();
+            noOfPaths = (int) (Math.random() * maxPath) + 2;
             for (int i = 0; i < noOfPaths; i++) {
                 children = new ArrayList<>();
                 if (k == 0) {
@@ -111,7 +112,7 @@ public class Dungeon implements Serializable {
 
     private AbstractRoom randomRoom( ArrayList<AbstractRoom> children ){
         AbstractRoom room;
-        int rand = (int) (Math.random() * 5) + 1; //for 5 room types
+        int rand = (int) (Math.random() * 6) + 1; //for 5 room types
         switch(rand){
             case 1:
                 room = new Fight(children, true, false, false);

@@ -8,6 +8,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -110,7 +112,7 @@ public class TreasureScene extends RoomScene {
         // card reward
         Rectangle cardRect = new Rectangle();
         ArrayList<AbstractCard> cards = ((Treasure)game.getDungeon().getCurrentRoom()).getCards();
-        String label = "add a card to your deck";
+        String label = "Add a Card to Your Deck";
         Text text = new Text(label);
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
         vbox.getChildren().add(text);
@@ -121,7 +123,7 @@ public class TreasureScene extends RoomScene {
         Text relicDesc = new Text();
         if(relics.size() != 0){
             String desc = relics.get(0).getDescription();
-            String s = "get a relic";
+            String s = "Get a Relic";
             relicText.setText(s);
             relicText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, origWidth/100));
             String name = relics.get(0).getName();
@@ -192,8 +194,8 @@ public class TreasureScene extends RoomScene {
                 cardRect.setX(origWidth/(232.0/100)); //cardRect.setX(x/2-90);
                 cardRect.setY(origHeight/(33.0/10)); //cardRect.setY(y/2-140);
                 cardRect.setFill(new ImagePattern(new Image(name)));
-                cardRect.setWidth(origWidth/(65/10.0)); //cardRect.setWidth(200);
-                cardRect.setHeight(origHeight/3.0); //cardRect.setHeight(250);
+                cardRect.setWidth(origWidth/8); //cardRect.setWidth(200);
+                cardRect.setHeight(origHeight/3); //cardRect.setHeight(250);
                 cardRect.setVisible(true);
                 g.getChildren().add(cardRect);
                 cardRect.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -280,8 +282,9 @@ public class TreasureScene extends RoomScene {
                     pane.getChildren().add(rect);
                     chosen();
                     chest.setDisable(true);
-                    root.getChildren().add(rewardHeader);
-                    root.setAlignment(rewardHeader, Pos.CENTER);
+                    pane.getChildren().add(rewardHeader);
+                    rewardHeader.setX(15*width/48);
+                    rewardHeader.setY(height/9);
                 }
 
             }
