@@ -127,7 +127,6 @@ public class SmithPane extends StackPane {
         back.setFitWidth(width);
         back.setFitHeight(height);
         back.setOpacity(0.80);
-
     }
 
 }
