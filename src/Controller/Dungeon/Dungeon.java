@@ -4,17 +4,13 @@ import Controller.Dungeon.Room.Fight;
 import Controller.Dungeon.Room.Merchant;
 import Controller.Dungeon.Room.Rest;
 import Controller.Dungeon.Room.Treasure;
-import View.FightScene;
 import View.Main;
 import View.MapScene;
 
-import java.security.spec.ECField;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import static View.Main.game;
-import static View.Main.main;
-
-public class Dungeon {
+public class Dungeon implements Serializable {
     private int act;
     private String name;
 
@@ -32,7 +28,7 @@ public class Dungeon {
         //Assign the max number of paths
         int maxPath = 3;
         //Randomize the number of paths
-        int noOfPaths = (int) (Math.random() * maxPath) + 2;
+        int noOfPaths;
 
         //Assign the max path length
         int maxLength = 3;
@@ -57,6 +53,7 @@ public class Dungeon {
         //Populate from top to bottom
         for( int k = 0; k < numOfUnions; k++ ) {
             prevRooms = new ArrayList<>();
+            noOfPaths = (int) (Math.random() * maxPath) + 2;
             for (int i = 0; i < noOfPaths; i++) {
                 children = new ArrayList<>();
                 if (k == 0) {
@@ -109,7 +106,7 @@ public class Dungeon {
 
     private AbstractRoom randomRoom( ArrayList<AbstractRoom> children ){
         AbstractRoom room;
-        int rand = (int) (Math.random() * 5) + 1; //for 5 room types
+        int rand = (int) (Math.random() * 6) + 1; //for 5 room types
         switch(rand){
             case 1:
                 room = new Fight(children, true, false, false);
@@ -126,6 +123,10 @@ public class Dungeon {
             default:
                 room = new Fight(children, false, false, false);
                 break;
+        }
+        rand = (int) (Math.random()*10);
+        if( rand == 1 ) {
+            room.setUnknown( true );
         }
         return room;
     }
@@ -147,8 +148,8 @@ public class Dungeon {
     }
 
     public boolean ascend() {
-        game.currentScene = new MapScene();
-        Main.window.setScene(game.currentScene);
+        Main.currentScene = new MapScene();
+        Main.window.setScene(Main.currentScene);
 
         return true;
     }

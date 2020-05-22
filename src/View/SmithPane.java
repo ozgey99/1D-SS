@@ -9,10 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -31,7 +28,7 @@ public class SmithPane extends StackPane {
     private int height;
     ImageView back;
     StackPane stack;
-    final ScrollPane sp;
+    ScrollPane sp;
 
     public SmithPane(int width, int height){
         padX = width*3/2;
@@ -39,13 +36,14 @@ public class SmithPane extends StackPane {
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
         stack = new StackPane();
-        stack.setPadding(new Insets(150, 200, 150, 250));
-        vbox = new VBox(height/70);
+        stack.setPadding(new Insets(width/4, height/2, width/4, height/2));
+        vbox = new VBox(height/70.0);
         sp = new ScrollPane();
         stack.getChildren().add(sp);
-        stack.setAlignment(sp, Pos.CENTER);
+        setAlignment(sp, Pos.CENTER);
         this.setMinSize( width, height);
         this.getChildren().add(stack);
+        vbox.setBackground( new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     public void visible(boolean bool){
@@ -65,7 +63,6 @@ public class SmithPane extends StackPane {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        //System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
 
@@ -90,18 +87,14 @@ public class SmithPane extends StackPane {
                 rect.setHeight(padY/(46/10));
                 rect.setVisible(true);
                 int j = i;
-                rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent t) {
+                rect.setOnMouseClicked(e -> {
                         cards.get(j).upgrade();
                         rect.setStroke(Color.GREEN);
                         draw();
                     }
-                });
+                );
 
-                rect.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
+                rect.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
                         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect);
                         scaleTransition.setToX(1.5f);
                         scaleTransition.setToY(1.5f);
@@ -109,18 +102,16 @@ public class SmithPane extends StackPane {
                         scaleTransition.setAutoReverse(true);
                         scaleTransition.play();
                     }
-                });
+                );
 
-                rect.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
+                rect.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
                         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect);
                         scaleTransition.setToX(1);
                         scaleTransition.setToY(1);
                         scaleTransition.setAutoReverse(true);
                         scaleTransition.play();
                     }
-                });
+                );
 
                 hbox.getChildren().add(rect);
                 if(count  != 6)
@@ -136,7 +127,6 @@ public class SmithPane extends StackPane {
         back.setFitWidth(width);
         back.setFitHeight(height);
         back.setOpacity(0.80);
-
     }
 
 }

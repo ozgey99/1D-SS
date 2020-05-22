@@ -5,6 +5,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -46,12 +47,14 @@ public class MapPane extends BorderPane {
                 if( !( room.getChildren().get(0).isUnion() ) ) {
 
                     for (int i = 0; i < branchingSize; i++) {
-                        int posSuccessorX = beginningX - (translationX + i) * spacing;
+                        int translationVertical = translationX + i - branchingSize/2;
+                        int posSuccessorX = beginningX - translationVertical * spacing;
                         Line passage = new Line(posX, posY, posSuccessorX, posSuccessorY);
                         passage.setStroke(Color.RED);
+                        passage.setStrokeDashOffset(20);
                         passage.setEffect(new DropShadow(30, Color.YELLOW));
                         this.getChildren().add(passage);
-                        recurseRooms(room.getChildren().get(i), translationX + i, translationY + 1);
+                        recurseRooms(room.getChildren().get(i), translationVertical, translationY + 1);
                     }
                 }
                 else{

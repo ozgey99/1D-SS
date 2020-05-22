@@ -6,7 +6,11 @@ import Models.Cards.Colorless.Dazed;
 import Models.Cards.Red.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.*;
+import Models.Object.AbstractPotion;
 import Models.Object.AbstractRelic;
+import Models.Object.Potions.AgilityPotion;
+import Models.Object.Potions.EntropicBrew;
+import Models.Object.Powers.Agility;
 import Models.Object.Relics.*;
 
 import java.lang.reflect.Array;
@@ -60,6 +64,14 @@ public class Utils {
         r.add(new Vajra());
 
         return r;
+    }
+
+    public static ArrayList<AbstractPotion> getAllPotions() {
+        ArrayList<AbstractPotion> p = new ArrayList<>();
+        p.add(new AgilityPotion());
+        p.add(new EntropicBrew());
+
+        return p;
     }
 
     public static ArrayList<AbstractMonster> getAllBosses(){

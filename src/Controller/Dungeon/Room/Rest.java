@@ -3,12 +3,8 @@ package Controller.Dungeon.Room;
 import Controller.Dungeon.AbstractRoom;
 import View.Main;
 import View.RestScene;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-import static View.Main.game;
-
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
@@ -25,11 +21,9 @@ public class Rest extends AbstractRoom {
     @Override
     public void start() {
 
-        game.currentScene = new RestScene();
+        Main.currentScene = new RestScene();
         Main.window.setScene(
-                game.currentScene);
-        game.currentScene.initialize();
-
+                Main.currentScene);
     }
 
 

@@ -3,7 +3,9 @@ package Models.Cards;
 import Models.Creatures.AbstractCharacter;
 import Controller.Dungeon.Room.Fight;
 
-public abstract class AbstractCard {
+import java.io.Serializable;
+
+public abstract class AbstractCard implements Serializable {
     protected String name;
     protected boolean selected;
     protected String description;

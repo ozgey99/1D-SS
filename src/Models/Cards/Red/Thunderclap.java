@@ -1,7 +1,7 @@
 package Models.Cards.Red;
 
-import Models.Actions.FightActions;
-import Models.Actions.PowerActions;
+import Controller.Actions.FightActions;
+import Controller.Actions.PowerActions;
 import Models.Cards.*;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.Monsters.AbstractMonster;

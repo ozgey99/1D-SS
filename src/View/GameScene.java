@@ -5,46 +5,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class GameScene extends Scene {
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    protected int width = screenSize.width;
-    protected int height = screenSize.height;
+public abstract class GameScene extends Scene implements Serializable {
+    protected int width;
+    protected int height;
     StackPane root;
     public GameScene(){
         super(new StackPane() );
         this.root = (StackPane) this.getRoot();
+        width = Main.optionsManager.getWidth();
+        height = Main.optionsManager.getHeight();
+        root.setPrefSize(width, height);
     }
-
     public abstract void initialize();
     public abstract void draw();
 }
-
-/**package View;
-
-
- public abstract class RoomScene extends Scene {
-
- Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
- protected int width = screenSize.width;
- protected int height = screenSize.height;
-
-StackPane root;
-
-    public RoomScene(StackPane stackPane){
-        super(new StackPane());
-        this.root = (StackPane) this.getRoot();
-        //addBackground();
-    }
-    public abstract void draw();
-    public abstract void initialize();
-
-    private void addBackground() {
-        ImageView imageView = new ImageView(new Image("background1.jpg"));
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-
-        root.getChildren().add(imageView);
-    }
-}
-*/

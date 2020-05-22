@@ -4,7 +4,9 @@ import Models.Creatures.AbstractCharacter;
 import Models.Creatures.AbstractCreature;
 import Controller.Dungeon.Room.Fight;
 
-public abstract class AbstractObject {
+import java.io.Serializable;
+
+public abstract class AbstractObject implements Serializable {
     public int onAttack(int prevDamage) {
         return prevDamage;
     }

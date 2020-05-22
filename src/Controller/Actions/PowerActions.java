@@ -1,4 +1,4 @@
-package Models.Actions;
+package Controller.Actions;
 
 import Models.Creatures.AbstractCreature;
 import Models.Object.AbstractPower;

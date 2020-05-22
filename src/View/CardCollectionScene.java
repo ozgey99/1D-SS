@@ -24,8 +24,6 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
-import static View.Main.game;
-
 public class CardCollectionScene extends GameScene {
     Pane redPane;
     Pane colorlessPane;
@@ -118,9 +116,9 @@ public class CardCollectionScene extends GameScene {
         turnBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                game.currentScene = new CompendiumScene();
+                Main.currentScene = new CompendiumScene();
                 Main.window.setScene(
-                        game.currentScene);
+                        Main.currentScene);
             }
         });
     }
@@ -271,6 +269,8 @@ public class CardCollectionScene extends GameScene {
         back.setFitWidth(width);
         back.setFitHeight(height);
         back.setOpacity(0.90);
+        ss_back.setFitWidth(width);
+        ss_back.setFitHeight(height);
 
     }
 }

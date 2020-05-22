@@ -21,7 +21,14 @@ public class StsMenuPane extends Pane {
                 200, 30,
                 0, 30
         );
-        bg.setStroke(Color.color(1, 0, 0, 0.75));
+        if( name.charAt(0) == 'M' && name.charAt(1) == 'u')
+        {
+            bg.setStroke(Color.color(0, 1, 0, 0.75));
+        }
+        else {
+            bg.setStroke(Color.color(1, 0, 0, 0.75));
+
+        }
         bg.setEffect(new Glow());
 
 

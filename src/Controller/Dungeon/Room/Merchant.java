@@ -8,12 +8,9 @@ import Models.Object.AbstractRelic;
 import Models.Utils;
 import View.Main;
 import View.MerchantScene;
-import View.RestScene;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static View.Main.game;
@@ -106,9 +103,9 @@ public class Merchant extends AbstractRoom {
     @Override
     public void start() {
 
-        game.currentScene = new MerchantScene();
+        Main.currentScene = new MerchantScene();
         Main.window.setScene(
-                game.currentScene);
+                Main.currentScene);
 
         System.out.println(" I AM IN MERCHANT ROOM");
 

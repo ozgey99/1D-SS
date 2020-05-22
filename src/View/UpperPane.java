@@ -3,14 +3,13 @@ package View;
 import Models.Object.AbstractPower;
 import Models.Object.AbstractRelic;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -18,11 +17,12 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import static View.Main.game;
 
-public class UpperPane extends GridPane {
+public class UpperPane extends StackPane {
     private ArrayList<Text> textList;
     private  int width;
     private int height;
@@ -44,6 +44,8 @@ public class UpperPane extends GridPane {
 
     public UpperPane(int width,int height)
     {
+        this.setMinSize( width, height );
+        System.out.println("UPP");
         pane = new Pane();
         this.width = width;
         this.height = height;
@@ -60,7 +62,7 @@ public class UpperPane extends GridPane {
         box4 = new HBox(10);
         relicDesc = false;
         powerDesc = false;
-        //addBackground();
+        pane.setBackground( new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)) );
     }
 
     private void addBackground() {
@@ -178,18 +180,14 @@ public class UpperPane extends GridPane {
                 relicDesc = true;
             }
 
-            relicImage.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            relicImage.setOnMouseEntered(e->{
                     desc.setVisible(true);
                 }
-            });
-            relicImage.setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            );
+            relicImage.setOnMouseExited( e->{
                     desc.setVisible(false);
                 }
-            });
+            );
             box3.getChildren().add(relicImage);
         }
 

@@ -33,7 +33,7 @@ public class RemoveCard extends StackPane {
     ImageView back;
     ImageView nextButton;
     StackPane stack;
-    final ScrollPane sp = new ScrollPane();
+    ScrollPane sp = new ScrollPane();
 
     public RemoveCard(int width, int height){
         this.width = width;
@@ -42,7 +42,7 @@ public class RemoveCard extends StackPane {
         padY = height*9/6;
         back = new ImageView(new Image("up.png"));
 
-        nextButton = new ImageView(new Image("goAhead.png"));
+        nextButton = new ImageView( new Image("goAhead.png") );
         stack = new StackPane();
         back.setFitWidth(padX);
         back.setFitHeight(padY);
@@ -58,9 +58,6 @@ public class RemoveCard extends StackPane {
 
     }
 
-    public void clickable(){
-        vbox.setDisable(true);
-    }
 
     public void visible(boolean bool){
         this.setVisible(bool);
@@ -78,7 +75,6 @@ public class RemoveCard extends StackPane {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        System.out.println("you have "+ game.getPlayer().masterDeck.getSize() + "card");
         vbox.getChildren().removeAll();
         vbox.getChildren().clear();
         int size = game.getPlayer().masterDeck.getSize();
@@ -102,20 +98,10 @@ public class RemoveCard extends StackPane {
                     public void handle(MouseEvent t) {
 
                         if (game.getPlayer().getGold() >= price) {
-                            System.out.println("gold before: "+ game.getPlayer().getGold());
                             game.getPlayer().changeGold(-price);
-
-                            System.out.println("gold after :" + game.getPlayer().getGold());
                             game.getPlayer().masterDeck.removeCard(game.getPlayer().masterDeck.getCard(j));
                             draw();
-                            System.out.println("========AFTER CLICK MASTER DECK=========");
-                            for(int k=0; k<game.getPlayer().masterDeck.getSize(); k++){
-                                System.out.println(game.getPlayer().masterDeck.getCard(k).getName());
-                            }
                             price += 25;
-
-                        } else {
-                            System.out.println("You don't have enough gold to remove a card");
                         }
 
                     }

@@ -1,6 +1,6 @@
 package View;
 
-import Models.Actions.FightActions;
+import Controller.Actions.FightActions;
 import Models.Creatures.Monsters.AbstractMonster;
 import Controller.Dungeon.Room.Fight;
 import javafx.animation.ScaleTransition;
@@ -119,9 +119,7 @@ public class MonsterPane extends StackPane {
             this.getChildren().add(movement); // add each movement
             movement.setVisible(false);
             ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), rect1);
-            rect1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            rect1.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
                     scaleTransition.setToX(1.5f);
                     scaleTransition.setToY(1.5f);
                     scaleTransition.setCycleCount(1);
@@ -129,7 +127,7 @@ public class MonsterPane extends StackPane {
                     scaleTransition.play();
                     movement.setVisible(true);
                 }
-            });
+            );
 
             rect1.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
                 @Override

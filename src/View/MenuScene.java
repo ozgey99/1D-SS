@@ -1,6 +1,6 @@
 package View;
 
-import static View.Main.game;
+
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -9,46 +9,42 @@ import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
+import Controller.Game;
 
 
-import java.awt.*;
-import java.nio.file.Paths;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
+import static Controller.SaveIO.loadObjectFromFile;
+
 public class MenuScene extends GameScene {
-    int width;
-    int height;
     private VBox menuBox;
 
 
     private List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("START NEW RUN", () -> Main.window.setScene( new MapScene() )),
+            new Pair<String, Runnable>("START NEW RUN", () -> startNewRun() ),
+            new Pair<String, Runnable>("CONTINUE EXISTING RUN", () -> Main.window.setScene( new MapScene() )),
+            new Pair<String, Runnable>("LOAD A SAVED RUN", () -> loadRun()),
             new Pair<String, Runnable>("VIEW COMPENDIUM",  () ->  Main.window.setScene( new CompendiumScene() )),
+            new Pair<String, Runnable>("OPTIONS",  () -> Main.window.setScene( new OptionsScene() ) ),
+            new Pair<String, Runnable>("INFO",  () -> openInfo() ),
             new Pair<String, Runnable>("EXIT", Platform::exit)
     );
 
-
-
     public MenuScene(){
         super();
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        width = dim.width;
-        height = dim.height;
-          menuBox = new VBox(-5);
-          root = (StackPane) this.getRoot();
+        menuBox = new VBox(-5);
         root = (StackPane) createContent();
         root.setMinSize(width, height);
         //root.setBackground( new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-
     }
+
     public void draw()
     {
 
@@ -127,6 +123,23 @@ public class MenuScene extends GameScene {
 
         root.getChildren().add(menuBox);
     }
-
-
+    private void startNewRun(){
+        Main.game.startMap();
+        Main.window.setScene( new MapScene() );
+    }
+    private void openInfo(){
+        try {
+            URI uri= new URI("https://slay-the-spire.fandom.com/wiki/Slay_the_Spire_Wiki");
+            java.awt.Desktop.getDesktop().browse(uri);
+            System.out.println("Web page opened in browser");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadRun(){
+        Main.game = (Game) loadObjectFromFile();
+        Main.window.setScene( new MapScene() );
+    }
 }
+
+

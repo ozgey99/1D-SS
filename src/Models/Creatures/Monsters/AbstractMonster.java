@@ -1,8 +1,8 @@
 package Models.Creatures.Monsters;
 //import java.util.ArrayList;
 
-import Models.Actions.FightActions;
-import Models.Actions.PowerActions;
+import Controller.Actions.FightActions;
+import Controller.Actions.PowerActions;
 import Models.Cards.AbstractCard;
 import Models.Creatures.AbstractCharacter;
 import Models.Creatures.AbstractCreature;

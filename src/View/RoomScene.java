@@ -8,15 +8,14 @@ import javafx.scene.layout.StackPane;
 import java.awt.*;
 
 public abstract class RoomScene extends GameScene {
-
     public RoomScene(){
         super();
-        //addBackground();
+        addBackground();
     }
 
     @Override
     public void initialize() {
-        Main.mediaPlayer.addMusic();
+        //Main.mediaPlayer.addMusic();
     }
 
     private void addBackground() {

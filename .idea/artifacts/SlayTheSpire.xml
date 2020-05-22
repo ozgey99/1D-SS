@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SlayTheSpire">
+    <output-path>$PROJECT_DIR$/out/artifacts/SlayTheSpire</output-path>
+    <root id="archive" name="SlayTheSpire.jar">
+      <element id="module-output" name="1D-SS" />
+      <element id="library" level="project" name="lib" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/.idea/artifacts/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
