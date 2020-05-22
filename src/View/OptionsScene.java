@@ -13,7 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.util.Pair;
-import Controller.MusicPlayer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,18 +25,15 @@ public class OptionsScene extends GameScene {
             new Pair<String, Runnable>("1600x900", () -> { setSize(1600,900); draw();} ),
             new Pair<String, Runnable>("1366x768", () -> { setSize(1366,768) ; draw();}),
             new Pair<String, Runnable>("1280x720", () -> { setSize(1280,720) ; draw();} ),
+            new Pair<String, Runnable>("Music Volume: High", () ->  setVolume( 0.1) ),
+            new Pair<String, Runnable>("Music Volume: Normal", () ->  setVolume( 0.06) ),
+            new Pair<String, Runnable>("Music Volume: Low", () ->  setVolume( 0.04)),
+            new Pair<String, Runnable>("Music Volume: Off", () ->  setVolume( 0.0 )),
             new Pair<String, Runnable>("Confirm", () -> confirm() )
 
     );
-    private List<Pair<String, Runnable>> volumeOptions = Arrays.asList(
-            new Pair<String, Runnable>("High", () ->  setVolume( 0.1) ),
-            new Pair<String, Runnable>("Normal", () ->  setVolume( 0.06) ),
-            new Pair<String, Runnable>("Low", () ->  setVolume( 0.04)),
-            new Pair<String, Runnable>("Off", () ->  setVolume( 0.0 ))
 
-    );
     VBox resBox;
-    VBox volBox;
     StackPane root;
     public OptionsScene(){
         super();
@@ -53,8 +49,7 @@ public class OptionsScene extends GameScene {
         resBox = new VBox();
         resBox.setVisible(true);
 
-        volBox = new VBox();
-        volBox.setVisible(true);
+
 
 
         resBox.setAlignment(Pos.CENTER);
@@ -79,21 +74,6 @@ public class OptionsScene extends GameScene {
         root.getChildren().add(resBox);
         startAnimation();
 
-
-      /*  volumeOptions.forEach(data -> {
-            StsMenuPane item = new StsMenuPane(data.getKey());
-            item.setOnAction(data.getValue());
-
-
-            Rectangle clip = new Rectangle(width/6, height/6);
-            clip.translateXProperty().bind(item.translateXProperty().negate());
-
-            item.setClip(clip);
-
-            volBox.getChildren().addAll(item);
-        });
-        root.getChildren().add(volBox);
-        startAnimation();*/
     }
 
     private void startAnimation() {

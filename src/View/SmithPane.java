@@ -36,7 +36,7 @@ public class SmithPane extends StackPane {
         back = new ImageView(new Image("up.png"));
         pane = new Pane();
         stack = new StackPane();
-        stack.setPadding(new Insets(height/5.0, width/(66.0/10), height/5.0, width/5.0));
+        stack.setPadding(new Insets(width/4, height/2, width/4, height/2));
         vbox = new VBox(height/70.0);
         sp = new ScrollPane();
         stack.getChildren().add(sp);
@@ -87,18 +87,14 @@ public class SmithPane extends StackPane {
                 rect.setHeight(padY/(46/10));
                 rect.setVisible(true);
                 int j = i;
-                rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent t) {
+                rect.setOnMouseClicked(e -> {
                         cards.get(j).upgrade();
                         rect.setStroke(Color.GREEN);
                         draw();
                     }
-                });
+                );
 
-                rect.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
+                rect.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, e -> {
                         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect);
                         scaleTransition.setToX(1.5f);
                         scaleTransition.setToY(1.5f);
@@ -106,18 +102,16 @@ public class SmithPane extends StackPane {
                         scaleTransition.setAutoReverse(true);
                         scaleTransition.play();
                     }
-                });
+                );
 
-                rect.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
+                rect.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, e -> {
                         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), rect);
                         scaleTransition.setToX(1);
                         scaleTransition.setToY(1);
                         scaleTransition.setAutoReverse(true);
                         scaleTransition.play();
                     }
-                });
+                );
 
                 hbox.getChildren().add(rect);
                 if(count  != 6)

@@ -54,7 +54,7 @@ public class FightScene extends RoomScene {
     }
 
     private void addBackground() {
-        ImageView imageView = new ImageView(new Image("background1.jpg"));
+        ImageView imageView = new ImageView(new Image("fightRoom.jpg"));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         root.getChildren().add( imageView);
